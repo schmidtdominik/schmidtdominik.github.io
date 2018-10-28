@@ -1,1 +1,135 @@
-this page is wip, temporary draft available at <a href="http://dominikschmidt.xyz/dev">http://dominikschmidt.xyz/dev</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Dominik Schmidt</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js" defer></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 200 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!--<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>-->
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/index.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div id="titlewrapper">
+        <h1>
+          <a href="index.html" id="title">Dominik Schmidt</a>
+        </h1>
+        <hr>
+        <nav>
+          <span class="navwrapper" ><a class="navitem" href="index.html" style="border-bottom: 2.3px solid #52D681; padding-bottom: 2px;"><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span class="navwrapper" ><a class="navitem" href="datasets.html" ><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span class="navwrapper" ><a class="navitem" href="about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About</a></span>
+
+          <!--ARTICLE FILTER: <div class="dropdown-wrapper">
+            <span class="dropbutton"><i class="fas fa-filter"></i>&nbsp;Filter results</span>
+            <div class="dropdown-content">
+              <div class="dropdown-column"><span>Topics:</span>
+                <a href="#">σ&nbsp;ML/AI</a><br>
+                <a href="#"><i class="fab fa-bitcoin"></i>&nbsp;crypto</a><br>
+                <a href="#">∇&nbsp;tensorflow</a><br>
+                <a href="#"><i class="fab fa-python"></i>&nbsp;python</a>
+                  <a href="#">α ∑ π²&nbsp;math</a>
+              </div>
+              <div class="dropdown-column"><span>Difficulty:</span>
+                <a href="#">easy</a><br>
+                <a href="#">intermediate</a><br>
+                <a href="#">difficult</a>
+              </div>
+              <div class="dropdown-column"><span>Type:</span>
+                <a href="#">◪&nbsp;non-technical</a><br>
+                <a href="#">⬣&nbsp;project</a><br>
+                <a href="#"><i class="fas fa-bullseye"></i>read</a>
+              </div>
+              <div class="dropdown-column"><span>Length:</span>
+                <a href="#">1-4mins</a><br>
+                <a href="#">5-10'</a><br>
+                <a href="#">10'+</a>
+              </div>
+            </div>
+          </div>-->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container article article-subsection">
+    <a href="tensorflow-data-pipeline"><video autoplay="true" class="header-img" autoplay loop playsinline muted>
+                    <source src=" tensorflow-data-pipeline/assets/cover.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video></a>
+    <div class="header-text">
+      <h4 class="article-title"><a href="tensorflow-data-pipeline">
+        Why <code>tf.data</code> is much better than <code>feed_dict</code> and how to build a simple data pipeline in 5 minutes.
+      </a></h4>
+      <span class="article-preview-text">
+        
+Most beginner tensorflow tutorials introduce the reader to the <code>feed_dict</code> method of loading data into your model where data is passed to tensorflow through the <code>tf.Session.run()</code> or <code>tf.Tensor.eval()</code> function calls. There is, however, a much better and almost easier way of doing this. Using the <code>tf.data</code> API you can create high-performance data pipelines in just a few lines of code. 
+      </span>
+      <a class="continue-reading article-preview-text" href="tensorflow-data-pipeline">
+        Continue reading
+        <span class="read-time">
+          <span style="font-size: 0.8em;">⧗</span>
+           5'
+        </span>
+      </a>
+    </div>
+</div>
+
+
+  <br><br>
+
+  <footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
