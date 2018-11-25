@@ -242,7 +242,16 @@ hr {
   display: inline-block;
 }
 
-@media (max-width: 455px) {
+@media (max-width: 500px) {
+  #title {
+    font-size: 3rem;
+  }
+  .navitem {
+    font-size: 1.35rem;
+  }
+}
+
+@media (max-width: 420px) {
   .navwrapper {
       display: block;
   }

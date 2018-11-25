@@ -36,6 +36,12 @@ h3 {
   display: inline-block;
 }
 
+@media (max-width: 500px) {
+  .article-text {
+    font-size: 15px;
+  }
+}
+
 .article {
   margin-bottom: 5rem;
 }
