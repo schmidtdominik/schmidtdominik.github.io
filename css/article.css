@@ -181,6 +181,13 @@ time {
     box-shadow: 0 0 4px 1px rgba(0,0,0,0.15);
 }
 
+@media (max-width: 500px) {
+  .zoomable-img:hover {
+      transform: scale(2.2);
+      box-shadow: 0 0 4px 1px rgba(0,0,0,0.15);
+  }
+}
+
 .round-img {
     border-radius: 50% !important;
 }
