@@ -256,7 +256,8 @@ pre {
   font-size: 0.87em;
 }
 
-.code-wrapper {
+pre > code {
+  white-space: pre-wrap;
 }
 
 h1 code {
