@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>mars32k Dataset - Dominik Schmidt</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 100 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/article.css">
+
+  <link rel="stylesheet" href="../highlight/styles/atom-one-light.css"><!--foundation/hopscotch-->
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 8%">
+          <h1>
+            <a href="../index.html">
+              <span id="title">
+                Dominik Schmidt
+              </span>
+            </a>
+            <!--<a href="index.html">
+              <span id="by-me">
+
+              </span>
+            </a>-->
+          </h1>
+        <hr>
+        <nav>
+          <span style="display: inline-block;" ><a class="navitem" href="../index.html"><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../datasets.html"><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About</a></span>
+
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container article">
+      <div id='header-box'>
+
+
+        <!--START OF HEADING-->
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <img src="assets/cover.jpg" id="header-img" alt="">
+        </div>
+
+
+        <div id="header-text">
+          <h1 class="article-title">
+            mars32k Dataset
+          </h1>
+          <time datetime="2018-11-23 00:00:00">November 23, 2018 ⧗ 6 minute read</time><br>
+        </div>
+      </div>
+      <!--END OF HEADING-->
+
+      <span class="article-text">
+        <div id="index"><a href=#format> → Format</a><br><a href=#preview> → Preview</a><br><a href=#anomalous-images> → Anomalous Images</a><br><a href=#download> → Download</a></div><br><hr>
+This dataset consists of about 32,000 color images collected by the Curiosity rover on Mars between August 2012 and November 2018. The images show various geographical and geological features of Mars such as mountains and valleys, craters, dunes and rocky terrain. All images have been scaled down using linear interpolation to 560x500px (some images have been cropped). The dataset is intended for unsupervised learning and the images are only labeled with the date they were taken on. This dataset only contains photos taken with Curiosity's Mastcam camera and all grayscale or other images were removed.<br>
+<br>
+
+<table style="width:100%">
+  <tr>
+    <th>Total images</th>
+    <td>32,368</td> 
+  </tr>
+  <tr>
+    <th>Total size</th>
+    <td>3.4GB</td>
+  </tr>
+  <tr>
+    <th>Image resolution</th>
+    <td>560x500px</td>
+  </tr>
+  <tr>
+    <th>Average size</th>
+    <td>105kb</td>
+  </tr>
+</table><br>
+<h2 id="format"> Format</h2>
+The dataset is available as a zip file. The archive contains all 32,368 images as <code>.jpg</code> files. The filenames are structured like this:<br>
+
+<pre><code><code>[cr_]</code><code>sol</code>_<code>nasa_filename</code>.jpg</code></pre>
+The optional<code>cr_</code> prefix indicates that this photo was cropped to the same ratio as all other images. <code>sol</code> is the martian solar day that the picture was taken and <code>nasa_filename</code> is the original filename from NASA.<br>
+
+Image <code>725_0725MR0030950120402857E01_DXXX.jpg</code> for example was not cropped, taken 725 days after landing and has the filename <code>0725MR0030950120402857E01_DXXX</code>.<br>
+<br>
+<h2 id="preview"> Preview</h2>
+
+                            <style>
+                                @media (max-width: 520px) {
+                                      .img-grid-id-rrmhmydh {
+                                          width: 18.8% !important;
+                                      }
+                                }
+                            </style>
+                            <div class="img-grid">
+<div>
+<img src="assets/images/0.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/1.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/2.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/3.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/4.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+</div>
+<div>
+<img src="assets/images/5.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/6.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/7.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/8.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/9.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+</div>
+<div>
+<img src="assets/images/10.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/11.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/12.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/13.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/14.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+</div>
+<div>
+<img src="assets/images/15.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/16.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/17.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/18.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/19.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+</div>
+<div>
+<img src="assets/images/20.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/21.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/22.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/23.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/24.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+</div>
+<div>
+<img src="assets/images/25.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/26.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/27.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/28.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+<img src="assets/images/29.jpg" style="width: 19.25%;" class=" zoomable-img  img-grid-id-rrmhmydh ">
+</div>
+</div>
+<br>
+<h2 id="anomalous-images"> Anomalous Images</h2>
+The dataset is not curated and some images contain rover parts obscuring the image, black bars or are images of the sky.<br>
+
+
+                            <style>
+                                @media (max-width: 520px) {
+                                      .img-grid-id-lmfldclx {
+                                          width: 23.8% !important;
+                                      }
+                                }
+                            </style>
+                            <div class="img-grid">
+<div>
+<img src="assets/images/art0.jpg" style="width: 24.25%;" class=" zoomable-img  img-grid-id-lmfldclx ">
+<img src="assets/images/art1.jpg" style="width: 24.25%;" class=" zoomable-img  img-grid-id-lmfldclx ">
+<img src="assets/images/art2.jpg" style="width: 24.25%;" class=" zoomable-img  img-grid-id-lmfldclx ">
+<img src="assets/images/art3.jpg" style="width: 24.25%;" class=" zoomable-img  img-grid-id-lmfldclx ">
+</div>
+<div>
+<img src="assets/images/art4.jpg" style="width: 24.25%;" class=" zoomable-img  img-grid-id-lmfldclx ">
+<img src="assets/images/art5.jpg" style="width: 24.25%;" class=" zoomable-img  img-grid-id-lmfldclx ">
+<img src="assets/images/art6.jpg" style="width: 24.25%;" class=" zoomable-img  img-grid-id-lmfldclx ">
+<img src="assets/images/art7.jpg" style="width: 24.25%;" class=" zoomable-img  img-grid-id-lmfldclx ">
+</div>
+</div>
+<br>
+<h2 id="download"> Download</h2>
+<a href="https://1drv.ms/u/s!At9DaMZX2MkBgwyYAaWjC013GC14, http://www.mediafire.com/file/r49yc8jvl26tjo8/mars32k.zip, https://drive.google.com/file/d/1yeLkE1p5oeCqa5pA7tc0tI4eoyvjZc5X/view?usp=sharing, assets/sample.zip" class="download-single" download>mars32k.zip, mirror mars32k.zip, mirror mars32k.zip, sample.zip<i class="fas fa-download download-icon"></i></a><br>
+<br>
+
+
+<div class="specialbox emailbox">
+    <strong>Any questions? Suggestions? Clarification needed?</strong><br>
+    Telegram: <a href="https://t.me/schmidtdominik">@schmidtdominik</a><br>
+    Email: <a id="email" target="_blank">&#115;&#099;&#104;&#109;&#105;&#100;&#116;&#100;&#111;&#109;&#105;&#110;&#105;&#107;&#051;&#048;&#032;[&#097;&#116;]&#032;&#103;&#109;&#097;&#105;&#108;&#046;&#032;[&#100;&#111;&#116;]&#032;&#099;&#111;&#109;</a><br>
+    Reddit: <a href="https://reddit.com/u/dominik_schmidt">u/dominik_schmidt</a><br>
+    I usually reply the same or next day.
+</div>
+<script type="text/javascript">
+    var string1 = "schmidtdominik30";
+    var string2 = "@";
+    var string3 = "gmail.com";
+    var string4 = string1 + string2 + string3;
+    document.getElementById('email').innerHTML = string4;
+    document.getElementById('email').href = "mailto:" + string4 + "?subject=Hi!";
+</script>
+
+
+      </span>
+  </div>
+
+  <br><br>
+
+  <footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>
+
+  <br>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

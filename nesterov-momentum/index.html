@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Understanding Nesterov Momentum (NAG) - Dominik Schmidt</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 100 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/article.css">
+
+  <link rel="stylesheet" href="../highlight/styles/atom-one-light.css"><!--foundation/hopscotch-->
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 8%">
+          <h1>
+            <a href="../index.html">
+              <span id="title">
+                Dominik Schmidt
+              </span>
+            </a>
+            <!--<a href="index.html">
+              <span id="by-me">
+
+              </span>
+            </a>-->
+          </h1>
+        <hr>
+        <nav>
+          <span style="display: inline-block;" ><a class="navitem" href="../index.html"><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../datasets.html"><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About</a></span>
+
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container article">
+      <div id='header-box'>
+
+
+        <!--START OF HEADING-->
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <img src="assets/cover.png" id="header-img" alt="">
+        </div>
+
+
+        <div id="header-text">
+          <h1 class="article-title">
+            Understanding Nesterov Momentum (NAG)
+          </h1>
+          <time datetime="2018-11-24 00:00:00">November 24, 2018 ⧗ 4 minute read</time><br>
+        </div>
+      </div>
+      <!--END OF HEADING-->
+
+      <span class="article-text">
+        <div id="index"><a href=#first:-gradient-descent> → First: Gradient Descent</a><br><a href=#second:-gradient-descent-with-momentum> → Second: Gradient Descent with Momentum</a><br><a href=#third:-gradient-descent-with-nesterov-momentum> → Third: Gradient Descent with Nesterov Momentum</a></div><br><hr>
+<strong>Momentum</strong> and <strong>Nesterov Momentum</strong> (also called Nesterov Accelerated Gradient/NAG) are slight variations of normal gradient descent that can speed up training and improve convergence significantly. <br>
+<h2 id="first:-gradient-descent"> First: Gradient Descent</h2>
+The most common method to train a neural network is by using <strong>gradient descent</strong> (<div class="tooltip">SGD<span class="tooltiptext">stochastic gradient descent</span></div>). The way this works is you define a <div class="tooltip">loss function<span class="tooltiptext">sometimes called cost or error function or optimization objective</span></div> \(l(\theta)\) that expresses how well your weights & biases \(\theta\) allow the network to fit your training data. A higher loss means that the network is bad and makes a lot of errors while a low loss generally means that the network performs well. You can then train your network by adjusting the network parameters in a way that reduces the loss.<br>
+
+<div class="image-center-wrapper"><img src="assets/sgd.png" style="width: 70%;" class="inline-image image-center    "></div>
+Formally the update rule in SGD is defined like this: $$\theta_{t+1} = \theta_t − \eta\nabla l(\theta)$$ Here you take the <div class="tooltip">gradient<span class="tooltiptext">derivative into all dimensions of the function</span></div> \(\nabla\) of the loss function \(l\) which tells you in which direction you have to move through parameter space to increase the loss. Then you go in the opposite direction \(-\nabla l\) (in which the loss decreases) and move by a distance dependent on the <strong>learning rate</strong> \(\eta\).<br>
+<br>
+
+This works very well in most cases and is the foundation of much of modern deep learning.<br>
+<br>
+<h2 id="second:-gradient-descent-with-momentum"> Second: Gradient Descent with Momentum</h2>
+Momentum is essentially a small change to the SGD parameter update so that movement through the parameter space is averaged over multiple time steps. This is done by introducing a velocity component \(v\). Momentum speeds up movement along directions of strong improvement (loss decrease) and also helps the network avoid local minima. It is intuitively related to the concept of momentum in physics.<br>
+
+<div class="image-center-wrapper"><img src="assets/sgd-mom.png" style="width: 70%;" class="inline-image image-center    "></div>
+With momentum, the SGD update rule is changed to: $$v_{t+1} = \mu v_t-\eta\nabla l(\theta)\\\theta_{t+1} = \theta_t + v_{t+1}$$ <br>
+
+Here \(v\) is the velocity and \(\mu\) is the momentum parameter which controls how fast the velocity can change and how much the local gradient influences long term movement. At every time step the velocity is updated according to the local gradient and is then applied to the parameters.<br>
+<br>
+<h2 id="third:-gradient-descent-with-nesterov-momentum"> Third: Gradient Descent with Nesterov Momentum</h2>
+Nesterov momentum is a simple change to normal momentum. Here the gradient term is not computed from the current position \(\theta_t\) in parameter space but instead from a position \(\theta_{intermediate}=\theta_t+ \mu v_t\). This helps because while the gradient term always points in <div class="tooltip">the right direction<span class="tooltiptext">the direction where the loss is minimized</span></div>, the momentum term may not. If the momentum term points in the wrong direction or overshoots, the gradient can still "go back" and correct it in the same update step. <br>
+
+<div class="image-center-wrapper"><img src="assets/sgd-nag.png" style="width: 70%;" class="inline-image image-center    "></div>
+The revised parameter update rule is: $$v_{t+1} = \mu v_t-\eta\nabla l(\theta+ \mu v_t)\\\theta_{t+1} = \theta_t + v_{t+1}$$ <br>
+<br>
+
+
+<div class="specialbox emailbox">
+    <strong>Any questions? Suggestions? Clarification needed?</strong><br>
+    Telegram: <a href="https://t.me/schmidtdominik">@schmidtdominik</a><br>
+    Email: <a id="email" target="_blank">&#115;&#099;&#104;&#109;&#105;&#100;&#116;&#100;&#111;&#109;&#105;&#110;&#105;&#107;&#051;&#048;&#032;[&#097;&#116;]&#032;&#103;&#109;&#097;&#105;&#108;&#046;&#032;[&#100;&#111;&#116;]&#032;&#099;&#111;&#109;</a><br>
+    Reddit: <a href="https://reddit.com/u/dominik_schmidt">u/dominik_schmidt</a><br>
+    I usually reply the same or next day.
+</div>
+<script type="text/javascript">
+    var string1 = "schmidtdominik30";
+    var string2 = "@";
+    var string3 = "gmail.com";
+    var string4 = string1 + string2 + string3;
+    document.getElementById('email').innerHTML = string4;
+    document.getElementById('email').href = "mailto:" + string4 + "?subject=Hi!";
+</script>
+
+<section id="article_footer"><div class="further-reading"><h2>Further Reading</h2><br><ul><li><a href="http://proceedings.mlr.press/v28/sutskever13.pdf">Sutskever, Martens et al. "On the importance of initialization and momentum in deep learning" 2013</a></li></ul></div></section>
+      </span>
+  </div>
+
+  <br><br>
+
+  <footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>
+
+  <br>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

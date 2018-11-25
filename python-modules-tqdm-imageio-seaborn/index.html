@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>`tqdm`, `imageio` and `Seaborn`: Three essential python modules. - Dominik Schmidt</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 100 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/article.css">
+
+  <link rel="stylesheet" href="../highlight/styles/atom-one-light.css"><!--foundation/hopscotch-->
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 8%">
+          <h1>
+            <a href="../index.html">
+              <span id="title">
+                Dominik Schmidt
+              </span>
+            </a>
+            <!--<a href="index.html">
+              <span id="by-me">
+
+              </span>
+            </a>-->
+          </h1>
+        <hr>
+        <nav>
+          <span style="display: inline-block;" ><a class="navitem" href="../index.html"><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../datasets.html"><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About</a></span>
+
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container article">
+      <div id='header-box'>
+
+
+        <!--START OF HEADING-->
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <img src="assets/cover.png" id="header-img" alt="">
+        </div>
+
+
+        <div id="header-text">
+          <h1 class="article-title">
+            <code>tqdm</code>, <code>imageio</code> and <code>Seaborn</code>: Three essential python modules.
+          </h1>
+          <time datetime="2018-11-22 00:00:00">November 22, 2018 ⧗ 4 minute read</time><br>
+        </div>
+      </div>
+      <!--END OF HEADING-->
+
+      <span class="article-text">
+        <div id="index"><a href=#tqdm:-progress-bars-for-the-command-line-or-jupyter-notebook> → tqdm: Progress bars for the command line or Jupyter notebook</a><br><a href=#install-tqdm>&emsp; → Install tqdm</a><br><a href=#imageio:-load-and-save-images> → imageio: Load and save images</a><br><a href=#install-imageio>&emsp; → Install imageio</a><br><a href=#seaborn:-create-beautiful-graphs-and-visualizations> → Seaborn: Create beautiful graphs and visualizations</a><br><a href=#install-seaborn>&emsp; → Install seaborn</a></div><br><hr>
+Learn how to use <code>tqdm</code> to display command line and Jupyter progress bars, <code>imageio</code> to easily load and save images and <code>Seaborn</code> to create beautiful graphs and visualizations.<br>
+<br>
+<h2 id="tqdm:-progress-bars-for-the-command-line-or-jupyter-notebook"> <code>tqdm</code>: Progress bars for the command line or Jupyter notebook</h2><br>
+
+Import the <code>tqdm</code> function from the module. Then wrap it around any iterable used in a for loop to create a progress bar.<br>
+
+<pre><code>from tqdm import tqdm
+for i in tqdm([a, b, c, d, ..]):
+	...
+</code></pre>
+<pre><code>41%|███████████████                      | 4080/10000 [00:04<00:06, 895.98it/s]
+</code></pre>
+The progress bar always displays the elapsed time, completed iterations and iters/sec. If the iterable has a <code>len()</code> (like a list or a numpy array but unlike a generator) it will also display the progress percentage and estimated time left. You can also use <code>tqdm</code> in Jupyter notebook by importing the <code>tqdm_notebook</code> function.<br>
+
+<div class="image-center-wrapper"><img src="assets/tqdm2.png" style="width: 80%;" class="inline-image image-center    "></div>
+<code>tqdm</code> also has some more advanced functionality for nested loops, labeled loops and color-coding exit status, all of which you can see in their <a href="https://github.com/tqdm/tqdm">great documentation</a>.<br>
+<h3 id="install-tqdm"> Install <code>tqdm</code></h3>
+Install <code>tqdm</code> with pip (pip3 for Python 3) <strong>or</strong> conda:
+<pre><code>pip install tqdm
+pip3 install tqdm
+conda install tqdm
+</code></pre><br>
+<h2 id="imageio:-load-and-save-images"> <code>imageio</code>: Load and save images</h2><br>
+
+Import <code>imageio</code>, then use <code>.imread(uri,..)</code> and <code>.imwrite(uri, image,..)</code> to read and write images.<br>
+
+<pre><code>import imageio
+
+image = imageio.imread('./cat.png')
+# You can manipulate the image as a numpy array.
+image = image[:500]
+image.imwrite('./half_cat.png', image)
+</code></pre>
+<div class="image-center-wrapper"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Red_Kitten_01.jpg" style="width: 20em;" class="inline-image image-center    "></div>
+<code>imageio</code> can also read volumetric and medical data, read frames from a video file, or open an url. It supports a ton of <a href="https://imageio.readthedocs.io/en/latest/formats.html">different file formats</a> and parameters and also has a <a href="https://imageio.readthedocs.io/en/latest/sec_gettingstarted.html">great documentation</a>.<br>
+<h3 id="install-imageio"> Install <code>imageio</code></h3>
+Install <code>imageio</code> with pip (pip3 for Python 3) <strong>or</strong> conda:
+<pre><code>pip install imageio
+pip3 install imageio
+conda install imageio
+</code></pre><br>
+<h2 id="seaborn:-create-beautiful-graphs-and-visualizations"> <code>Seaborn</code>: Create beautiful graphs and visualizations</h2><br>
+
+<code>Seaborn</code> is basically an extension to matplotlib that allows you to use its normal plotting functions but applies really pretty styles to them. It also provides some additional functions not available in matplotlib. Check out their <a href="https://seaborn.pydata.org/examples/index.html">example library</a> and <a href="https://seaborn.pydata.org/introduction.html#introduction">getting started guide</a>.<br>
+<br>
+
+<a href="assets/Seaborn.ipynb" class="download-single" download>Here<i class="fas fa-download download-icon"></i></a> is the jupyter notebook for the following examples.<br>
+
+<div class="image-center-wrapper"><img src="assets/sb1.png" style="width: 60%;" class="inline-image image-center    "></div>
+<div class="image-center-wrapper"><img src="assets/sb3.png" style="width: 60%;" class="inline-image image-center    "></div>
+<div class="image-center-wrapper"><img src="assets/sb4.png" style="width: 60%;" class="inline-image image-center    "></div>
+<div class="image-center-wrapper"><img src="assets/sb5.png" style="width: 60%;" class="inline-image image-center    "></div>
+<div class="image-center-wrapper"><img src="assets/sb8.png" style="width: 60%;" class="inline-image image-center    "></div>
+<div class="image-center-wrapper"><img src="assets/sb9.png" style="width: 60%;" class="inline-image image-center    "></div>
+<div class="image-center-wrapper"><img src="assets/sb12.png" style="width: 60%;" class="inline-image image-center    "></div>
+<div class="image-center-wrapper"><img src="assets/sb13.png" style="width: 60%;" class="inline-image image-center    "></div>
+<div class="image-center-wrapper"><img src="assets/sb14.png" style="width: 60%;" class="inline-image image-center    "></div><h3 id="install-seaborn"> Install <code>seaborn</code></h3>
+Install <code>seaborn</code> with pip (pip3 for Python 3) <strong>or</strong> conda:
+<pre><code>pip install seaborn
+pip3 install seaborn
+conda install seaborn
+</code></pre>
+
+<div class="specialbox emailbox">
+    <strong>Any questions? Suggestions? Clarification needed?</strong><br>
+    Telegram: <a href="https://t.me/schmidtdominik">@schmidtdominik</a><br>
+    Email: <a id="email" target="_blank">&#115;&#099;&#104;&#109;&#105;&#100;&#116;&#100;&#111;&#109;&#105;&#110;&#105;&#107;&#051;&#048;&#032;[&#097;&#116;]&#032;&#103;&#109;&#097;&#105;&#108;&#046;&#032;[&#100;&#111;&#116;]&#032;&#099;&#111;&#109;</a><br>
+    Reddit: <a href="https://reddit.com/u/dominik_schmidt">u/dominik_schmidt</a><br>
+    I usually reply the same or next day.
+</div>
+<script type="text/javascript">
+    var string1 = "schmidtdominik30";
+    var string2 = "@";
+    var string3 = "gmail.com";
+    var string4 = string1 + string2 + string3;
+    document.getElementById('email').innerHTML = string4;
+    document.getElementById('email').href = "mailto:" + string4 + "?subject=Hi!";
+</script>
+
+
+      </span>
+  </div>
+
+  <br><br>
+
+  <footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>
+
+  <br>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

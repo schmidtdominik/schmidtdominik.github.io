@@ -22,8 +22,8 @@ code {
 }
 
 .article-subsection {
-
 }
+
 
 
 /*#header-img {
@@ -99,6 +99,11 @@ code {
   font-weight: 400;
   /*font-family: "Crimson Text", serif;*/
   font-family: Roboto, Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+.article-preview-text a {
+  color: #52D681;
+  text-decoration: none;
 }
 
 .continue-reading {
