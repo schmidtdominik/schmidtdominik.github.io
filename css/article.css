@@ -250,10 +250,13 @@ strong {
   background: rgb(200, 200, 200); /* Gecko Browsers */
 }
 
-code {
-  overflow-x: auto;
-  max-width: 960px;
+pre {
+  overflow-x: hidden;
+  max-width: 860px;
   font-size: 0.87em;
+}
+
+.code-wrapper {
 }
 
 h1 code {

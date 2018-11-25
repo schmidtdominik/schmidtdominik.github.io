@@ -123,12 +123,12 @@ A <code>tf.data</code> pipeline, however, can prefetch the next batches asynchro
 To build a simple data pipeline you need two objects. A <code>tf.data.Dataset</code> stores your dataset and a <code>tf.data.Iterator</code> allows you to extract items from your dataset one-by-one.<br>
 
 A <code>tf.data.Dataset</code> for an image pipeline could (schematically) look like this:
-<pre><code>[
+<div class="code-wrapper"><pre><code>[
     [Tensor(image), Tensor(label)],
     [Tensor(image), Tensor(label)],
     ...
 ]
-</code></pre>
+</code></pre></div>
 You can then use a <code>tf.data.Iterator</code> to retrieve image-label pairs one by one. In practice, multiple image-label pairs would be batched together so that the iterator pulls out one entire batch at a time. <br>
 <br>
 
@@ -146,15 +146,15 @@ A minimal data pipeline for images could look like this:<br>
 <div class="image-center-wrapper"><img src="assets/minimal_pipeline.png" style="width: 70%;" class="inline-image image-center    no-border-radius"></div>
 <strong>All of the following code is placed in your computation graph definition along with the model, loss, optimizer,...</strong> First create a tensor from a list of files.<br>
 
-<pre><code># define list of files
+<div class="code-wrapper"><pre><code># define list of files
 files = ['a.png', 'b.png', 'c.png', 'd.png']
     
 # create a dataset from filenames
 dataset = tf.data.Dataset.from_tensor_slices(files)
-</code></pre>
+</code></pre></div>
 Now define a function to load an image (as a tensor) from its path and use <code>tf.data.Dataset.map()</code> to apply this function to all elements (file paths) in the dataset.<sup><a id="ref1ref" href="#ref1">[1]</a></sup> You can also add a <code>num_parallel_calls=n</code> argument to <code>map()</code> to parallelize the function calls.<br>
 
-<pre><code># <span class="highlight"><a href="https://cs230-stanford.github.io/tensorflow-input-data.html#building-an-image-data-pipeline">Source</a></span>
+<div class="code-wrapper"><pre><code># <span class="highlight"><a href="https://cs230-stanford.github.io/tensorflow-input-data.html#building-an-image-data-pipeline">Source</a></span>
 def load_image(path):
     image_string = tf.read_file(path)
 
@@ -170,28 +170,28 @@ def load_image(path):
 
 # Apply the function load_image to each filename in the dataset
 dataset = dataset.map(load_image, num_parallel_calls=8)
-</code></pre>
+</code></pre></div>
 Next use <code>tf.data.Dataset.batch()</code> to create batches:
-<pre><code># Create batches of 64 images each
+<div class="code-wrapper"><pre><code># Create batches of 64 images each
 dataset = dataset.batch(64)
-</code></pre>
+</code></pre></div>
 You may also want to add <code>tf.data.Dataset.prefetch(buffer_size)</code> to the end of your pipeline. This ensures that the next batch is always immediately available to the GPU and reduces GPU starvation as mentioned above. <code>buffer_size</code> is the number of batches that should be prefetched. <code>buffer_size=1</code> is usually sufficient although in some cases, especially when the processing time per batch varies, it can help to increase it.<br>
 
-<pre><code>dataset = dataset.prefetch(buffer_size=1)
-</code></pre>
+<div class="code-wrapper"><pre><code>dataset = dataset.prefetch(buffer_size=1)
+</code></pre></div>
 Finally, create an iterator to allow us to iterate through the dataset. There are different types of iterators available. For most purposes the initializable iterator is recommended.<br>
 
-<pre><code>iterator = dataset.make_initializable_iterator()
-</code></pre>
+<div class="code-wrapper"><pre><code>iterator = dataset.make_initializable_iterator()
+</code></pre></div>
 Now call <code>tf.data.Iterator.get_next()</code> to create a placeholder-tensor that tensorflow fills with the next batch of images <strong>every time it is evaluated.</strong><br>
 
-<pre><code>batch_of_images = iterator.get_next()
-</code></pre>
+<div class="code-wrapper"><pre><code>batch_of_images = iterator.get_next()
+</code></pre></div>
 If you're switching from <code>feed_dict</code>, <code>batch_of_images</code> replaces your previous placeholder variable. <br>
 <h3 id="running-the-session"> Running the session</h3>
 Now run your model as usual but make sure to evaluate the <code>iterator.initializer</code> op <strong>before</strong> every epoch and catch the <code>tf.errors.OutOfRangeError</code> exception <strong>after</strong> every epoch.<br>
 
-<pre><code>with tf.Session() as session:
+<div class="code-wrapper"><pre><code>with tf.Session() as session:
     
     for i in range(epochs): 
         session.run(iterator.initializer)
@@ -203,7 +203,7 @@ Now run your model as usual but make sure to evaluate the <code>iterator.initial
                 
         except tf.errors.OutOfRangeError:
             print('End of Epoch.')
-</code></pre>
+</code></pre></div>
 <div class="specialbox hintbox"><i class="fas fa-info-circle"></i>&ensp;
 The program <code>nvidia-smi</code> allows you to monitor your GPU utilization and can help you understand bottlenecks in your data pipeline. The average GPU utilization should usually be above 70-80%.
 </div><br>
@@ -211,12 +211,12 @@ The program <code>nvidia-smi</code> allows you to monitor your GPU utilization a
 <div class="image-center-wrapper"><img src="assets/complete_pipeline.png" style="width: 77%;" class="inline-image image-center    "></div><h3 id="shuffle"> Shuffle</h3>
 Use <code>tf.data.Dataset.shuffle()</code> to shuffle the filenames. The argument specifies how many elements should be shuffled at a time. In general, it's recommended to shuffle the entire list at once. <a href="https://stackoverflow.com/questions/46444018/meaning-of-buffer-size-in-dataset-map-dataset-prefetch-and-dataset-shuffle/48096625#48096625">See this answer on Stackoverflow</a><br>
 
-<pre><code>dataset = tf.data.Dataset.from_tensor_slices(files)
+<div class="code-wrapper"><pre><code>dataset = tf.data.Dataset.from_tensor_slices(files)
 dataset = dataset.shuffle(len(files))
-</code></pre><h3 id="data-augmentation"> Data augmentation</h3>
+</code></pre></div><h3 id="data-augmentation"> Data augmentation</h3>
 You can use the functions <code>tf.image.random_flip_left_right()</code>, <code>tf.image.random_brightness()</code>, <code>tf.image.random_saturation()</code> to perform simple data augmentation on your images. <sup><a id="ref1ref" href="#ref1">[1]</a></sup><br>
 
-<pre><code># <span class="highlight"><a href="https://cs230-stanford.github.io/tensorflow-input-data.html#building-an-image-data-pipeline">Source</a></span>
+<div class="code-wrapper"><pre><code># <span class="highlight"><a href="https://cs230-stanford.github.io/tensorflow-input-data.html#building-an-image-data-pipeline">Source</a></span>
 def train_preprocess(image):
     image = tf.image.random_flip_left_right(image)
 
@@ -226,21 +226,21 @@ def train_preprocess(image):
     image = tf.clip_by_value(image, 0.0, 1.0)
 
     return image
-</code></pre><h3 id="labels"> Labels</h3>
+</code></pre></div><h3 id="labels"> Labels</h3>
 To load labels (or other metadata) along your images simply include them when creating the intial dataset:
-<pre><code># <code>files</code> is a python list of image filenames
+<div class="code-wrapper"><pre><code># <code>files</code> is a python list of image filenames
 # <code>labels</code> is a numpy array with label data for each image
 dataset = tf.data.Dataset.from_tensor_slices((files, labels))
-</code></pre>
+</code></pre></div>
 Make sure any functions that you apply to your dataset with <code>.map()</code> allow label data to pass through:<br>
 
-<pre><code>def load_image(path, label):
+<div class="code-wrapper"><pre><code>def load_image(path, label):
     # load image
     
     return image, label
 
 dataset = dataset.map(load_image)
-</code></pre>
+</code></pre></div>
 
 <div class="specialbox emailbox">
     <strong>Any questions? Suggestions? Clarification needed?</strong><br>

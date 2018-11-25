@@ -113,41 +113,41 @@ Learn how to use <code>tqdm</code> to display command line and Jupyter progress 
 
 Import the <code>tqdm</code> function from the module. Then wrap it around any iterable used in a for loop to create a progress bar.<br>
 
-<pre><code>from tqdm import tqdm
+<div class="code-wrapper"><pre><code>from tqdm import tqdm
 for i in tqdm([a, b, c, d, ..]):
 	...
-</code></pre>
-<pre><code>41%|███████████████                      | 4080/10000 [00:04<00:06, 895.98it/s]
-</code></pre>
+</code></pre></div>
+<div class="code-wrapper"><pre><code>41%|███████████████                      | 4080/10000 [00:04<00:06, 895.98it/s]
+</code></pre></div>
 The progress bar always displays the elapsed time, completed iterations and iters/sec. If the iterable has a <code>len()</code> (like a list or a numpy array but unlike a generator) it will also display the progress percentage and estimated time left. You can also use <code>tqdm</code> in Jupyter notebook by importing the <code>tqdm_notebook</code> function.<br>
 
 <div class="image-center-wrapper"><img src="assets/tqdm2.png" style="width: 80%;" class="inline-image image-center    "></div>
 <code>tqdm</code> also has some more advanced functionality for nested loops, labeled loops and color-coding exit status, all of which you can see in their <a href="https://github.com/tqdm/tqdm">great documentation</a>.<br>
 <h3 id="install-tqdm"> Install <code>tqdm</code></h3>
 Install <code>tqdm</code> with pip (pip3 for Python 3) <strong>or</strong> conda:
-<pre><code>pip install tqdm
+<div class="code-wrapper"><pre><code>pip install tqdm
 pip3 install tqdm
 conda install tqdm
-</code></pre><br>
+</code></pre></div><br>
 <h2 id="imageio:-load-and-save-images"> <code>imageio</code>: Load and save images</h2><br>
 
 Import <code>imageio</code>, then use <code>.imread(uri,..)</code> and <code>.imwrite(uri, image,..)</code> to read and write images.<br>
 
-<pre><code>import imageio
+<div class="code-wrapper"><pre><code>import imageio
 
 image = imageio.imread('./cat.png')
 # You can manipulate the image as a numpy array.
 image = image[:500]
 image.imwrite('./half_cat.png', image)
-</code></pre>
+</code></pre></div>
 <div class="image-center-wrapper"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Red_Kitten_01.jpg" style="width: 20em;" class="inline-image image-center    "></div>
 <code>imageio</code> can also read volumetric and medical data, read frames from a video file, or open an url. It supports a ton of <a href="https://imageio.readthedocs.io/en/latest/formats.html">different file formats</a> and parameters and also has a <a href="https://imageio.readthedocs.io/en/latest/sec_gettingstarted.html">great documentation</a>.<br>
 <h3 id="install-imageio"> Install <code>imageio</code></h3>
 Install <code>imageio</code> with pip (pip3 for Python 3) <strong>or</strong> conda:
-<pre><code>pip install imageio
+<div class="code-wrapper"><pre><code>pip install imageio
 pip3 install imageio
 conda install imageio
-</code></pre><br>
+</code></pre></div><br>
 <h2 id="seaborn:-create-beautiful-graphs-and-visualizations"> <code>Seaborn</code>: Create beautiful graphs and visualizations</h2><br>
 
 <code>Seaborn</code> is basically an extension to matplotlib that allows you to use its normal plotting functions but applies really pretty styles to them. It also provides some additional functions not available in matplotlib. Check out their <a href="https://seaborn.pydata.org/examples/index.html">example library</a> and <a href="https://seaborn.pydata.org/introduction.html#introduction">getting started guide</a>.<br>
@@ -165,10 +165,10 @@ conda install imageio
 <div class="image-center-wrapper"><img src="assets/sb13.png" style="width: 60%;" class="inline-image image-center    "></div>
 <div class="image-center-wrapper"><img src="assets/sb14.png" style="width: 60%;" class="inline-image image-center    "></div><h3 id="install-seaborn"> Install <code>seaborn</code></h3>
 Install <code>seaborn</code> with pip (pip3 for Python 3) <strong>or</strong> conda:
-<pre><code>pip install seaborn
+<div class="code-wrapper"><pre><code>pip install seaborn
 pip3 install seaborn
 conda install seaborn
-</code></pre>
+</code></pre></div>
 
 <div class="specialbox emailbox">
     <strong>Any questions? Suggestions? Clarification needed?</strong><br>
