@@ -139,6 +139,10 @@ time {
 
 .image-center {
   display: inline-block;
+  margin: 3rem 0 2rem 0;
+}
+
+.multi-center-image-spacing {
   margin: 3rem 2.3rem 2rem 2.3rem;
 }
 
