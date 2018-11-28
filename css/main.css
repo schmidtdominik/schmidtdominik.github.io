@@ -197,6 +197,7 @@
 #title {
   text-transform: uppercase;
   font-size: 5.7rem;
+  font-display: swap;
   font-family: 'Big John', sans-serif;
   color: #52D681;
   letter-spacing: 1px;

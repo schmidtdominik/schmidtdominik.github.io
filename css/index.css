@@ -2,6 +2,7 @@
   margin-bottom: 1rem;
   font-weight: 500;
   font-family: Roboto, Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  font-display: fallback;
 }
 
 code {
@@ -91,6 +92,7 @@ code {
   font-weight: 400;
   /*font-family: "Crimson Text", serif;*/
   font-family: Roboto, Ubuntu, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  font-display: fallback;
 }
 
 @media (max-width: 500px) {
