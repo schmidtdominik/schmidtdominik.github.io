@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Multi-label Image Classification - Dominik Schmidt</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <link rel=preload href="../css/BIG JOHN.otf" as="font" crossorigin>
+
+  <meta property="og:title" content="Multi-label Image Classification"/>
+  <meta property='og:type' content='article'/>
+  <meta property="og:image" content="assets/cover.png"/>
+  <meta property="og:url" content="http://dominikschmidt.xyz/multi-label-classification"/>
+  <!--<meta property="og:description" content="This is a gallery of some results in multi-label image classification I achieved last December. I used an Inception-v4 based convnet architecture which I trained for 2-3 hours on a dataset of more than 50,000 200x200px images scraped from unsplash.com."/>-->
+
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+  <script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#edeff5",
+        "text": "#838391"
+      },
+      "button": {
+        "background": "#4b81e8"
+      }
+    },
+    "position": "bottom-left",
+    "content": {
+      "href": "http://dominikschmidt.xyz/policy"
+    }
+  })});
+  </script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-4694920180315448",
+      enable_page_level_ads: true
+    });
+  </script>
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 100 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/article.css">
+
+  <link rel="stylesheet" href="../highlight/styles/atom-one-light.css"><!--foundation/hopscotch-->
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+
+  <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 8%">
+          <h1>
+            <a href="../index.html">
+              <span id="title">
+                Dominik Schmidt
+              </span>
+            </a>
+            <!--<a href="index.html">
+              <span id="by-me">
+
+              </span>
+            </a>-->
+          </h1>
+        <hr>
+        <nakjv>
+          <span style="display: inline-block;" ><a class="navitem" href="../index.html"><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../datasets.html"><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About</a></span>
+
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container article">
+      <div id='header-box'>
+
+
+        <!--START OF HEADING-->
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <img src="assets/cover.png" id="header-img" alt="">
+        </div>
+
+
+        <div id="header-text">
+          <h1 class="article-title">
+            Multi-label Image Classification
+          </h1>
+          <time datetime="2019-07-08 00:00:00">July 8, 2019 ⧗ 8 minute read</time><br>
+        </div>
+      </div>
+      <!--END OF HEADING-->
+
+      <span class="article-text">
+        <div id="index"><a href=#cherry-picked-results> → Cherry-picked results</a><br><a href=#randomly-picked-results-approximate-avg-case> → Randomly picked results (approximate avg-case)</a><br><a href=#download-samples-as-.svg's> → Download samples as .svg's</a></div><br><hr>
+This is a gallery of some results in multi-label image classification I achieved last December. I used an Inception-v4 based convnet architecture which I trained for 2-3 hours on a dataset of more than 50,000 200x200px images scraped from unsplash.com. Predicted labels at the top are in arbitrary order. Only labels above a certain cutoff confidence value are shown.<br>
+<br>
+<h2 id="cherry-picked-results"> Cherry-picked results</h2>
+(Hover/tap to zoom)
+
+                            <style>
+                                @media (max-width: 520px) {
+                                      .img-grid-id-twnkqmwk {
+                                          width: 31.883333333333336% !important;
+                                      }
+                                }
+                            </style>
+                            <div class="img-grid">
+<div>
+<img src="assets/cherry-picked/1.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+<img src="assets/cherry-picked/10.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+<img src="assets/cherry-picked/11.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+</div>
+<div>
+<img src="assets/cherry-picked/12.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+<img src="assets/cherry-picked/13.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+<img src="assets/cherry-picked/14.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+</div>
+<div>
+<img src="assets/cherry-picked/15.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+<img src="assets/cherry-picked/16.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+<img src="assets/cherry-picked/17.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+</div>
+<div>
+<img src="assets/cherry-picked/18.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+<img src="assets/cherry-picked/19.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+<img src="assets/cherry-picked/2.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+</div>
+<div>
+<img src="assets/cherry-picked/20.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+<img src="assets/cherry-picked/21.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+<img src="assets/cherry-picked/22.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+</div>
+<div>
+<img src="assets/cherry-picked/23.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+<img src="assets/cherry-picked/24.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+<img src="assets/cherry-picked/3.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+</div>
+<div>
+<img src="assets/cherry-picked/4.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+<img src="assets/cherry-picked/5.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+<img src="assets/cherry-picked/6.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+</div>
+<div>
+<img src="assets/cherry-picked/7.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+<img src="assets/cherry-picked/8.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+<img src="assets/cherry-picked/9.svg" style="width: 32.333333333333336%;" class="pix zoomable-img  img-grid-id-twnkqmwk ">
+</div>
+</div>
+<br>
+<h2 id="randomly-picked-results-approximate-avg-case"> Randomly picked results (approximate avg-case)</h2>
+
+                            <style>
+                                @media (max-width: 520px) {
+                                      .img-grid-id-miabrkgw {
+                                          width: 23.55% !important;
+                                      }
+                                }
+                            </style>
+                            <div class="img-grid">
+<div>
+<img src="assets/avg-case/34LM6EWRigDRLPUvTFkNScLEL.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/3aqWiJmhpRSy3EG6E71OjrgtL.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/4EcynDAk5n3VMcF2J9gWVNkDk.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/7OQjIhTs2jzUOSgWFiKmEcexQ.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+</div>
+<div>
+<img src="assets/avg-case/8MhihNcVnrbWoDy0XB51vIyMB.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/AH8Gyh9QSlY0BM3Qv8d2Ir1xQ.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/Bd6g65yiPPmBXUUb0jc3YePzU.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/C90FvnFthhWZVOtlqtYOx77om.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+</div>
+<div>
+<img src="assets/avg-case/E5jsKvPStXHTocfiH7fZyxUGI.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/FFKzyjWI3X7Iyk3M1QL9QD3pD.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/GZhz7wwFcjevPpW5Iox7Sx7iB.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/GZmTEt6OqbVP67HKYVOFnxqIh.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+</div>
+<div>
+<img src="assets/avg-case/ISLkBa2iqd8p8C48jIEH607dR.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/JdAnwmB47yi8CEpefls110mqQ.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/KEO4vYTfkXLs90lz28mU8YhMB.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/PYoHVkVrmruX9wKYRXp7A8NKW.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+</div>
+<div>
+<img src="assets/avg-case/XIND19dj5fIR40HNh7UF3aXM5.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/XNI5jYQekoK27gsCVNFMsARMz.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/YSu04lenAhKLelrwT7mo7Jaxc.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/atl8UADfPpZEop7NozwkcsnsQ.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+</div>
+<div>
+<img src="assets/avg-case/czTYvCyX3jvH5o83mqfzVIkxj.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/d80r9fzPLuoYZFRBVBFTXTrFm.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/errfj2J8DDP9wOkAbKWxxkxfY.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/eyPfb11Yih3YTKwLZHeqgIZ6F.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+</div>
+<div>
+<img src="assets/avg-case/fN2VDN8S9MR98pMvNyE3SyDxb.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/h4zegtDBgFmXk7j7cBf3Dd8lN.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/hCSDF96qcFcrWv8nFWrMhDTaK.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/hbqLww1eRRLwOJKYyC7477d0B.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+</div>
+<div>
+<img src="assets/avg-case/kVo6mkCEr6dIPSijisGY1LrBX.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/ozgM6vStMzbbPimbGjcypC42c.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/p3zidTrbn7so9nOMe15vR5gmJ.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/pYXQvYIS7xFWy1F1en3J3pz7L.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+</div>
+<div>
+<img src="assets/avg-case/u4gKjLw6Xa9wj6iM8YtBQ6kQx.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/uRKejQCCqdME3WGPcR6ZsQ8uZ.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/wxOhHmoY4mTNlMmVMRGt5tnd6.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+<img src="assets/avg-case/yfx3WpeSEgTnMcAe40eDGxIaY.svg" style="width: 24.0%;" class="pix zoomable-img  img-grid-id-miabrkgw ">
+</div>
+</div>
+<br>
+<h2 id="download-samples-as-.svg's"> Download samples as .svg's</h2>
+<div class="download-block">
+                                <a href="assets/cherry-picked.zip" target="_blank" download>
+                                  <i class="far fa-file-archive filetype fa-fw"></i>
+                                  cherry-picked.zip
+                                  <i class="fas fa-download download-icon"></i>
+                                </a>
+                            
+                                <a href="assets/avg-case.zip" target="_blank" download>
+                                  <i class="far fa-file-archive filetype fa-fw"></i>
+                                  avg-case.zip
+                                  <i class="fas fa-download download-icon"></i>
+                                </a>
+                            </div>
+<section id="article_footer"><div class="further-reading"><h2>Further Reading</h2><br><ul><li><a href="https://unsplash.com">Custom Dataset Source - Unsplash.com</a></li></ul></div></section>
+      </span>
+  </div>
+
+  <br><br>
+
+  <footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>
+
+  <br>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
