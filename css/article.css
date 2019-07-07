@@ -319,6 +319,13 @@ a:hover {
   border-radius: 3px;
 }
 
+.open-new-tab {
+  display: inline;
+  background-color: #edeeef;
+  padding: 0.09em 0.4em;
+  border-radius: 3px;
+}
+
 .download-single .download-icon {
   margin-left: 0.5rem;
   float: none;
