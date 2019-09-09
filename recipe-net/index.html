@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>RecipeNet - Training a Neural Network to Improve Recipes - Dominik Schmidt</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <link rel=preload href="../css/BIG JOHN.otf" as="font" crossorigin>
+
+  <meta property="og:title" content="RecipeNet - Training a Neural Network to Improve Recipes"/>
+  <meta property='og:type' content='article'/>
+  <meta property="og:image" content="assets/cover.png"/>
+  <meta property="og:url" content="http://dominikschmidt.xyz/recipe-net"/>
+  <!--<meta property="og:description" content="This neural network can improve your cooking recipes by adding new and fitting ingredients. It's trained on the <em>simplified-recipes-1M dataset</em> which differentiates between 3500 different ingredients."/>-->
+
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+  <script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#edeff5",
+        "text": "#838391"
+      },
+      "button": {
+        "background": "#4b81e8"
+      }
+    },
+    "position": "bottom-left",
+    "content": {
+      "href": "http://dominikschmidt.xyz/policy"
+    }
+  })});
+  </script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-4694920180315448",
+      enable_page_level_ads: true
+    });
+  </script>
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 100 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/article.css">
+
+  <link rel="stylesheet" href="../highlight/styles/atom-one-light.css"><!--foundation/hopscotch-->
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+
+  <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 8%">
+          <h1>
+            <a href="../index.html">
+              <span id="title">
+                Dominik Schmidt
+              </span>
+            </a>
+            <!--<a href="index.html">
+              <span id="by-me">
+
+              </span>
+            </a>-->
+          </h1>
+        <hr>
+        <nav>
+          <span style="display: inline-block;" ><a class="navitem" href="../index.html"><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../datasets.html"><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About me</a></span>
+
+          <span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://github.com/schmidtdominik"><i class="fab fa-github"></i>&nbsp;</a></span>
+          <!--<span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://www.reddit.com/user/dominik_schmidt"><i class="fab fa-reddit"></i></i>&nbsp;</a></span>-->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container article">
+      <div id='header-box'>
+
+
+        <!--START OF HEADING-->
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <img src="assets/cover.png" id="header-img" alt="">
+        </div>
+
+
+        <div id="header-text">
+          <h1 class="article-title">
+            RecipeNet - Training a Neural Network to Improve Recipes
+          </h1>
+          <time datetime="2019-09-09 00:00:00">September 9, 2019 ⧗ 8 minute read</time><br>
+        </div>
+      </div>
+      <!--END OF HEADING-->
+
+      <span class="article-text">
+        <div id="index"><a href=#download> → Download</a><br><a href=#how-to-use> → How to use</a></div><br><hr>
+This neural network can improve your cooking recipes by adding new and fitting ingredients. It's trained on the <a href="../simplified-recipes-1M">simplified-recipes-1M dataset</a> which differentiates between 3500 different ingredients.<br>
+
+<img src="assets/maki1.jpg" style="width: 100%;" class="inline-image inline-image-left    ">
+For example, using this (partial) ingredient list for maki (sushi) as input<br>
+<br>
+
+<div style="text-align:center;">[<code>salt</code>, <code>sugar</code>, <code>rice</code>, <code>cucumber</code>, <code>nori</code>, <code>sushi rice</code>]</div><br>
+
+the network successfully suggests fitting ingredients including common fillings like <code>avocado</code>, <code>salmon</code> and <code>cucumber</code>. <br>
+<br>
+
+<em>(top 14 out of 3500 known ingredients shown, parenthesized ingredients are similar to one or more ingredients in the input and are not helpful and not hard to guess for the network)</em><br>
+<br>
+
+<table style="margin-left:auto;margin-right:auto;">
+    <tr>
+        <th>Ingredient</th>
+        <th>confidence</th>
+        <th>fitting?</th>
+        <th>notes</th>
+    </tr>
+    <tr>
+        <td>(<code>seaweed</code>)</td>
+        <td>0.131</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>to wrap the maki</td>
+    </tr>
+    <tr>
+        <td><code>water</code></td>
+        <td>0.081</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>for cooking the rice</td>
+    </tr>
+    <tr>
+        <td><code>mayonnaise</code></td>
+        <td>0.028</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>not in traditional maki, but not uncommon</td>
+    </tr>
+    <tr>
+        <td><code>avocado</code></td>
+        <td>0.025</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>as a filling</td>
+    </tr>
+    <tr>
+        <td>(<code>nori</code>)</td>
+        <td>0.025</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>seaweed - to wrap the maki</td>
+    </tr>
+    <tr>
+        <td><code>salmon</code></td>
+        <td>0.018</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>as a filling</td>
+    </tr>
+    <tr>
+        <td><code>wasabi</code></td>
+        <td>0.015</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>maki is commonly served with wasabi</td>
+    </tr>
+    <tr>
+        <td><code>roe</code></td>
+        <td>0.013</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>for ikura maki</td>
+    </tr>
+    <tr>
+        <td><code>lettuce</code></td>
+        <td>0.013</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><code>vinegar</code></td>
+        <td>0.010</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>for sumeshi (vinegared sushi rice)</td>
+    </tr>
+    <tr>
+        <td><code>eggs</code></td>
+        <td>0.010</td>
+        <td>~</td>
+        <td>maybe for the mayonnaise?</td>
+    </tr>
+    <tr>
+        <td>(<code>sushi rice</code>)</td>
+        <td>0.008</td>
+        <td><i class="fas fa-check"></i></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><code>egg</code></td>
+        <td>0.007</td>
+        <td>~</td>
+        <td>same as eggs</td>
+    </tr>
+    <tr>
+        <td>(<code>english cucumber</code>)</td>
+        <td>0.006</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>as a filling</td>
+    </tr>
+</table>
+In other training attempts the model also suggested <code>crab sticks</code>, <code>ginger</code> and <code>mango</code>.<br>
+
+<img src="assets/burrito.jpg" style="width: 100%;" class="inline-image inline-image-left    "><br>
+
+For the (partial) burrito recipe<br>
+<br>
+
+<div style="text-align:center;">[<code>peppers</code>, <code>rice</code>, <code>tortillas</code>, <code>black beans</code>, <code>flour tortillas</code>, <code>guacamole</code>]</div><br>
+
+the model suggested many common burrito ingredients, but also less common ones like <code>mozzarella cheese</code> and <code>corn</code>.<br>
+<br>
+
+<table  style="margin-left:auto;margin-right:auto;">
+    <tr>
+        <th>Ingredient</th>
+        <th>confidence</th>
+        <th>fitting?</th>
+        <th>notes</th>
+    </tr>
+    <tr>
+        <td>(<code>black</code>)</td>
+        <td>0.868</td>
+        <td>/</td>
+        <td>ingredient cleaning artifact</td>
+    </tr>
+    <tr>
+        <td><code>salt</code></td>
+        <td>0.098</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>seasoning</td>
+    </tr>
+    <tr>
+        <td><code>onion</code></td>
+        <td>0.057</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>vegetables</td>
+    </tr>
+    <tr>
+        <td>(<code>bell peppers</code>)</td>
+        <td>0.038</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>vegetables</td>
+    </tr>
+    <tr>
+        <td><code>corn</code></td>
+        <td>0.035</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>vegetables</td>
+    </tr>
+    <tr>
+        <td><code>chicken</code></td>
+        <td>0.026</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>meat</td>
+    </tr>
+    <tr>
+        <td><code>seasoning mix</code></td>
+        <td>0.021</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>seasoning</td>
+    </tr>
+    <tr>
+        <td><code>oil</code></td>
+        <td>0.021</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>oil</td>
+    </tr>
+    <tr>
+        <td><code>cheese</code></td>
+        <td>0.020</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>cheese</td>
+    </tr>
+    <tr>
+        <td>(<code>red peppers</code>)</td>
+        <td>0.020</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>vegetables</td>
+    </tr>
+    <tr>
+        <td><code>salsa</code></td>
+        <td>0.018</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>seasoning</td>
+    </tr>
+    <tr>
+        <td>(<code>green peppers</code>)</td>
+        <td>0.013</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>vegetables</td>
+    </tr>
+    <tr>
+        <td><code>onions</code></td>
+        <td>0.013</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>vegetables</td>
+    </tr>
+    <tr>
+        <td>(<code>chili peppers</code>)</td>
+        <td>0.007</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>vegetables</td>
+    </tr>
+    <tr>
+        <td><code>mozzarella cheese</code></td>
+        <td>0.007</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>cheese</td>
+    </tr>
+    <tr>
+        <td><code>water</code></td>
+        <td>0.007</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>for cooking the rice</td>
+    </tr>
+</table>
+In other training attempts the model also suggested <code>ground beef</code> and <code>salt</code>.<br>
+
+<img src="assets/rice1.jpg" style="width: 100%;" class="inline-image inline-image-left    "><br>
+
+For the fairly basic vegetables and rice recipe <br>
+<br>
+
+<div style="text-align:center;">[<code>salt</code>, <code>pepper</code>, <code>tomatoes</code>, <code>carrots</code>, <code>oil</code>, <code>seasoning</code>, <code>rice</code>, <code>bell peppers</code>, <code>vegetables</code>, <code>spices</code>]</div><br>
+
+the network suggested adding many other kinds of vegetables and also chicken. <br>
+<br>
+
+<table  style="margin-left:auto;margin-right:auto;">
+    <tr>
+        <th>Ingredient</th>
+        <th>confidence</th>
+        <th>fitting?</th>
+        <th>notes</th>
+    </tr>
+    <tr>
+        <td>(<code>peppers</code>)</td>
+        <td>0.935</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>vegetables</td>
+    </tr>
+    <tr>
+        <td><code>onion</code></td>
+        <td>0.225</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>vegetables</td>
+    </tr>
+    <tr>
+        <td><code>onions</code></td>
+        <td>0.176</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>vegetables</td>
+    </tr>
+    <tr>
+        <td><code>chicken</code></td>
+        <td>0.099</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>meat</td>
+    </tr>
+    <tr>
+        <td>(<code>green bell peppers</code>)</td>
+        <td>0.082</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>vegetables</td>
+    </tr>
+    <tr>
+        <td>(<code>mixed vegetables</code>)</td>
+        <td>0.065</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>vegetables</td>
+    </tr>
+    <tr>
+        <td><code>cauliflower</code></td>
+        <td>0.056</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>vegetables</td>
+    </tr>
+    <tr>
+        <td><code>zucchini</code></td>
+        <td>0.056</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>vegetables</td>
+    </tr>
+    <tr>
+        <td>(<code>italian seasoning</code>)</td>
+        <td>0.049</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>seasoning</td>
+    </tr>
+    <tr>
+        <td><code>sugar</code></td>
+        <td>0.048</td>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><code>celery</code></td>
+        <td>0.033</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>vegetables</td>
+    </tr>
+    <tr>
+        <td><code>water</code></td>
+        <td>0.030</td>
+        <td>~</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><code>garlic</code></td>
+        <td>0.027</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>seasoning</td>
+    </tr>
+    <tr>
+        <td>(<code>black pepper</code>)</td>
+        <td>0.022</td>
+        <td><i class="fas fa-check"></i></td>
+        <td>seasoning</td>
+    </tr>
+</table><br>
+<h2 id="download"> Download</h2>
+You can download the code  <a href="https://github.com/schmidtdominik/RecipeNet">here</a>. Go <a href="../simplified-recipes-1M/">here</a> for the dataset-only download and further information on the format.<br>
+<h2 id="how-to-use"> How to use</h2>
+(skip to step 4 if you already have the <code>simplified-recipes-1M.npz</code> file and do not wish to recreate the dataset with different parameters)<br>
+<br>
+
+<ol>
+<li>Manually download the three used Kaggle datasets as described in the second cell in <code>recipeprep.ipynb</code></li>
+<li>Use <code>recipeprep.ipynb</code> to download all other datasets and extract, merge, process and clean all of them. Here all used datasets get unified, messy ingredient strings get stripped of non-alpha chars and similar ingredients get merged. This step creates a ~200MB file <code>data.pickle</code> that contains preprocessed recipe and ingredient data.</li>
+<li>Use <code>ingredient_extract.ipynb</code> to further clean and simplify ingredients. This is necessary since ingredients are initially in a bad format (like '1 1/2 lbs of chicken breasts' or 'a finely blended 2:3 mix of greek yoghurt and milk' instead of 'chicken' or ['yoghurt', 'milk']). This step creates a ~60MB file <code>recipes.npz</code> containing simplified recipe-ingredient-lists using the most common 3500 ingredients. This can take up to two hours. The next step reads the <code>simplified-recipes-1M.npz</code> dataset so if you want to use your recreated dataset make sure to replace it with your <code>recipes.npz</code> file.</li>
+<li>Use <code>recipenet.ipynb</code> to train or load the neural network and make predictions. Training for 4-8 epochs takes 15-30 minutes on an NVIDIA RTX 2080 Ti GPU depending on the selected architecture.</li>
+</ol>
+<ul>
+<li><code>hparam_tune.py</code> contains code for hyperparameter optimation with TensorBoard</li>
+<li><code>util.py</code> contains code for loading and managing the dataset during training</li>
+<li><code>setup.sh</code> contains code for setup on a remote server</li>
+<li><code>recipenet_saved_model.zip</code> contains a saved_model (training from scratch is recommended)</li>
+</ul>
+
+      </span>
+  </div>
+
+  <br><br>
+
+  <!--<footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>-
+
+  <br>-->
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
