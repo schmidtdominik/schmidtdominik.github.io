@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>simplified-recipes-1M Dataset - Dominik Schmidt</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <link rel=preload href="../css/BIG JOHN.otf" as="font" crossorigin>
+
+  <meta property="og:title" content="simplified-recipes-1M Dataset"/>
+  <meta property='og:type' content='article'/>
+  <meta property="og:image" content="assets/cover.png"/>
+  <meta property="og:url" content="http://dominikschmidt.xyz/simplified-recipes-1M"/>
+  <!--<meta property="og:description" content="This recipe-ingredient dataset contains about 1,000,000 carefully cleaned and preprocessed recipes. The underlying data comes from five different base datasets (see sources below) which were merged in order to create a more complete recipe collection. The main contribution here is that all recipes have been meticulously cleaned and standardized (see <em>preprocessing</em> section)."/>-->
+
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+  <script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#edeff5",
+        "text": "#838391"
+      },
+      "button": {
+        "background": "#4b81e8"
+      }
+    },
+    "position": "bottom-left",
+    "content": {
+      "href": "http://dominikschmidt.xyz/policy"
+    }
+  })});
+  </script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+      google_ad_client: "ca-pub-4694920180315448",
+      enable_page_level_ads: true
+    });
+  </script>
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 100 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/article.css">
+
+  <link rel="stylesheet" href="../highlight/styles/atom-one-light.css"><!--foundation/hopscotch-->
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+
+  <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 8%">
+          <h1>
+            <a href="../index.html">
+              <span id="title">
+                Dominik Schmidt
+              </span>
+            </a>
+            <!--<a href="index.html">
+              <span id="by-me">
+
+              </span>
+            </a>-->
+          </h1>
+        <hr>
+        <nav>
+          <span style="display: inline-block;" ><a class="navitem" href="../index.html"><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../datasets.html"><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About me</a></span>
+
+          <span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://github.com/schmidtdominik"><i class="fab fa-github"></i>&nbsp;</a></span>
+          <!--<span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://www.reddit.com/user/dominik_schmidt"><i class="fab fa-reddit"></i></i>&nbsp;</a></span>-->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container article">
+      <div id='header-box'>
+
+
+        <!--START OF HEADING-->
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <img src="assets/cover.png" id="header-img" alt="">
+        </div>
+
+
+        <div id="header-text">
+          <h1 class="article-title">
+            simplified-recipes-1M Dataset
+          </h1>
+          <time datetime="2019-09-08 00:00:00">September 8, 2019 ⧗ 6 minute read</time><br>
+        </div>
+      </div>
+      <!--END OF HEADING-->
+
+      <span class="article-text">
+        <div id="index"><a href=#example-recipes> → Example recipes</a><br><a href=#using-the-dataset> → Using the dataset</a><br><a href=#preprocessing-&-cleaning> → Preprocessing & Cleaning</a><br><a href=#dataset-errors> → Dataset errors</a><br><a href=#download> → Download</a><br><a href=#dataset-sources> → Dataset Sources</a></div><br><hr>
+This recipe-ingredient dataset contains about 1,000,000 carefully cleaned and preprocessed recipes. The underlying data comes from five different base datasets (see sources below) which were merged in order to create a more complete recipe collection. The main contribution here is that all recipes have been meticulously cleaned and standardized (see <em>preprocessing</em> section). <br>
+<br>
+
+<table style="width:100%">
+  <tr>
+    <th># of recipes</th>
+    <td>1,067,557</td> 
+  </tr>
+  <tr>
+    <th>Total size</th>
+    <td>62.2MB</td>
+  </tr>
+  <tr>
+    <th>Average # of ingredients per recipe</th>
+    <td>16.5</td>
+  </tr>
+  <tr>
+    <th>Most common ingredients</th>
+    <td><code>salt</code>, <code>pepper</code>, <code>butter</code>, <code>garlic</code>, <code>sugar</code>, <code>flour</code>, <code>onion</code></td>
+  </tr>
+  <tr>
+    <th>Least common ingredients</th>
+    <td><code>crystal hot sauce</code>, <code>watercress leaves</code>, <code>emerils essence</code>
+    </td>
+  </tr>
+</table><br>
+<h2 id="example-recipes"> Example recipes</h2>
+<div class="code-wrapper"><pre><code>['butter','cocoa','eggs','flour','sugar','whitesugar']
+['basilleaves','focaccia','leaves','mozzarella','pesto','plumtomatoes','rosemary','sandwiches','sliced','tomatoes']
+['babyspinach','blackpepper','cheese','eggs','fetacheese','grapetomatoes','kosher','koshersalt','largeeggs','olive','oliveoil','pepper','scallions','spinach','tomatoes']
+</code></pre></div><br>
+<h2 id="using-the-dataset"> Using the dataset</h2>
+The dataset is available as a single <code>.npz</code> (compressed numpy binary) file that contains both the recipes and the ingredient index.
+<div class="code-wrapper"><pre><code>import numpy as np
+
+with np.load('simplified-recipes-1M.npz') as data:
+    recipes = data['recipes']
+    ingredients = data['ingredients']
+</code></pre></div>
+<code>ingredients</code> is just a numpy string array that contains all used cooking ingredients. 
+<div class="code-wrapper"><pre><code>array(['salt', 'pepper', 'butter', ..., 'watercress leaves',
+       'emerils essence', 'corn flakes cereal'])
+</code></pre></div>
+Each recipe in <code>recipes</code> is a numpy array of ingredient indices.
+<div class="code-wrapper"><pre><code>In [2]: recipes[0]
+Out [2]: array([233, 2754, 42, 120, 560, 345, 150, 2081, 12, 21])
+</code></pre></div>
+To get the string representation of a recipe use numpys array indexing notation
+<div class="code-wrapper"><pre><code>In [2]: ingredients[recipes[0]]
+Out [2]: array(['basil leaves', 'focaccia', 'leaves', 'mozzarella', 'pesto',
+                'plum tomatoes', 'rosemary', 'sandwiches', 'sliced', 'tomatoes'])
+</code></pre></div><br>
+<h2 id="preprocessing-&-cleaning"> Preprocessing & Cleaning</h2>
+As mentioned above, the main contribution of this dataset is the work that went into cleaning the ingredient strings to make them usable for machine learning tasks.
+The raw messy recipes from the base datasets mostly look like this:<br>
+
+<div class="code-wrapper"><pre><code>['1 fennel bulb (sometimes called anise), stalks discarded, bulb cut\xa0into '
+ '1/2-inch dice, and feathery leaves reserved for garnish',
+ '1 onion, diced',
+ '2 tablespoons unsalted butter',
+ '2 medium russet (baking) potatoes',
+ '2 cups chicken broth',
+ '1 1/2 cups milk']
+</code></pre></div>
+Since each ingredient string also contains sizes/units, special characters, instructions and other descriptions the total number of unique ingredients was more than 1 million. This makes the dataset practically unusable for machine learning tasks due to data sparsity. Unless the neural networks reads the actual string associated with each ingredient it won't know that <code>organic sweetened soy sauce</code> is actually very similar to <code>glutenfree soy sauce</code> (since the network only sees the differing ingredient indices).<br>
+<br>
+
+Even after removing non-alpha characters and units the dataset contained ten-thousands of unique ingredient strings. Therefore I used two cleaned ingredient-list datasets and a number of other simplification approaches to further reduce the number of unique ingredients to about 16,000. Then I discarded all but the most common 3,500. The recipe above, now cleaned, looks like this:<br>
+
+<div class="code-wrapper"><pre><code>['baking potatoes' 'butter' 'chicken' 'chicken broth' 'fennel'
+  'fennel bulb' 'garnish' 'leaves' 'milk' 'onion' 'potatoes'
+  'unsalted butter']
+</code></pre></div>
+As you can see, the strings are much simpler, only containing the ingredient names themselves. Furthermore some ingredients like <code>baking potatoes</code> or <code>unsalted butter</code> have been split up into [<code>baking potatoes</code>, <code>potatoes</code>] and [<code>unsalted butter</code>, <code>butter</code>], eliminating the problem of data sparsity.<br>
+<br>
+<h2 id="dataset-errors"> Dataset errors</h2>
+The dataset includes a few errors due to the used simplification algorithms. For example sometimes <code>olive oil</code> is incorectly mapped to [<em><code>olive</code></em>, <code>oil</code>, <code>olive oil</code>]. Additionally some ingredients may be wrongly split up: <code>yellow</code>, <code>dry</code>, <code>prepared</code>, <code>other</code>, these can just be ignored.<br>
+<br>
+<h2 id="download"> Download</h2>
+You can download the dataset here:
+<div class="download-block">
+                                <a href="https://github.com/schmidtdominik/RecipeNet/raw/master/simplified-recipes-1M.npz" target="_blank" download>
+                                  <i class="far fa-file filetype fa-fw"></i>
+                                  simplified-recipes-1M.npz
+                                  <i class="fas fa-download download-icon"></i>
+                                </a>
+                            </div><br>
+<h2 id="dataset-sources"> Dataset Sources</h2>
+<strong>Recipe1M+</strong><br>
+
+Marin, Javier, et al. “<a href="http://pic2recipe.csail.mit.edu/">Recipe1M+: A Dataset for Learning Cross-Modal Embeddings for Cooking Recipes and Food Images.</a>” IEEE Transactions on Pattern Analysis and Machine Intelligence, 2019, pp. 1–1. DOI.org (Crossref), doi:10.1109/TPAMI.2019.2927476.<br>
+<br>
+
+<strong>Epicurious - Recipes with Rating and Nutrition</strong><br>
+
+<a href="https://www.kaggle.com/hugodarwood/epirecipes">Recipes with Rating and Nutrition</a><br>
+<br>
+
+<strong>Yummly - Recipe Ingredients Dataset</strong><br>
+
+<a href="https://www.kaggle.com/kaggle/recipe-ingredients-dataset">Recipe Ingredients Dataset</a><br>
+<br>
+
+<strong>Datafinity - Food Ingredient Lists</strong><br>
+
+<a href="https://www.kaggle.com/datafiniti/food-ingredient-lists">Food Ingredient Lists</a><br>
+<br>
+
+<strong>Eight Portions - Recipe Box</strong><br>
+
+<a href="https://eightportions.com/datasets/Recipes/">Recipe Box</a><br>
+<br>
+
+Most of the original data comes from
+<a href="https://www.yummly.com/">Yummly</a>,  <a href="https://datafiniti.co/">Datafiniti</a>, <a href="https://www.epicurious.com/">Epicurious</a> and <a href="https://www.allrecipes.com/">Allrecipes</a>.
+      </span>
+  </div>
+
+  <br><br>
+
+  <!--<footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>-
+
+  <br>-->
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
