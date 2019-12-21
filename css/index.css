@@ -5,7 +5,7 @@
   font-display: fallback;
 }
 
-code {
+.article-title code {
   font-weight: 700;
 }
 
@@ -54,13 +54,15 @@ code {
 }
 
 .header-img {
-  width: 14.5rem;
-  height: 14.5rem;
+  width: 15rem;
+  height: 15rem;
   border-radius: 5px;
   float: left;
-  margin-right: 2.5rem;
+  margin-right: 3rem;
   margin-bottom: 0px;
   margin-top: 0;
+  /* offset-x | offset-y | blur-radius | spread-radius | color */
+  box-shadow: 1.5px 1.5px 0 0 rgba(0, 0, 0, 0.1);
 }
 
 .header-text {
@@ -128,7 +130,7 @@ code {
 }
 
 .article {
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
 }
 
 .read-time {

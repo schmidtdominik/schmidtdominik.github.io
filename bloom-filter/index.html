@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>The Bloom Filter Algorithm - Dominik Schmidt</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <link rel=preload href="../css/BIG JOHN.otf" as="font" crossorigin>
+
+  <meta property="og:title" content="The Bloom Filter Algorithm"/>
+  <meta property='og:type' content='article'/>
+  <meta property="og:image" content="assets/cover.jpg"/>
+  <meta property="og:url" content="http://dominikschmidt.xyz/bloom-filter"/>
+  <!--<meta property="og:description" content="A bloom filter is a probabilistic data structure that allows you to efficiently test an element for probable set membership. It supports the operations add(item) and contains(item) where add performs as expected and contains either yields a <em>definite no</em> or a <em>probable yes</em>, meaning false positives are possible but false negatives are not."/>-->
+
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+  <script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#edeff5",
+        "text": "#838391"
+      },
+      "button": {
+        "background": "#4b81e8"
+      }
+    },
+    "position": "bottom-left",
+    "content": {
+      "href": "http://dominikschmidt.xyz/policy"
+    }
+  })});
+  </script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-4694920180315448",
+            enable_page_level_ads: true
+       });
+  </script>
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 100 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/article.css">
+
+  <link rel="stylesheet" href="../highlight/styles/atom-one-light.css"><!--foundation/hopscotch-->
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+
+  <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 8%">
+          <h1>
+            <a href="../index.html">
+              <span id="title">
+                Dominik Schmidt
+              </span>
+            </a>
+            <!--<a href="index.html">
+              <span id="by-me">
+
+              </span>
+            </a>-->
+          </h1>
+        <hr>
+        <nav>
+          <span style="display: inline-block;" ><a class="navitem" href="../index.html"><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../datasets.html"><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About me</a></span>
+
+          <span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://github.com/schmidtdominik"><i class="fab fa-github"></i>&nbsp;</a></span>
+          <!--<span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://www.reddit.com/user/dominik_schmidt"><i class="fab fa-reddit"></i></i>&nbsp;</a></span>-->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container article">
+      <div id='header-box'>
+
+
+        <!--START OF HEADING-->
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <img src="assets/cover.jpg" id="header-img" alt="">
+        </div>
+
+
+        <div id="header-text">
+          <h1 class="article-title">
+            The Bloom Filter Algorithm
+          </h1>
+          <time datetime="2019-12-21 00:00:00">December 21, 2019 ⧗ 5 minute read</time><br>
+        </div>
+      </div>
+      <!--END OF HEADING-->
+
+      <span class="article-text">
+        <div id="index"><a href=#how-to-add-an-item> → How to add an item</a><br><a href=#how-to-test-membership-of-an-item> → How to test membership of an item</a><br><a href=#applications-of-bloom-filters> → Applications of Bloom Filters</a><br><a href=#how-to-choose-parameters-m,-k-and-the-hash-functions> → How to choose parameters m, k and the hash functions</a><br><a href=#how-to-use-a-bloom-filter-in-python> → How to use a Bloom Filter in Python</a></div><br><hr>
+A <strong>bloom filter</strong> is a probabilistic data structure that allows you to efficiently test an element for probable set membership. It supports the operations <code>add(item)</code> and <code>contains(item)</code> where <code>add</code> performs as expected and <code>contains</code> either yields a <em>definite no</em> or a <em>probable yes</em>, meaning false positives are possible but false negatives are not. <br>
+<br>
+
+A newly initialized bloom filter is an <strong>all-zeros array of length \(m\)</strong> along with <strong>\(k\) different uniform hash functions</strong>, which hash set items to positions in the array.<br>
+<br>
+<h2 id="how-to-add-an-item"> How to add an item</h2>
+To add an element \(x\) to a bloom filter simply hash it with all the different hash functions and set the array at those resulting indices \(h_1(x), h_2(x), \ldots, h_k(x)\) to \(1\).<br>
+<br>
+<h2 id="how-to-test-membership-of-an-item"> How to test membership of an item</h2>
+To test whether an item has previously been added to the bloom filter simply hash it with all the hash functions and check whether the array is <em>all-ones</em> at those indices. If it is not then the item definitely hasn't been added since those indices would have been set to ones. If all the indices are set to one the item may have been added or it may be a coincidence and those indices were set to ones while adding one or more other items.<br>
+
+<div class="image-center-wrapper"><img src="assets/bloom_filter.svg" style="width: 80%;" class="inline-image image-center    "></div><h2 id="applications-of-bloom-filters"> Applications of Bloom Filters</h2>
+A bloom filter is a fast way to determine whether an element does or does not belong to a set.
+Bloom filters can be used to optimize disk lookups, database or web requests, improve caching systems, search chemical structures and much more. Amongst others they have been applied at Medium to avoid recommending previously viewed articles to users, at Google to identify malicious URLs and at Bing to improve their page index.<sup><a id="ref1ref" href="#ref1">[1]</a></sup><br>
+
+The fact that bloom filters sometimes return false positives is usually not a problem. For example when optimizing database or web requests one might want to use a bloom filter to determine whether an item is actually available there before sending a time-consuming lookup request. In this case a false positive would mean that the bloom filter says the item is stored in the database when it in reality is not. Therefore the false positive would only cause an unnecessary web request but no information would be lost.<br>
+<br>
+<h2 id="how-to-choose-parameters-$m$,-$k$-and-the-hash-functions"> How to choose parameters \(m\), \(k\) and the hash functions</h2>
+When creating a bloom filter, one needs to specify the array size \(m\) and the number of hash functions \(k\). These together determine the expected false positive rate \(\lambda\) for the bloom filter after having had added \(n\) items to it. Therefore the parameters should be chosen with the required false positive rate in mind.<br>
+<br>
+
+<ol>
+    <li>Estimate the approximate total size of the set \(n\).</li>
+    <li>Choose an array size \(m\), for example \(10n\).</li>
+    <li>Set the number of hash functions, \(k\) to \(\frac{m}{n}ln(2)\).</li>
+    <li>Decide if the false positive rate \(\lambda = (1-e^{-kn/m})^k\) is acceptable, if not, go back and adjust \(m\).</li>
+</ol>
+The hash functions should be independent and uniformally distributed but do not need to be cryptographically secure. A well-suited hash function would be FNV or FNV-1 for example. <sup><a id="ref2ref" href="#ref2">[2]</a></sup><br>
+<br>
+<h2 id="how-to-use-a-bloom-filter-in-python"> How to use a Bloom Filter in Python</h2>
+To use a bloom filter in Python you could either implement it yourself or use a publicly available library such as <a href="https://pypi.org/project/bloom-filter/">bloom-filter (Pypi)</a>.<br>
+
+<div class="code-wrapper"><pre><code>from bloom_filter import BloomFilter
+
+# instantiate BloomFilter with custom settings,
+# max_elements is how many elements you expect the filter to hold.
+# error_rate defines accuracy; You can use defaults with
+# <code>BloomFilter()</code> without any arguments. Following example
+# is same as defaults:
+bloom = BloomFilter(max_elements=10000, error_rate=0.1)
+
+# Test whether the bloom-filter has seen a key:
+print("test-key" in bloom)
+
+# Mark the key as seen
+bloom.add("test-key")
+
+# Now check again
+print("test-key" in bloom)
+</code></pre></div>
+(Example is modified from project readme)
+<section id="article_footer"><div class="further-reading"><h2>Further Reading</h2><br><ul><li><a href="https://pypi.org/project/bloom-filter/">bloom-filter for Python (Pypi)</a></li><li><a href="https://llimllib.github.io/bloomfilter-tutorial/">Bloom Filter Online Example</a></li></ul></div><h2>References</h2><br><ol class="references"><li><span id="ref1"><a href="https://en.wikipedia.org/wiki/Bloom_filter">Wikipedia - Bloom Filter</a></span> <a href="#ref1ref""><i class="references-return fas fa-caret-left"></i></a></li><li><span id="ref2"><a href="https://stackoverflow.com/a/4125080/3062435">Modern, high performance bloom filter in Python?</a></span> <a href="#ref2ref""><i class="references-return fas fa-caret-left"></i></a></li></ol></section>
+      </span>
+  </div>
+
+  <br><br>
+
+  <!--<footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>-
+
+  <br>-->
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
