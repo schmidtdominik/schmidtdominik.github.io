@@ -54,11 +54,11 @@
 }
 
 .header-img {
-  width: 15rem;
-  height: 15rem;
+  width: 14.5rem;
+  height: 14.5rem;
   border-radius: 5px;
   float: left;
-  margin-right: 3rem;
+  margin-right: 3.2rem;
   margin-bottom: 0px;
   margin-top: 0;
   /* offset-x | offset-y | blur-radius | spread-radius | color */
