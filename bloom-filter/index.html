@@ -163,7 +163,7 @@ Bloom filters can be used to optimize disk lookups, database or web requests, im
 The fact that bloom filters sometimes return false positives is usually not a problem. For example when optimizing database or web requests one might want to use a bloom filter to determine whether an item is actually available there before sending a time-consuming lookup request. In this case a false positive would mean that the bloom filter says the item is stored in the database when it in reality is not. Therefore the false positive would only cause an unnecessary web request but no information would be lost.<br>
 <br>
 <h2 id="how-to-choose-parameters-$m$,-$k$-and-the-hash-functions"> How to choose parameters \(m\), \(k\) and the hash functions</h2>
-When creating a bloom filter, one needs to specify the array size \(m\) and the number of hash functions \(k\). These together determine the expected false positive rate \(\lambda\) for the bloom filter after having had added \(n\) items to it. Therefore the parameters should be chosen with the required false positive rate in mind.<br>
+When creating a bloom filter, one needs to specify the array size \(m\) and the number of hash functions \(k\). These together determine the expected false positive rate \(\lambda\) for the bloom filter after adding \(n\) items to it. Therefore the parameters should be chosen with the required false positive rate in mind.<br>
 <br>
 
 <ol>
