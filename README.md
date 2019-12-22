@@ -1,1 +1,1 @@
-# schmidtdominik.github.io
+# dominikschmidt.xyz
