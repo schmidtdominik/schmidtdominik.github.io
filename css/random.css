@@ -1,0 +1,74 @@
+.header-img {
+  width: 8rem;
+  height: 8rem;
+}
+
+.article {
+  margin-bottom: 3rem;
+}
+
+.article-title {
+  margin-bottom: 0.3rem;
+}
+
+.article-title a {
+  margin-bottom: 0.5rem;
+  font-size: 2.1rem;
+}
+
+.header-text .button {
+  color: #55505C;
+  border: none;
+  font-weight: 600;
+  height: 31px;
+  padding: 0 3px;
+  font-size: 13px;
+  line-height: 28px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  border-radius: 0;
+  margin: 0 1rem;
+  background-color: transparent;
+  -webkit-transition: all 0.15s; /* Safari */
+  transition: all 0.15s;
+}
+
+.header-text a:hover {
+  border: none;
+}
+
+.header-text .button:hover {
+  -webkit-transition: all 0.15s; /* Safari */
+  transition: all 0.15s;
+  background-color: transparent;
+  color: #55505C;
+  border-bottom: 2.3px solid #52D681;
+}
+
+/*
+.article-title .github-button {
+    background-color: #d65265;
+}
+
+.article-title .github-button:hover {
+  background-color: #c62f45;
+  border: none;
+}
+
+.article-title .live-button {
+    background-color: #52d681;
+}
+
+.article-title .live-button:hover {
+  background-color: #2fc665;
+  border: none;
+}
+
+.article-title .show-button {
+    background-color: #52a7d6;
+}
+
+.article-title .show-button:hover {
+  background-color: #2f90c6;
+  border: none;
+}*/

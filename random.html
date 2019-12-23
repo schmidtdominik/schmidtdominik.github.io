@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Random Stuff</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <link rel=preload href="css/BIG JOHN.otf" as="font" crossorigin>
+
+
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+  <script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#edeff5",
+        "text": "#838391"
+      },
+      "button": {
+        "background": "#4b81e8"
+      }
+    },
+    "position": "bottom-left",
+    "content": {
+      "href": "http://dominikschmidt.xyz/policy"
+    }
+  })});
+  </script>
+
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script src="https://use.fontawesome.com/releases/v5.12.0/js/all.js" defer></script>
+
+  <!-- MathJax disabled on overview pages! -->
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 100 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!--<script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>-->
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/random.css">
+
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+  <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div id="titlewrapper">
+        <h1>
+          <a href="index.html" id="title">Dominik Schmidt</a>
+        </h1>
+        <hr>
+        <nav>
+          <span class="navwrapper" ><a class="navitem" href="index.html" ><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span class="navwrapper" ><a class="navitem" href="datasets.html" ><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span class="navwrapper" ><a class="navitem" href="random.html" style="border-bottom: 2.3px solid #52D681; padding-bottom: 2px;"><i class="fas fa-robot"></i></i>&nbsp;Random Stuff</a></span>
+          <span class="navwrapper" ><a class="navitem" href="about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About me</a></span>
+
+          <span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://github.com/schmidtdominik"><i class="fab fa-github"></i>&nbsp;</a></span>
+          <!--<span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://www.reddit.com/user/dominik_schmidt"><i class="fab fa-reddit"></i></i>&nbsp;</a></span>-->
+
+
+          <!--ARTICLE FILTER: <div class="dropdown-wrapper">
+            <span class="dropbutton"><i class="fas fa-filter"></i>&nbsp;Filter results</span>
+            <div class="dropdown-content">
+              <div class="dropdown-column"><span>Topics:</span>
+                <a href="#">σ&nbsp;ML/AI</a><br>
+                <a href="#"><i class="fab fa-bitcoin"></i>&nbsp;crypto</a><br>
+                <a href="#">∇&nbsp;tensorflow</a><br>
+                <a href="#"><i class="fab fa-python"></i>&nbsp;python</a>
+                  <a href="#">α ∑ π²&nbsp;math</a>
+              </div>
+              <div class="dropdown-column"><span>Difficulty:</span>
+                <a href="#">easy</a><br>
+                <a href="#">intermediate</a><br>
+                <a href="#">difficult</a>
+              </div>
+              <div class="dropdown-column"><span>Type:</span>
+                <a href="#">◪&nbsp;non-technical</a><br>
+                <a href="#">⬣&nbsp;project</a><br>
+                <a href="#"><i class="fas fa-bullseye"></i>read</a>
+              </div>
+              <div class="dropdown-column"><span>Length:</span>
+                <a href="#">1-4mins</a><br>
+                <a href="#">5-10'</a><br>
+                <a href="#">10'+</a>
+              </div>
+            </div>
+          </div>-->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container"><h5>Courses</h5></div><div class="container article article-subsection">
+    <a><img src="num-linalg/assets/cover.png" class="header-img" alt=""></a>
+    <div class="header-text">
+      <h4 class="article-title"><a>
+        My (partial) Solutions to the USFCA course "Computational Numerical Linear Algebra" <span style="font-size: 1.4rem; color: #777;">(2019)</span>
+      </a></h4>
+      <span class="article-preview-text">
+        
+      </span><a target="_blank" class="button button-primary github-button" href="https://github.com/schmidtdominik/numerical-linear-algebra">Github <i class="fab fa-github"></i></a>
+    </div>
+</div>
+
+<!--
+  old version with link to article (to use: replace double curly braces with single curly braces)
+
+  <div class="container article article-subsection">
+      <a href="{article_url}"><img src="num-linalg/assets/cover.png" class="header-img" alt=""></a>
+      <div class="header-text">
+        <h4 class="article-title"><a href="{article_url}">
+          My (partial) Solutions to the USFCA course "Computational Numerical Linear Algebra" <span style="font-size: 1.4rem; color: #777;">(2019)</span>
+        </a></h4>
+        <span class="article-preview-text">
+          
+        </span>
+      </div>
+  </div>
+-->
+<div class="container article article-subsection">
+    <a><img src="cs231n-assignments/assets/cover.png" class="header-img" alt=""></a>
+    <div class="header-text">
+      <h4 class="article-title"><a>
+        Assignments for the CS231n Stanford lecture "Convolutional Neural Networks for Visual Recognition" <span style="font-size: 1.4rem; color: #777;">(2019)</span>
+      </a></h4>
+      <span class="article-preview-text">
+        
+      </span><a target="_blank" class="button button-primary github-button" href="https://github.com/schmidtdominik/cs231n-assignments">Github <i class="fab fa-github"></i></a>
+    </div>
+</div>
+
+<!--
+  old version with link to article (to use: replace double curly braces with single curly braces)
+
+  <div class="container article article-subsection">
+      <a href="{article_url}"><img src="cs231n-assignments/assets/cover.png" class="header-img" alt=""></a>
+      <div class="header-text">
+        <h4 class="article-title"><a href="{article_url}">
+          Assignments for the CS231n Stanford lecture "Convolutional Neural Networks for Visual Recognition" <span style="font-size: 1.4rem; color: #777;">(2019)</span>
+        </a></h4>
+        <span class="article-preview-text">
+          
+        </span>
+      </div>
+  </div>
+-->
+<div class="container"><h5>Other</h5></div><div class="container article article-subsection">
+    <a><img src="eepromfs/assets/cover.png" class="header-img" alt=""></a>
+    <div class="header-text">
+      <h4 class="article-title"><a>
+        A very simple filesystem for up to 65kB EEP-ROM chips <span style="font-size: 1.4rem; color: #777;">(2019)</span>
+      </a></h4>
+      <span class="article-preview-text">
+        
+      </span><a target="_blank" class="button button-primary github-button" href="https://github.com/schmidtdominik/eepromfs">Github <i class="fab fa-github"></i></a>
+    </div>
+</div>
+
+<!--
+  old version with link to article (to use: replace double curly braces with single curly braces)
+
+  <div class="container article article-subsection">
+      <a href="{article_url}"><img src="eepromfs/assets/cover.png" class="header-img" alt=""></a>
+      <div class="header-text">
+        <h4 class="article-title"><a href="{article_url}">
+          A very simple filesystem for up to 65kB EEP-ROM chips <span style="font-size: 1.4rem; color: #777;">(2019)</span>
+        </a></h4>
+        <span class="article-preview-text">
+          
+        </span>
+      </div>
+  </div>
+-->
+<div class="container article article-subsection">
+    <a><img src="jetson-nano-clustering/assets/cover.jpg" class="header-img" alt=""></a>
+    <div class="header-text">
+      <h4 class="article-title"><a>
+        Team Tumbleweed Jetson Nano Clustering <span style="font-size: 1.4rem; color: #777;">(2019)</span>
+      </a></h4>
+      <span class="article-preview-text">
+        
+      </span><a target="_blank" class="button button-primary github-button" href="https://github.com/schmidtdominik/jetson-nano-inception-clustering">Github <i class="fab fa-github"></i></a>
+    </div>
+</div>
+
+<!--
+  old version with link to article (to use: replace double curly braces with single curly braces)
+
+  <div class="container article article-subsection">
+      <a href="{article_url}"><img src="jetson-nano-clustering/assets/cover.jpg" class="header-img" alt=""></a>
+      <div class="header-text">
+        <h4 class="article-title"><a href="{article_url}">
+          Team Tumbleweed Jetson Nano Clustering <span style="font-size: 1.4rem; color: #777;">(2019)</span>
+        </a></h4>
+        <span class="article-preview-text">
+          
+        </span>
+      </div>
+  </div>
+-->
+<div class="container"><h5>Web</h5></div><div class="container article article-subsection">
+    <a><img src="color-gradient-tool/assets/cover.png" class="header-img" alt=""></a>
+    <div class="header-text">
+      <h4 class="article-title"><a>
+        Tiny Color Gradient Tool <span style="font-size: 1.4rem; color: #777;">(2018)</span>
+      </a></h4>
+      <span class="article-preview-text">
+        
+      </span><a target="_blank" class="button button-primary live-button" href="https://dominikschmidt.xyz/old-web-projects/color%20gradient/">Open live demo <i class="fas fa-play"></i></a><a target="_blank" class="button button-primary github-button" href="https://github.com/schmidtdominik/old-web-projects/tree/master/color%20gradient">Github <i class="fab fa-github"></i></a>
+    </div>
+</div>
+
+<!--
+  old version with link to article (to use: replace double curly braces with single curly braces)
+
+  <div class="container article article-subsection">
+      <a href="{article_url}"><img src="color-gradient-tool/assets/cover.png" class="header-img" alt=""></a>
+      <div class="header-text">
+        <h4 class="article-title"><a href="{article_url}">
+          Tiny Color Gradient Tool <span style="font-size: 1.4rem; color: #777;">(2018)</span>
+        </a></h4>
+        <span class="article-preview-text">
+          
+        </span>
+      </div>
+  </div>
+-->
+<div class="container article article-subsection">
+    <a><img src="vector-field-plot/assets/cover.png" class="header-img" alt=""></a>
+    <div class="header-text">
+      <h4 class="article-title"><a>
+        Vector field plotter <span style="font-size: 1.4rem; color: #777;">(2017)</span>
+      </a></h4>
+      <span class="article-preview-text">
+        
+      </span><a target="_blank" class="button button-primary live-button" href="https://dominikschmidt.xyz/old-web-projects/vector%20field%20plot/plot.html">Open live demo <i class="fas fa-play"></i></a><a target="_blank" class="button button-primary github-button" href="https://github.com/schmidtdominik/old-web-projects/tree/master/vector%20field%20plot">Github <i class="fab fa-github"></i></a>
+    </div>
+</div>
+
+<!--
+  old version with link to article (to use: replace double curly braces with single curly braces)
+
+  <div class="container article article-subsection">
+      <a href="{article_url}"><img src="vector-field-plot/assets/cover.png" class="header-img" alt=""></a>
+      <div class="header-text">
+        <h4 class="article-title"><a href="{article_url}">
+          Vector field plotter <span style="font-size: 1.4rem; color: #777;">(2017)</span>
+        </a></h4>
+        <span class="article-preview-text">
+          
+        </span>
+      </div>
+  </div>
+-->
+<div class="container article article-subsection">
+    <a><img src="voronoi-diagram/assets/cover.png" class="header-img" alt=""></a>
+    <div class="header-text">
+      <h4 class="article-title"><a>
+        Voronoi Diagrams in metric spaces <span style="font-size: 1.4rem; color: #777;">(2017)</span>
+      </a></h4>
+      <span class="article-preview-text">
+        
+      </span><a target="_blank" class="button button-primary live-button" href="https://dominikschmidt.xyz/old-web-projects/voronoi%20diagram/voronoi.html">Open live demo <i class="fas fa-play"></i></a><a target="_blank" class="button button-primary github-button" href="https://github.com/schmidtdominik/old-web-projects/tree/master/voronoi%20diagram">Github <i class="fab fa-github"></i></a>
+    </div>
+</div>
+
+<!--
+  old version with link to article (to use: replace double curly braces with single curly braces)
+
+  <div class="container article article-subsection">
+      <a href="{article_url}"><img src="voronoi-diagram/assets/cover.png" class="header-img" alt=""></a>
+      <div class="header-text">
+        <h4 class="article-title"><a href="{article_url}">
+          Voronoi Diagrams in metric spaces <span style="font-size: 1.4rem; color: #777;">(2017)</span>
+        </a></h4>
+        <span class="article-preview-text">
+          
+        </span>
+      </div>
+  </div>
+-->
+<div class="container article article-subsection">
+    <a><img src="project-name-finder/assets/cover.png" class="header-img" alt=""></a>
+    <div class="header-text">
+      <h4 class="article-title"><a>
+        Project Name Finder <span style="font-size: 1.4rem; color: #777;">(2016)</span>
+      </a></h4>
+      <span class="article-preview-text">
+        
+      </span><a target="_blank" class="button button-primary live-button" href="https://dominikschmidt.xyz/old-web-projects/project%20name%20finder/">Open live demo <i class="fas fa-play"></i></a><a target="_blank" class="button button-primary github-button" href="https://github.com/schmidtdominik/old-web-projects/tree/master/project%20name%20finder">Github <i class="fab fa-github"></i></a>
+    </div>
+</div>
+
+<!--
+  old version with link to article (to use: replace double curly braces with single curly braces)
+
+  <div class="container article article-subsection">
+      <a href="{article_url}"><img src="project-name-finder/assets/cover.png" class="header-img" alt=""></a>
+      <div class="header-text">
+        <h4 class="article-title"><a href="{article_url}">
+          Project Name Finder <span style="font-size: 1.4rem; color: #777;">(2016)</span>
+        </a></h4>
+        <span class="article-preview-text">
+          
+        </span>
+      </div>
+  </div>
+-->
+<div class="container article article-subsection">
+    <a><img src="time-tracking-tool/assets/cover.png" class="header-img" alt=""></a>
+    <div class="header-text">
+      <h4 class="article-title"><a>
+        Time Tracking Tool <span style="font-size: 1.4rem; color: #777;">(2016)</span>
+      </a></h4>
+      <span class="article-preview-text">
+        
+      </span><a target="_blank" class="button button-primary live-button" href="https://dominikschmidt.xyz/old-web-projects/time%20tracking/">Open live demo <i class="fas fa-play"></i></a><a target="_blank" class="button button-primary github-button" href="https://github.com/schmidtdominik/old-web-projects/tree/master/time%20tracking">Github <i class="fab fa-github"></i></a>
+    </div>
+</div>
+
+<!--
+  old version with link to article (to use: replace double curly braces with single curly braces)
+
+  <div class="container article article-subsection">
+      <a href="{article_url}"><img src="time-tracking-tool/assets/cover.png" class="header-img" alt=""></a>
+      <div class="header-text">
+        <h4 class="article-title"><a href="{article_url}">
+          Time Tracking Tool <span style="font-size: 1.4rem; color: #777;">(2016)</span>
+        </a></h4>
+        <span class="article-preview-text">
+          
+        </span>
+      </div>
+  </div>
+-->
+<div class="container article article-subsection">
+    <a><img src="canvas-patterns/assets/cover.png" class="header-img" alt=""></a>
+    <div class="header-text">
+      <h4 class="article-title"><a>
+        Canvas Patterns <span style="font-size: 1.4rem; color: #777;">(2016)</span>
+      </a></h4>
+      <span class="article-preview-text">
+        
+      </span><a target="_blank" class="button button-primary live-button" href="https://dominikschmidt.xyz/old-web-projects/canvas%20patterns/canvaspatterns.html">Open live demo <i class="fas fa-play"></i></a><a target="_blank" class="button button-primary github-button" href="https://github.com/schmidtdominik/old-web-projects/tree/master/canvas%20patterns">Github <i class="fab fa-github"></i></a>
+    </div>
+</div>
+
+<!--
+  old version with link to article (to use: replace double curly braces with single curly braces)
+
+  <div class="container article article-subsection">
+      <a href="{article_url}"><img src="canvas-patterns/assets/cover.png" class="header-img" alt=""></a>
+      <div class="header-text">
+        <h4 class="article-title"><a href="{article_url}">
+          Canvas Patterns <span style="font-size: 1.4rem; color: #777;">(2016)</span>
+        </a></h4>
+        <span class="article-preview-text">
+          
+        </span>
+      </div>
+  </div>
+-->
+
+
+  <br><br>
+
+  <!--<footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>-->
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
