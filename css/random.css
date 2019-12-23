@@ -1,6 +1,6 @@
 .header-img {
-  width: 8rem;
-  height: 8rem;
+  width: 7.7rem;
+  height: 7.7rem;
 }
 
 .article {
@@ -43,6 +43,11 @@
   background-color: transparent;
   color: #55505C;
   border-bottom: 2.3px solid #52D681;
+}
+
+.header-text .button:focus {
+  background-color: transparent;
+  color: #55505C;
 }
 
 /*
