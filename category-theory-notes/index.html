@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Category Theory - Dominik Schmidt</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <link rel=preload href="../css/BIG JOHN.otf" as="font" crossorigin>
+
+  <meta property="og:title" content="Category Theory"/>
+  <meta property='og:type' content='article'/>
+  <meta property="og:image" content="assets/cover.png"/>
+  <meta property="og:url" content="http://dominikschmidt.xyz/category-theory-notes"/>
+  <!--<meta property="og:description" content="These are my lecture notes on Bartosz Milewski's course on category theory. These are not meant as a comprehensive guide but rather a loose collection of definitions and short summaries."/>-->
+
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+  <script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#edeff5",
+        "text": "#838391"
+      },
+      "button": {
+        "background": "#4b81e8"
+      }
+    },
+    "position": "bottom-left",
+    "content": {
+      "href": "http://dominikschmidt.xyz/policy"
+    }
+  })});
+  </script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-4694920180315448",
+            enable_page_level_ads: true
+       });
+  </script>
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 100 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/article.css">
+
+  <link rel="stylesheet" href="../highlight/styles/atom-one-light.css"><!--foundation/hopscotch-->
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+
+  <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 8%">
+          <h1>
+            <a href="../index.html">
+              <span id="title">
+                Dominik Schmidt
+              </span>
+            </a>
+            <!--<a href="index.html">
+              <span id="by-me">
+
+              </span>
+            </a>-->
+          </h1>
+        <hr>
+        <nav>
+          <span style="display: inline-block;" ><a class="navitem" href="../index.html"><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../datasets.html"><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../random.html"><i class="fas fa-robot"></i>&nbsp;Random Stuff</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About me</a></span>
+
+          <span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://github.com/schmidtdominik"><i class="fab fa-github"></i>&nbsp;</a></span>
+          <!--<span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://www.reddit.com/user/dominik_schmidt"><i class="fab fa-reddit"></i></i>&nbsp;</a></span>-->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container article">
+      <div id='header-box'>
+
+
+        <!--START OF HEADING-->
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <img src="assets/cover.png" id="header-img" alt="">
+        </div>
+
+
+        <div id="header-text">
+          <h1 class="article-title">
+            Category Theory
+          </h1>
+          <time datetime="2019-12-29 00:00:00">December 29, 2019 ⧗ 6 minute read</time><br>
+        </div>
+      </div>
+      <!--END OF HEADING-->
+
+      <span class="article-text">
+        <div id="index"><a href=#general-stuff> → General stuff</a><br><a href=#set> → Set</a><br><a href=#category-theory-in-programming> → Category Theory in Programming</a><br><a href=#the-empty-set>&emsp; → The Empty Set</a><br><a href=#the-singleton-set>&emsp; → The Singleton Set</a><br><a href=#the-two-element-set>&emsp; → The two-element Set</a><br><a href=#hask> → Hask</a></div><br><hr>These are my lecture notes on Bartosz Milewski's course on category theory. These are not meant as a comprehensive guide but rather a loose collection of definitions and short summaries.<br>
+<h2 id="general-stuff"> General stuff</h2>
+A <strong>category</strong> is a collection of <strong>objects</strong> along with arrows, called <strong>morphisms</strong>, between those objects. It is therefore similar to a labeled directed graph.<br>
+
+A category has two properties: <strong>composition of morphisms</strong> and <strong>identity</strong>. Composition in category theory is similar to composition of functions and behaves associatively. Identity means that every object has an <strong>identity morphism</strong>.<br>
+
+<div class="image-center-wrapper"><img src="assets/category.svg"  class="inline-image image-center    "></div>
+Morphisms between any two objects form a set called the <strong>hom set</strong> denoted as \(hom(a, b)\). In higher-order categories morphisms don't form sets, they form objects in a category.
+A <strong>groupoid</strong> is a category in which every morphism has an inverse.
+A category whose objects form a set is called <strong>small</strong>, otherwise it's called <strong>large</strong>.
+An algebraic group is a category with a single object (corresponding to the set of elements of the group).<br>
+<br>
+
+<div class="image-center-wrapper"><img src="assets/group-like-structures.png" style="width: 65%;" class="inline-image image-center    "></div><br>
+
+A morphism \(f: a \rightarrow b\) is called
+<ul>
+	<li> an <strong>epimorphism</strong> (or <strong>epic</strong>) if it is right-cancellable, i.e. \(g_1 \circ f = g_2 \circ f\) implies \(g_1 = g_2\) for all \(c\) and all \(g_1, g_2: b \rightarrow c\)</li>
+	<li> a <strong>monomorphism</strong> (or <strong>monic</strong>) if it is left-cancellable, i.e. \(f \circ g_1 = f \circ g_2\) implies \(g_1 = g_2\) for all \(c\) and all \(g_1, g_2: c \rightarrow a\)</li>
+	<li> a <strong>bimorphism</strong> if it is both a monomorphism and an epimorphism</li>
+	<li>An <strong>isomorphism</strong> if it has an inverse, i.e. if there exists an morphism \(f^{-1}: b \rightarrow a\) with \(f^{-1} \circ f = id_a\) and \(f \circ f^{-1} = id_b\).</li>
+</ul><h2 id="set"> Set</h2>
+<strong>Set</strong> (capitalized) is the category of sets and functions. <em>Set</em> is a category because there is an identity function for each set which becomes the identity morphism in <em>Set</em> and function composition (which becomes morphism composition in <em>Set</em>) is associative.<br>
+<br>
+
+In <em>Set</em>: surjective functions correspond to epimorphisms, injective functions correspond to monomorphisms and bijective functions correspond to bimorphisms.<br>
+
+Also notice the distinction between isomorphisms and bimorphisms. While in set theory a function that is bijective (both injective and surjective) is invertible, in category theory a morphism that is both epic and monic (a bimorphism) is not necessarily invertible (an isomorphism).<br>
+<br>
+<h2 id="category-theory-in-programming"> Category Theory in Programming</h2>
+In a general sense, types in programming languages are sets:<br>
+<br>
+
+<ul>
+	<li>Boolean represents the set \( \{True, False\}\)</li>
+	<li>Int represents a subset of \(\mathbb{N}\)</li>
+	<li>Float/Double represents a subset of \(\mathbb{Q}\)</li>
+</ul>
+If we go in the other direction we can ask which type in programming a specific set corresponds to:<br>
+<br>
+<h3 id="the-empty-set"> The Empty Set</h3>
+The empty set does not correspond to any type in most imperative languages, it does however correspond to the type <em>Void</em> in Haskell (omitting the bottom element).<br>
+<br>
+
+We can define the following (uncallable) functions with Void in Haskell:<br>
+
+<code>absurd :: Void → a</code><br>
+
+<code>id_void :: Void → Void</code><br>
+<br>
+<h3 id="the-singleton-set"> The Singleton Set</h3>
+The (one element) singleton set has one element called <code>()</code> and we can build the <code>unit</code> function with it:<br>
+
+<code>unit :: a → ()</code><br>
+<br>
+
+Furthermore we can define infinitely many functions of type <code>() → a</code>. These individual functions are constant. In this way we can express elements of a set as functions, or in category theory as morphisms.<br>
+
+For example for type bool we can define the functions<br>
+
+<div class="code-wrapper"><pre><code>true :: () → Bool
+true _ = True
+false :: () → Bool
+false _ = False
+</code></pre></div>
+Here we have expressed the elements of the type set of Bool as morphisms.<br>
+
+Such an object <code>()</code> that allows us to view individual elements of a set does not exist for any category. In general, category theory abstracts over elements and looks at sets, functions and other things from a higher perspective.<br>
+<br>
+<h3 id="the-two-element-set"> The two-element Set</h3>
+(todo)<br>
+<br>
+
+Sidenote: There is an important difference between pure functions in programming and mathematical functions. Mathematical functions instantly evaluate to a certain result while functions in programming may not terminate. To avoid this issue a special element called <strong>bottom</strong> is added to all type-sets above and a non-terminating function is said to return this bottom value.<br>
+<br>
+<h2 id="hask"> Hask</h2>
+<strong>Hask</strong> (capitalized) is the category of types and functions in Haskell (types include <strong>bottom</strong>). A mathematical function is only equivalent to a pure and total function in programming because it can't have side effects and is defined for every argument.
+<section id="article_footer"><div class="further-reading"><h2>Further Reading</h2><br><ul><li><a href="https://www.youtube.com/playlist?list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_">Category Theory lectures by Bartosz Milewski</a></li><li><a href="https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/">Category Theory for Programmers, Book by Bartosz Milewski</a></li><li><a href="https://en.wikipedia.org/wiki/Category_theory">Wikipedia (Category Theory)</a></li></ul></div></section>
+      </span>
+
+      <div id="disqus_thread"></div>
+
+      
+      <script>
+          /**
+           *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+           *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+           */
+
+          var disqus_config = function () {
+              this.page.url = "https://dominikschmidt.xyz/category-theory-notes";  // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = "category-theory-notes"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+          };
+
+          (function() {  // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+
+              s.src = 'https://dominikschmidtxyz.disqus.com/embed.js';
+
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+          })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+  </div>
+
+  <br><br>
+
+  <!--<footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>-
+
+  <br>-->
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
