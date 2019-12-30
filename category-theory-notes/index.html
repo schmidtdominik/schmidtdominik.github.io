@@ -172,7 +172,7 @@ A morphism \(f: a \rightarrow b\) is called
 
 In <em>Set</em>: surjective functions correspond to epimorphisms, injective functions correspond to monomorphisms and bijective functions correspond to bimorphisms.<br>
 
-Also notice the distinction between isomorphisms and bimorphisms. While in set theory a function that is bijective (both injective and surjective) is invertible, in category theory a morphism that is both epic and monic (a bimorphism) is not necessarily invertible (an isomorphism).<br>
+Also notice the distinction between isomorphisms and bimorphisms. While in set theory a function that is bijective (both injective and surjective) is invertible, in category theory a bimorphism (which is both epic and monic) is not necessarily invertible (an isomorphism).<br>
 <br>
 <h2 id="category-theory-in-programming"> Category Theory in Programming</h2>
 In a general sense, types in programming languages are sets:<br>
@@ -191,10 +191,9 @@ The empty set does not correspond to any type in most imperative languages, it d
 
 We can define the following (uncallable) functions with Void in Haskell:<br>
 
-<code>absurd :: Void → a</code><br>
-
-<code>id_void :: Void → Void</code><br>
-<br>
+<div class="code-wrapper"><pre><code>absurd :: Void → a
+id_void :: Void → Void
+</code></pre></div><br>
 <h3 id="the-singleton-set"> The Singleton Set</h3>
 The (one element) singleton set has one element called <code>()</code> and we can build the <code>unit</code> function with it:<br>
 
@@ -212,7 +211,7 @@ false _ = False
 </code></pre></div>
 Here we have expressed the elements of the type set of Bool as morphisms.<br>
 
-Such an object <code>()</code> that allows us to view individual elements of a set does not exist for any category. In general, category theory abstracts over elements and looks at sets, functions and other things from a higher perspective.<br>
+Such an object <code>()</code> that allows us to view individual elements of a set as morphisms does not exist for every category. In general, category theory abstracts over elements and looks at sets, functions and other things from a higher perspective.<br>
 <br>
 <h3 id="the-two-element-set"> The two-element Set</h3>
 (todo)<br>
