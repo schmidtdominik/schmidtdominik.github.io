@@ -172,7 +172,8 @@ When creating a bloom filter, one needs to specify the array size \(m\) and the 
     <li>Choose an array size \(m\), for example \(10n\).</li>
     <li>Set the number of hash functions, \(k\) to \(\frac{m}{n}ln(2)\).</li>
     <li>Decide if the false positive rate \(\lambda = (1-e^{-kn/m})^k\) is acceptable, if not, go back and adjust \(m\).</li>
-</ol>
+</ol><br>
+
 The hash functions should be independent and uniformally distributed but do not need to be cryptographically secure. A well-suited hash function would be FNV or FNV-1 for example. <sup><a id="ref2ref" href="#ref2">[2]</a></sup><br>
 <br>
 <h2 id="how-to-use-a-bloom-filter-in-python"> How to use a Bloom Filter in Python</h2>

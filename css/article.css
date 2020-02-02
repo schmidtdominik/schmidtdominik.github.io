@@ -444,3 +444,20 @@ a:hover {
 .further-reading a:hover {
   color: rgb(82, 214, 129);
 }
+
+.further-reading, .references {
+    padding-bottom: 1rem;
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+}
+
+ol, ul {
+    margin-bottom: -1rem;
+    list-style-position: outside;
+    list-style-type: disc;
+}
+
+li {
+    list-style-position: outside;
+    list-style-type: disc;
+}
