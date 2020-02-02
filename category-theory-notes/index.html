@@ -139,20 +139,20 @@
           <h1 class="article-title">
             Category Theory
           </h1>
-          <time datetime="2019-12-29 00:00:00">December 29, 2019 ⧗ 6 minute read</time><br>
+          <time datetime="2019-12-29 00:00:00">December 29, 2019 ⧗ 14 minute read</time><br>
         </div>
       </div>
       <!--END OF HEADING-->
 
       <span class="article-text">
-        <div id="index"><a href=#general-stuff> → General stuff</a><br><a href=#set> → Set</a><br><a href=#category-theory-in-programming> → Category Theory in Programming</a><br><a href=#the-empty-set>&emsp; → The Empty Set</a><br><a href=#the-singleton-set>&emsp; → The Singleton Set</a><br><a href=#the-two-element-set>&emsp; → The two-element Set</a><br><a href=#hask> → Hask</a></div><br><hr>These are my lecture notes on Bartosz Milewski's course on category theory. These are not meant as a comprehensive guide but rather a loose collection of definitions and short summaries.<br>
+        <div id="index"><a href=#general-stuff> → General stuff</a><br><a href=#set> → Set</a><br><a href=#category-theory-in-programming> → Category Theory in Programming</a><br><a href=#the-empty-set>&emsp; → The Empty Set</a><br><a href=#the-singleton-set>&emsp; → The Singleton Set</a><br><a href=#the-two-element-set>&emsp; → The Two-Element Set</a><br><a href=#hask>&emsp; → Hask</a><br><a href=#weak-and-strong-typing>&emsp; → Weak and Strong Typing</a><br><a href=#other-categories> → Other Categories</a><br><a href=#the-category-\varnothing>&emsp; → The Category \varnothing</a><br><a href=#free-categories>&emsp; → Free Categories</a><br><a href=#monoids>&emsp; → Monoids</a><br><a href=#thin-categories>&emsp; → Thin Categories</a><br><a href=#orders>&emsp; → Orders</a></div><br><hr>These are my lecture notes on Bartosz Milewski's course on category theory. These are not meant as a comprehensive guide but rather a loose collection of definitions and short summaries.<br>
 <h2 id="general-stuff"> General stuff</h2>
 A <strong>category</strong> is a collection of <strong>objects</strong> along with arrows, called <strong>morphisms</strong>, between those objects. It is therefore similar to a labeled directed graph.<br>
 
 A category has two properties: <strong>composition of morphisms</strong> and <strong>identity</strong>. Composition in category theory is similar to composition of functions and behaves associatively. Identity means that every object has an <strong>identity morphism</strong>.<br>
 
 <div class="image-center-wrapper"><img src="assets/category.svg"  class="inline-image image-center    "></div>
-Morphisms between any two objects form a set called the <strong>hom set</strong> denoted as \(hom(a, b)\). In higher-order categories morphisms don't form sets, they form objects in a category.
+Morphisms between any two objects form a set called the <strong>hom-set</strong> denoted as \(C(a, b)\) where \(C\) is the category and \(a\) and \(b\) are objects. In higher-order categories morphisms don't form sets, they form objects in a category.
 A <strong>groupoid</strong> is a category in which every morphism has an inverse.
 A category whose objects form a set is called <strong>small</strong>, otherwise it's called <strong>large</strong>.
 An algebraic group is a category with a single object (corresponding to the set of elements of the group).<br>
@@ -166,11 +166,12 @@ A morphism \(f: a \rightarrow b\) is called
 	<li> a <strong>monomorphism</strong> (or <strong>monic</strong>) if it is left-cancellable, i.e. \(f \circ g_1 = f \circ g_2\) implies \(g_1 = g_2\) for all \(c\) and all \(g_1, g_2: c \rightarrow a\)</li>
 	<li> a <strong>bimorphism</strong> if it is both a monomorphism and an epimorphism</li>
 	<li>An <strong>isomorphism</strong> if it has an inverse, i.e. if there exists an morphism \(f^{-1}: b \rightarrow a\) with \(f^{-1} \circ f = id_a\) and \(f \circ f^{-1} = id_b\).</li>
-</ul><h2 id="set"> Set</h2>
+</ul><br>
+<h2 id="set"> Set</h2>
 <strong>Set</strong> (capitalized) is the category of sets and functions. <em>Set</em> is a category because there is an identity function for each set which becomes the identity morphism in <em>Set</em> and function composition (which becomes morphism composition in <em>Set</em>) is associative.<br>
 <br>
 
-In <em>Set</em>: surjective functions correspond to epimorphisms, injective functions correspond to monomorphisms and bijective functions correspond to bimorphisms.<br>
+In <em>Set</em>: surjective functions correspond to epimorphisms, injective functions correspond to monomorphisms and bijective functions correspond to bimorphisms. In <em>Set</em> all bimorphisms are isomorphisms since all bijective functions are invertible.<br>
 
 Also notice the distinction between isomorphisms and bimorphisms. While in set theory a function that is bijective (both injective and surjective) is invertible, in category theory a bimorphism (which is both epic and monic) is not necessarily invertible (an isomorphism).<br>
 <br>
@@ -182,8 +183,9 @@ In a general sense, types in programming languages are sets:<br>
 	<li>Boolean represents the set \( \{True, False\}\)</li>
 	<li>Int represents a subset of \(\mathbb{N}\)</li>
 	<li>Float/Double represents a subset of \(\mathbb{Q}\)</li>
-</ul>
-If we go in the other direction we can ask which type in programming a specific set corresponds to:<br>
+</ul><br>
+
+If we go in the other direction we can ask which type in programming specific (special) sets correspond to:<br>
 <br>
 <h3 id="the-empty-set"> The Empty Set</h3>
 The empty set does not correspond to any type in most imperative languages, it does however correspond to the type <em>Void</em> in Haskell (omitting the bottom element).<br>
@@ -193,34 +195,106 @@ We can define the following (uncallable) functions with Void in Haskell:<br>
 
 <div class="code-wrapper"><pre><code>absurd :: Void → a
 id_void :: Void → Void
-</code></pre></div><br>
+</code></pre></div>
+To call these functions we would have to supply a value to fill the Void-type parameter which we can not since there are no values of type Void. There exists no function with type <code>a → Void</code>. (If we called it with any argument, what could it return?)<br>
+
+In mathematical logic, types/objects correspond to propositions and functions correspond to proofs. Therefore, the existence of a function between two propositions is equivalent to the existence of a proof.
+This ties in well with the functions we defined above if we take the type Void to correspond to <em>False</em>.<br>
+<br>
+
+<ul>
+    <li>The function <code>absurd :: Void → a</code> exists, this corresponds to the fact that we can proof anything from starting from false assumptions. ("All even numbers are primes \(\implies\) 20 is a prime")</li>
+    <li>There exists no function of type <code>a → Void</code>, we cannot prove falsity. (You cannot prove something that's false, it has no proof)</li>
+</ul><br>
 <h3 id="the-singleton-set"> The Singleton Set</h3>
 The (one element) singleton set has one element called <code>()</code> and we can build the <code>unit</code> function with it:<br>
 
-<code>unit :: a → ()</code><br>
-<br>
-
+<div class="code-wrapper"><pre><code>unit :: a → ()
+</code></pre></div>
 Furthermore we can define infinitely many functions of type <code>() → a</code>. These individual functions are constant. In this way we can express elements of a set as functions, or in category theory as morphisms.<br>
 
-For example for type bool we can define the functions<br>
+For example for type Bool we can define the functions<br>
 
 <div class="code-wrapper"><pre><code>true :: () → Bool
 true _ = True
 false :: () → Bool
 false _ = False
 </code></pre></div>
-Here we have expressed the elements of the type set of Bool as morphisms.<br>
-
-Such an object <code>()</code> that allows us to view individual elements of a set as morphisms does not exist for every category. In general, category theory abstracts over elements and looks at sets, functions and other things from a higher perspective.<br>
-<br>
-<h3 id="the-two-element-set"> The two-element Set</h3>
-(todo)<br>
+Here we have expressed the elements of the type set of Bool as morphisms. In general the family of functions of type <code>() → a</code> correspond to picking elements of sets.<br>
 <br>
 
-Sidenote: There is an important difference between pure functions in programming and mathematical functions. Mathematical functions instantly evaluate to a certain result while functions in programming may not terminate. To avoid this issue a special element called <strong>bottom</strong> is added to all type-sets above and a non-terminating function is said to return this bottom value.<br>
+Such an object <code>()</code>  (called <strong>generalized element</strong>) that allows us to view individual elements of a set as morphisms does not exist for every category. In general, category theory abstracts over elements and looks at sets, functions and other things from a higher perspective.<br>
 <br>
-<h2 id="hask"> Hask</h2>
-<strong>Hask</strong> (capitalized) is the category of types and functions in Haskell (types include <strong>bottom</strong>). A mathematical function is only equivalent to a pure and total function in programming because it can't have side effects and is defined for every argument.
+<h3 id="the-two-element-set"> The Two-Element Set</h3>
+The two element set is equivalent to the type Bool. It can also be defined as the sum of two units.
+A function that returns a boolean is a predicate.<br>
+<br>
+<h3 id="hask"> Hask</h3>
+<strong>Hask</strong> (capitalized) is the category of types and functions in Haskell.<br>
+
+Sidenote: There is an important difference between pure functions in programming and mathematical functions. Mathematical functions instantly evaluate to a certain result while functions in programming may not terminate. To avoid this issue a special element called <strong>bottom</strong> is added to all type-sets above and  and a non-terminating function is said to return this bottom value. Furthermore is a mathematical function only equivalent to a pure and total function in programming because it can't have side effects and is defined for every argument.<br>
+<br>
+<h3 id="weak-and-strong-typing"> Weak and Strong Typing</h3>
+In a <em>Set</em>-like category with only a single object, any two function are composable. This is equivalent to a weakly typed language (or a language with only a single type). A strongly typed language is equivalent to a category with multiple objects.<br>
+
+Therefore weak and strong typing aren't actually distinct concepts but instead is weak typing inside strong typing.<br>
+<br>
+<h2 id="other-categories"> Other Categories</h2><h3 id="the-category-$\varnothing$"> The Category \(\varnothing\)</h3>
+The category \(\varnothing\) is the empty category. It contains no objects or morphisms.
+Similar to the empty set or the number zero it is not very useful by itself. It however becomes useful in the context of other categories. <br>
+<br>
+<h3 id="free-categories"> Free Categories</h3>
+Every finite directed graph can be turned into a category by adding a finite number of arrows.<br>
+<br>
+
+<ol>
+    <li>Add identiy arrows to each node/object (if they do not exist yet).</li>
+    <li>For every pair of composable arrows \(f, g\), add their composition \(g \circ f\). Keep in mind that because of associativity, not all compositions have to be added (\((f \circ g) \circ h = f \circ (g \circ h)\)).</li>
+</ol><br>
+
+This method of creating a category is called <strong>free construction</strong>. We are not imposing any additional constraints other than those required by the definition of a category. A category creating in this way is called a <strong>free category</strong>. <br>
+<br>
+<h3 id="monoids"> Monoids</h3>
+A category is called a <strong>monoid</strong> if it contains exactly one object. This object has to have at least one morphism, the identity, but it can have more. It is related to algebraic monoids (in group theory) in the following way:<br>
+<br>
+
+An algebraic monoid is a set along with an associative operation and a neutral element. <br>
+<br>
+
+<ul>
+    <li>Each element in the set along with the operation corresponds to a morphism from and to the single object.</li>
+    <li>The neutral element corresponds to the identity morphism.</li>
+    <li>The associativity of the operation corresponds to the associativity of morphism composition.</li>
+</ul><br>
+
+For example take the algebraic monoid of the natural numbers under addition. The associated monoid in category theory is a single object along with arrows corresponding to \(A = \{+0, +1, +2, +3, \ldots\}\). We choose \(+0\) to be the identity morphism (\(\forall a \in A[ (+0)\circ a = a \land a\circ (+0) = a]\)). Since addition is associative, morphism composition is also associative.<br>
+<br>
+
+In this way we can always create a category monoid from an algebraic monoid and vice versa. <br>
+<br>
+<h3 id="thin-categories"> Thin Categories</h3>
+A category is called a <strong>thin category</strong> if every hom-set is either the empty set or a singleton set. This means that for any pair of objects \((a, b)\) there is at most one arrow going from \(a\) to \(b\). In such a category every morphism is an epi- and monomorphism. (The definition of epi/monomorphism includes "[..] for every pair of morphisms between a and b [..]" but in a thin category there is at most one morphisms between any two objects.)<br>
+<br>
+
+In a thin category a bimorphism is not necessarily invertible (i.e. an isomorphism).<br>
+<br>
+<h3 id="orders"> Orders</h3>
+<strong>Orders</strong> are categories where arrows are not necessarily functions but rather general relations.<br>
+<br>
+
+<ul>
+    <li>A <strong>preorder</strong> is an order that is reflexive and composable (transitive). Every preorder is a thin category since for every pair of objects \((a, b)\) the hom-set is either empty (when \(a \nleq b\)) or a singleton set (when \(a \le	 b\)).</li>
+    <li>A <strong>partial order</strong> is a preorder that is also antisymmetric. (It is therefore relexive, transitive and antisymmetric)</li>
+    <li>A <strong>total order</strong> is a partial order that is also connex (defined for any two objects - either \(a \le b\) or \(b \le a\)).</li>
+</ul><br>
+
+ \(\le\) is a total order on \(\mathbb{R}\). It satisfies the requirements for categories (associative composability and identity) since it is a transitive and reflexive relation (composition is associative because there can never be more than one arrow between a pair of objects). It furthermore is transitive, antisymmetric and defined for any two real numbers.<br>
+<br>
+<br>
+
+[todo...]<br>
+<br>
+
 <section id="article_footer"><div class="further-reading"><h2>Further Reading</h2><br><ul><li><a href="https://www.youtube.com/playlist?list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_">Category Theory lectures by Bartosz Milewski</a></li><li><a href="https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/">Category Theory for Programmers, Book by Bartosz Milewski</a></li><li><a href="https://en.wikipedia.org/wiki/Category_theory">Wikipedia (Category Theory)</a></li></ul></div></section>
       </span>
 
