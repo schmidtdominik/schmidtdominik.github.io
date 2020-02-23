@@ -145,7 +145,7 @@
       <!--END OF HEADING-->
 
       <span class="article-text">
-        <div id="index"><a href=#general-stuff> → General stuff</a><br><a href=#set> → Set</a><br><a href=#category-theory-in-programming> → Category Theory in Programming</a><br><a href=#the-empty-set>&emsp; → The Empty Set</a><br><a href=#the-singleton-set>&emsp; → The Singleton Set</a><br><a href=#the-two-element-set>&emsp; → The Two-Element Set</a><br><a href=#hask>&emsp; → Hask</a><br><a href=#weak-and-strong-typing>&emsp; → Weak and Strong Typing</a><br><a href=#other-categories> → Other Categories</a><br><a href=#the-category-\varnothing>&emsp; → The Category \varnothing</a><br><a href=#free-categories>&emsp; → Free Categories</a><br><a href=#monoids>&emsp; → Monoids</a><br><a href=#thin-categories>&emsp; → Thin Categories</a><br><a href=#orders>&emsp; → Orders</a></div><br><hr>These are my lecture notes on Bartosz Milewski's course on category theory. These are not meant as a comprehensive guide but rather a loose collection of definitions and short summaries.<br>
+        <div id="index"><a href=#general-stuff> → General stuff</a><br><a href=#set> → Set</a><br><a href=#category-theory-in-programming> → Category Theory in Programming</a><br><a href=#the-empty-set>&emsp; → The Empty Set</a><br><a href=#the-singleton-set>&emsp; → The Singleton Set</a><br><a href=#the-two-element-set>&emsp; → The Two-Element Set</a><br><a href=#hask>&emsp; → Hask</a><br><a href=#weak-and-strong-typing>&emsp; → Weak and Strong Typing</a><br><a href=#other-categories> → Other Categories</a><br><a href=#the-category-\varnothing>&emsp; → The Category \varnothing</a><br><a href=#free-categories>&emsp; → Free Categories</a><br><a href=#monoids>&emsp; → Monoids</a><br><a href=#thin-categories>&emsp; → Thin Categories</a><br><a href=#orders>&emsp; → Orders</a><br><a href=#kleisli-categories>&emsp; → Kleisli Categories</a></div><br><hr>These are my lecture notes on Bartosz Milewski's course on category theory. These are not meant as a comprehensive guide but rather a loose collection of definitions and short summaries.<br>
 <h2 id="general-stuff"> General stuff</h2>
 A <strong>category</strong> is a collection of <strong>objects</strong> along with arrows, called <strong>morphisms</strong>, between those objects. It is therefore similar to a labeled directed graph.<br>
 
@@ -227,7 +227,7 @@ Such an object <code>()</code>  (called <strong>generalized element</strong>) th
 <br>
 <h3 id="the-two-element-set"> The Two-Element Set</h3>
 The two element set is equivalent to the type Bool. It can also be defined as the sum of two units.
-A function that returns a boolean is a predicate.<br>
+A function that returns a boolean is called a predicate.<br>
 <br>
 <h3 id="hask"> Hask</h3>
 <strong>Hask</strong> (capitalized) is the category of types and functions in Haskell.<br>
@@ -267,7 +267,7 @@ An algebraic monoid is a set along with an associative operation and a neutral e
     <li>The associativity of the operation corresponds to the associativity of morphism composition.</li>
 </ul><br>
 
-For example take the algebraic monoid of the natural numbers under addition. The associated monoid in category theory is a single object along with arrows corresponding to \(A = \{+0, +1, +2, +3, \ldots\}\). We choose \(+0\) to be the identity morphism (\(\forall a \in A[ (+0)\circ a = a \land a\circ (+0) = a]\)). Since addition is associative, morphism composition is also associative.<br>
+For example take the algebraic monoid of the natural numbers under addition. The associated monoid in category theory is a single object along with arrows, each corresponding to an element from \(A = \{+0, +1, +2, +3, \ldots\}\). We choose \(+0\) to be the identity morphism (\(\forall a \in A[ (+0)\circ a = a \land a\circ (+0) = a]\)). Since addition is associative, morphism composition is also associative.<br>
 <br>
 
 In this way we can always create a category monoid from an algebraic monoid and vice versa. <br>
@@ -280,17 +280,15 @@ In a thin category a bimorphism is not necessarily invertible (i.e. an isomorphi
 <br>
 <h3 id="orders"> Orders</h3>
 <strong>Orders</strong> are categories where arrows are not necessarily functions but rather general relations.<br>
-<br>
 
 <ul>
     <li>A <strong>preorder</strong> is an order that is reflexive and composable (transitive). Every preorder is a thin category since for every pair of objects \((a, b)\) the hom-set is either empty (when \(a \nleq b\)) or a singleton set (when \(a \le	 b\)).</li>
-    <li>A <strong>partial order</strong> is a preorder that is also antisymmetric. (It is therefore relexive, transitive and antisymmetric)</li>
+    <li>A <strong>partial order</strong> is a preorder that is also antisymmetric. (It is therefore relexive, transitive and antisymmetric) A partial order induces a directed acyclic graph.</li>
     <li>A <strong>total order</strong> is a partial order that is also connex (defined for any two objects - either \(a \le b\) or \(b \le a\)).</li>
 </ul><br>
 
  \(\le\) is a total order on \(\mathbb{R}\). It satisfies the requirements for categories (associative composability and identity) since it is a transitive and reflexive relation (composition is associative because there can never be more than one arrow between a pair of objects). It furthermore is transitive, antisymmetric and defined for any two real numbers.<br>
-<br>
-<br>
+<h3 id="kleisli-categories"> Kleisli Categories</h3><br>
 
 [todo...]<br>
 <br>
@@ -298,9 +296,9 @@ In a thin category a bimorphism is not necessarily invertible (i.e. an isomorphi
 <section id="article_footer"><div class="further-reading"><h2>Further Reading</h2><br><ul><li><a href="https://www.youtube.com/playlist?list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_">Category Theory lectures by Bartosz Milewski</a></li><li><a href="https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/">Category Theory for Programmers, Book by Bartosz Milewski</a></li><li><a href="https://en.wikipedia.org/wiki/Category_theory">Wikipedia (Category Theory)</a></li></ul></div></section>
       </span>
 
-      <div id="disqus_thread"></div>
+      <!--<div id="disqus_thread"></div>
 
-      
+
       <script>
           /**
            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
@@ -322,7 +320,7 @@ In a thin category a bimorphism is not necessarily invertible (i.e. an isomorphi
           })();
     </script>
     <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-  </div>
+    </div>-->
 
   <br><br>
 

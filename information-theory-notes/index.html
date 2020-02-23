@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Information Theory - Dominik Schmidt</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <link rel=preload href="../css/BIG JOHN.otf" as="font" crossorigin>
+
+  <meta property="og:title" content="Information Theory"/>
+  <meta property='og:type' content='article'/>
+  <meta property="og:image" content="assets/cover.png"/>
+  <meta property="og:url" content="http://dominikschmidt.xyz/information-theory-notes"/>
+  <!--<meta property="og:description" content="These are my lecture notes on Prof. Raymond W. Yeung's course on information theory. The course is based on Prog. Yeung's book "Information Theory and
+Network Coding" and these notes are organized around that.<br>
+<br>
+
+Information theory is a major research field in communication theory and applied probability. This is not meant as a comprehensive guide but rather a loose collection of definitions and short summaries."/>-->
+
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+  <script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#edeff5",
+        "text": "#838391"
+      },
+      "button": {
+        "background": "#4b81e8"
+      }
+    },
+    "position": "bottom-left",
+    "content": {
+      "href": "http://dominikschmidt.xyz/policy"
+    }
+  })});
+  </script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-4694920180315448",
+            enable_page_level_ads: true
+       });
+  </script>
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 100 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/article.css">
+
+  <link rel="stylesheet" href="../highlight/styles/atom-one-light.css"><!--foundation/hopscotch-->
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+
+  <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 8%">
+          <h1>
+            <a href="../index.html">
+              <span id="title">
+                Dominik Schmidt
+              </span>
+            </a>
+            <!--<a href="index.html">
+              <span id="by-me">
+
+              </span>
+            </a>-->
+          </h1>
+        <hr>
+        <nav>
+          <span style="display: inline-block;" ><a class="navitem" href="../index.html"><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../datasets.html"><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../random.html"><i class="fas fa-robot"></i>&nbsp;Random Stuff</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About me</a></span>
+
+          <span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://github.com/schmidtdominik"><i class="fab fa-github"></i>&nbsp;</a></span>
+          <!--<span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://www.reddit.com/user/dominik_schmidt"><i class="fab fa-reddit"></i></i>&nbsp;</a></span>-->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container article">
+      <div id='header-box'>
+
+
+        <!--START OF HEADING-->
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <img src="assets/cover.png" id="header-img" alt="">
+        </div>
+
+
+        <div id="header-text">
+          <h1 class="article-title">
+            Information Theory
+          </h1>
+          <time datetime="2020-02-16 00:00:00">February 16, 2020 ⧗ 9 minute read</time><br>
+        </div>
+      </div>
+      <!--END OF HEADING-->
+
+      <span class="article-text">
+        <div id="index"><a href=#1.-the-science-of-information> → 1. The Science of Information</a><br><a href=#shannon's-seminal-paper-1948>&emsp; → Shannon's Seminal Paper (1948)</a><br><a href=#2.-information-measures> → 2. Information Measures</a><br><a href=#2.1-independence-and-markov-chain>&emsp; → 2.1 Independence and Markov Chain</a><br><a href=#2.2-shannon's-information-measures>&emsp; → 2.2 Shannon's Information Measures</a><br><a href=#2.3-continuity-of-shannons's-information-measures>&emsp; → 2.3 Continuity of Shannons's Information Measures</a></div><br><hr>These are my lecture notes on Prof. Raymond W. Yeung's course on information theory. The course is based on Prog. Yeung's book "Information Theory and
+Network Coding" and these notes are organized around that.<br>
+<br>
+
+Information theory is a major research field in communication theory and applied probability. This is not meant as a comprehensive guide but rather a loose collection of definitions and short summaries.<br>
+<br>
+<h2 id="1.-the-science-of-information"> 1. The Science of Information</h2><br>
+
+<div class="image-center-wrapper"><img src="assets/txrx_model.png" style="width: 80%;" class="inline-image image-center    "></div>
+Two key concepts:<br>
+<br>
+
+<ul>
+<li> Information is uncertainty: modeled as random variables</li>
+<li> information is transmitted digitally: transmission is based on ones and zeros with no reference to what they represent</li>
+</ul><br>
+<br>
+<h3 id="shannon's-seminal-paper-1948"> Shannon's Seminal Paper (1948)</h3><br>
+
+<ul>
+<li> The <strong>source coding theorem</strong> defines <strong>entropy</strong> as the fundamental measure of information and establishes a fundamental limit for data compression (there always exists a minimal compressed-file size, no matter how smart the compression). This is the theoretical basis for lossless data compression.</li>
+<li> The <strong>channel coding theorem</strong> establishes a fundamental rate limit for reliable communication through a noisy channel. There always exists a maximum rate, called the <strong>channel capacity </strong>(which is generally strictly positive), of how much data can be reliably transmitted through a a channel.</li>
+</ul><br>
+<br>
+<h2 id="2.-information-measures"> 2. Information Measures</h2><br>
+
+<ul>
+<li> \(X\) is a <strong>discrete random variable</strong> taking values in \(\mathcal{X}\)</li>
+<li> \({p_X(x)}\) is the probability distribution for \(X\)</li>
+<li> \(\mathcal{S}_X=\{x\in\mathcal{X}:{p_X(x)>0}\}\) is the <strong>support</strong> of X (set of all outcomes \(x\) such that the probability is non-zero)</li>
+<li> is \(\mathcal{S}_X=\mathcal{X}\), \(p\) is called <strong>strictly positive</strong></li>
+</ul><br>
+<h3 id="2.1-independence-and-markov-chain"> 2.1 Independence and Markov Chain</h3><br>
+
+<strong>Definition 2.1</strong> Random Variables \(X\) and \(Y\) are called independent, denoted by \(X\perp Y\) if:
+$$
+\forall (x,y) \in \mathcal{X\times Y}\colon\, p(x, y)=p(x)p(y)
+$$<br>
+
+<strong>Definition 2.2 (Mutual Independence)</strong> For \(n\ge3\), random variables \(X_1, X_2,...X_n\) are mutually independent if:
+$$
+\forall (x_1, x_2,...,x_n)\colon\, p(x_1, x_2,...,x_n)=p(x_1)p(x_2)\cdots p(x_n)
+$$<br>
+
+<strong>Definition 2.3 (Pairwise Independence)</strong> For \(n\ge3\), random variables \(X_1, X_2,...X_n\) are pairwise independent if all \(X_i\) and \(X_j\) are independent.<br>
+
+Mutual independence \(\implies\) pairwise independence<br>
+<br>
+
+<strong>Definition 2.4 (Conditional Independence)</strong> For random variables \(X\), \(Y\) and \(Z\), \(X\) is independent of \(Z\) conditioning on \(Y\), denoted by \((X\perp Z)\mid Y\)
+$$
+p(x, y, z) = \Bigg\{
+		\begin{array}{lr}
+        \frac{p(x,y)p(y,z)}{p(y)}\,(\ast), & \text{if } p(y)>0\\
+        0, & \text{otherwise}
+        \end{array}
+$$<br>
+
+if \(p(y)>0\) then
+$$
+p(x,y,z)=(\ast)\,\frac{p(x,y)p(y,z)}{p(y)}=p(x,y)p(z|y)
+$$<br>
+
+<img src="assets/cond_indep.svg" style="width: 40%;" class="inline-image inline-image-right    "> "In other words, \(A\) and \(B\) are conditionally independent given \(C\) if and only if, given knowledge that \(C\) occurs, knowledge of whether \(A\) occurs provides no information on the likelihood of \(B\) occurring, and knowledge of whether \(B\) occurs provides no information on the likelihood of \(A\) occurring." <sup><a id="fn1ref" href="#fn1">[1]</a></sup>In the picture on the right \(R\) and \(B\) are conditionally independent given \(Y\) but not given \(\overline Y\)<br>
+<br>
+
+<strong>Proposition 2.5</strong> For random variables \(X\), \(Y\) and \(Z\)
+$$
+\forall (x, y, z),\, p(y)>0\colon\, [(X\perp Z)\mid Y \iff p(x,y,z) = a(x,y)b(y,z)]
+$$
+Meaning \(p(x,y,z)\) can be factorized as the given term, where \(a\) is a function that depends only on \(x, y\) and b is a function that depends only on \(y, z\).<br>
+<br>
+
+<strong>Definition 2.6 (Markov Chain)</strong> For random variables \(X_1, X_2,\ldots,X_n\) where \(n\ge 3\), \(X_1→X_2→\cdots→X_n\) forms a Markov chain if
+$$
+p(x_1, x_2,\ldots,x_n) = \\\Bigg\{\begin{array}{lr}
+        p(x_1, x_2)p(x_3|x_2)\cdots p(x_n|x_{n-1}) & \text{if } p(x_2), p(x_3),\ldots,p(x_{n-1})>0\\
+        0, & \text{otherwise}
+        \end{array}
+$$<br>
+
+Further explanation by Wikipedia:<div class="image-center-wrapper"><img src="assets/markovproperty_wiki.png" style="width: 90%;" class="inline-image image-center    "></div>
+<strong>Remark</strong> \(X_1→X_2→X_3\) is equivalent to \((X_1\perp X_3)\mid X_2\)<br>
+<br>
+
+<strong>Proposition 2.7</strong> \(X_1→X_2→\cdots→X_n\) forms a Markov chain if and only if \(X_n→X_{n-1}→\cdots X_1\) forms a Markov chain<br>
+<br>
+
+<strong>Proposition 2.8</strong> \(X_1→X_2→\cdots→X_n\) forms a Markov chain if and only if
+$$
+X_1→X_2→X_3\\
+(X_1,X_2)→X_3→X_4
+\\\vdots\\
+(X_1, X_2, \ldots, X_{n-2})→X_{n-1}→X_n
+$$
+form Markov chains.<br>
+
+<strong>Proposition 2.9</strong> \(X_1→X_2→\cdots→X_n\) forms a Markov chain if and only if
+$$
+p(x_1, x_2,\ldots,x_n) =f_1(x_1, x_2)f_2(x_2,x_3)\cdots f_{n-1}(x_{n-1},x_2)
+$$
+This is a generalization of Proposition 2.5<br>
+
+<strong>Proposition 2.10 (Markov subchains)</strong> Let \(\mathcal{N}_n=\{1,2,\ldots n\}\) and let \(X_1→X_2→\cdots→X_n\) form a Markov chain. For any subset \(\alpha\) of \(\mathcal{N}_n\) denote \((X_i, i \in \alpha)\) (a collection of random Variables) by \(X_\alpha\). Then for any disjoint subsets \(\alpha_1, \alpha_2, \ldots \alpha_m\) of \(\mathcal{N}_n\) such that
+$$
+k_1<k_2<\cdots<k_m
+$$
+for all \(k_j \in \alpha_j, \,j=1,2,\ldots, m\),
+$$
+X_{\alpha_1}→X_{\alpha_2}→\cdots→X_{\alpha_n}
+$$
+forms a Markov chain. Thats is, a subchain of \(X_1→X_2→\cdots→X_n\) is also a Markov chain.<br>
+<br>
+<br>
+<h3 id="2.2-shannon's-information-measures"> 2.2 Shannon's Information Measures</h3><br>
+
+Shannon introduced these basic measures of information:<br>
+<br>
+
+<ul>
+<li><strong>Entropy</strong> \(H(X) = -\sum_xp(x)\log_\alpha p(x) = -E[\log p(X)]\)<br>
+
+Measures the uncertainty of a discrete random variable. The unit for entropy is <strong>bit</strong> if \(\alpha=2\), <strong>nat</strong> if \(\alpha=e\) and D-it if \(\alpha = D\). (A bit in information theory is different from a bit in computer science)</li>
+<li><strong>Joint Entropy</strong> \(H(X, Y) = -\sum_{x, y} p(x, y) \log p(x,y) = -E[\log p(X,Y)]\)<br>
+
+Measures the uncertainty of two joint discrete random variables.
+</li>
+<li><strong>Conditional Entropy</strong> \(H(Y|X) = -\sum_{x, y}  p(x, y) \log p(y|x) = -E[\log p(Y|X)]\)<br>
+
+Measures the uncertainty of a discrete random variable Y, given X.
+</li>
+<li><strong>Mutual Information</strong> \(I(X; Y) = \sum_{x, y} p(x, y)\log \frac{p(x,y)}{p(x)p(y)}=E[\log \frac{p(X,Y)}{p(X)p(Y)}]\)<br>
+
+"Quantifies the "amount of information" [..] obtained about one random variable through observing the other random variable."<sup><a id="fn2ref" href="#fn2">[2]</a></sup></li>
+<li><strong>Conditional Mutual Information</strong> \(I(X; Y|Z) = \sum_{x,y,z} \log \frac{p(x, y|z)}{p(x|z)p(y|z)} = E[\log \frac{p(X, Y|Z)}{p(X|Z)p(Y|Z)}]\)<br>
+
+The mutual information of X and Y, given Z.
+</li>
+</ul><br>
+
+<div class="image-center-wrapper"><img src="assets/information-measures.png" style="width: 60%;" class="inline-image image-center    "></div>
+The following equalities hold:<br>
+<br>
+
+<ul>
+    <li>\(H(X, Y) = H(Y, X)\) and \(I(X; Y) = I(Y; X)\) and \(I(X; Y | Z) = I(Y; X | Z)\)(symmetry)</li>
+    <li>\(H(X, Y) = H(X) + H(Y|X)\) (revealing X and Y at the same time or one after another yields the same amount of information)</li>
+    <li>\(I(X; X) = H(X)\)</li>
+    <li>\(I(X; Y) = H(X) - H(X|Y)\)</li>
+    <li>\(I(X; Y) = H(X) + H(Y) - H(X, Y)\) (→ inclusion-exclusion)</li>
+    <li>\(I(X; X|Z) = H(X|Z)\)</li>
+</ul><br>
+<h3 id="2.3-continuity-of-shannons's-information-measures"> 2.3 Continuity of Shannons's Information Measures</h3><br>
+
+All of the information measures described above are continuous for fixed finite alphabets with respect to convergence in variational distance (\(\mathcal{L}_1\) distance):
+$$
+V(p, q) = \sum_{x\in\mathcal{X}} |p(x) - q(x)|
+$$<br>
+
+<section id="article_footer"><h2>Footnotes</h2><br><ol class="footnotes"><li><span id="fn1">https://en.wikipedia.org/wiki/Conditional_independence</span><a href="#fn1ref""><i class="footnotes-return fas fa-caret-left"></i></a></li><li><span id="fn2">https://en.wikipedia.org/wiki/Mutual_information</span><a href="#fn2ref""><i class="footnotes-return fas fa-caret-left"></i></a></li></ol></section>
+      </span>
+
+      <!--<div id="disqus_thread"></div>
+
+
+      <script>
+          /**
+           *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+           *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+           */
+
+          var disqus_config = function () {
+              this.page.url = "https://dominikschmidt.xyz/information-theory-notes";  // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = "information-theory-notes"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+          };
+
+          (function() {  // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+
+              s.src = 'https://dominikschmidtxyz.disqus.com/embed.js';
+
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+          })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    </div>-->
+
+  <br><br>
+
+  <!--<footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>-
+
+  <br>-->
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
