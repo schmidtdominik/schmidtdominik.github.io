@@ -212,7 +212,7 @@ $$
 p(x,y,z)=(\ast)\,\frac{p(x,y)p(y,z)}{p(y)}=p(x,y)p(z|y)
 $$<br>
 
-<img src="assets/cond_indep.svg" style="width: 40%;" class="inline-image inline-image-right    "> "In other words, \(A\) and \(B\) are conditionally independent given \(C\) if and only if, given knowledge that \(C\) occurs, knowledge of whether \(A\) occurs provides no information on the likelihood of \(B\) occurring, and knowledge of whether \(B\) occurs provides no information on the likelihood of \(A\) occurring." <sup><a id="fn1ref" href="#fn1">[1]</a></sup>In the picture on the right \(R\) and \(B\) are conditionally independent given \(Y\) but not given \(\overline Y\)<br>
+<img src="assets/cond_indep.svg" style="width: 40%;" class="inline-image inline-image-right    "> "In other words, \(A\) and \(B\) are conditionally independent given \(C\) if and only if, given knowledge that \(C\) occurs, knowledge of whether \(A\) occurs provides no information on the likelihood of \(B\) occurring, and knowledge of whether \(B\) occurs provides no information on the likelihood of \(A\) occurring." <sup><a id="ref1ref" href="#ref1">[1]</a></sup> In the picture on the right \(R\) and \(B\) are conditionally independent given \(Y\) but not given \(\overline Y\)<br>
 <br>
 
 <strong>Proposition 2.5</strong> For random variables \(X\), \(Y\) and \(Z\)
@@ -282,7 +282,8 @@ Measures the uncertainty of a discrete random variable Y, given X.
 </li>
 <li><strong>Mutual Information</strong> \(I(X; Y) = \sum_{x, y} p(x, y)\log \frac{p(x,y)}{p(x)p(y)}=E[\log \frac{p(X,Y)}{p(X)p(Y)}]\)<br>
 
-"Quantifies the "amount of information" [..] obtained about one random variable through observing the other random variable."<sup><a id="fn2ref" href="#fn2">[2]</a></sup></li>
+"Quantifies the "amount of information" [..] obtained about one random variable through observing the other random variable."<sup><a id="ref2ref" href="#ref2">[2]</a></sup>
+</li>
 <li><strong>Conditional Mutual Information</strong> \(I(X; Y|Z) = \sum_{x,y,z} \log \frac{p(x, y|z)}{p(x|z)p(y|z)} = E[\log \frac{p(X, Y|Z)}{p(X|Z)p(Y|Z)}]\)<br>
 
 The mutual information of X and Y, given Z.
@@ -308,7 +309,7 @@ $$
 V(p, q) = \sum_{x\in\mathcal{X}} |p(x) - q(x)|
 $$<br>
 
-<section id="article_footer"><h2>Footnotes</h2><br><ol class="footnotes"><li><span id="fn1">https://en.wikipedia.org/wiki/Conditional_independence</span><a href="#fn1ref""><i class="footnotes-return fas fa-caret-left"></i></a></li><li><span id="fn2">https://en.wikipedia.org/wiki/Mutual_information</span><a href="#fn2ref""><i class="footnotes-return fas fa-caret-left"></i></a></li></ol></section>
+<section id="article_footer"><h2>References</h2><br><ol class="references"><li><span id="ref1">https://en.wikipedia.org/wiki/Conditional_independence</span> <a href="#ref1ref""><i class="references-return fas fa-caret-left"></i></a></li><li><span id="ref2">https://en.wikipedia.org/wiki/Mutual_information</span> <a href="#ref2ref""><i class="references-return fas fa-caret-left"></i></a></li></ol></section>
       </span>
 
       <!--<div id="disqus_thread"></div>

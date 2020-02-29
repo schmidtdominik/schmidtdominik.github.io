@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Analysis 1 (in German) - Dominik Schmidt</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <link rel=preload href="../css/BIG JOHN.otf" as="font" crossorigin>
+
+  <meta property="og:title" content="Analysis 1 (in German)"/>
+  <meta property='og:type' content='article'/>
+  <meta property="og:image" content="assets/cover.png"/>
+  <meta property="og:url" content="http://dominikschmidt.xyz/analysis-1-notes"/>
+  <!--<meta property="og:description" content="These are my lecture notes for the analysis 1 course at the Vienna University of Technology."/>-->
+
+  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+  <script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#edeff5",
+        "text": "#838391"
+      },
+      "button": {
+        "background": "#4b81e8"
+      }
+    },
+    "position": "bottom-left",
+    "content": {
+      "href": "http://dominikschmidt.xyz/policy"
+    }
+  })});
+  </script>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-4694920180315448",
+            enable_page_level_ads: true
+       });
+  </script>
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 100 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/article.css">
+
+  <link rel="stylesheet" href="../highlight/styles/atom-one-light.css"><!--foundation/hopscotch-->
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+
+  <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 8%">
+          <h1>
+            <a href="../index.html">
+              <span id="title">
+                Dominik Schmidt
+              </span>
+            </a>
+            <!--<a href="index.html">
+              <span id="by-me">
+
+              </span>
+            </a>-->
+          </h1>
+        <hr>
+        <nav>
+          <span style="display: inline-block;" ><a class="navitem" href="../index.html"><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../datasets.html"><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../random.html"><i class="fas fa-robot"></i>&nbsp;Random Stuff</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About me</a></span>
+
+          <span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://github.com/schmidtdominik"><i class="fab fa-github"></i>&nbsp;</a></span>
+          <!--<span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://www.reddit.com/user/dominik_schmidt"><i class="fab fa-reddit"></i></i>&nbsp;</a></span>-->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container article">
+      <div id='header-box'>
+
+
+        <!--START OF HEADING-->
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <img src="assets/cover.png" id="header-img" alt="">
+        </div>
+
+
+        <div id="header-text">
+          <h1 class="article-title">
+            Analysis 1 (in German)
+          </h1>
+          <time datetime="2020-02-29 00:00:00">February 29, 2020 ⧗ 27 minute read</time><br>
+        </div>
+      </div>
+      <!--END OF HEADING-->
+
+      <span class="article-text">
+        <div id="index"><a href=#2.-zahlen> → 2. Zahlen</a><br><a href=#körper-k,-+,-\ast-field>&emsp; → Körper \((K, +, \ast)\) (field)</a><br><a href=#ordnungsrelation/partielle-ordnung/halbordnung-partial-order-auf-m>&emsp; → Ordnungsrelation/partielle Ordnung/Halbordnung (partial order) auf \(M\)</a><br><a href=#angeordneter-körper-ordered-field-k,-\le-mit-körper-k-und-linearer-ordnung-\le>&emsp; → Angeordneter Körper (ordered field) \((K, \le)\) mit Körper \(K\) und linearer Ordnung \(\le\)</a><br><a href=#ordnungsvollständigkeit-completeness>&emsp; → Ordnungsvollständigkeit (completeness)</a><br><a href=#induktive-menge-inductive-sets>&emsp; → Induktive Menge (inductive sets)</a><br><a href=#binomischer-lehrsatz-binomial-theorem>&emsp; → Binomischer Lehrsatz (binomial theorem)</a><br><a href=#bernoullische-ungleichung-bernoulli's-inequality>&emsp; → Bernoullische Ungleichung (Bernoulli's inequality)</a><br><a href=#archimedes-eudoxos>&emsp; → Archimedes-Eudoxos</a><br><a href=#wohlordnungssatz-well-ordering-theorem>&emsp; → Wohlordnungssatz (well-ordering theorem)</a><br><a href=#potenzen-mit-rationalen-exponenten>&emsp; → Potenzen mit rationalen Exponenten</a><br><a href=#metrik-d\colon-x-\times-x-\rightarrow-\mathbb{r}>&emsp; → Metrik \(d\colon X \times X \rightarrow \mathbb{R}\)</a><br><a href=#norm-\vert-\cdot\vert-\colon-v-\rightarrow-\mathbb{r}>&emsp; → Norm \(\Vert \cdot\Vert \colon V \rightarrow \mathbb{R}\)</a><br><a href=#skalarprodukt/inneres-produkt-\langle\cdot,\cdot\rangle-\colon-v-\times-v-\rightarrow-\mathbb{r}>&emsp; → Skalarprodukt/inneres Produkt \(\langle\cdot,\cdot\rangle \colon V \times V \rightarrow \mathbb{R}\)</a><br><a href=#cauchy-schwarz>&emsp; → Cauchy-Schwarz</a><br><a href=#3.-folgen-infinite-sequences> → 3. Folgen (infinite sequences)</a><br><a href=#konvergenz/divergenz>&emsp; → Konvergenz/Divergenz</a><br><a href=#teilfolgen-subsequences>&emsp; → Teilfolgen (subsequences)</a><br><a href=#cauchykriterium>&emsp; → Cauchykriterium</a><br><a href=#häufungspunkte-cluster-point/accumulation-point>&emsp; → Häufungspunkte (cluster point/accumulation point)</a><br><a href=#potenzen-mit-reellen-exponenten-und-logarithmen>&emsp; → Potenzen mit reellen Exponenten und Logarithmen</a><br><a href=#4.-reihen-series> → 4. Reihen (series)</a><br><a href=#absolute-konvergenz>&emsp; → Absolute Konvergenz</a><br><a href=#assoziativgesetz-für-reihen?>&emsp; → Assoziativgesetz für Reihen?</a><br><a href=#kommutativgesetz-für-reihen?>&emsp; → Kommutativgesetz für Reihen?</a><br><a href=#leibnizkriterium>&emsp; → Leibnizkriterium</a><br><a href=#cauchyscher-verdichtungssatz>&emsp; → Cauchyscher Verdichtungssatz</a><br><a href=#majoranten-,-minoranten-,-vergleichskriterium>&emsp; → Majoranten-, Minoranten-, Vergleichskriterium</a><br><a href=#wurzelkriterium>&emsp; → Wurzelkriterium</a><br><a href=#quotientenkriterium>&emsp; → Quotientenkriterium</a><br><a href=#faltung-convolution>&emsp; → Faltung (Convolution)</a><br><a href=#cauchyprodukt>&emsp; → Cauchyprodukt</a><br><a href=#exponentialfunktion>&emsp; → Exponentialfunktion</a><br><a href=#sinus,-cosinus>&emsp; → Sinus, Cosinus</a><br><a href=#5.-stetige-funktionen-continuous-functions> → 5. Stetige Funktionen (continuous functions)</a><br><a href=#epsilon-delta-kriterium>&emsp; → Epsilon-Delta Kriterium</a><br><a href=#lipschitzstetigkeit-lipschitz-continuity>&emsp; → Lipschitzstetigkeit (Lipschitz-continuity)</a><br><a href=#topologische-grundbegriffe>&emsp; → Topologische Grundbegriffe</a><br><a href=#stetigkeit-in-metrischen-räumen>&emsp; → Stetigkeit in metrischen Räumen</a><br><a href=#stetigkeit-in-topologischen-räumen>&emsp; → Stetigkeit in topologischen Räumen</a><br><a href=#grenzwert-von-funktionen-limits-of-functions>&emsp; → Grenzwert von Funktionen (limits of functions)</a><br><a href=#sprungstelle,-fortsetzung,-hebbare-unstetigkeit>&emsp; → Sprungstelle, Fortsetzung, hebbare Unstetigkeit</a><br><a href=#kompaktheit-compactness>&emsp; → Kompaktheit (compactness)</a><br><a href=#überdeckungen-covers>&emsp; → Überdeckungen (covers)</a><br><a href=#oberhalb-/unterhalbstetigkeit>&emsp; → Oberhalb-/Unterhalbstetigkeit</a><br><a href=#gleichmäßige-stetigkeit-uniform-continuity>&emsp; → Gleichmäßige Stetigkeit (uniform continuity)</a><br><a href=#zwischenwertsatz-intermediate-value-theorem>&emsp; → Zwischenwertsatz (intermediate value theorem)</a><br><a href=#fixpunktsätze-fixed-point-theorems>&emsp; → Fixpunktsätze (fixed-point theorems)</a><br><a href=#stetigkeit-von-umkehrfunktionen-continuity-of-inverse-functions>&emsp; → Stetigkeit von Umkehrfunktionen (continuity of inverse functions)</a><br><a href=#6.-differentialrechnung> → 6. Differentialrechnung</a><br><a href=#fréchetableitung>&emsp; → Fréchetableitung</a><br><a href=#ableitungsregeln>&emsp; → Ableitungsregeln</a><br><a href=#ableitung-von-umkehrfunktionen>&emsp; → Ableitung von Umkehrfunktionen</a><br><a href=#richtungsableitung-directional-derivative>&emsp; → Richtungsableitung (directional derivative)</a><br><a href=#hessematrix>&emsp; → Hessematrix</a><br><a href=#weitere-eigenschaften>&emsp; → weitere Eigenschaften</a><br><a href=#lokale-extrema>&emsp; → Lokale Extrema</a><br><a href=#satz-von-rolle>&emsp; → Satz von Rolle</a><br><a href=#mittelwertsatz-der-differentialrechnung-mean-value-theorem>&emsp; → Mittelwertsatz der Differentialrechnung (mean value theorem)</a><br><a href=#satz-6.42-&-korollar-6.43>&emsp; → Satz 6.42 & Korollar 6.43</a></div><br><hr>These are my lecture notes for the analysis 1 course at the Vienna University of Technology.<br>
+<br>
+<h2 id="2.-zahlen"> 2. Zahlen</h2><h3 id="körper-$k,-+,-\ast$-field"> Körper \((K, +, \ast)\) (field)</h3>
+<ul>
+<li>kommutativ</li>
+<li>assoziativ</li>
+<li>distributiv</li>
+<li>zwei verschiedene neutrale Elemente</li>
+<li>inverse Elemente</li>
+</ul><br>
+<h3 id="ordnungsrelation/partielle-ordnung/halbordnung-partial-order-auf-$m$"> Ordnungsrelation/partielle Ordnung/Halbordnung (partial order) auf \(M\)</h3>
+<ul>
+<li>reflexiv</li>
+<li>transitiv</li>
+<li>antisymmetrisch</li>
+</ul><br>
+
+Eine Ordnungrelation heißt <strong>lineare Ordnung</strong> (<strong>Totalordnung</strong>/total order) wenn für alle x, y gilt \(x \le y \lor y \le x\)<br>
+<br>
+<h3 id="angeordneter-körper-ordered-field-$k,-\le$-mit-körper-$k$-und-linearer-ordnung-$\le$"> Angeordneter Körper (ordered field) \((K, \le)\) mit Körper \(K\) und linearer Ordnung \(\le\)</h3>
+Verträglichkeit der Ordnungs- und Körperaxiome<br>
+
+<ul>
+<li>\(x < y \implies x+z < y+z \)</li>
+<li>\(x > 0 \land y > 0 \implies x \ast y > 0\)</li>
+</ul><br>
+
+In einem angeordneten Körper kann man einen Positivitätsbereich auszeichnen:<br>
+
+\(P = \{k\in K \mid k \ge 0\}\), \(a \le b \iff b-a \in P\)<br>
+<br>
+<h3 id="ordnungsvollständigkeit-completeness"> Ordnungsvollständigkeit (completeness)</h3>
+Ein <em>angeordneter</em> Körper heißt ordnungsvollständig falls gilt: \(\forall A \subset K: (A \ne \emptyset \wedge A \textrm{ nach oben beschränkt}) \implies \sup(A) \textrm{ existiert (in K)}\)<br>
+<br>
+
+<ul>
+<li>"Zwischen zwei ordnungsvollständigen geordneten Körpern existiert stets eine bijektive Abbildung, die Körperstruktur und Ordnung erhält."</li>
+<li>\(\mathbb{C}\) ist nicht angeordnet und somit auch nicht ordnungsvollständig (allerdings in einem von Ordnung unabhängigen Sinn vollständig)</li>
+<li>\(\mathbb{R}\) ist ordnungsvollständiger angeordneter Körper</li>
+</ul><br>
+<h3 id="induktive-menge-inductive-sets"> Induktive Menge (inductive sets)</h3>
+\(M \subset \mathbb{R}\) heißt induktiv falls gilt \((1 \in M) \wedge (\forall a \in M: (a+1) \in M)\)<br>
+<br>
+<h3 id="binomischer-lehrsatz-binomial-theorem"> Binomischer Lehrsatz (binomial theorem)</h3>
+$$
+(a+b)^n = \sum_{k=0}^{n} {n \choose k}a^{n-k}b^k
+$$<br>
+<h3 id="bernoullische-ungleichung-bernoulli's-inequality"> Bernoullische Ungleichung (Bernoulli's inequality)</h3>
+$$
+n \in \mathbb{N}\setminus\{1\},\, x \in \mathbb{R}\setminus\{0\},\, x > -1\\
+(1+x)^n > 1+nx
+$$<br>
+<h3 id="archimedes-eudoxos"> Archimedes-Eudoxos</h3>
+<ul>
+<li>\(\mathbb{N}\) ist nach oben unbeschränkt</li>
+<li>\(\forall \epsilon>0 \exists n \in\mathbb{N}: \frac{1}{n}< \epsilon\)</li>
+</ul><br>
+<h3 id="wohlordnungssatz-well-ordering-theorem"> Wohlordnungssatz (well-ordering theorem)</h3>
+Jede nichtleere Teilmenge von \(\mathbb{N}\) besitzt ein kleinstes Element<br>
+<br>
+<h3 id="potenzen-mit-rationalen-exponenten"> Potenzen mit rationalen Exponenten</h3>
+Potenzen mit rationalen Exponenten sind über <strong>ganzzahlige Wurzeln</strong> definiert.<br>
+
+Sei \(r = \frac{p}{q}\). Dann gilt
+$$
+a^r := \sqrt[q]{a^p}\qquad
+a^{-r} := \frac{1}{a^r}\qquad
+0^r := 0\qquad
+a^0 := 1
+$$<br>
+<h3 id="metrik-$d\colon-x-\times-x-\rightarrow-\mathbb{r}$"> Metrik \(d\colon X \times X \rightarrow \mathbb{R}\)</h3>
+<ul>
+<li>Definitheit \(d(x, y) = 0 \iff x=y\)</li>
+<li>Symmetrie</li>
+<li>Dreiecksungleichung \(d(x, z) \le d(x, y) + d(y, z)\)</li>
+</ul><br>
+
+\((X, d)\) ist ein metrischer Raum<br>
+
+diskrete Metrik ist \(1\) falls \(x \neq y\) und \(0\) falls \(x=y\)<br>
+<br>
+<h3 id="norm-$\vert-\cdot\vert-\colon-v-\rightarrow-\mathbb{r}$"> Norm \(\Vert \cdot\Vert \colon V \rightarrow \mathbb{R}\)</h3>
+<ul>
+<li>Definitheit \(\Vert x\Vert = 0 \iff x=0\)</li>
+<li>Homogenität \(\Vert \lambda x\Vert = \vert\lambda\vert \Vert x\Vert\)</li>
+<li>Dreiecksungleichung \(\Vert x+y \Vert \le \Vert x\Vert + \Vert y\Vert\)</li>
+</ul><br>
+
+\((V, \Vert \cdot\Vert)\) ist ein normierter Raum<br>
+
+(\(d(x, y) = \Vert x-y\Vert\) ist eine Metrik auf \(V\))<br>
+<br>
+<h3 id="skalarprodukt/inneres-produkt-$\langle\cdot,\cdot\rangle-\colon-v-\times-v-\rightarrow-\mathbb{r}$"> Skalarprodukt/inneres Produkt \(\langle\cdot,\cdot\rangle \colon V \times V \rightarrow \mathbb{R}\)</h3>
+<ul>
+<li>positive Definitheit \(\langle x,x\rangle \ge 0 \wedge (\langle x,x\rangle=0 \iff x=0)\)</li>
+<li>Symmetrie</li>
+<li>Bilinerarität \(\langle\lambda x + \mu y,z\rangle = \lambda\langle x, z\rangle + \mu \langle y, z\rangle\)</li>
+</ul><br>
+
+\((V, \langle\cdot,\cdot\rangle)\) ist ein euklidischer Vektorraum<br>
+
+\(\Vert x \Vert = \sqrt{\langle x, x\rangle}\) ist eine Norm auf \(V\)<br>
+<br>
+<h3 id="cauchy-schwarz"> Cauchy-Schwarz</h3>
+Euklidischer Vektorraum \((V, \langle\cdot,\cdot\rangle)\) mit Norm \(\Vert x \Vert = \sqrt{\langle x, x\rangle}\)<br>
+
+$$\forall x, y \in V: \vert\langle x, y\rangle \vert \le \Vert x \Vert \cdot \Vert x \Vert$$<br>
+<br>
+<h2 id="3.-folgen-infinite-sequences"> 3. Folgen (infinite sequences)</h2><h3 id="konvergenz/divergenz"> Konvergenz/Divergenz</h3><br>
+
+$$
+x = \lim_{x \to \infty} x_n \\
+\iff\forall\epsilon>0,\, \exists n_0 \in \mathbb{N}, \, n\ge n_0\colon \Vert x_n-x\Vert < \epsilon
+$$
+<ul>
+<li>Folge divergent genau dann wenn sie nicht konvergent ist</li>
+<li>Folge konvergiert genau dann wenn alle Komponentenfolgen konvergieren</li>
+<li>konvergent \(\implies\) beschränkt</li>
+<li>\(a_n \rightarrow a\) \(\implies\) \(\vert a_n\vert \rightarrow \vert a\vert\)</li>
+<li>\((a_n \rightarrow 0 \wedge b_n \textrm{beschränkt}) \implies a_n \cdot b_n \rightarrow 0\)</li>
+<li>\((\forall n \ge n_0 \colon a_n \le b_n) \implies a \le b\)</li>
+<li>Limes reinziehen in Summe, in Produkt mit Skalar</li>
+<li>Sandwichkriterium</li>
+<li>\((a_n \rightarrow a \wedge b_n \rightarrow b) \implies (a_n \cdot b_n) \rightarrow a\cdot b\)</li>
+<li>\((a_n \rightarrow a) \wedge (b_n \rightarrow b \ne0) \wedge (\forall n \ge n_0: b_n \ne 0) \implies \frac{a_n}{b_n} \rightarrow \frac{a}{b}\)</li>
+<li>Falls \(a_n\) reell, monoton fallend <strong>und</strong> beschränkt, gilt: \(\lim_{x \to \infty}a_n = \sup_{n \in \mathbb{N}} (a_n)\) (bzw. infimum, für monoton fallend) (gilt nicht in \(\mathbb{Q}\), braucht ordnungsvollständigkeit)</li>
+<li>Eine Folge \(a_n \rightarrow \pm \infty\) heißt <strong>bestimmt divergent</strong> mit dem <strong>uneigentlichen Grenzwert</strong> \(\pm \infty\).</li>
+<li>\(\lim_{n\to\infty}\sqrt[n]{n} = 1\)</li>
+</ul><br>
+<h3 id="teilfolgen-subsequences"> Teilfolgen (subsequences)</h3>
+<ul>
+<li>Jede TF einer konvergenten Folge konvergiert gegen den selben Grenzwert</li>
+<li>Jede reelle Folge enthält eine monotone TF</li>
+<li><strong>Bolzano-Weierstraß</strong>: Jede beschränkte reelle Folge enthält eine konvergente TF (setzt Ordnungsvollständigkeit voraus, Gegenbeispiel wäre \(x_n \to \sqrt 2\) in \(\mathbb{Q}\))</li>
+<li>\(a_n \rightarrow a \iff\) alle TF \(a_{n_k} \rightarrow a\)</li>
+<li>Wenn eine Teilfolge divergiert, muss auch die ursprüngliche Folge divergieren</li>
+</ul><br>
+<h3 id="cauchykriterium"> Cauchykriterium</h3>
+Cauchyfolge: \(\forall\epsilon>0,\, \exists n_0 \in \mathbb{N}, \, \forall n, m\ge n_0\colon \Vert a_n-a_m\Vert < \epsilon\)<br>
+
+In ordnungsvollständigen Räumen gilt: \(a_n \textrm{Cauchyfolge} \iff \textrm{konvergent}\)<br>
+<br>
+<h3 id="häufungspunkte-cluster-point/accumulation-point"> Häufungspunkte (cluster point/accumulation point)</h3>
+\(x\) ist HP von \(x_n\) wenn gilt:<br>
+
+$$
+\forall\epsilon>0,\, \forall n_0 \in \mathbb{N}, \, \exists n \ge n_0\colon \Vert x-x_n\Vert < \epsilon
+$$
+<ul>
+<li>\(a\) ist HP von \(a_n \iff \exists a_{n_k}\colon a_{n_k}\rightarrow a\)  </li>
+<li>jede beschränkte reelle Folge besitzt einen HP</li>
+<li>\(a_n \rightarrow a \iff \forall a_{n_k}: a \textrm{ ist HP von } a_{n_k}\)</li>
+</ul><br>
+
+Sei \(H\) die Menge der HP, also \(H = \{k :k \textrm{ ist HP von }a_n\}\)<br>
+<br>
+
+<ul>
+<li>Satz 3.28: Sei \(a_n\) eine nach oben (bzw. unten) beschränkte reelle Folge. Es gilt gilt \(\sup{H}\) (bzw. inf) ist HP von \(a_n\) und \(\sup{H} \le \sup{a_n}\) (bzw \(\inf{H}\ge \inf{a_n}\)).</li>
+<li>Sei \(H \ne \emptyset\) und \(a_n\) nach oben bzw. unten beschränkt, dann sei:
+  \(\limsup{a_n} = \sup{H}\) (bzw \(=+\infty\) falls \(a_n\) nach oben unbeschränkt)
+  \(\liminf{a_n} = \inf{H}\) (bzw \(=-\infty\) falls \(a_n\) nach unten unbeschränkt)</li>
+<li>\(a_n \textrm{ konvergent} \iff a_n \textrm{ beschränkt} \wedge \limsup{a_n} = \liminf{a_n}\).
+  Dann gilt \(\lim_{n \to \infty}a_n = \limsup{a_n}\)</li>
+</ul><br>
+<h3 id="potenzen-mit-reellen-exponenten-und-logarithmen"> Potenzen mit reellen Exponenten und Logarithmen</h3>
+Sei \(a > 0,\, x \in \mathbb{R}\) und \(q_n\) eine Folge in \(\mathbb{Q}\) ist mit \(\lim_{n\to\infty}{q_n=x}\). Dann ist \(a^x := \lim_{n\to \infty}{a^{q_n}}\).<br>
+
+Das eindeutige \(x\in\mathbb{R}\) in \(b^x=a\) mit \(b>1,\, a>0\) nennt sich Logarithmus von \(a\) zur Basis \(b\), \(x:=\log_ba\)<br>
+<br>
+
+\(e :=\lim_{n \to \infty}{(1+\frac{1}{n})^n}\)<br>
+<br>
+<h2 id="4.-reihen-series"> 4. Reihen (series)</h2><br>
+
+Eine unendliche Reihe ist eine Folge der Gestalt:
+$$
+(\sum_{k=1}^n a_k)_{n\in\mathbb{R}}
+$$
+Die <strong>Summe der Reihe</strong> ist der Grenzwert der zugehörigen Partialsummenfolge:
+$$
+\sum_{k=k_0}^\infty a_k = \lim_{n\to\infty} \sum_{k=k_0}^n a_k
+$$<br>
+
+Die Reihe divergiert falls dieser Grenzwert \(\pm \infty\) ist.<br>
+<br>
+
+<ul>
+<li>Konvergenz und Grenzwert einer Reihe in \(\mathbb{R}^n\) bzw. \(\mathbb{C}\) ist definiert über Konvergenz und Grenzwert ihrer Komponentenreihen.</li>
+<li>\(\sum_{k=1}^\infty a_k\) konvergiert \(\iff \forall\epsilon>0,\, \exists n_0\in\mathbb{N},\, \forall n \ge n_0, \, \forall p \in \mathbb{N}: \Vert \sum_{i=1}^p a_{n+i} \Vert<\epsilon\)</li>
+<li>\(\sum_{k=1}^\infty a_k\) konvergiert \(\implies a_n \rightarrow 0\)</li>
+<li>\(\sum_{k=1}^\infty a_k\) konvergiert \(\implies \forall k\in\mathbb{N}\colon \sum_{n=k}^\infty a_n\) konvergiert</li>
+<li>Reihenkonvergenz und Grenzwert werden unter Addition von Reihen bzw. Multiplikation mit einem Skalar erhalten.</li>
+</ul><br>
+
+\(\sum_{n=1}^\infty a_n\) mit \(a_n \ge 0\) konvergiert genau dann wenn ihre Partialsummenfolge beschränkt ist.<br>
+
+\(\sum_{k=1}^\infty \frac{1}{k^\alpha}\) konvergiert für \(\alpha>1\), divergiert für \(\alpha \le 1\).<br>
+
+\(\sum_{k=1}^\infty a_0q^k = \frac{a_0}{1-q}\) gilt für \(|q|<1\).<br>
+<br>
+<h3 id="absolute-konvergenz"> Absolute Konvergenz</h3>
+<ul>
+<li>Eine Reihe \(\sum_{n=1}^\infty a_n\) heißt absolut konvergent, genau dann wenn \(\sum_{n=1}^\infty \Vert a_n\Vert\) konvergiert.</li>
+<li>Eine absolut konvergente Reihe ist konvergent und es gilt: \(\Vert\sum_{n=1}^\infty a_n \Vert \le \sum_{n=1}^\infty \Vert a_n\Vert\)</li>
+</ul><br>
+<h3 id="assoziativgesetz-für-reihen?"> Assoziativgesetz für Reihen?</h3>
+Nein, man kann in einer konvergenten Reihe Klammern setzen aber nicht weglassen<br>
+
+→ Satz 4.10 zu konvergenten Segmenten<br>
+<br>
+<h3 id="kommutativgesetz-für-reihen?"> Kommutativgesetz für Reihen?</h3>
+Sei \(\sum_{n=1}^\infty a_n\) eine Reihe, \(f\colon \mathbb{N} \rightarrow\mathbb{N}\) bijektiv<br>
+<br>
+
+<ul>
+<li>\(\sum_{n=1}^\infty a_{f(n)}\) heißt eine Umordnung der Reihe</li>
+<li>Die Reihe heißt unbedingt konvergent wenn jede Umordnung der Reihe konvergiert und die selbe Summe hat.</li>
+<li>Sie heißt bedingt konvergent wenn sie konvergent, aber nicht unbedingt konvergent ist.</li>
+</ul><br>
+
+Es gelten folgende Aussagen:<br>
+<br>
+
+<ul>
+<li>Eine absolut konvergente Reihe in (\(\mathbb{R}\), \(\mathbb{R}^m\) oder \(\mathbb{C}\)) ist unbedingt konvergent.</li>
+<li>Riemannscher Umordnungssatz: Für eine konvergente, aber nicht absolut konvergente reelle Reihe und ein \(s \in \mathbb{R}\) existiert eine Umordnung der Reihe mit Summe = \(s\). Die Folge ist insbesondere bedingt konvergent.</li>
+</ul><br>
+<h3 id="leibnizkriterium"> Leibnizkriterium</h3>
+Sei \(a_n\) eine monoton fallende Folge in \(\mathbb{R}_0^+\) mit \(a_n \rightarrow 0\).<br>
+<br>
+
+<ul>
+<li>Die <strong>alternierende Reihe</strong> \(\sum_{n=1}^\infty (-1)^n a_n\) konvergiert.</li>
+<li>Abschätzung 4.13.b gilt</li>
+</ul><br>
+<h3 id="cauchyscher-verdichtungssatz"> Cauchyscher Verdichtungssatz</h3>
+Sei \(a_n\) eine monoton fallende Folge in \(\mathbb{R}_0^+\). Dann gilt
+$$
+\sum_{n=1}^\infty a_n \textrm{ konvergent} \iff \sum_{k=1}^\infty 2^k a_{2^k} \textrm{ konvergent}
+$$<br>
+<h3 id="majoranten-,-minoranten-,-vergleichskriterium"> Majoranten-, Minoranten-, Vergleichskriterium</h3>
+Sei<br>
+
+<ul>
+<li>\(a_n\) eine Folge in \(\mathbb{R}\),</li>
+<li>\(b_n\) eine Folge in \(\mathbb{R}^+\),</li>
+<li>\(c_n\) eine Folge in \(\mathbb{R}_0^+\)</li>
+</ul><br>
+
+(gilt auch für Folgen im \(\mathbb{R}^m\) oder \(\mathbb{C}\), im weiteren den Betrag durch eine Norm ersetzen)<br>
+<br>
+
+<strong>Majorantenkriterium</strong>
+$$
+\forall n \ge n_0\colon (|a_n|\le c_n) \textrm{ und } \sum_{n=1}^\infty c_n \textrm{ konvergent } \implies \sum_{n=1}^\infty a_n \textrm{ konvergent}
+$$
+<strong>Minorantenkriterium</strong>
+$$
+\forall n \ge n_0\colon (a_n\ge c_n) \textrm{ und } \sum_{n=1}^\infty c_n \textrm{ divergent } \implies \sum_{n=1}^\infty a_n \textrm{ divergent}
+$$
+<strong>Vergleichskriterium</strong><br>
+<br>
+
+Falls \(\forall n \ge n_0\colon (a_n \ge 0)\) und \(x := \lim_{n\to\infty}\frac{a_n}{b_n}\) existiert, dann gilt,
+falls \(x > 0\):
+$$
+\sum_{n=1}^\infty a_n \textrm{ konvergiert} \iff \sum_{n=1}^\infty b_n  \textrm{ konvergiert}
+$$
+falls \(x = 0\):
+$$
+\sum_{n=1}^\infty b_n \textrm{ konvergiert} \implies \sum_{n=1}^\infty a_n  \textrm{ konvergiert}
+$$<br>
+<h3 id="wurzelkriterium"> Wurzelkriterium</h3>
+$$
+\alpha := \limsup{\sqrt[n]{\Vert a_n\Vert}} \in\mathbb{R} \cup\{+\infty\}
+$$
+<ul>
+<li>\(\alpha < 1 \implies \sum_{n=1}^\infty a_n \textrm{ absolut konvergent}\)</li>
+<li>\(\alpha > 1 \implies \sum_{n=1}^\infty a_n \textrm{ divergent}\)</li>
+</ul><br>
+<h3 id="quotientenkriterium"> Quotientenkriterium</h3>
+$$
+\alpha := \limsup{\bigg\vert \frac{a_{n+1}}{a_n} \bigg\vert} \in\mathbb{R} \cup\{+\infty\}
+$$
+$$
+\beta := \liminf{\bigg\vert \frac{a_{n+1}}{a_n} \bigg\vert} \in\mathbb{R} \cup\{+\infty\}
+$$
+<ul>
+<li>\(\alpha < 1 \implies \sum_{n=1}^\infty a_n \textrm{ absolut konvergent}\)</li>
+<li>\(\beta > 1 \implies \sum_{n=1}^\infty a_n \textrm{ divergent}\)</li>
+</ul><br>
+<h3 id="faltung-convolution"> Faltung (Convolution)</h3>
+$$
+(a_n) \ast (b_n) = (c_n) \textrm{ mit}\\
+\forall n \in \mathbb{N}\colon c_n := \sum_{i=1}^na_ib_{n+1-i} = \sum_{i+k = n+1} a_i b_k
+$$<br>
+<h3 id="cauchyprodukt"> Cauchyprodukt</h3>
+$$
+\textrm{Cauchyprodukt: Reihe zu obigem } c_n \leftrightarrow \sum_{n=1}^\infty \sum_{i=1}^na_ib_{n+1-i}
+$$<br>
+
+Seien Reihen \(\sum_{n=1}^\infty a_n\) und \(\sum_{n=1}^\infty b_n\) absolut konvergent. Dann ist ihr Cauchyprodukt \(\sum_{n=1}^\infty c_n\) absolut konvergent und es gilt:
+$$
+\sum_{n=1}^\infty c_n = (\sum_{n=1}^\infty a_n)\cdot(\sum_{n=1}^\infty b_n)
+$$<br>
+<h3 id="exponentialfunktion"> Exponentialfunktion</h3>
+$$
+\exp(z) := \sum_{k=0}^\infty \frac{z^k}{k!}
+$$<br>
+<h3 id="sinus,-cosinus"> Sinus, Cosinus</h3>
+$$
+\cos{x} := \textrm{Re}(\textrm{exp}(ix)) = \sum_{k=0}^\infty (-1)^k \frac{x^{2k}}{(2k)!}\\
+\sin{x} := \textrm{Im}(\textrm{exp}(ix)) = \sum_{k=0}^\infty (-1)^k \frac{x^{2k+1}}{(2k+1)!}\\
+\cosh{x} := \frac{\exp{x}+\exp{-x}}{2} = \sum_{k=0}^\infty \frac{x^{2k}}{(2k)!}\\
+\sinh{x} := \frac{\exp{x}-\exp{-x}}{2} = \sum_{k=0}^\infty \frac{x^{2k+1}}{(2k+1)!}
+$$<br>
+<h2 id="5.-stetige-funktionen-continuous-functions"> 5. Stetige Funktionen (continuous functions)</h2>
+\(f\colon A \rightarrow B\) heißt<br>
+<br>
+
+<ul>
+<li>stetig in \(x \in A \iff \forall (x_n)\in A^\mathbb{N}\colon [x_n \rightarrow x \implies f(x_n) \rightarrow f(x)]\)</li>
+<li>stetig (auf \(A\))\(\iff \forall x \in A\colon f \textrm{ stetig in } x\)</li>
+</ul><br>
+
+rechtsseitig und linksseitig stetig in \(x\) \(\iff\) stetig in \(x\)<br>
+
+Eine Funktion ist rechtsseitig bzw. linksseitig stetig in \(x\) wenn obige Definition spezifisch für Folgen gilt die von rechts bzw. links gegen \(x\) konvergieren.<br>
+<br>
+
+Die Identitätsfunktion und Zusammensetzungen und Komposition von stetigen Funktionen sind stetig.<br>
+<br>
+
+Stetigkeit in Outputs kann man getrennt untersuchen, Stetigkeit in Inputs nur zusammen. (Stetigkeit einer vektorwertigen Funktion komponentenweise, Stetigkeit einer Funktion in mehreren Variablen nicht getrennt für die einzelnen Variablen)<br>
+<br>
+<h3 id="epsilon-delta-kriterium"> Epsilon-Delta Kriterium</h3>
+\(f\colon A \rightarrow B\) heißt stetig in \(x\) falls gilt 
+$$
+\forall \epsilon > 0,\, \exists\delta>0,\, \forall y\in A\colon \Vert x-y\Vert < \delta \implies \Vert f(x)-f(y)\Vert < \epsilon
+$$<br>
+<h3 id="lipschitzstetigkeit-lipschitz-continuity"> Lipschitzstetigkeit (Lipschitz-continuity)</h3>
+\(\exists L>0,\, \forall x, y \in A\colon \Vert f(x)-f(y) \Vert \le L \Vert x-y \Vert\)<br>
+
+Eine Lipschitz-stetig Funktion mit \(L<1\) nennt man <strong>kontraktiv</strong>.<br>
+<br>
+<h3 id="topologische-grundbegriffe"> Topologische Grundbegriffe</h3>
+Sei \(X:=\mathbb{R}\), \(\mathbb{R}^m\) oder \(\mathbb{C}\) und \(A \subset X\)<br>
+<br>
+
+<ul>
+<li>\(U_\epsilon(x) := \{y\in X\colon \Vert y-x\Vert < \epsilon\}\)</li>
+<li>\(x\in A\) ist <strong>innerer Punkt</strong> von \(A \iff \exists\epsilon>0\colon U_\epsilon(x)\subset A\)</li>
+<li><strong>Inneres:</strong> \(A^0 = \{x \in A : x \textrm{ ist innerer Punkt von } A\}\)</li>
+<li>\(x\in X\) ist <strong>Häufungspunkt</strong> von \(A \iff \forall\epsilon>0\colon (U_\epsilon(x)\setminus\{x\})\cap A\ne \emptyset\)</li>
+<li>\(x\) <strong>isolierter Punkt</strong> \(\iff\) nicht Häufungspunkt</li>
+<li><strong>Abschluss:</strong> \(\overline A:=A\cup\{x\in X:x \textrm{ ist HP von A}\}\)</li>
+<li><strong>Rand:</strong> \(\partial A:=\overline A\setminus A^0\)</li>
+<li>\(A\subset X\) heißt offen \(\iff A=A^0\)</li>
+<li>\(A\subset X\) heißt abgeschlossen \(\iff A=\overline A\)</li>
+</ul><br>
+
+Jede Funktion ist in allen ihren isolierten Punkten stetig, daher ist die Stetigkeit einer Funktion nur in den Häufungspunkten des Definitionsbereichs interessant.<br>
+<br>
+
+\((I)\): Sei \(f\colon \mathbb{R} \rightarrow \mathbb{R}\). \(f\) ist stetig \(\iff\) Das Urbild \(f^{-1}\) aller offener Mengen \(D\in\mathbb{R}\) ist offen<br>
+<br>
+<h3 id="stetigkeit-in-metrischen-räumen"> Stetigkeit in metrischen Räumen</h3>
+Seien \((X, d), (Y, d')\) metrische Räume und \(f\colon A (\subset X) \rightarrow Y\)<br>
+<br>
+
+<ul>
+<li>stetig in \(x \in X \iff \forall (x_n)\in A^\mathbb{N}\colon [x_n \xrightarrow{X} x \implies f(x_n) \xrightarrow{Y} f(x)]\)</li>
+<li>stetig (auf \(X\))\(\iff \forall x \in X\colon f \textrm{ stetig in } x\)</li>
+</ul><br>
+
+(Epsilon-Delta Kriterium mit Metrik statt Norm, topologische Begriffe definiert analog zu oben nur mit Metrik statt Normen)<br>
+<br>
+
+Analog zu \((I)\) oben: Seien \((X, d), (Y, d')\) metrische Räume.<br>
+
+\(f\colon X\rightarrow Y\) ist stetig \(\iff\) \(\forall O \subset Y \textrm{ offen}\colon f^{-1}(O) \textrm{ offen}\)<br>
+<br>
+
+Sei \((X, d)\) ein metrischer Raum. Dann gilt:<br>
+<br>
+
+<ul>
+<li>\(X\) und \(\emptyset\) sind offen</li>
+<li>Die Vereinigung beliebig vieler offener Mengen ist offen.</li>
+<li>Der Durchschnitt endlich vieler offener Mengen ist offen</li>
+</ul><br>
+<h3 id="stetigkeit-in-topologischen-räumen"> Stetigkeit in topologischen Räumen</h3>
+\(\mathcal{T} \subset\mathcal{P}(X)\) heißt Topologie falls Bedingungen T1-T3 (analog zu obigen Punkten zu metrischen Räumen) gelten. \((X, \mathcal{T})\) heißt dann topologischer Raum, \(\mathcal{T}\) heißt System der offenen Mengen.<br>
+<br>
+
+→ Definition 5.21 zu Stetigkeit in topologischen Räumen<br>
+<br>
+
+Für \(X\ne \emptyset\) gilt:<br>
+<br>
+
+<ul>
+<li>\(\{X, \emptyset\}\) ist die <strong>indiskrete</strong> (gröbste) Topologie</li>
+<li>\(\mathcal{P}(X)\) ist die <strong>diskrete</strong> (feinste) Topologie</li>
+</ul><br>
+
+\(\mathcal{T}_d:=\{O\subset X : [\forall x \in O,\,\exists\epsilon>0\colon U_\epsilon(x)\subset O]\}\) ist die durch die Metrik erzeugte Topologie.<br>
+
+Ein topologischer Raum \((X, \mathcal{T})\) heißt metrisierbar, wenn es eine Metrik \(d\) auf \(X\) gibt, sodass \(\mathcal{T}_d=\mathcal{T}\).<br>
+<br>
+<h3 id="grenzwert-von-funktionen-limits-of-functions"> Grenzwert von Funktionen (limits of functions)</h3>
+Sei \(f: A \rightarrow B\) und \(x_0\) Häufungspunkt von \(A\).<br>
+
+$$
+\lim_{x\to x_0}f(x)=y \iff \\
+\forall\epsilon>0,\,\exists\delta>0,\,\forall x\in(U_\delta(x_0)\setminus\{x_0\})\cap A\colon f(x)\in U_\epsilon(y)
+$$<br>
+
+Satz 5.26: Sei \(f: A \rightarrow B\) und \(x_0\) Häufungspunkt von \(A\).
+$$
+\lim_{x\to x_0}f(x)=y \iff\\
+\forall (x_n)\in (A\setminus\{x_0\})^\mathbb{N}\colon [x_n \rightarrow x_0 \implies f(x_n) \xrightarrow{Y} y]
+$$
+(\(x_0\) bzw: \(y\) können \(\in \{+\infty, -\infty\}\) sein)<br>
+<br>
+
+Linksseitiger Grenzwert (rechtsseitig analog)
+$$
+\lim_{x\to x_0^-}f(x)=y \iff \\\forall\epsilon>0,\,\exists\delta>0,\,\forall x\in(U_\delta(x_0)\setminus\{x_0\})\cap A\cap(-\infty, x_0)\colon f(x)\in U_\epsilon(y)
+$$<br>
+
+Satz 5.27: \(f\) stetig \(\iff\) \(\lim_{x\to x_0} f(x)=f(x_0)\) (bzw rechts und linksseitiger Limes)<br>
+<br>
+<h3 id="sprungstelle,-fortsetzung,-hebbare-unstetigkeit"> Sprungstelle, Fortsetzung, hebbare Unstetigkeit</h3>
+Wenn in \(x_0\) die links- und rechtsseitigen Limiten existieren und verschieden sind ist \(x_0\) eine <strong>Sprungstelle</strong>.<br>
+<br>
+
+Sei \(x\notin A\) Häufungspunkt von \(A\). \(f\) ist nach \(x_0\) <strong>stetig fortsetzbar</strong>, wenn \(\lim_{x\to x_0} f(x)\) existiert. \(\overline f\colon A \cup \{x_0\} \rightarrow B\) mit [\(\overline f(x)=\)...] heißt <strong>Fortsetzung</strong> von \(f\).<br>
+<br>
+
+\(f\) besitzt in \(x_0\) eine <strong>hebbare Unstetigkeit</strong> wenn \(f\) in \(x_0\) unstetig ist aber \(\lim_{x\to x_0} f(x)\)  existiert.<br>
+<br>
+<h3 id="kompaktheit-compactness"> Kompaktheit (compactness)</h3>
+\(A \subset \mathbb{R}\), \(\mathbb{R}^m\) oder \(\mathbb{C}\) heißt (folgen-)kompakt \(\iff\)
+$$
+\forall (x_n)\in A^\mathbb{N},\,\exists (x_{n_k}),\, \exists x \in A \colon x_{n_k} \rightarrow x
+$$
+(Jede Folge besitzt eine konvergente Teilfolge, ähnlich zu Bolzano Weierstraß in \(\mathbb{R}\), aber \(x\in A\))<br>
+<br>
+
+Sei \(A \subset \mathbb{R}\), \(\mathbb{R}^m\) oder \(\mathbb{C}\):
+\(A\) ist kompakt \(\iff A\) abgeschlossen und beschränkt (von einer 1-Kugel der Norm)<br>
+<br>
+
+Bsp: \(A= (0, 1), a_n=(\frac{1}{2}, \frac{1}{3}, \frac{1}{4}, \frac{1}{5},..).\) \(a_n\) kann nicht gegen \(0\) konvergieren da \(0 \notin A\).<br>
+<br>
+<h3 id="überdeckungen-covers"> Überdeckungen (covers)</h3>
+Eine Familie offener Mengen heißt <strong>offene Überdeckung</strong> von \(A\), wenn \(A\) eine Teilmenge ihrer Vereinigung ist.<br>
+
+<strong>endliche Teilüberdeckung</strong>: endliche Teilmenge einer offenen Überdeckung die auch selbst eine Überdeckung ist.<br>
+<br>
+
+\(A\) ist <strong>überdeckungskompakt</strong> genau dann, wenn zu jeder offenen Überdeckung von \(A\) eine endliche Teilüberdeckung existiert.<br>
+<br>
+
+<ul>
+<li>\(A\) folgenkompakt \(\iff\) \(A\) überdeckungskompakt</li>
+<li>\(f\colon A \rightarrow \mathbb{R}\), \(\mathbb{R}^m\) oder \(\mathbb{C}\) stetig \(\implies f(A)\) kompakt</li>
+<li>\(f\colon A \rightarrow \mathbb{R}\) stetig \(\implies\) \(f\) nimmt in jeweils mindestens einem Punkt von \(A\) das globale min/max an.</li>
+</ul><br>
+<h3 id="oberhalb-/unterhalbstetigkeit"> Oberhalb-/Unterhalbstetigkeit</h3><br>
+<h3 id="gleichmäßige-stetigkeit-uniform-continuity"> Gleichmäßige Stetigkeit (uniform continuity)</h3>
+\(f\colon A \rightarrow B\) heißt gleichmäßig stetig auf \(A\) wenn gilt:
+$$
+\forall \epsilon > 0,\,\exists\delta>0,\,\forall x,y \in A\colon (\Vert x-y\Vert<\delta \implies\Vert f(x)-f(y)\Vert < \epsilon)
+$$
+<strong>Heine:</strong> \(A\) kompakt und \(f\colon A \rightarrow B\) stetig \(\implies\) \(f\) gleichmäßig stetig<br>
+
+Lipschitz-stetig \(\implies\) gleichmäßig stetig<br>
+<br>
+<h3 id="zwischenwertsatz-intermediate-value-theorem"> Zwischenwertsatz (intermediate value theorem)</h3>
+\(f:[a,b] \rightarrow \mathbb{R}\) stetig, \(y \in [\inf{f([a, b])}, \sup{f([a, b])}]\).<br>
+
+Dann existiert ein \(x\in[a,b]\) mit \(f(x)=y\). Insbesondere nimmt \(f\) jeden Wert zwischen \(f(a)\) und \(f(b)\) an.<br>
+<br>
+<h3 id="fixpunktsätze-fixed-point-theorems"> Fixpunktsätze (fixed-point theorems)</h3>
+Sei \(a, b \in \mathbb{R}, a < b, g\colon [a,b]\rightarrow [a,b]\) stetig.
+Dann hat \(g\) einen Fixpunkt.<br>
+<br>
+
+<ul>
+<li>Fixpunktsatz von Brouwer</li>
+<li>Banachscher Fixpunktsatz (+Verfahren der sukzessiven Approximation)</li>
+<li>→ Korollar 5.49</li>
+</ul><br>
+<h3 id="stetigkeit-von-umkehrfunktionen-continuity-of-inverse-functions"> Stetigkeit von Umkehrfunktionen (continuity of inverse functions)</h3>
+Sei \(I \subset \mathbb{R}\) ein Intervall, \(f\colon I → \mathbb{R}\) stetig und streng monoton wachsend oder fallend.<br>
+<br>
+
+Dann ist \(f(I)\) ein Intervall, \(f\colon I → f(I)\) bijektiv und die Umkehrfunktion \(f^{-1}\colon f(I) → I\) stetig und im selben Sinn streng monoton.<br>
+<br>
+<h2 id="6.-differentialrechnung"> 6. Differentialrechnung</h2>
+Eine Funktion \(f\colon I(\subset \mathbb{R}) → \mathbb{R}\) heißt differenzierbar, wenn:
+$$
+\lim_{x\to x_0}\frac{f(x)-f(x_0)}{x-x_0}=:f'(x_0)
+$$
+existiert.<br>
+<br>
+
+Approximation durch eine lineare Funktion:<br>
+
+Sei \(A\subset \mathbb{R}\) offen, \(f\colon A→\mathbb{R}\) und \(x_0 \in A\). Dann ist \(f\) differenzierbar genau dann, wenn:
+$$
+\exists l\in \mathbb{R}\,\exists r\colon \mathbb{R} → \mathbb{R}:[(\forall h\in\mathbb{R},\,x_0+h\in A\colon f(x_0+h)=f(x_0)+lh+r(h)) \\\land\lim_{h→0}\frac{r(h)}{h}=0]
+$$
+\(l\) ist eindeutig bestimmt mit \(l=f'(x_0)\).<br>
+<br>
+<h3 id="fréchetableitung"> Fréchetableitung</h3>
+\(L(\mathbb{R}^n, \mathbb{R}^m)\) bezeichnet die Menge der linearen Abbildungen von \(\mathbb{R}^n\) nach \(\mathbb{R}^m\).<br>
+<br>
+
+Sei \(A\subset R^n\) offen, \(f\colon A→\mathbb{R}^m\) und \(x_0 \in A\).
+\(f\) heißt (Fréchet-, total-)differenzierbar in \(x_0\), wenn:
+$$
+\exists L\in L(\mathbb{R}^n, \mathbb{R}^m)\,\exists r\colon \mathbb{R}^n → \mathbb{R}^m:[(\forall h\in\mathbb{R}^n,\,x_0+h\in A\colon f(x_0+h)=f(x_0)+Lh+r(h)) \\\land\lim_{h→0}\frac{\Vert r(h)\Vert }{\Vert h\Vert }=0]
+$$
+\(L\) heißt Fréchetableitung von \(f\).<br>
+<br>
+
+<ul>
+<li>Komponentenfunktionen unabhängig differenzierbar</li>
+<li>Differenzierbar in \(x_0\implies\) stetig in \(x_0\)</li>
+<li>partielle Ableitung \(\lim_{x\to x_0}\frac{f(x_1,..,x_k+t,..,x_n)-f(x)}{t}\)</li>
+<li>Gradient: partielle Ableitungen in alle Richtungen</li>
+<li>Jacobi-Matrix: Zeilen sind verschiedene Outputs, Spalten sind verschiedene Richtungen</li>
+<li>stetig differenzierbar: Alle partiellen Ableitungen existieren und sind stetig</li>
+<li>stetig differenzierbar \(\implies\) (Fréchet-)differenzierbar \(\implies\) alle partiellen Ableitungen existieren (Umkehrungen gelten nicht)</li>
+</ul><br>
+<h3 id="ableitungsregeln"> Ableitungsregeln</h3>
+<ul>
+<li>Produkt mit Skalar rausziehen (genauso in höheren Ableitungen)</li>
+<li>Komponenten von Summe getrennt ableiten (genauso in höheren Ableitungen)</li>
+<li>Kettenregel</li>
+<li>Produktregel</li>
+<li>Quotientenregel</li>
+<li>Leibnizsche Regel (höhere Ableitungen für Produkt)</li>
+</ul><br>
+
+Lemma 6.11: \(\forall L \in L(\mathbb{R}^n, \mathbb{R}^m),\,\exists C>0,\,\forall h \in \mathbb{R}^n\colon \Vert Lh\Vert\le C\Vert h\Vert\) (Beweis mit Cauchy Schwarz)<br>
+<br>
+<h3 id="ableitung-von-umkehrfunktionen"> Ableitung von Umkehrfunktionen</h3>
+\(I\subset\mathbb{R}\) Intervall, \(f\colon I →\mathbb{R}\) streng monoton und differenzierbar und \(y_0 \in f(I)\) so, dass \(f'(f^{-1}(y_0))\ne0\). Dann ist \(f^{-1}\) in \(y_0\) differenzierbar und es gilt:
+$$
+(f^{-1})'(y_0)=\frac{1}{f'(f^{-1}(y_0))}
+$$<br>
+<h3 id="richtungsableitung-directional-derivative"> Richtungsableitung (directional derivative)</h3>
+$$
+v \in\mathbb{R}^n, \Vert v \Vert =1\\
+\lim_{x\to x_0}\frac{f(x+tv)-f(x)}{x-x_0}=:\frac{\partial f}{\partial v}(x)
+$$
+\(\frac{\partial f}{\partial v}(x) = \langle\textrm{grad} f(x), v\rangle\)<br>
+<br>
+
+Satz 6.21: gradient is direction of steepest ascent<br>
+<br>
+
+\(C^k(A)\): alle Funktionen \(f\colon A→\mathbb{R}\) die auf ganz \(A\) alle partiellen Ableitungen bis zur Ordnung \(k\) haben, wobei diese stetig sind.<br>
+<br>
+<h3 id="hessematrix"> Hessematrix</h3>
+Hesse Matrix äußerste Elemente im Uhrzeigersinn, beginnend 0,0 \(x_1^2,\, x_1x_n,\, x_n^2,\, x_nx_1\).<br>
+<br>
+<h3 id="weitere-eigenschaften"> weitere Eigenschaften</h3>
+<ul>
+<li>\(f, g\) beide \(k\)-mal (stetig) differenzierbar \(\implies g\circ f\) \(k\)-mal (stetig) differenzierbar</li>
+<li>Funktion auf einem Intervall mit \(f'(x)\ne0\), \(k\)-mal stetig differenzierbar \(\implies\) Umkehrfunktion auch \(k\)-mal stetig differenzierbar</li>
+</ul><br>
+<h3 id="lokale-extrema"> Lokale Extrema</h3>
+$$
+\forall \epsilon>0,\,\forall x\in U_\epsilon(x_0)\cap A \colon f(x_0)\ge f(x)
+$$
+Bei lokalen Extrema gilt: \(\textrm{grad}f(\overline x)=0\)<br>
+
+Extrema finden: kritische Punkte im inneren, Randextrema,..<br>
+<br>
+<h3 id="satz-von-rolle"> Satz von Rolle</h3>
+\(a < b, f\colon [a,b] → \mathbb{R}\) stetig und differenzierbar auf \([a,b]\) und \(f(a) = f(b)\).<br>
+
+Dann existiert ein \(x\in(a,b)\) mit \(f'(x)=0\)<br>
+<br>
+<h3 id="mittelwertsatz-der-differentialrechnung-mean-value-theorem"> Mittelwertsatz der Differentialrechnung (mean value theorem)</h3>
+\(a < b, f\colon [a,b] → \mathbb{R}\) stetig und differenzierbar.<br>
+
+Es gilt \(\exists x \in (a,b)\colon f(b)-f(a)=f'(x)(b-a)\). Weiters gilt Satz 6.41b.<br>
+<br>
+<h3 id="satz-6.42-&-korollar-6.43"> Satz 6.42 & Korollar 6.43</h3>
+
+      </span>
+
+      <!--<div id="disqus_thread"></div>
+
+
+      <script>
+          /**
+           *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+           *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+           */
+
+          var disqus_config = function () {
+              this.page.url = "https://dominikschmidt.xyz/analysis-1-notes";  // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = "analysis-1-notes"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+          };
+
+          (function() {  // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+
+              s.src = 'https://dominikschmidtxyz.disqus.com/embed.js';
+
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+          })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    </div>-->
+
+  <br><br>
+
+  <!--<footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>-
+
+  <br>-->
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
