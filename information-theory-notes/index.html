@@ -143,13 +143,13 @@ Information theory is a major research field in communication theory and applied
           <h1 class="article-title">
             Information Theory
           </h1>
-          <time datetime="2020-02-16 00:00:00">February 16, 2020 ⧗ 9 minute read</time><br>
+          <time datetime="2020-02-16 00:00:00">February 16, 2020 ⧗ 14 minute read</time><br>
         </div>
       </div>
       <!--END OF HEADING-->
 
       <span class="article-text">
-        <div id="index"><a href=#1.-the-science-of-information> → 1. The Science of Information</a><br><a href=#shannon's-seminal-paper-1948>&emsp; → Shannon's Seminal Paper (1948)</a><br><a href=#2.-information-measures> → 2. Information Measures</a><br><a href=#2.1-independence-and-markov-chain>&emsp; → 2.1 Independence and Markov Chain</a><br><a href=#2.2-shannon's-information-measures>&emsp; → 2.2 Shannon's Information Measures</a><br><a href=#2.3-continuity-of-shannons's-information-measures>&emsp; → 2.3 Continuity of Shannons's Information Measures</a></div><br><hr>These are my lecture notes on Prof. Raymond W. Yeung's course on information theory. The course is based on Prog. Yeung's book "Information Theory and
+        <div id="index"><a href=#1.-the-science-of-information> → 1. The Science of Information</a><br><a href=#shannon's-seminal-paper-1948>&emsp; → Shannon's Seminal Paper (1948)</a><br><a href=#2.-information-measures> → 2. Information Measures</a><br><a href=#2.1-independence-and-markov-chain>&emsp; → 2.1 Independence and Markov Chain</a><br><a href=#2.2-shannon's-information-measures>&emsp; → 2.2 Shannon's Information Measures</a><br><a href=#2.3-continuity-of-shannon's-information-measures>&emsp; → 2.3 Continuity of Shannon's Information Measures</a><br><a href=#2.4-chain-rules>&emsp; → 2.4 Chain Rules</a><br><a href=#2.5-informational-divergence>&emsp; → 2.5 Informational Divergence</a><br><a href=#2.6-the-basic-inequalities>&emsp; → 2.6 The Basic Inequalities</a><br><a href=#2.7-some-useful-information-inequalities>&emsp; → 2.7 Some Useful Information Inequalities</a><br><a href=#2.8-fano's-inequality>&emsp; → 2.8 Fano's Inequality</a><br><a href=#2.10-entropy-rate-of-a-stationary-source>&emsp; → 2.10 Entropy Rate of a Stationary Source</a></div><br><hr>These are my lecture notes on Prof. Raymond W. Yeung's course on information theory. The course is based on Prog. Yeung's book "Information Theory and
 Network Coding" and these notes are organized around that.<br>
 <br>
 
@@ -166,39 +166,37 @@ Two key concepts:<br>
 <li> information is transmitted digitally: transmission is based on ones and zeros with no reference to what they represent</li>
 </ul><br>
 <br>
-<h3 id="shannon's-seminal-paper-1948"> Shannon's Seminal Paper (1948)</h3><br>
-
+<h3 id="shannon's-seminal-paper-1948"> Shannon's Seminal Paper (1948)</h3>
 <ul>
 <li> The <strong>source coding theorem</strong> defines <strong>entropy</strong> as the fundamental measure of information and establishes a fundamental limit for data compression (there always exists a minimal compressed-file size, no matter how smart the compression). This is the theoretical basis for lossless data compression.</li>
 <li> The <strong>channel coding theorem</strong> establishes a fundamental rate limit for reliable communication through a noisy channel. There always exists a maximum rate, called the <strong>channel capacity </strong>(which is generally strictly positive), of how much data can be reliably transmitted through a a channel.</li>
 </ul><br>
 <br>
-<h2 id="2.-information-measures"> 2. Information Measures</h2><br>
-
+<h2 id="2.-information-measures"> 2. Information Measures</h2>
 <ul>
 <li> \(X\) is a <strong>discrete random variable</strong> taking values in \(\mathcal{X}\)</li>
 <li> \({p_X(x)}\) is the probability distribution for \(X\)</li>
 <li> \(\mathcal{S}_X=\{x\in\mathcal{X}:{p_X(x)>0}\}\) is the <strong>support</strong> of X (set of all outcomes \(x\) such that the probability is non-zero)</li>
-<li> is \(\mathcal{S}_X=\mathcal{X}\), \(p\) is called <strong>strictly positive</strong></li>
+<li> if \(\mathcal{S}_X=\mathcal{X}\), \(p\) is called <strong>strictly positive</strong></li>
 </ul><br>
-<h3 id="2.1-independence-and-markov-chain"> 2.1 Independence and Markov Chain</h3><br>
-
-<strong>Definition 2.1</strong> Random Variables \(X\) and \(Y\) are called independent, denoted by \(X\perp Y\) if:
+<br>
+<h3 id="2.1-independence-and-markov-chain"> 2.1 Independence and Markov Chain</h3>
+Random variables \(X\) and \(Y\) are called <strong>independent</strong>, denoted by \(X\perp Y\) if:
 $$
 \forall (x,y) \in \mathcal{X\times Y}\colon\, p(x, y)=p(x)p(y)
 $$<br>
 
-<strong>Definition 2.2 (Mutual Independence)</strong> For \(n\ge3\), random variables \(X_1, X_2,...X_n\) are mutually independent if:
+For \(n\ge3\), random variables \(X_1, X_2,...X_n\) are <strong>mutually independent</strong> if:
 $$
 \forall (x_1, x_2,...,x_n)\colon\, p(x_1, x_2,...,x_n)=p(x_1)p(x_2)\cdots p(x_n)
 $$<br>
 
-<strong>Definition 2.3 (Pairwise Independence)</strong> For \(n\ge3\), random variables \(X_1, X_2,...X_n\) are pairwise independent if all \(X_i\) and \(X_j\) are independent.<br>
+For \(n\ge3\), random variables \(X_1, X_2,...X_n\) are <strong>pairwise independent</strong> if all \(X_i\) and \(X_j\) are independent.<br>
 
 Mutual independence \(\implies\) pairwise independence<br>
 <br>
 
-<strong>Definition 2.4 (Conditional Independence)</strong> For random variables \(X\), \(Y\) and \(Z\), \(X\) is independent of \(Z\) conditioning on \(Y\), denoted by \((X\perp Z)\mid Y\)
+For random variables \(X\), \(Y\) and \(Z\), \(X\) is independent of \(Z\) conditioning on \(Y\), denoted by \((X\perp Z)\mid Y\) (<strong>conditional independence</strong>)
 $$
 p(x, y, z) = \Bigg\{
 		\begin{array}{lr}
@@ -215,14 +213,14 @@ $$<br>
 <img src="assets/cond_indep.svg" style="width: 40%;" class="inline-image inline-image-right    "> "In other words, \(A\) and \(B\) are conditionally independent given \(C\) if and only if, given knowledge that \(C\) occurs, knowledge of whether \(A\) occurs provides no information on the likelihood of \(B\) occurring, and knowledge of whether \(B\) occurs provides no information on the likelihood of \(A\) occurring." <sup><a id="ref1ref" href="#ref1">[1]</a></sup> In the picture on the right \(R\) and \(B\) are conditionally independent given \(Y\) but not given \(\overline Y\)<br>
 <br>
 
-<strong>Proposition 2.5</strong> For random variables \(X\), \(Y\) and \(Z\)
+For random variables \(X\), \(Y\) and \(Z\)
 $$
 \forall (x, y, z),\, p(y)>0\colon\, [(X\perp Z)\mid Y \iff p(x,y,z) = a(x,y)b(y,z)]
 $$
-Meaning \(p(x,y,z)\) can be factorized as the given term, where \(a\) is a function that depends only on \(x, y\) and b is a function that depends only on \(y, z\).<br>
+Meaning <strong>\(p(x,y,z)\) can be factorized</strong> as the given term, where \(a\) is a function that depends only on \(x, y\) and \(b\) is a function that depends only on \(y, z\).<br>
 <br>
 
-<strong>Definition 2.6 (Markov Chain)</strong> For random variables \(X_1, X_2,\ldots,X_n\) where \(n\ge 3\), \(X_1→X_2→\cdots→X_n\) forms a Markov chain if
+For random variables \(X_1, X_2,\ldots,X_n\) where \(n\ge 3\), \(X_1→X_2→\cdots→X_n\) forms a <strong>Markov chain</strong> if
 $$
 p(x_1, x_2,\ldots,x_n) = \\\Bigg\{\begin{array}{lr}
         p(x_1, x_2)p(x_3|x_2)\cdots p(x_n|x_{n-1}) & \text{if } p(x_2), p(x_3),\ldots,p(x_{n-1})>0\\
@@ -230,31 +228,29 @@ p(x_1, x_2,\ldots,x_n) = \\\Bigg\{\begin{array}{lr}
         \end{array}
 $$<br>
 
-Further explanation by Wikipedia:<div class="image-center-wrapper"><img src="assets/markovproperty_wiki.png" style="width: 90%;" class="inline-image image-center    "></div>
-<strong>Remark</strong> \(X_1→X_2→X_3\) is equivalent to \((X_1\perp X_3)\mid X_2\)<br>
-<br>
-
-<strong>Proposition 2.7</strong> \(X_1→X_2→\cdots→X_n\) forms a Markov chain if and only if \(X_n→X_{n-1}→\cdots X_1\) forms a Markov chain<br>
-<br>
-
-<strong>Proposition 2.8</strong> \(X_1→X_2→\cdots→X_n\) forms a Markov chain if and only if
+<ul>
+<li>\(X_1→X_2→X_3 \iff (X_1\perp X_3)\mid X_2\)</li>
+<li>\(X_1→X_2→\cdots→X_n\) forms a Markov chain \(\iff X_n→X_{n-1}→\cdots X_1\) forms a Markov chain</li>
+<li>\(X_1→X_2→\cdots→X_n\) forms a Markov chain if and only if
 $$
 X_1→X_2→X_3\\
 (X_1,X_2)→X_3→X_4
 \\\vdots\\
 (X_1, X_2, \ldots, X_{n-2})→X_{n-1}→X_n
 $$
-form Markov chains.<br>
+form Markov chains.</li><br>
 
-<strong>Proposition 2.9</strong> \(X_1→X_2→\cdots→X_n\) forms a Markov chain if and only if
+<li>\(X_1→X_2→\cdots→X_n\) forms a Markov chain if and only if
 $$
 p(x_1, x_2,\ldots,x_n) =f_1(x_1, x_2)f_2(x_2,x_3)\cdots f_{n-1}(x_{n-1},x_2)
 $$
-This is a generalization of Proposition 2.5<br>
+This is a generalization of Proposition 2.5</li>
+</ul><br>
+<br>
 
-<strong>Proposition 2.10 (Markov subchains)</strong> Let \(\mathcal{N}_n=\{1,2,\ldots n\}\) and let \(X_1→X_2→\cdots→X_n\) form a Markov chain. For any subset \(\alpha\) of \(\mathcal{N}_n\) denote \((X_i, i \in \alpha)\) (a collection of random Variables) by \(X_\alpha\). Then for any disjoint subsets \(\alpha_1, \alpha_2, \ldots \alpha_m\) of \(\mathcal{N}_n\) such that
+<strong>Markov subchains:</strong> Let \(\mathcal{N}_n=\{1,2,\ldots n\}\) and let \(X_1→X_2→\cdots→X_n\) form a Markov chain. For any subset \(\alpha\) of \(\mathcal{N}_n\) denote \((X_i, i \in \alpha)\) (a collection of random Variables) by \(X_\alpha\). Then for any disjoint subsets \(\alpha_1, \alpha_2, \ldots \alpha_m\) of \(\mathcal{N}_n\) such that
 $$
-k_1<k_2<\cdots<k_m
+k_1 < k_2 < \cdots < k_m
 $$
 for all \(k_j \in \alpha_j, \,j=1,2,\ldots, m\),
 $$
@@ -263,8 +259,7 @@ $$
 forms a Markov chain. Thats is, a subchain of \(X_1→X_2→\cdots→X_n\) is also a Markov chain.<br>
 <br>
 <br>
-<h3 id="2.2-shannon's-information-measures"> 2.2 Shannon's Information Measures</h3><br>
-
+<h3 id="2.2-shannon's-information-measures"> 2.2 Shannon's Information Measures</h3>
 Shannon introduced these basic measures of information:<br>
 <br>
 
@@ -290,6 +285,8 @@ The mutual information of X and Y, given Z.
 </li>
 </ul><br>
 
+All of the above information measures can be expressed in terms of conditional mutual information.<br>
+
 <div class="image-center-wrapper"><img src="assets/information-measures.png" style="width: 60%;" class="inline-image image-center    "></div>
 The following equalities hold:<br>
 <br>
@@ -302,14 +299,107 @@ The following equalities hold:<br>
     <li>\(I(X; Y) = H(X) + H(Y) - H(X, Y)\) (→ inclusion-exclusion)</li>
     <li>\(I(X; X|Z) = H(X|Z)\)</li>
 </ul><br>
-<h3 id="2.3-continuity-of-shannons's-information-measures"> 2.3 Continuity of Shannons's Information Measures</h3><br>
-
+<br>
+<h3 id="2.3-continuity-of-shannon's-information-measures"> 2.3 Continuity of Shannon's Information Measures</h3>
 All of the information measures described above are continuous for fixed finite alphabets with respect to convergence in variational distance (\(\mathcal{L}_1\) distance):
 $$
 V(p, q) = \sum_{x\in\mathcal{X}} |p(x) - q(x)|
 $$<br>
+<h3 id="2.4-chain-rules"> 2.4 Chain Rules</h3>
+<ul>
+<li><strong>Chain Rule for Entropy</strong> \(H(X_1, X_2, \ldots, X_n) = \sum_{i=1}^n H(X_i|X_1, \ldots, X_{i-1})\)</li>
+<li><strong>Chain Rule for Conditional Entropy</strong></li>
+<li><strong>Chain Rule for Mutual Information</strong> \(I(X_1, X_2, \ldots, X_n; Y) = \sum_{i=1}^n I(X_i;Y|X_1, \ldots, X_{i-1})\)</li>
+<li><strong>Chain Rule for Conditional Mutual Information</strong></li>
+</ul><br>
+<br>
+<h3 id="2.5-informational-divergence"> 2.5 Informational Divergence</h3>
+The <strong>informational divergence</strong> (Kullback-Leibler distance/relative entropy) between two probability distributions \(p\) and \(q\) on a common alphabet \(\mathcal{X}\) is defined as:
+$$
+D(p\|q)=\sum_xp(x)\log\frac{p(x)}{q(x)} = E_p\log\frac{p(X)}{q(X)} \underset{\text{"Div. Ineq."}}{\ge} 0
+$$
+(where \(E_p\) denotes expectation with respect to \(p\), note that \(D\) is not symmetrical)<br>
+<br>
 
-<section id="article_footer"><h2>References</h2><br><ol class="references"><li><span id="ref1">https://en.wikipedia.org/wiki/Conditional_independence</span> <a href="#ref1ref""><i class="references-return fas fa-caret-left"></i></a></li><li><span id="ref2">https://en.wikipedia.org/wiki/Mutual_information</span> <a href="#ref2ref""><i class="references-return fas fa-caret-left"></i></a></li></ol></section>
+<strong>Fundamental Inequality:</strong> \(\ln a \le a-1\) for \(a > 0\)<br>
+
+<strong>Log-Sum Inequality:</strong>
+$$
+\sum_i a_i \log \frac{a_i}{b_i} \ge \bigg(\sum_i a_i\bigg) \log \frac{\sum_i a_i}{\sum_i b_i}
+$$
+Log-Sum Inequality \(\iff\) Divergence Inequality<br>
+<br>
+
+<strong>Pinsker's Inequality:</strong> \(D(p\|q) \ge \frac{1}{2\ln 2} V^2(p, q)\)<br>
+
+In particular, convergence in informational divergence \(\implies\) convergence in variational distance<br>
+<br>
+<h3 id="2.6-the-basic-inequalities"> 2.6 The Basic Inequalities</h3>
+<ul>
+<li>\(I(X; Y|Z) \ge 0\) (follows from the divergence inequality)</li>
+<li>\(H(X)=0 \iff X\) is deterministic</li>
+<li>\(H(Y|X) = 0 \iff Y\) is a function of \(X\)</li>
+<li>\(I(X; Y) = 0 \iff X\) and \(Y\) are independent</li>
+</ul><br>
+<br>
+<h3 id="2.7-some-useful-information-inequalities"> 2.7 Some Useful Information Inequalities</h3>
+<ul>
+    <li><strong>Conditioning does not increase entropy:</strong> \(H(Y|X) \le H(Y)\) and \(H(Y|X, Z) \le H(Y|Z)\) (equality iff \(X\) and \(Y\) are independent)</li>
+    <li><strong>Independence bound for entropy:</strong> \(H(X_1, X_2, \ldots, X_n) \le \sum_{i=1}^n H(X_i)\) (equality iff all \(X_i\) are mutually independent)</li>
+    <li>\(I(X; Y, Z) \le I(X; Y)\) (equality iff \(X → Y → Z\) forms a MC)</li>
+    <li><strong>Closer variables on the MC have higher mutual information:</strong> If \(X→Y→Z\) then \(I(X;Z) \le I(X;Y)\) and  \(I(X;Z) \le I(Y;Z)\)</li>
+    <li><strong>Closer pairs of variables on a MC have lower conditional entropy:</strong> \(X→Y→Z \implies H(X|Z) \ge H(X|Y)\)</li>
+    <li><strong>Data processing inequality</strong> If \(U→X→Y→V\) forms a MC then \(I(U; V) \le I(X; Y)\) ("post-processing cannot increase information"<sup><a id="ref3ref" href="#ref3">[3]</a></sup>)</li>
+</ul><br>
+<h3 id="2.8-fano's-inequality"> 2.8 Fano's Inequality</h3>
+Theorem: \(H(X) \le \log |\mathcal{X}|\). Therefore if \(\mathcal{X}\) is finite then \(H(X)\) is finite.<br>
+<br>
+
+A random variable with an infinite alphabet can have finite or infinite entropy, see \(X\) with \(\Pr\{X=i\}=2^{-i}\) (example 2.45) or example 2.46 in the textbook.</li><br>
+<br>
+
+<strong>Fano's Inequality</strong><br>
+
+Let \(X\) and \(\hat X\) be random variables on the alphabet \(\mathcal{X}\). Then
+$$
+H(X|\hat X) \le h_b(P_e)+P_e \log (|\mathcal{X}|-1)
+$$
+where \(P_e = \Pr\{X\neq\hat X\}\) and \(h_b\) is the binary entropy function.<br>
+
+Suppose \(\hat X\) is an estimate on \(X\). If the error probability \(P_e\) is small, then \(H(X|\hat X)\) should be small as well.<br>
+<br>
+
+For a finite alphabet \(P_e → 0 \implies H(X|\hat X) → 0\)<br>
+<br>
+
+Corollary: \(H(X|\hat X) \le 1+P_e \log (|\mathcal{X}|)\)<br>
+<br>
+<h3 id="2.10-entropy-rate-of-a-stationary-source"> 2.10 Entropy Rate of a Stationary Source</h3>
+A discrete-time information source can be modeled as a <strong>discrete-time random process</strong> \(P=\{X_k, k \ge 1\}\). \(P\) is an infinite collection of random variables indexed by the set of positive integers. The index \(k\) is referred to as the <strong>"time"</strong> index. Random variables \(X_k\) are called <strong>letters</strong>. We assume that all \(H(X_k)\) are finite.<br>
+<br>
+
+The total entropy of a finite subset of \(\{X_k\}\) (\(H(X_k, k\in A)\) where \(A \subset P\)) is finite because of the independence bound for entropy and our assumption that all \(H(X_k)\) are finite. Apart from special cases the joint entropy of an infinite collection of letters is usually infinite, therefore it is generally not meaningful to discuss the entropy of \(P\). <br>
+<br>
+
+<ul>
+<li>The <strong>entropy rate</strong> \(H_X\) is defined as \(\lim_{n→\infty} \frac{1}{n}H(X_1, \ldots, X_n)\).<br>
+
+If the limit does not exist, \(H_X\) is not defined.</li>
+<li>Define \(H_X^\prime\) as \(\lim_{n→\infty} H(X_n | X_1, X_2, \ldots, X_{n-1})\)<br>
+
+This is the limit of the conditional entropy of the next letter given the past history of the source.
+</li>
+</ul><br>
+
+An information source \(\{X_k\}\) is called <strong>stationary</strong> if \(X_1, X_2, \ldots, X_m\) and  \(X_{1+l}, X_{2+l}, \ldots, X_{m+l}\) have the same joint distribution for any \(m, l \ge 1\).<br>
+
+For a sequence \((a_n)\), the <strong>Cesáro mean</strong> is defined as the sequence \((b_n)\), where \(b_n = \frac{1}{n}\sum_{i=1}^n a_i\). If \(a_n → a\) then \(b_n → a\).<br>
+
+Source stationary \(\implies\) the limit \(H_X^\prime\) exists \(\implies\) the entropy rate \(H_X\) exists and is equal to \(H_X^\prime\). (proof using stationarity and Cesáro mean) Therefore for stationary sources, \(H_X^\prime\) is simply an alternative definition/interpretation of the entropy rate.<br>
+<br>
+<br>
+
+ <section id="article_footer"><h2>References</h2><br><ol class="references"><li><span id="ref1">https://en.wikipedia.org/wiki/Conditional_independence</span> <a href="#ref1ref""><i class="references-return fas fa-caret-left"></i></a></li><li><span id="ref2">https://en.wikipedia.org/wiki/Mutual_information</span> <a href="#ref2ref""><i class="references-return fas fa-caret-left"></i></a></li><li><span id="ref3">https://en.wikipedia.org/wiki/Data_processing_inequality</span> <a href="#ref3ref""><i class="references-return fas fa-caret-left"></i></a></li></ol></section>
       </span>
 
       <!--<div id="disqus_thread"></div>
