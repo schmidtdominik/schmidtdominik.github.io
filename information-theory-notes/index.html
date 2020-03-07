@@ -15,7 +15,7 @@
   <meta property='og:type' content='article'/>
   <meta property="og:image" content="assets/cover.png"/>
   <meta property="og:url" content="http://dominikschmidt.xyz/information-theory-notes"/>
-  <!--<meta property="og:description" content="These are my lecture notes on Prof. Raymond W. Yeung's course on information theory. The course is based on Prog. Yeung's book "Information Theory and
+  <!--<meta property="og:description" content="These are my lecture notes on Prof. Raymond W. Yeung's excellent course on information theory. The course is based on Prog. Yeung's book "Information Theory and
 Network Coding" and these notes are organized around that.<br>
 <br>
 
@@ -143,13 +143,13 @@ Information theory is a major research field in communication theory and applied
           <h1 class="article-title">
             Information Theory
           </h1>
-          <time datetime="2020-02-16 00:00:00">February 16, 2020 ⧗ 14 minute read</time><br>
+          <time datetime="2020-02-16 00:00:00">February 16, 2020 ⧗ 20 minute read</time><br>
         </div>
       </div>
       <!--END OF HEADING-->
 
       <span class="article-text">
-        <div id="index"><a href=#1.-the-science-of-information> → 1. The Science of Information</a><br><a href=#shannon's-seminal-paper-1948>&emsp; → Shannon's Seminal Paper (1948)</a><br><a href=#2.-information-measures> → 2. Information Measures</a><br><a href=#2.1-independence-and-markov-chain>&emsp; → 2.1 Independence and Markov Chain</a><br><a href=#2.2-shannon's-information-measures>&emsp; → 2.2 Shannon's Information Measures</a><br><a href=#2.3-continuity-of-shannon's-information-measures>&emsp; → 2.3 Continuity of Shannon's Information Measures</a><br><a href=#2.4-chain-rules>&emsp; → 2.4 Chain Rules</a><br><a href=#2.5-informational-divergence>&emsp; → 2.5 Informational Divergence</a><br><a href=#2.6-the-basic-inequalities>&emsp; → 2.6 The Basic Inequalities</a><br><a href=#2.7-some-useful-information-inequalities>&emsp; → 2.7 Some Useful Information Inequalities</a><br><a href=#2.8-fano's-inequality>&emsp; → 2.8 Fano's Inequality</a><br><a href=#2.10-entropy-rate-of-a-stationary-source>&emsp; → 2.10 Entropy Rate of a Stationary Source</a></div><br><hr>These are my lecture notes on Prof. Raymond W. Yeung's course on information theory. The course is based on Prog. Yeung's book "Information Theory and
+        <div id="index"><a href=#1.-the-science-of-information> → 1. The Science of Information</a><br><a href=#shannon's-seminal-paper-1948>&emsp; → Shannon's Seminal Paper (1948)</a><br><a href=#2.-information-measures> → 2. Information Measures</a><br><a href=#2.1-independence-and-markov-chain>&emsp; → 2.1 Independence and Markov Chain</a><br><a href=#2.2-shannon's-information-measures>&emsp; → 2.2 Shannon's Information Measures</a><br><a href=#2.3-continuity-of-shannon's-information-measures>&emsp; → 2.3 Continuity of Shannon's Information Measures</a><br><a href=#2.4-chain-rules>&emsp; → 2.4 Chain Rules</a><br><a href=#2.5-informational-divergence>&emsp; → 2.5 Informational Divergence</a><br><a href=#2.6-the-basic-inequalities>&emsp; → 2.6 The Basic Inequalities</a><br><a href=#2.7-some-useful-information-inequalities>&emsp; → 2.7 Some Useful Information Inequalities</a><br><a href=#2.8-fano's-inequality>&emsp; → 2.8 Fano's Inequality</a><br><a href=#2.10-entropy-rate-of-a-stationary-source>&emsp; → 2.10 Entropy Rate of a Stationary Source</a><br><a href=#3.-the-i-measure> → 3. The I-Measure</a><br><a href=#3.1-preliminaries>&emsp; → 3.1 Preliminaries</a><br><a href=#3.3-construction-of-the-i-measure-\mu^\ast>&emsp; → 3.3 Construction of the I-Measure \(\mu^\ast\)</a><br><a href=#3.4-\mu^\ast-can-be-negative>&emsp; → 3.4 \(\mu^\ast\) can be Negative</a><br><a href=#3.5-information-diagrams>&emsp; → 3.5 Information Diagrams</a></div><br><hr>These are my lecture notes on Prof. Raymond W. Yeung's excellent course on information theory. The course is based on Prog. Yeung's book "Information Theory and
 Network Coding" and these notes are organized around that.<br>
 <br>
 
@@ -339,12 +339,15 @@ In particular, convergence in informational divergence \(\implies\) convergence 
 <li>\(I(X; Y|Z) \ge 0\) (follows from the divergence inequality)</li>
 <li>\(H(X)=0 \iff X\) is deterministic</li>
 <li>\(H(Y|X) = 0 \iff Y\) is a function of \(X\)</li>
+<li>\(H(Y) \le H(X) \iff Y\) is a function of \(X\)</li>
 <li>\(I(X; Y) = 0 \iff X\) and \(Y\) are independent</li>
 </ul><br>
 <br>
 <h3 id="2.7-some-useful-information-inequalities"> 2.7 Some Useful Information Inequalities</h3>
 <ul>
-    <li><strong>Conditioning does not increase entropy:</strong> \(H(Y|X) \le H(Y)\) and \(H(Y|X, Z) \le H(Y|Z)\) (equality iff \(X\) and \(Y\) are independent)</li>
+    <li><strong>Conditioning does not increase entropy:</strong> \(H(Y|X) \le H(Y)\) and \(H(Y|X, Z) \le H(Y|Z)\) (equality iff \(X\) and \(Y\) are independent)
+    Note however that conditioning can increase mutual information (page 60).
+    </li>
     <li><strong>Independence bound for entropy:</strong> \(H(X_1, X_2, \ldots, X_n) \le \sum_{i=1}^n H(X_i)\) (equality iff all \(X_i\) are mutually independent)</li>
     <li>\(I(X; Y, Z) \le I(X; Y)\) (equality iff \(X → Y → Z\) forms a MC)</li>
     <li><strong>Closer variables on the MC have higher mutual information:</strong> If \(X→Y→Z\) then \(I(X;Z) \le I(X;Y)\) and  \(I(X;Z) \le I(Y;Z)\)</li>
@@ -392,14 +395,88 @@ This is the limit of the conditional entropy of the next letter given the past h
 </ul><br>
 
 An information source \(\{X_k\}\) is called <strong>stationary</strong> if \(X_1, X_2, \ldots, X_m\) and  \(X_{1+l}, X_{2+l}, \ldots, X_{m+l}\) have the same joint distribution for any \(m, l \ge 1\).<br>
+<br>
 
 For a sequence \((a_n)\), the <strong>Cesáro mean</strong> is defined as the sequence \((b_n)\), where \(b_n = \frac{1}{n}\sum_{i=1}^n a_i\). If \(a_n → a\) then \(b_n → a\).<br>
+<br>
 
 Source stationary \(\implies\) the limit \(H_X^\prime\) exists \(\implies\) the entropy rate \(H_X\) exists and is equal to \(H_X^\prime\). (proof using stationarity and Cesáro mean) Therefore for stationary sources, \(H_X^\prime\) is simply an alternative definition/interpretation of the entropy rate.<br>
 <br>
+<h2 id="3.-the-i-measure"> 3. The I-Measure</h2>
+Shannon's information measures for \(n \ge 2\) random variables have a set-theoretic structure.<br>
 <br>
 
- <section id="article_footer"><h2>References</h2><br><ol class="references"><li><span id="ref1">https://en.wikipedia.org/wiki/Conditional_independence</span> <a href="#ref1ref""><i class="references-return fas fa-caret-left"></i></a></li><li><span id="ref2">https://en.wikipedia.org/wiki/Mutual_information</span> <a href="#ref2ref""><i class="references-return fas fa-caret-left"></i></a></li><li><span id="ref3">https://en.wikipedia.org/wiki/Data_processing_inequality</span> <a href="#ref3ref""><i class="references-return fas fa-caret-left"></i></a></li></ol></section>
+<ul>
+	<li>The random variable \(X\) corresponds to the set \(\tilde X\)</li>
+    <li>\(H/I\) corresponds to \(\mu^\ast\), where \(\mu^\ast\) is some signed measure (set-additive function)</li>
+    <li>\(,\) corresponds to \(\cup\)</li>
+    <li>\(;\) corresponds to \(\cap\)</li>
+    <li>\(|\) corresponds to \(-\) where \((A-B = A \cap B^C)\)</li>
+</ul><br>
+
+Notation<br>
+<br>
+
+<ul>
+    <li>\(X_G = (X_i, i \in G)\)</li>
+    <li>\(\tilde X_G = \cup_{i\in G} \tilde X_i\)</li>
+</ul><br>
+<h3 id="3.1-preliminaries"> 3.1 Preliminaries</h3>
+The <strong>field</strong> \(\mathcal{F}_n\) generated by sets \(\tilde X_1, \tilde X_2, \ldots, \tilde X_n\) is the collection of sets which can be obtained by any sequence of usual set operations on \(\tilde X_1, \tilde X_2, \ldots, \tilde X_n\).<br>
+<br>
+
+The <strong>atoms</strong> of \(\mathcal{F}_n\) are sets of the form \(\bigcap_{i=1}^n Y_i\) where \(Y_i\) is either \(\tilde X_i\) or \(\tilde X_1^C\).<br>
+<br>
+
+A real function \(\mu\) defined on \(\mathcal{F}_n\) is called a <strong>signed measure</strong> if it is <strong>set-additive:</strong> for <em>disjoint</em> \(A, B\) in \(\mathcal{F}_n\): \(\mu(A \cup B) = \mu(A) + \mu(B)\).<br>
+<br>
+
+A signed measure on \(\mathcal{F}_n\) is completely specified by its values on the atoms of \(\mathcal{F}_n\) , \(\{\mu(A), A \in \mathcal{A} \}\), since the values on other sets in \(\mathcal{F}_n\) can be obtained via set-additivity.<br>
+
+(\(\ast\)) A signed measure is furthermore completely specified by it's values on all unions \(\{\mu(B), B \in \mathcal{B} \}\) where \(\mathcal{B} = \{\tilde X_G : G \subset \mathcal{N_n}\}\).<br>
+<br>
+<h3 id="3.3-construction-of-the-i-measure-$\mu^\ast$"> 3.3 Construction of the I-Measure \(\mu^\ast\)</h3>
+<ul>
+    <li>Let \(\tilde X_i\) be the set corresponding to the random variable \(X_i\)</li>
+    <li>For a fix \(n\) let \(\mathcal{N_n} = \{1, 2, \ldots, n\}\)</li>
+    <li>Let the universal set be \(\Omega = \bigcup_{i\in\mathcal{N_n}} \tilde X_i\)</li>
+    <li>The atom
+        $$
+        A_0 = \bigcap_{i\in \mathcal{N_n}} \tilde X_i^C = {\Bigg(\bigcup_{i \in \mathcal{N_n}} \tilde X_i \Bigg)}^C = \Omega^C = \emptyset
+        $$
+	is called the <strong>empty atom</strong> of \(\mathcal{F_n}\).
+    </li>
+    <li>\(\mathcal{A}\) is the set of all other atoms of \(\mathcal{F_n}\), called the <strong>non-empty atoms</strong> and \(|A| = 2^n-1\).</li>
+</ul><br>
+
+<strong>Definition I-measure:</strong> Define \(\mu^\ast\) by setting 
+$$\mu^\ast(\tilde X_G) = H(X_G)$$
+for all non-empty \(G\subset \mathcal{N_n}\). This completely defines the measure as by (\(\ast\)). \(\mu^\ast\) is the unique signed measure on \(\mathcal{F_n}\) which is consistent with all information measures.<br>
+<br>
+
+To show that \(\mu^\ast\) is consistent with all information measures we only have to show that it is consistent with conditional mutual information, i.e. that \(\mu^\ast(\tilde X_G \cap \tilde X_{G'}-\tilde X_{G''}) = H(X_G; X_{G'}|X_{G''})\). This can be proved using Lemmas 3.7 and 3.8 in the textbook.<br>
+<br>
+
+Using the I-measure we can employ set-theoretic tools to manipulate expressions of Shannon's information measures.<br>
+<br>
+<h3 id="3.4-$\mu^\ast$-can-be-negative"> 3.4 \(\mu^\ast\) can be Negative</h3>
+\(\mu^\ast\) is positive for all non-empty atoms that correspond to Shannon's information measures. It can however be negative in other cases such as \(\mu^\ast(\tilde X_1 \cap \tilde X_2 \cap \tilde X_3) = I(X_1;X_2;X_3)\), which is not a Shannon's information measure.<br>
+<br>
+
+For two or fewer random variables all three non-empty atoms correspond to Shannon's information measures so here \(\mu^\ast\) is always positive.<br>
+<br>
+<h3 id="3.5-information-diagrams"> 3.5 Information Diagrams</h3>
+Due to the correspondence between information and set theory we can use Venn diagrams to visualize information measures. In \(n\) dimensions, any information diagram for \(n+1\) dimensions can be displayed perfectly.<br>
+
+<div class="image-center-wrapper"><img src="assets/information-diag.png" style="width: 80%;" class="inline-image image-center    "></div>
+We can always omit atoms from an information diagram on which \(\mu^\ast\) takes the value \(0\). In particular, this occurs when certain Markov conditions are imposed on the random variables, see the following information diagram for a Markov chain:<br>
+
+<div class="image-center-wrapper"><img src="assets/information-diag-markov.png" style="width: 80%;" class="inline-image image-center    "></div>
+If there is no constraint on \(X_1, X_2, \ldots, X_n\), then \(\mu^\ast\) can take any set of nonnegative values on the nonempty atoms of \(\mathcal{F_n}\).<br>
+<br>
+
+\(\mu^\ast\) is nonnegative on all atoms of a Markov chain.
+<section id="article_footer"><h2>References</h2><br><ol class="references"><li><span id="ref1">https://en.wikipedia.org/wiki/Conditional_independence</span> <a href="#ref1ref""><i class="references-return fas fa-caret-left"></i></a></li><li><span id="ref2">https://en.wikipedia.org/wiki/Mutual_information</span> <a href="#ref2ref""><i class="references-return fas fa-caret-left"></i></a></li><li><span id="ref3">https://en.wikipedia.org/wiki/Data_processing_inequality</span> <a href="#ref3ref""><i class="references-return fas fa-caret-left"></i></a></li></ol></section>
       </span>
 
       <!--<div id="disqus_thread"></div>
