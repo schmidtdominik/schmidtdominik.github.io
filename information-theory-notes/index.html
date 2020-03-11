@@ -143,13 +143,13 @@ Information theory is a major research field in communication theory and applied
           <h1 class="article-title">
             Information Theory
           </h1>
-          <time datetime="2020-02-16 00:00:00">February 16, 2020 ⧗ 20 minute read</time><br>
+          <time datetime="2020-02-16 00:00:00">February 16, 2020 ⧗ 24 minute read</time><br>
         </div>
       </div>
       <!--END OF HEADING-->
 
       <span class="article-text">
-        <div id="index"><a href=#1.-the-science-of-information> → 1. The Science of Information</a><br><a href=#shannon's-seminal-paper-1948>&emsp; → Shannon's Seminal Paper (1948)</a><br><a href=#2.-information-measures> → 2. Information Measures</a><br><a href=#2.1-independence-and-markov-chain>&emsp; → 2.1 Independence and Markov Chain</a><br><a href=#2.2-shannon's-information-measures>&emsp; → 2.2 Shannon's Information Measures</a><br><a href=#2.3-continuity-of-shannon's-information-measures>&emsp; → 2.3 Continuity of Shannon's Information Measures</a><br><a href=#2.4-chain-rules>&emsp; → 2.4 Chain Rules</a><br><a href=#2.5-informational-divergence>&emsp; → 2.5 Informational Divergence</a><br><a href=#2.6-the-basic-inequalities>&emsp; → 2.6 The Basic Inequalities</a><br><a href=#2.7-some-useful-information-inequalities>&emsp; → 2.7 Some Useful Information Inequalities</a><br><a href=#2.8-fano's-inequality>&emsp; → 2.8 Fano's Inequality</a><br><a href=#2.10-entropy-rate-of-a-stationary-source>&emsp; → 2.10 Entropy Rate of a Stationary Source</a><br><a href=#3.-the-i-measure> → 3. The I-Measure</a><br><a href=#3.1-preliminaries>&emsp; → 3.1 Preliminaries</a><br><a href=#3.3-construction-of-the-i-measure-\mu^\ast>&emsp; → 3.3 Construction of the I-Measure \(\mu^\ast\)</a><br><a href=#3.4-\mu^\ast-can-be-negative>&emsp; → 3.4 \(\mu^\ast\) can be Negative</a><br><a href=#3.5-information-diagrams>&emsp; → 3.5 Information Diagrams</a></div><br><hr>These are my lecture notes on Prof. Raymond W. Yeung's excellent course on information theory. The course is based on Prog. Yeung's book "Information Theory and
+        <div id="index"><a href=#1.-the-science-of-information> → 1. The Science of Information</a><br><a href=#shannon's-seminal-paper-1948>&emsp; → Shannon's Seminal Paper (1948)</a><br><a href=#2.-information-measures> → 2. Information Measures</a><br><a href=#2.1-independence-and-markov-chain>&emsp; → 2.1 Independence and Markov Chain</a><br><a href=#2.2-shannon's-information-measures>&emsp; → 2.2 Shannon's Information Measures</a><br><a href=#2.3-continuity-of-shannon's-information-measures>&emsp; → 2.3 Continuity of Shannon's Information Measures</a><br><a href=#2.4-chain-rules>&emsp; → 2.4 Chain Rules</a><br><a href=#2.5-informational-divergence>&emsp; → 2.5 Informational Divergence</a><br><a href=#2.6-the-basic-inequalities>&emsp; → 2.6 The Basic Inequalities</a><br><a href=#2.7-some-useful-information-inequalities>&emsp; → 2.7 Some Useful Information Inequalities</a><br><a href=#2.8-fano's-inequality>&emsp; → 2.8 Fano's Inequality</a><br><a href=#2.10-entropy-rate-of-a-stationary-source>&emsp; → 2.10 Entropy Rate of a Stationary Source</a><br><a href=#3.-the-i-measure> → 3. The I-Measure</a><br><a href=#3.1-preliminaries>&emsp; → 3.1 Preliminaries</a><br><a href=#3.3-construction-of-the-i-measure-\mu^\ast>&emsp; → 3.3 Construction of the I-Measure \(\mu^\ast\)</a><br><a href=#3.4-\mu^\ast-can-be-negative>&emsp; → 3.4 \(\mu^\ast\) can be Negative</a><br><a href=#3.5-information-diagrams>&emsp; → 3.5 Information Diagrams</a><br><a href=#4.-zero-error-data-compression> → 4. Zero-Error Data Compression</a><br><a href=#4.1-the-entropy-bound>&emsp; → 4.1 The Entropy Bound</a><br><a href=#4.2-prefix-codes>&emsp; → 4.2 Prefix Codes</a></div><br><hr>These are my lecture notes on Prof. Raymond W. Yeung's excellent course on information theory. The course is based on Prog. Yeung's book "Information Theory and
 Network Coding" and these notes are organized around that.<br>
 <br>
 
@@ -227,6 +227,11 @@ p(x_1, x_2,\ldots,x_n) = \\\Bigg\{\begin{array}{lr}
         0, & \text{otherwise}
         \end{array}
 $$<br>
+
+or equivalently when \(p(x_1, \ldots, x_n)p(x_2)\cdots p(x_{n-1}) = p(x_1, x_2)p(x_2, x_3)\cdots p(x_{n-1}, x_n)\).<br>
+
+Note that this definition allows for non-stationary transition probabilities, i.e. the probability distribution can still change over time, see stationarity below.<br>
+<br>
 
 <ul>
 <li>\(X_1→X_2→X_3 \iff (X_1\perp X_3)\mid X_2\)</li>
@@ -339,7 +344,7 @@ In particular, convergence in informational divergence \(\implies\) convergence 
 <li>\(I(X; Y|Z) \ge 0\) (follows from the divergence inequality)</li>
 <li>\(H(X)=0 \iff X\) is deterministic</li>
 <li>\(H(Y|X) = 0 \iff Y\) is a function of \(X\)</li>
-<li>\(H(Y) \le H(X) \iff Y\) is a function of \(X\)</li>
+<li>\(H(Y) \le H(X) \iff Y\) is a function of \(X\) (deterministically processing a random variable cannot increase entropy)s</li>
 <li>\(I(X; Y) = 0 \iff X\) and \(Y\) are independent</li>
 </ul><br>
 <br>
@@ -471,11 +476,71 @@ Due to the correspondence between information and set theory we can use Venn dia
 <div class="image-center-wrapper"><img src="assets/information-diag.png" style="width: 80%;" class="inline-image image-center    "></div>
 We can always omit atoms from an information diagram on which \(\mu^\ast\) takes the value \(0\). In particular, this occurs when certain Markov conditions are imposed on the random variables, see the following information diagram for a Markov chain:<br>
 
-<div class="image-center-wrapper"><img src="assets/information-diag-markov.png" style="width: 80%;" class="inline-image image-center    "></div>
-If there is no constraint on \(X_1, X_2, \ldots, X_n\), then \(\mu^\ast\) can take any set of nonnegative values on the nonempty atoms of \(\mathcal{F_n}\).<br>
+<div class="image-center-wrapper"><img src="assets/information-diag-markov.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+
+<ul>
+<li>If there is no constraint on \(X_1, X_2, \ldots, X_n\), then \(\mu^\ast\) can take any set of nonnegative values on the nonempty atoms of \(\mathcal{F_n}\).</li>
+<li>\(\mu^\ast\) is nonnegative on all atoms of a Markov chain.</li>
+<li>If \(\mu^\ast\) is nonnegative, then \(A\subset B \implies \mu^\ast(A) \le \mu^\ast(B)\)</li>
+</ul><br>
+
+<strong>Shannon's Perfect Secrecy Theorem</strong><br>
+
+Given plaintext \(X\), ciphertext \(Y\) and key \(Z\).<br>
 <br>
 
-\(\mu^\ast\) is nonnegative on all atoms of a Markov chain.
+<ul>
+	<li>Perfect secrecy: \(I(X; Y) = 0\)</li>    
+	<li>Decipherability: \(H(X|Y, Z) = 0\)</li>    
+</ul><br>
+
+These requirements imply that \(H(Z) \ge H(X)\), i.e. the length of the key is \(\ge\) the length of the plaintext.
+<div class="image-center-wrapper"><img src="assets/perfect-secrecy-proof.png" style="width: 90%;" class="inline-image image-center    "></div>
+<strong>Imperfect Secrecy Theorem</strong><br>
+
+Given plaintext \(X\), ciphertext \(Y\) and key \(Z\). Decipherability: \(H(X|Y, Z) = 0\)<br>
+
+Generalization of Shannon's perfect secrecy theorem above: \(I(X;Y) \ge H(X) - H(Z)\)<br>
+
+Interpretation: \(I(X; Y)\) measures the leakage of information into the ciphertext<br>
+<br>
+<h2 id="4.-zero-error-data-compression"> 4. Zero-Error Data Compression</h2><h3 id="4.1-the-entropy-bound"> 4.1 The Entropy Bound</h3>
+A D-ary <strong>source code</strong> \(\mathcal{C}\) for a source random variable \(X\) is a function \(\mathcal{C}\colon \mathcal{X}→\mathcal{D^\ast}\), where \(\mathcal{D}^\ast\) is the set of all finite strings from a D-ary alphabet.<br>
+<br>
+
+A code \(\mathcal{C}\) is <strong>uniquely decodable</strong> if for any string in \(\mathcal{D^\ast}\) the function can be inverted to get the <em>unique</em> source sequence that generated it.<br>
+<br>
+
+<strong>Kraft Inequality</strong>
+Let \(\mathcal{C}\) be a D-ary source code and let \(l_1, l_2, \ldots, l_m\) be the lengths of the codewords. If \(\mathcal{C}\) is <em>uniquely decodable</em> then,
+$$
+\sum_{k=1}^m D^{-l_k}\le 1
+$$<br>
+
+Let \(X\) be a source random variable with \(X \sim \{p_1, p_2, \ldots, p_m\}\). Then the <strong>expected code length</strong> \(L\) of a source code \(\mathcal{C}\)  is \(\sum_i p_il_i\).<br>
+<br>
+
+For a D-ary <em>uniquely decodable</em> code \(\mathcal{C}\) for a source variable \(X\) we can furthermore establish the <strong>entropy bound</strong> \(H_D(X) \le L\), since each D-ary symbol can carry at most 1 D-it of information.<br>
+<br>
+
+The <strong>redundancy</strong> \(R\) of a D-ary uniquely decodable code is \(L-H_D(X) \underset{H \text{-bound}}{\ge} 0\)<br>
+<br>
+<h3 id="4.2-prefix-codes"> 4.2 Prefix Codes</h3>
+A code is <strong>prefix-free</strong> if no codeword is a prefix of another codeword. Such codes are called <strong>prefix codes</strong>. All prefix codes are uniquely decodable.<br>
+<br>
+
+A tree representation of a prefix code is called a <strong>code tree</strong>.
+<div class="image-center-wrapper"><img src="assets/code-tree.png" style="width: 80%;" class="inline-image image-center    "></div>
+<strong>Instantaneous decoding</strong> can be done by tracing the code tree from the root, starting at the beginning of the stream of coded symbols. In this way, the boundaries of the codewords can be discovered. A prefix code is said to be <strong>self-punctuating</strong>.<br>
+<br>
+
+There exists a D-ary prefix code with codeword lengths \(l_1, l_2, \ldots, l_m \iff\) the Kraft inequality is satisfied <br>
+<br>
+
+A probability distribution is called <strong>D-adic</strong> (or <strong>dyadic</strong> when D=2) when \(p_i = D^{-t_i}\) for all \(i\), where \(t_i\) is an integer.<br>
+<br>
+
+There exists a D-ary prefix code which achieves the entropy bound for a distribution \(\{p_i\}\) if and only if  \(\{p_i\}\) is D-adic.
 <section id="article_footer"><h2>References</h2><br><ol class="references"><li><span id="ref1">https://en.wikipedia.org/wiki/Conditional_independence</span> <a href="#ref1ref""><i class="references-return fas fa-caret-left"></i></a></li><li><span id="ref2">https://en.wikipedia.org/wiki/Mutual_information</span> <a href="#ref2ref""><i class="references-return fas fa-caret-left"></i></a></li><li><span id="ref3">https://en.wikipedia.org/wiki/Data_processing_inequality</span> <a href="#ref3ref""><i class="references-return fas fa-caret-left"></i></a></li></ol></section>
       </span>
 
