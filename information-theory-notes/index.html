@@ -143,13 +143,13 @@ Information theory is a major research field in communication theory and applied
           <h1 class="article-title">
             Information Theory
           </h1>
-          <time datetime="2020-02-16 00:00:00">February 16, 2020 ⧗ 24 minute read</time><br>
+          <time datetime="2020-02-16 00:00:00">February 16, 2020 ⧗ 31 minute read</time><br>
         </div>
       </div>
       <!--END OF HEADING-->
 
       <span class="article-text">
-        <div id="index"><a href=#1.-the-science-of-information> → 1. The Science of Information</a><br><a href=#shannon's-seminal-paper-1948>&emsp; → Shannon's Seminal Paper (1948)</a><br><a href=#2.-information-measures> → 2. Information Measures</a><br><a href=#2.1-independence-and-markov-chain>&emsp; → 2.1 Independence and Markov Chain</a><br><a href=#2.2-shannon's-information-measures>&emsp; → 2.2 Shannon's Information Measures</a><br><a href=#2.3-continuity-of-shannon's-information-measures>&emsp; → 2.3 Continuity of Shannon's Information Measures</a><br><a href=#2.4-chain-rules>&emsp; → 2.4 Chain Rules</a><br><a href=#2.5-informational-divergence>&emsp; → 2.5 Informational Divergence</a><br><a href=#2.6-the-basic-inequalities>&emsp; → 2.6 The Basic Inequalities</a><br><a href=#2.7-some-useful-information-inequalities>&emsp; → 2.7 Some Useful Information Inequalities</a><br><a href=#2.8-fano's-inequality>&emsp; → 2.8 Fano's Inequality</a><br><a href=#2.10-entropy-rate-of-a-stationary-source>&emsp; → 2.10 Entropy Rate of a Stationary Source</a><br><a href=#3.-the-i-measure> → 3. The I-Measure</a><br><a href=#3.1-preliminaries>&emsp; → 3.1 Preliminaries</a><br><a href=#3.3-construction-of-the-i-measure-\mu^\ast>&emsp; → 3.3 Construction of the I-Measure \(\mu^\ast\)</a><br><a href=#3.4-\mu^\ast-can-be-negative>&emsp; → 3.4 \(\mu^\ast\) can be Negative</a><br><a href=#3.5-information-diagrams>&emsp; → 3.5 Information Diagrams</a><br><a href=#4.-zero-error-data-compression> → 4. Zero-Error Data Compression</a><br><a href=#4.1-the-entropy-bound>&emsp; → 4.1 The Entropy Bound</a><br><a href=#4.2-prefix-codes>&emsp; → 4.2 Prefix Codes</a></div><br><hr>These are my lecture notes on Prof. Raymond W. Yeung's excellent course on information theory. The course is based on Prog. Yeung's book "Information Theory and
+        <div id="index"><a href=#1.-the-science-of-information> → 1. The Science of Information</a><br><a href=#shannon's-seminal-paper-1948>&emsp; → Shannon's Seminal Paper (1948)</a><br><a href=#2.-information-measures> → 2. Information Measures</a><br><a href=#2.1-independence-and-markov-chain>&emsp; → 2.1 Independence and Markov Chain</a><br><a href=#2.2-shannon's-information-measures>&emsp; → 2.2 Shannon's Information Measures</a><br><a href=#2.3-continuity-of-shannon's-information-measures>&emsp; → 2.3 Continuity of Shannon's Information Measures</a><br><a href=#2.4-chain-rules>&emsp; → 2.4 Chain Rules</a><br><a href=#2.5-informational-divergence>&emsp; → 2.5 Informational Divergence</a><br><a href=#2.6-the-basic-inequalities>&emsp; → 2.6 The Basic Inequalities</a><br><a href=#2.7-some-useful-information-inequalities>&emsp; → 2.7 Some Useful Information Inequalities</a><br><a href=#2.8-fano's-inequality>&emsp; → 2.8 Fano's Inequality</a><br><a href=#2.10-entropy-rate-of-a-stationary-source>&emsp; → 2.10 Entropy Rate of a Stationary Source</a><br><a href=#3.-the-i-measure> → 3. The I-Measure</a><br><a href=#3.1-preliminaries>&emsp; → 3.1 Preliminaries</a><br><a href=#3.3-construction-of-the-i-measure-\mu^\ast>&emsp; → 3.3 Construction of the I-Measure \(\mu^\ast\)</a><br><a href=#3.4-\mu^\ast-can-be-negative>&emsp; → 3.4 \(\mu^\ast\) can be Negative</a><br><a href=#3.5-information-diagrams>&emsp; → 3.5 Information Diagrams</a><br><a href=#4.-zero-error-data-compression> → 4. Zero-Error Data Compression</a><br><a href=#4.1-the-entropy-bound>&emsp; → 4.1 The Entropy Bound</a><br><a href=#4.2-prefix-codes>&emsp; → 4.2 Prefix Codes</a><br><a href=#4.3-redundancy-of-prefix-codes>&emsp; → 4.3 Redundancy of Prefix Codes</a><br><a href=#5.-weak-typicality> → 5. Weak Typicality</a><br><a href=#the-weak-aep-weak-asymptotic-equipartition-property>&emsp; → The Weak AEP (Weak Asymptotic Equipartition Property)</a><br><a href=#5.2-source-coding-theorem>&emsp; → 5.2 Source Coding Theorem</a></div><br><hr>These are my lecture notes on Prof. Raymond W. Yeung's excellent course on information theory. The course is based on Prog. Yeung's book "Information Theory and
 Network Coding" and these notes are organized around that.<br>
 <br>
 
@@ -474,6 +474,9 @@ For two or fewer random variables all three non-empty atoms correspond to Shanno
 Due to the correspondence between information and set theory we can use Venn diagrams to visualize information measures. In \(n\) dimensions, any information diagram for \(n+1\) dimensions can be displayed perfectly.<br>
 
 <div class="image-center-wrapper"><img src="assets/information-diag.png" style="width: 80%;" class="inline-image image-center    "></div>
+Here is an information diagram for four random variables:<br>
+
+<div class="image-center-wrapper"><img src="assets/information-diag-4.png" style="width: 70%;" class="inline-image image-center    "></div>
 We can always omit atoms from an information diagram on which \(\mu^\ast\) takes the value \(0\). In particular, this occurs when certain Markov conditions are imposed on the random variables, see the following information diagram for a Markov chain:<br>
 
 <div class="image-center-wrapper"><img src="assets/information-diag-markov.png" style="width: 80%;" class="inline-image image-center    "></div><br>
@@ -504,6 +507,9 @@ Generalization of Shannon's perfect secrecy theorem above: \(I(X;Y) \ge H(X) - H
 
 Interpretation: \(I(X; Y)\) measures the leakage of information into the ciphertext<br>
 <br>
+
+The data processing theorem can also be proved using information diagrams.<br>
+<br>
 <h2 id="4.-zero-error-data-compression"> 4. Zero-Error Data Compression</h2><h3 id="4.1-the-entropy-bound"> 4.1 The Entropy Bound</h3>
 A D-ary <strong>source code</strong> \(\mathcal{C}\) for a source random variable \(X\) is a function \(\mathcal{C}\colon \mathcal{X}→\mathcal{D^\ast}\), where \(\mathcal{D}^\ast\) is the set of all finite strings from a D-ary alphabet.<br>
 <br>
@@ -517,7 +523,7 @@ $$
 \sum_{k=1}^m D^{-l_k}\le 1
 $$<br>
 
-Let \(X\) be a source random variable with \(X \sim \{p_1, p_2, \ldots, p_m\}\). Then the <strong>expected code length</strong> \(L\) of a source code \(\mathcal{C}\)  is \(\sum_i p_il_i\).<br>
+Let \(X\) be a source random variable with \(X \sim \{p_1, p_2, \ldots, p_m\}\). Then the <strong>expected code length</strong> \(L\) (a measure of efficiency) of a source code \(\mathcal{C}\)  is \(\sum_i p_il_i\).<br>
 <br>
 
 For a D-ary <em>uniquely decodable</em> code \(\mathcal{C}\) for a source variable \(X\) we can furthermore establish the <strong>entropy bound</strong> \(H_D(X) \le L\), since each D-ary symbol can carry at most 1 D-it of information.<br>
@@ -526,21 +532,119 @@ For a D-ary <em>uniquely decodable</em> code \(\mathcal{C}\) for a source variab
 The <strong>redundancy</strong> \(R\) of a D-ary uniquely decodable code is \(L-H_D(X) \underset{H \text{-bound}}{\ge} 0\)<br>
 <br>
 <h3 id="4.2-prefix-codes"> 4.2 Prefix Codes</h3>
-A code is <strong>prefix-free</strong> if no codeword is a prefix of another codeword. Such codes are called <strong>prefix codes</strong>. All prefix codes are uniquely decodable.<br>
+A code is <strong>prefix-free</strong> if no codeword is a prefix of another codeword. Such codes are called <strong>prefix codes</strong>. Prefix codes are uniquely decodable.<br>
 <br>
 
 A tree representation of a prefix code is called a <strong>code tree</strong>.
-<div class="image-center-wrapper"><img src="assets/code-tree.png" style="width: 80%;" class="inline-image image-center    "></div>
+<div class="image-center-wrapper"><img src="assets/code-tree.png" style="width: 70%;" class="inline-image image-center    "></div>
 <strong>Instantaneous decoding</strong> can be done by tracing the code tree from the root, starting at the beginning of the stream of coded symbols. In this way, the boundaries of the codewords can be discovered. A prefix code is said to be <strong>self-punctuating</strong>.<br>
 <br>
 
-There exists a D-ary prefix code with codeword lengths \(l_1, l_2, \ldots, l_m \iff\) the Kraft inequality is satisfied <br>
+There exists a D-ary prefix code with codeword lengths \(l_1, l_2, \ldots, l_m \iff\) the Kraft inequality is satisfied.<br>
 <br>
 
-A probability distribution is called <strong>D-adic</strong> (or <strong>dyadic</strong> when D=2) when \(p_i = D^{-t_i}\) for all \(i\), where \(t_i\) is an integer.<br>
+A probability distribution is called <strong>D-adic</strong> (or <strong>dyadic</strong> when D=2) when \(p_i = D^{-t_i}\) for all \(i\), where \(t_i\) is an integer. 
+There exists a D-ary prefix code which achieves the entropy bound for a distribution \(\{p_i\}\) if and only if  \(\{p_i\}\) is D-adic.<br>
 <br>
 
-There exists a D-ary prefix code which achieves the entropy bound for a distribution \(\{p_i\}\) if and only if  \(\{p_i\}\) is D-adic.
+A code for a source is called <strong>optimal</strong> if it has the shortest expected length of all codes for this source (an optimal code need not achieve the entropy bound). In an optimal code, words with high probability are associated with shorter codewords.<br>
+
+<strong>Huffman codes</strong> are a simple construction of optimal prefix codes. The expected length of a Huffman code is bounded: \(H_D(X) \underset{H \text{-bound}}{\le} L_\text{Huff} < H_D(X) + 1\).
+<div class="image-center-wrapper"><img src="assets/huffman-procedure.png" style="width: 75%;" class="inline-image image-center    "></div>
+When encoding a sequence \(X_1, \ldots X_n\) with a Huffman code \(nH(X) \le L_\text{Huff}^n < nH(X) + 1\) holds. So \(H(X) \le \frac{1}{n} (L_\text{Huff})^n < H(X) + \frac{1}{n}\). Therefore \(\frac{1}{n} (L_\text{Huff})^n\), which is called the <strong>rate</strong> of the code (in D-it per source symbol), goes to \(H(X)\) as \(n→\infty\).<br>
+<br>
+<h3 id="4.3-redundancy-of-prefix-codes"> 4.3 Redundancy of Prefix Codes</h3>
+Let \(q_k\) be the <strong>reaching probability</strong> of an internal node \(k\) in a code tree. Then \(q_k\) is equal to the sum of the probabilities of all the leaves descending from node \(k\). <br>
+<br>
+
+Let \(\tilde p_{k,j}\) be the <strong>branching probability</strong> of the \(j\)-th branch of internal node \(k\). Then \(q_k = \sum_j \tilde p_{k,j}\).<br>
+<br>
+
+The <strong>conditional branching distribution</strong> at node \(k\) is \(P = \Big \{ \frac{\tilde p_{k,0}}{q_k}, \frac{\tilde p_{k,1}}{q_k}\, \ldots, \frac{\tilde p_{k,D-1}}{q_k} \Big\}\) <br>
+<br>
+
+The <strong>conditional entropy</strong> of node \(k\) is \(h_k = H_D(P) \le \log_d D = 1\)<br>
+
+\(h_k\) measures the amount of information that the next symbol to be revealed carries given that the symbols already revealed led to internal node \(k\). <br>
+<br>
+
+\(H_D(X) = \sum_k q_k h_k\) and \(L=\sum_k q_k\) hold.<br>
+<br>
+
+The <strong>local redundancy</strong> of an internal node in a code tree is \(r_k = q_k(1-h_k)\).<br>
+<br>
+
+An internal node is called <strong>balanced</strong> if \(\tilde p_{k,j} = \frac{q_k}{D}\). In this case \(r_k = 0\).
+\(h_k\) measures the amount of information that the next symbol to be revealed carries given that the symbols already revealed led to internal node \(k\). <br>
+<br>
+
+<strong>Local redundancy theorem:</strong> \(R = \sum_k r_k\)<br>
+<br>
+<h2 id="5.-weak-typicality"> 5. Weak Typicality</h2>
+Both weak and strong typicality are formal measures of how typical some outcome is for a sequence of i.i.d. random variables.<br>
+<br>
+<h3 id="the-weak-aep-weak-asymptotic-equipartition-property"> The Weak AEP (Weak Asymptotic Equipartition Property)</h3>
+<strong>Weak law of Large Numbers (WLLN)</strong>
+For i.i.d. random variables \(Y_1, Y_2, \ldots\) with generic random variable \(Y\)
+$$
+\frac{1}{n}\sum_{k=1}^n Y_k → E[Y]
+$$<br>
+
+<strong>Weak AEP I</strong>
+Let \(X = (X_1, X_2, \ldots, X_n)\) where \(X_i\) are i.i.d. random variables.
+$$
+\lim_{n→\infty}\bigg(-\frac{1}{n}\log p(X)\bigg) = H(X)
+$$
+This holds due to \(p(X) = p(X_1)p(X_2)\cdots p(X_n)\), the WLLN above and the fact that \(-E[\log p(X)] = H(X)\). Weak AEP I includes two further equivalent statements.<br>
+<br>
+
+The <strong>weakly typical set</strong> \(W_{[X]\epsilon}^n\) with respect to \(p(x)\) is the set of all sequences \(x = (x_1, \ldots, x_n) \in \mathcal{X}^n\) such that
+$$
+\Big|-\frac{1}{n}\log p(x) - H(X)\Big| \le \epsilon
+$$
+The <strong>empirical entropy</strong> of a sequence \(x = (x_1, \ldots, x_n)\) is
+$$
+-\frac{1}{n} \log p(x) = \frac{1}{n}\sum_{k=1}^n [-\log p(x_k)]
+$$
+Therefore the empirical entropy of a weakly typical sequence is close to the true entropy \(H(X)\).<br>
+<br>
+
+<strong>Weak AEP II</strong>
+For \(\epsilon > 0\) and \(x \in W_{[X]\epsilon}^n\)
+$$
+2^{-n(H(X)+\epsilon)} \le p(x) \le 2^{-n(H(X)-\epsilon)}
+$$
+which follows directly from the definition of \(W_{[X]\epsilon}^n\). Furthermore for \(n\) sufficiently large
+$$
+\Pr\{X\in W_{[X]\epsilon}^n\} > 1-\epsilon
+$$
+and
+$$
+(1-\epsilon)2^{n(H(X)-\epsilon)} \le |W_{[X]\epsilon}^n| \le 2^{n(H(X)+\epsilon)}
+$$
+"The idea is that, although the size of the weakly typical set may be insignificant compared with the size of  the set of all sequences, the former has almost all the probability. When \(n\) is large, one can almost think of the sequence \(X\) as being obtained by choosing a sequence from the weakly typical set according to a uniform distribution. [..] The most likely sequence is in general not weakly typical although the probability of the weakly typical set is close to 1 when \(n\) is large."<br>
+<br>
+
+→ By proving a property for the typical set, this property will hold with a high probability in the general case.<br>
+<br>
+<h3 id="5.2-source-coding-theorem"> 5.2 Source Coding Theorem</h3>
+<div class="image-center-wrapper"><img src="assets/source-coding.png" style="width: 60%;" class="inline-image image-center    "></div>
+The <strong>encoder</strong> is a function \(f\colon \mathcal{X}^n → I = \{1, 2, \ldots, M\}\). Such a code is called a <strong>block code</strong> with <strong>block length</strong> \(n\). The <strong> coding rate</strong> of the code is \(\frac{\log M}{n}\) in bits per source symbol.<br>
+<br>
+
+For data compression typically \(R < \log |\mathcal{X}|\).<br>
+<br>
+
+\(P_e = \Pr\{\hat X \ne X\}\) is called the error probability.<br>
+<br>
+
+<strong>The source coding theorem</strong><br>
+<br>
+
+<ul>
+    <li>If we allow a small error probability \(P_e\), there exists a block code whose coding rate is arbitrarily close to \(H(X)\) when \(n\) is sufficiently large. (Reliable communication can be achieved if the coding rate is \(\ge H(X)\))</li>
+	<li>For a block code with block length \(n\) and coding rate less than \(H(X)-\zeta\), where \(\zeta > 0\), then \(P_e → 0\) as \(n→\infty\). (It is impossible to achieve reliable communication if the coding rate is less than \(H(X)\))</li>
+</ul>
 <section id="article_footer"><h2>References</h2><br><ol class="references"><li><span id="ref1">https://en.wikipedia.org/wiki/Conditional_independence</span> <a href="#ref1ref""><i class="references-return fas fa-caret-left"></i></a></li><li><span id="ref2">https://en.wikipedia.org/wiki/Mutual_information</span> <a href="#ref2ref""><i class="references-return fas fa-caret-left"></i></a></li><li><span id="ref3">https://en.wikipedia.org/wiki/Data_processing_inequality</span> <a href="#ref3ref""><i class="references-return fas fa-caret-left"></i></a></li></ol></section>
       </span>
 

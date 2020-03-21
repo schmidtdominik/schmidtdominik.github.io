@@ -139,13 +139,13 @@
           <h1 class="article-title">
             Category Theory
           </h1>
-          <time datetime="2019-12-29 00:00:00">December 29, 2019 ⧗ 14 minute read</time><br>
+          <time datetime="2019-12-29 00:00:00">December 29, 2019 ⧗ 19 minute read</time><br>
         </div>
       </div>
       <!--END OF HEADING-->
 
       <span class="article-text">
-        <div id="index"><a href=#general-stuff> → General stuff</a><br><a href=#set> → Set</a><br><a href=#category-theory-in-programming> → Category Theory in Programming</a><br><a href=#the-empty-set>&emsp; → The Empty Set</a><br><a href=#the-singleton-set>&emsp; → The Singleton Set</a><br><a href=#the-two-element-set>&emsp; → The Two-Element Set</a><br><a href=#hask>&emsp; → Hask</a><br><a href=#weak-and-strong-typing>&emsp; → Weak and Strong Typing</a><br><a href=#other-categories> → Other Categories</a><br><a href=#the-category-\varnothing>&emsp; → The Category \(\varnothing\)</a><br><a href=#free-categories>&emsp; → Free Categories</a><br><a href=#monoids>&emsp; → Monoids</a><br><a href=#thin-categories>&emsp; → Thin Categories</a><br><a href=#orders>&emsp; → Orders</a><br><a href=#kleisli-categories>&emsp; → Kleisli Categories</a></div><br><hr>These are my lecture notes on Bartosz Milewski's course on category theory. These are not meant as a comprehensive guide but rather a loose collection of definitions and short summaries.<br>
+        <div id="index"><a href=#general-stuff> → General stuff</a><br><a href=#set> → Set</a><br><a href=#category-theory-in-programming> → Category Theory in Programming</a><br><a href=#the-empty-set>&emsp; → The Empty Set</a><br><a href=#the-singleton-set>&emsp; → The Singleton Set</a><br><a href=#the-two-element-set>&emsp; → The Two-Element Set</a><br><a href=#hask>&emsp; → Hask</a><br><a href=#weak-and-strong-typing>&emsp; → Weak and Strong Typing</a><br><a href=#other-categories> → Other Categories</a><br><a href=#the-category-\varnothing>&emsp; → The Category \(\varnothing\)</a><br><a href=#free-categories>&emsp; → Free Categories</a><br><a href=#monoids>&emsp; → Monoids</a><br><a href=#thin-categories>&emsp; → Thin Categories</a><br><a href=#orders>&emsp; → Orders</a><br><a href=#kleisli-categories>&emsp; → Kleisli Categories</a><br><a href=#categories-through-universal-construction>&emsp; → Categories through Universal Construction</a></div><br><hr>These are my lecture notes on Bartosz Milewski's course on category theory. These are not meant as a comprehensive guide but rather a loose collection of definitions and short summaries.<br>
 <h2 id="general-stuff"> General stuff</h2>
 A <strong>category</strong> is a collection of <strong>objects</strong> along with arrows, called <strong>morphisms</strong>, between those objects. It is therefore similar to a labeled directed graph.<br>
 
@@ -226,7 +226,7 @@ Here we have expressed the elements of the type set of Bool as morphisms. In gen
 Such an object <code>()</code>  (called <strong>generalized element</strong>) that allows us to view individual elements of a set as morphisms does not exist for every category. In general, category theory abstracts over elements and looks at sets, functions and other things from a higher perspective.<br>
 <br>
 <h3 id="the-two-element-set"> The Two-Element Set</h3>
-The two element set is equivalent to the type Bool. It can also be defined as the sum of two units.
+The two element set is equivalent to the type <code>Bool</code>. It can also be defined as the sum of two units.
 A function that returns a boolean is called a predicate.<br>
 <br>
 <h3 id="hask"> Hask</h3>
@@ -283,17 +283,57 @@ In a thin category a bimorphism is not necessarily invertible (i.e. an isomorphi
 
 <ul>
     <li>A <strong>preorder</strong> is an order that is reflexive and composable (transitive). Every preorder is a thin category since for every pair of objects \((a, b)\) the hom-set is either empty (when \(a \nleq b\)) or a singleton set (when \(a \le	 b\)).</li>
-    <li>A <strong>partial order</strong> is a preorder that is also antisymmetric. (It is therefore relexive, transitive and antisymmetric) A partial order induces a directed acyclic graph.</li>
+    <li>A <strong>partial order</strong> is a preorder that is also antisymmetric. (It is therefore relexive, transitive and antisymmetric) A partial order induces a directed acyclic graph. A partially ordered set is called a poset.</li>
     <li>A <strong>total order</strong> is a partial order that is also connex (defined for any two objects - either \(a \le b\) or \(b \le a\)).</li>
 </ul><br>
 
  \(\le\) is a total order on \(\mathbb{R}\). It satisfies the requirements for categories (associative composability and identity) since it is a transitive and reflexive relation (composition is associative because there can never be more than one arrow between a pair of objects). It furthermore is transitive, antisymmetric and defined for any two real numbers.<br>
-<h3 id="kleisli-categories"> Kleisli Categories</h3><br>
-
-[todo...]<br>
+<br>
+<h3 id="kleisli-categories"> Kleisli Categories</h3>
+<div class="image-center-wrapper"><img src="assets/kleisli-categories.png" style="width: 80%;" class="inline-image image-center    "></div>
+Given a category consisting of objects \(a, b, c,\ldots\) and mappings \(x→(m,x)\) a Kleisli category can be constructed as above.<br>
 <br>
 
-<section id="article_footer"><div class="further-reading"><h2>Further Reading</h2><br><ul><li><a href="https://www.youtube.com/playlist?list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_">Category Theory lectures by Bartosz Milewski</a></li><li><a href="https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/">Category Theory for Programmers, Book by Bartosz Milewski</a></li><li><a href="https://en.wikipedia.org/wiki/Category_theory">Wikipedia (Category Theory)</a></li></ul></div></section>
+The mapping from \(a\) to \((m, a)\) is called a <strong>monad</strong>. <br>
+<br>
+<h3 id="categories-through-universal-construction"> Categories through Universal Construction</h3>
+A <strong>universal construction</strong> is a characterization of a particular type of object through its relationship with the rest of the universe. This allows us to define things like the empty set, singleton set, cartesian product, etc. in category theory, which in set theory are generally defined in terms of elements of sets.<br>
+<br>
+
+<strong>Example: Singleton set</strong><br>
+
+The singleton set has the <strong>universal property</strong> that there is an arrow from every set to the singleton set. This property however is not uniquely characteristic of the singleton set since it in <em>Set</em> there are arrows from almost every set to every other set (apart from arrows from non-empty sets to void)
+However to the singleton set there is always <em>exactly</em> one arrow from all other sets. Using this we can define the singleton set in category theory without using the notion of elements.<br>
+<br>
+
+<strong>Terminal objects</strong> generalize the relationship between the category <em>Set</em> and the singleton set.  A terminal object in a category is an object that has a unique arrow coming from any other object. Therefore a terminal object \((\,)\) satisfies the condition for existence of an incoming arrow \(\forall a\, \exists f\colon a →(\,)\) and the condition for uniqueness of the incoming arrow \(\forall f\colon a → (\,), g\colon a → (\,) \implies f=g\).<br>
+<br>
+
+Any sequence of arrows that lead from \(a\) to the terminal object \((\,)\) can be reduced through composition to a single arrow from \(a\) to \((\,)\). By the definition of the terminal object, this arrow is unique (for all paths, the composition is the same unique arrow). From this follows that all paths from \(a\) to \((\,)\) are in some sense equal.<br>
+<br>
+
+<strong>Example: Terminal objects in orders</strong><br>
+
+Since orders are thin categories and in thin categories there can be at most one arrow from \(a\) to \(b\), only the condition for existence above is relevant. In an order there exists an arrow \(a → b\) if \(a \le b\). Therefore for \(\forall a\, \exists f\colon a →(\,)\) to hold we know that \(\forall a\colon a \le (\,)\) must be true. From this follows that the terminal object of an order is largest object in the order. Such an object does not necessarily exist (for example in \(\mathbb{N}\)).<br>
+<br>
+
+<strong>Example: Empty set</strong><br>
+
+The empty set has the universal and uniquely defining property that it has exactly one outgoing arrow (the function <em>absurd</em>) to every object in <em>Set</em>.<br>
+<br>
+
+This motivates the definition of <strong>initial objects</strong> of a category (analogous to terminal objects). <br>
+<br>
+
+A category can have any number of terminal or initial objects.<br>
+<br>
+
+<strong>Terminal (or initial) objects are isomorphic</strong><br>
+
+Let \(a\) and \(b\) be terminal objects of a category. Then by the definition of terminal objects there exist unique morphisms \(f\colon a→b\) and \(g\colon b→a\). Let \(h=g\circ f\). Therefore \(h\) goes from \(a\) to \(a\). By the definition of a terminal object there can only be a single arrow from \(a\) to \(a\) so the identity \(\text{id}_a\) and \(h\) must be the same. Analogous for \(k=f\circ g\).<br>
+<br>
+
+Therefore \(f \circ g = \text{id}_b\) and \(g \circ f = \text{id}_a\) which is the definition of an isomorphism. This isomorphism is unique since \(f\) and \(g\) are unique.<section id="article_footer"><div class="further-reading"><h2>Further Reading</h2><br><ul><li><a href="https://www.youtube.com/playlist?list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_">Category Theory lectures by Bartosz Milewski</a></li><li><a href="https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/">Category Theory for Programmers, Book by Bartosz Milewski</a></li><li><a href="https://en.wikipedia.org/wiki/Category_theory">Wikipedia (Category Theory)</a></li></ul></div></section>
       </span>
 
       <!--<div id="disqus_thread"></div>
