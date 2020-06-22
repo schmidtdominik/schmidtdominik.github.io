@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Discrete Optimization - Dominik Schmidt</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <link rel=preload href="../css/BIG JOHN.otf" as="font" crossorigin>
+
+  <meta property="og:title" content="Discrete Optimization"/>
+  <meta property='og:type' content='article'/>
+  <meta property="og:image" content="assets/cover.png"/>
+  <meta property="og:url" content="http://dominikschmidt.xyz/discrete-opt-notes"/>
+  <!--<meta property="og:description" content="These are my lecture notes on Professor Pascal Van Hentenryck's excellent course on discrete optimization."/>-->
+
+  <!--<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+  <script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#edeff5",
+        "text": "#838391"
+      },
+      "button": {
+        "background": "#4b81e8"
+      }
+    },
+    "position": "bottom-left",
+    "content": {
+      "href": "http://dominikschmidt.xyz/policy"
+    }
+  })});
+</script>-->
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-4694920180315448",
+            enable_page_level_ads: true
+       });
+  </script>
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 100 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/article.css">
+
+  <link rel="stylesheet" href="../highlight/styles/atom-one-light.css"><!--foundation/hopscotch-->
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+
+  <!--<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>-->
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 8%">
+          <h1>
+            <a href="../index.html">
+              <span id="title">
+                Dominik Schmidt
+              </span>
+            </a>
+            <!--<a href="index.html">
+              <span id="by-me">
+
+              </span>
+            </a>-->
+          </h1>
+        <hr>
+        <nav>
+          <span style="display: inline-block;" ><a class="navitem" href="../index.html"><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../datasets.html"><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../random.html"><i class="fas fa-robot"></i>&nbsp;Random Stuff</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About me</a></span>
+
+          <span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://github.com/schmidtdominik"><i class="fab fa-github"></i>&nbsp;</a></span>
+          <!--<span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://www.reddit.com/user/dominik_schmidt"><i class="fab fa-reddit"></i></i>&nbsp;</a></span>-->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container article">
+      <div id='header-box'>
+
+
+        <!--START OF HEADING-->
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <img src="assets/cover.png" id="header-img" alt="">
+        </div>
+
+
+        <div id="header-text">
+          <h1 class="article-title">
+            Discrete Optimization
+          </h1>
+          <time datetime="2020-03-26 00:00:00">March 26, 2020 ⧗ 35 minute read</time><br>
+        </div>
+      </div>
+      <!--END OF HEADING-->
+
+      <span class="article-text">
+        <div id="index"><ul><li><a href=#some-problems> Some Problems</li></a><ul></ul><li><a href=#general-techniques> General Techniques</li></a><ul><li><a href=#dynamic-programming> Dynamic Programming</li></a><li><a href=#branch-and-bound> Branch and Bound</li></a></ul><li><a href=#constraint-programming> Constraint Programming</li></a><ul><li><a href=#linear-constraints-over-integers> Linear Constraints over Integers</li></a><li><a href=#global-constraints> Global Constraints</li></a><li><a href=#other-kinds-of-constraints> Other Kinds of Constraints</li></a><li><a href=#dual-modelling> Dual Modelling</li></a><li><a href=#arc-consistency--domain-consistency> Arc consistency / domain consistency</li></a><li><a href=#binary-knapsack-impl-w-cp> Binary Knapsack (impl w/ CP)</li></a><li><a href=#alldifferent-constraint-impl-w-cp> Alldifferent Constraint (impl w/ CP)</li></a><li><a href=#search> Search</li></a><li><a href=#variable-value-labeling> Variable-Value Labeling</li></a><li><a href=#value-variable-labeling> Value-Variable Labeling</li></a><li><a href=#domain-splitting> Domain Splitting</li></a><li><a href=#symmetry-breaking-during-search> Symmetry Breaking during Search</li></a><li><a href=#randomization-and-restarts> Randomization and Restarts</li></a></ul><li><a href=#local-search> Local Search</li></a><ul><li><a href=#swap-neighborhood> Swap Neighborhood</li></a><li><a href=#x-opt-neighborhood-for-tsp> x-OPT Neighborhood for TSP</li></a><li><a href=#local-search-for-graph-coloring> Local Search for Graph Coloring</li></a><li><a href=#connectivity> Connectivity</li></a><li><a href=#general-local-search-procedure> General Local Search Procedure</li></a><li><a href=#max-min-conflict> Max-Min Conflict</li></a><li><a href=#random-walk> Random Walk</li></a><li><a href=#iterated-local-search> Iterated Local Search</li></a><li><a href=#metropolis-heuristic> Metropolis Heuristic</li></a><li><a href=#simulated-annealing> Simulated Annealing</li></a><li><a href=#tabu-search> Tabu Search</li></a><li><a href=#other-metaheuristics> Other Metaheuristics</li></a></ul><li><a href=#linear-programming> Linear Programming</li></a><ul><li><a href=#geometry> Geometry</li></a><li><a href=#the-simplex-algorithm> The Simplex Algorithm</li></a></ul></div><hr style="margin-bottom: 4rem;">These are my lecture notes on Professor Pascal Van Hentenryck's excellent course on discrete optimization. <br>
+
+<div class="image-center-wrapper"><img src="assets/opt-techniques.png" style="width: 55%;" class="inline-image image-center    "></div><h2 id="some-problems"> Some Problems</h2>
+<strong>SEND+MORE=MONEY Problem:</strong> Assign a <em>unique</em> integer digit to each character in the string such that adding the digits of the characters of "SEND" and "MORE" results in "MONEY" as below.<br>
+
+<div class="code-wrapper"><pre><code>   SEND
++  MORE
+= MONEY
+</code></pre></div>
+<strong>8-Queens Problem:</strong> Given an 8x8 board, place 8 queens so that none of them attack each other (same row, column, diagonal).<br>
+<br>
+
+<strong>Magic Series:</strong> An integer series \((S_0, \ldots, S_n)\) is magic if \(S_i\) represents the number of occurrences of \(i\) in the series.<br>
+<br>
+
+<strong>Balanced Incomplete Block Designs (BIBDs):</strong> Input: \((v, b, r, k, l)\); Output: a \(v \times b\) binary matrix with exactly \(r\) ones per row, \(k\) ones per column and a scalar product of any two rows being equals to \(l\).<br>
+
+Many problems (like this one) naturally exhibit <strong>symmetries</strong> (for example variable symmetries or value symmetries). Exploring such symmetrical parts of the search space is useless. Therefore impose symmetry-breaking constraints.<br>
+
+For variable symmetries, impose an ordering on the variables (e.g. lexicographic).<br>
+<br>
+
+<strong>The Perfect Square Problem:</strong> Given \(n\) squares with specific sizes, put them all together into a large square of a given size.<br>
+<br>
+
+<strong>The Magic Square Problem:</strong> Create a matrix of individually unique numbers such that all rows, columns, and diagonals sum to the same number.<br>
+<br>
+
+<strong>Scene Allocation:</strong> Schedule actors to minimize total cost:<br>
+
+<ul>
+	<li>an actor plays in some of the scenes</li>
+	<li>at most \(k\) scenes can be shot per day</li>
+	<li>each actor is paid by the day</li>
+</ul><br>
+
+Days are symmetric: Only consider scheduling the first scene on the first day, the second scene on either the first day or the second day,..<br>
+<br>
+
+<strong>Warehouse Location Problem:</strong> Given a set of warehouses \(W\), each warehouse with a fixed cost \(f_w\), a set of customers \(C\) and a transportation cost \(t_{w, c}\) from warehouse \(w\) to customer \(c\), find which warehouses to open to warehouse and transportation costs.<br>
+<br>
+
+<strong>Symmetric TSP:</strong> Given a set of cities and a symmetric distance matrix containing the distances between any two cities find a tour of minimal cost that visits each city exactly once.<br>
+<br>
+
+<strong>Car Sequencing:</strong> Given k classes/configurations of cars (each consisting of different options) and a demand number and production capacity for each class, find a schedule according to which cars can be produced (meeting demand numbers and capacity constraints).<br>
+
+<div class="image-center-wrapper"><img src="assets/car-seq.png" style="width: 65%;" class="inline-image image-center    "></div>
+For CP: Add redundant constraint to ensure optimizer doesn't wait to long to start scheduling a particular category (e.g. doesn't wait until there are only 8 slots left to schedule 15 cars).<br>
+<br>
+
+<strong>The Knapsack Problem:</strong> Given items with values \(v_1, \ldots ,v_n\) and weights \(w_1, \ldots, w_n\) and a knapsack with capacity \(K\), find the subset of items with maximum total value but total weight less than \(K\).<br>
+
+Decision variable \(x=(x_1, \ldots, x_n)\) where \(x_i = 1\) means that the item is selected and \(x_1=0\) means that the item is not selected. The solution space size is therefore \(2^n\).<br>
+
+Express problem constraints in decision variables: \(\sum w_ix_i\le K\)<br>
+
+Objective function: \(\sum v_ix_i\)
+$$
+\text{maximize } \sum v_ix_i\\\text{subject to } \sum w_ix_i\le K \text{ and } x_i\in\{0, 1\}
+$$<br>
+<h2 id="general-techniques"> General Techniques</h2><h3 id="dynamic-programming"> Dynamic Programming</h3>
+Bottom up - divide and conquer approach<br>
+<br>
+
+For the knapsack problem:<br>
+
+\(O(k, 0) = 0\)<br>
+
+\(O(k, j) = \max(O(k, j-1), v_j + O(k-w_j, j-1))\) if \(w_j \le K\)<br>
+
+\(O(k, j) = O(k, j-1)\) otherwise<br>
+
+→ then trace back to find decision variable.<br>
+<br>
+
+Complexity: \(\mathcal{O}(Kn)\) but since \(\log(K)\) bits are needed to represent \(K\) the algorithm is actually exponential in \(K\) (pseudo polynomial).<br>
+<br>
+<h3 id="branch-and-bound"> Branch and Bound</h3>
+Create exhaustive search-tree but do not expand branches whose admissible (optimistic) estimate is worse then the best already found solution.<br>
+
+Find such an optimistic estimate through a relaxation of the problem. For example for the Knapsack problem we could remove the weight constraint \(K\) or allow fractional items to be included \(0 \le x_i \le 1\) (the latter one is a linear relaxation).<br>
+<br>
+
+<strong>Depth First Search:</strong> always select the deepest node to expand, space efficient (depth of the search tree)<br>
+
+<strong>Best First Search:</strong> Always select the node with the best optimistic estimate, bad worst case space complexity (may have to keep the entire search tree in memory)<br>
+
+<strong><a href="http://cs.brown.edu/courses/cs149/notes/lds_expanded.pdf">Limited/Least Discrepancy Search:</a></strong> quickly probes parts of the search space, space/time complexity depends on implementation, space complexity somewhere between DFS and Best FS.<br>
+<br>
+<h2 id="constraint-programming"> Constraint Programming</h2>
+Constraint programming is a <br>
+
+<ul>
+	<li>branch and prune methodology</li>
+	<li>complete method not a heuristic (always find optimal solution)</li>
+</ul><br>
+
+How to:<br>
+
+<ul>
+	<li>choose the decision variables</li>
+	<li>express constraints in terms of these variables</li>
+	<li>use constraints to reduce the set of values each variable can take</li>
+	<li>make a choice when no more deduction can be performed</li>
+</ul><br>
+<br>
+
+What does a constraint do?<br>
+
+<ul>
+	<li><strong>Feasibility checking:</strong> a constraint checks if it can be satisfied given the values in the domains of its variables \(\exists v_1\in D(x_1), \ldots, v_n \in D(x_n): c(x_1=v_1, \ldots x_n=v_n) = \text{true}\)</li>
+	<li><strong>Pruning:</strong> if satisfiable, a constraint determines which values in the domains cannot be part of any solution</li>
+	<li>every constraint has its own pruning algorithm</li>
+</ul><br>
+<br>
+
+<strong>Constrained Optimization:</strong> Find a solution → Then impose a constraint that the next solution must be better<br>
+<br>
+<h3 id="linear-constraints-over-integers"> Linear Constraints over Integers</h3>
+Consider a constraint
+$$
+a_1x_1 + \ldots + a_nx_n \ge b_1y_1 + \ldots + b_my_m
+$$
+\(a_1, b_j \ge 0\) are constant
+\(x_i, y_j\) are variables with domain \(D(x_i), D(x_j)\)<br>
+<br>
+
+<strong>Feasibility Test:</strong>
+$$
+a_1\max(D(x_1)) + \ldots + a_n \max(D(x_n)) \ge b_1\min(D(y_1)) + \ldots + b_m\min(D(y_m))
+$$<br>
+
+<strong>Pruning:</strong> Let,<br>
+
+$$
+l = a_1\max(D(x_1)) + \ldots + a_n \max(D(x_n)) \\
+r = b_1\min(D(y_1)) + \ldots + b_m\min(D(y_m))
+$$
+Then by bringing all terms apart from \(a_ix_i\) to the right side of the constraint we get
+$$
+a_ix_i \ge r - (l-a_i\max(D(x_i)))
+$$
+By dividing by \(a_i\) and conservatively rounding we get
+$$
+x_i \ge \left \lceil \frac{r - (l-a_i\max(D(x_i)))}{a_i} \right \rceil\\
+$$
+and
+$$
+y_j \le \left \lceil \frac{l - (r-b_j\max(D(y_j)))}{b_j} \right \rceil
+$$<br>
+<br>
+<h3 id="global-constraints"> Global Constraints</h3>
+Global constraints help reduce search space size by being able to detect infeasibility earlier and prune more efficiently than when using individual constraints.<br>
+
+<ul>
+	<li>\(\text{alldifferent}(x_1, \ldots, x_n)\) Individual pairwise constraints may be satisfiable while all of them together are not, global constraint detects this earlier. Furthermore individual constraints may not able to prune as much of the search space as global constraints.</li>
+	<li>Table constraints</li>
+	<li>\(\text{atmost}(\cdots)\)</li>
+</ul><br>
+<br>
+<h3 id="other-kinds-of-constraints"> Other Kinds of Constraints</h3>
+<strong>Basic Element Constraints:</strong> Let \(x, y\) be variables, \(c\) an array of integers and a constraint that \(x=c[y]\). Then constraint propagation occurs both ways.<br>
+<br>
+
+<strong>Reification:</strong> Allow constraints inside constraints (Replace the constraint by a 0/1 variables representing the truth value of the constraint)<br>
+<br>
+
+<strong>Redundant Constraints:</strong> Add constraints that are semantically redundant but computationally significant. Redundant constraints do not remove valid solutions but still help reduce the search space further.<br>
+
+E.g. for <code>Magic Series</code> add constraint sum(series) = len(series)<br>
+<br>
+
+<strong>Surrogate Constraints:</strong> Add constraints that are combinations of existing constraints. → Can improve pruning<br>
+<br>
+<h3 id="dual-modelling"> Dual Modelling</h3>
+Sometimes we have two different models (decision variables + constraints,..) for the same problem and are unsure which to choose. For example in the 8-queens problem we could save the position of the queen for each row, or for each column. We can solve this by using both models at the same time and connecting them with constraints.<br>
+<br>
+<h3 id="arc-consistency--domain-consistency"> Arc consistency / domain consistency</h3>
+After pruning: if value \(v\) is in the domain of variable \(x\), then there exists a solution to the constraint with value \(v\) assigned to variable \(x\) (optimal pruning). <br>
+<br>
+<h3 id="binary-knapsack-impl-w-cp"> Binary Knapsack (impl w/ CP)</h3>
+<ul>
+	<li>combine feasibility with pruning through DP approach</li>
+	<li>use dynamic programming to check for feasibility</li>
+	<li>use the dynamic programming table for pruning (update dependency links to only keep feasibly values)</li>
+</ul><br>
+
+<div class="image-center-wrapper"><img src="assets/knapsack-CP.png" style="width: 55%;" class="inline-image image-center    "></div><br>
+<h3 id="alldifferent-constraint-impl-w-cp"> Alldifferent Constraint (impl w/ CP)</h3>
+Construct bipartite graph with variables and values as vertices and assignments as edges. Now, checking for feasibility can simply be reduced to finding a maximum matching of the graph with size equals to the number of variables.<br>
+
+<div class="image-center-wrapper"><img src="assets/alldiff-CP.png" style="width: 55%;" class="inline-image image-center    "></div>
+Starting from an initial (incomplete) matching use alternating paths to improve matching until it reaches the required size.
+<div class="image-center-wrapper"><img src="assets/alldiff-CP2.png" style="width: 55%;" class="inline-image image-center    "></div>
+Use basic property by Berge (1970) for pruning.<br>
+<br>
+<h3 id="search"> Search</h3>
+Up until now we mostly focused on constraint propagation and related topics. Now with search we consider in which order we should traverse the search tree<br>
+<br>
+
+<strong>First-fail</strong> is a heuristic that says we should make the more difficult choices first, then later make the easier ones. (We don't need to make all the easy ones if we can't make the harder ones anyway). For example in 8-queens, place the hardest to place queens first. Harder choices are generally related to variables with smaller domains.<br>
+<br>
+<h3 id="variable-value-labeling"> Variable-Value Labeling</h3>
+<strong>Variable Ordering:</strong> choose the most constrained variable (smallest domain)<br>
+
+<strong>Value Ordering:</strong> choose a value that leaves as many options as possible for the other variables<br>
+<br>
+<h3 id="value-variable-labeling"> Value-Variable Labeling</h3>
+First choose the value to assign, then choose the variable to assign this value to.
+This works well when there are some values that we know will definitely have to be part of the solution.<br>
+<br>
+<h3 id="domain-splitting"> Domain Splitting</h3>
+Assigning a specific value to a specific variable is a strong commitment and drastically restricts future possibilities. Instead split the domain of a variable into two sets and choose one of them.<br>
+<br>
+
+For the magic square problem: Instead of assigning a specific value to a variable, split that variables domain in half.<br>
+<br>
+
+For car sequencing: Don't assign a specific configuration (boolean vector of options) to a slot, specify whether a specific option will be selected for this slot. This narrows down which car configurations can be selected for a slot. Choosing the option can be done by <em>first-fail</em>: choose options that are harder to schedule first (options that have high demand but low production capacity).<br>
+<br>
+<h3 id="symmetry-breaking-during-search"> Symmetry Breaking during Search</h3>
+Symmetry breaking constraints can interfere with search heuristics. Instead of using CB constraints, introduce symmetry breaking dynamically during the search procedure.<br>
+<br>
+<h3 id="randomization-and-restarts"> Randomization and Restarts</h3>
+Sometimes there is no (obvious) optimal search ordering. → Try many different random orderings. If no solution is found within a given time, restart the search.<br>
+
+<ul>
+	<li>apply a heuristic but with randomization (e.g. one of the three best variables)</li>
+	<li>limit the time in the search</li>
+	<li>if the limit is reached, restart and possibly increase the limit</li>
+</ul><br>
+<h2 id="local-search"> Local Search</h2>
+For optimization problems: Start with suboptimal solution, move towards optimal configurations<br>
+<br>
+
+For satisfaction problems: Start with infeasible configuration, move towards feasibility (turn satisfaction problem into optimization problem by minimizing number of constraint violations)<br>
+<br>
+
+<strong>Local minima:</strong> A configuration \(c\) is a local minima with respect to neighborhood \(N\) if  \(\forall n \in N(c)\colon f(n) \ge f(c)\) <br>
+<br>
+<h3 id="swap-neighborhood"> Swap Neighborhood</h3>
+For car sequencing: Find a configuration that appears in violations → swap that config with another one to minimize the number of violations.<br>
+<br>
+
+<strong>Why swaps, not assignments?</strong><br>
+
+Swaps ensure that some <em>hard constraints</em> are always satisfied during the search (e.g. in car sequencing the demand numbers constraint). Other constraints, called <em>soft constraints</em>, may be intermittently violated.<br>
+<br>
+
+In constrained optimization problems we can either choose to stay in feasible space and try to minimize the optimization objective or we can always consider feasible and infeasible configurations at the same time.<br>
+<br>
+
+In cases where there are binary constraints that are unlikely to change when performing local moves it can be better to define a discrete loss function to drive the search (e.g. magic square problem: instead of the binary constraint \(\text{sum(row)} = n\) use the value of \(|\text{sum(row)}-n|\)).<br>
+
+(Instead of optimizing the number of violations, optimize the degree of violation)<br>
+<br>
+<h3 id="x-opt-neighborhood-for-tsp"> x-OPT Neighborhood for TSP</h3>
+<strong>2-OPT:</strong> The neighborhood is the set of all tours that can be reached by swapping two edges (select two edges and replace them by other two edges). This neighborhood is equivalent to taking a substring of the tour and reversing it (inplace).<br>
+
+<strong>3-OPT:</strong> Same as 2-OPT but with three edges. Much better in quality than 2-OPT but more expensive<br>
+
+<strong>4-OPT:</strong> marginally better, much more expensive<br>
+
+<strong>K-OPT:</strong> generalization with fixed K<br>
+
+<strong>V-OPT:</strong> find favorable sequence of swaps (built incrementally). Size of the edge set to remove is grown as search progresses.<br>
+<br>
+<h3 id="local-search-for-graph-coloring"> Local Search for Graph Coloring</h3>
+Three possible ways:<br>
+
+<ul>
+<li>Find a greedy solution with \(k\) colors, then repeatedly remove a color and run local search to find a feasible solution with \(k-1\) colors. This way we force the objective function to decrease and use local search to move from infeasible to feasible space.</li>
+<li>Alternatively we can try to always remain in feasible space. One way to do that would be to start from a greedy solution and optimize \(\sum_i |C_i|^2\) where the color class \(C_i\) is the set of all nodes of color \(i\). Doing this encourages larger color classes which in turn makes it easier to reach a lower number of total colors.<br>
+<br>
+
+Unfortunately restricting the search to the feasible space severely impacts the neighborhood size since any give configuration may only have very few feasible neighbors. Therefore it makes sense to think about larger more interesting neighborhoods.<br>
+<br>
+
+<strong>Kemp chain neighborhood:</strong> when flipping the color of node \(v\) from red to blue, find all connected blue nodes and flip them red, then continue recursively from there (all nodes in the connected component in the picture below flip colors)<br>
+
+  <div class="image-center-wrapper"><img src="assets/kemp chain.png" style="width: 65%;" class="inline-image image-center    "></div></li><br>
+
+<li>A third way is to optimize feasibility and the objective function at the same time. To do this simply minimize \(\sum_i 2|B_i||C_i| - \sum_i |C_i|^2\) where \(B_i\) is the set of bad edges of color \(i\) and \(C_i\) is the color class for color \(i\) as above. This objective function furthermore has the special property that local minima are always feasible configurations.</li>
+</ul><br>
+<br>
+<h3 id="connectivity"> Connectivity</h3>
+A neighborhood \(N\) is connected if, from every configuration \(S\), some optimal solution \(O\) can be reached by a sequence of local moves: \(S = S_1 → S_2 → \ldots S_n = O\) where \(S_i \in N(S_{i-1})\).<br>
+<br>
+<h3 id="general-local-search-procedure"> General Local Search Procedure</h3>
+A general local search is done in the following way where \(N\) denotes the neighborhood, \(L\) denotes the subset of legal moves (e.g. local improvement \(\{n \in N(s) : f(n) < f(s)\}\), no degradation \(\{n \in N(s) : f(n) \le f(s)\}\)), and \(S\) denotes the selection function (e.g. greedy \(\arg \min_{n\in L} f(n)\), first neighbor, \(\epsilon\)-greedy, random walk w/ improvement).<br>
+
+<div class="image-center-wrapper"><img src="assets/local-search.png" style="width: 65%;" class="inline-image image-center    "></div>
+<div class="image-center-wrapper"><img src="assets/local-search-proc.png" style="width: 50%;" class="inline-image image-center    "></div>
+→ Use heuristics to drive the search towards a local minimum using local information<br>
+
+→ Use metaheuristics to try to escape local minima & drive the search towards global minima<br>
+<br>
+<h3 id="max-min-conflict"> Max-Min Conflict</h3>
+Max-Min conflict is a kind of multi-stage heuristic that tries to curb quadratic neighborhood size (\(\text{variables} \times \text{values}\)) and try approximate it with two linear selections.<br>
+<br>
+
+→ Select the variable with the most constraint violations. Then change its value to the value with the least constraint violations for that variable.<br>
+<br>
+<h3 id="random-walk"> Random Walk</h3>
+Always pick a random legal neighbor. This is very effective in very large neighborhoods where the objective value of each configuration is expensive to compute (making more choices vs making better choices).<br>
+<br>
+<h3 id="iterated-local-search"> Iterated Local Search</h3>
+Execute multiple local searches from different starting locations (can be combined with many other metaheuristics, multistarts or restarts)<br>
+<br>
+<h3 id="metropolis-heuristic"> Metropolis Heuristic</h3>
+<ul>
+    <li>Accept a move if it improves the objective value</li>
+    <li>A degrading move is accepted with probability \(\exp(\frac{-\delta}{t})\) where \(\delta\) is the difference in the objective values and \(t\) is a temperature.</li>
+</ul><br>
+<br>
+<h3 id="simulated-annealing"> Simulated Annealing</h3>
+Use Metropolis heuristic starting with a very high temperature and slowly adjust temperature downwards, thereby transitioning from a random walk to a local improvement search.<br>
+<br>
+
+With a very slow schedule simulated annealing is guaranteed to converge to a global optimum in a connected neighborhood.<br>
+<br>
+
+Possible to use restarts and reheats, also combine with tabu search<br>
+<br>
+<h3 id="tabu-search"> Tabu Search</h3>
+Keep running list of previous \(k \in \mathbb{N}\cup\{\infty\}\) explored nodes. Then always select the best configuration that is not tabu (has not been explored recently).<br>
+<br>
+
+Always storing entire solutions in the tabu list maybe to expensive (to store & compare) → Instead store hash/abstraction/summary/relative change in solution (e.g. swaps)<br>
+<br>
+
+Example: car sequencing
+Keep data structure <code>tabu[i, j]</code> which stores the next iteration when pair (i, j) can be swapped. A move is tabu as long as <code>tabu[i, j] >= current_iteration</code> and after applying a move <code>tabu[i, j]</code> is set to <code>current_iteration + L</code>. (e.g. <code>L=100</code>). This prevents the same configs to be swapped back and forth repeatedly<br>
+<br>
+
+The abstraction in the tabu list can be more or less specific. For example instead of just storing the swap \((a,b)\) we can store \((a, b, f_1, f_2)\) where \(f_1\) is the objective value before the swap and \(f_2\) is the objective value after the swap. This more specific tabu information would only prevent the exact same move from happening but would not prevent the same swap in a different configuration from happening.<br>
+<br>
+
+<strong>Aspiration:</strong> if a move is tabu but really good, ignore tabu status and still allow it<br>
+
+<strong>Intensification:</strong> retain high quality solutions and return to them periodically<br>
+
+<strong>Diversification:</strong> if the search gets stuck, diversify the current state by randomly changing values of some variables (inject randomness)<br>
+
+<strong>Strategic oscillation:</strong> Change the percentage of time spent in feasible/infeasible regions<br>
+
+<div class="image-center-wrapper"><img src="assets/tabu.png" style="width: 65%;" class="inline-image image-center    "></div><br>
+<h3 id="other-metaheuristics"> Other Metaheuristics</h3>
+<ul>
+    <li>Variable neighborhood search</li>
+    <li>Guided local search</li>
+    <li>Ant colony optimization</li>
+    <li>Hybrid evolutionary algorithms</li>
+    <li>Scatter search</li>
+    <li>Reactive search</li>
+</ul><br>
+<h2 id="linear-programming"> Linear Programming</h2>
+A <strong>linear program</strong> is a linear optimization term along with linear constraints and can be expressed in canonical form as follows:
+$$
+\begin{alignat}{1}
+ & \text{maximize} & c^\top x \\
+ & \text{subject to} \quad& Ax \le b & \\
+ & \text{and} \quad& x \ge 0 & \\          
+\end{alignat}
+$$
+where \(x\) represents the vector of variables (to be determined), \(c\) and \(b\) are known vectors of coefficients of the problem and \(A\) is a known matrix of coefficients of the problem.<sup><a id="ref1ref" href="#ref1">[1]</a></sup><br>
+<br>
+
+All variables in a program can take only nonnegative values. We can however replace any variable \(x_i\) by \(x_i^+ - x_i^-\) to represent negative values.<br>
+<br>
+
+Some notes on the (slightly different) conventions used in this course: A linear program generally minimizes the given optimization term but we can maximize by minimizing the negative of the term. Furthermore equality constraints can be represented as two inequalities. Refer to MIP for integer-valued variables.<br>
+<br>
+
+Linear programs can be solved in polynomial time with interior point methods or in worst-case exponential time with the Simplex algorithm. Both algorithms however exhibit similar performance characteristics on "typical" matrices and the Simplex algorithm is very efficient in practice.<br>
+<br>
+<h3 id="geometry"> Geometry</h3>
+A <strong>convex set</strong> is a set such that any convex combination between any two points from the set are members of the set (i.e. any line between two points in the set is fully inside the set). The intersection of convex sets is a convex set.<br>
+<br>
+
+A <strong>half space</strong> is either of the two parts into which a hyperplane divides an affine space. A half space can be represented by an inequality and is a convex set. The intersection of a set of half spaces is convex and is called a <strong>polyhedron</strong>, or <strong>polytope</strong> if the intersection is finite.<br>
+<br>
+
+→ The set of solutions satisfying the constraints of a linear program is convex.<br>
+<br>
+
+A <strong>face</strong> is the intersection of finitely many hyperplanes. For \(n\) variables a single hyperplane (dimension \(n-1\)) is called a <strong>facet</strong>, the intersection of \(n\) hyperplanes (dimension \(0\)) is called a <strong>vertex</strong>.<br>
+<br>
+
+<strong>Theorem:</strong> At least one of the points where the objective function is minimal is a vertex. Proof:<br>
+
+<div class="image-center-wrapper"><img src="assets/vertex-optimal-LP.png" style="width: 65%;" class="inline-image image-center    "></div>
+This reduces finding the optimal solution to a finite search problem (since there are only finite vertices). The number of vertices can however be extremely large.<br>
+<br>
+<h3 id="the-simplex-algorithm"> The Simplex Algorithm</h3>
+The Simplex algorithm is an average case polynomial time but worst case exponential time algorithm for finding a vertex on which the objective function takes on the minimal value. It does so in a local search like fashion but is guaranteed to find the global optimum due to convexity. <br>
+<br>
+
+<strong>Finding Basic Feasible Solutions (BFS)</strong><br>
+
+<ol>
+    <li>Express constraint inequalities as equalities by adding slack variables  \(a \le b \longrightarrow  a+s = b, s \ge 0\)</li>
+    <li>Select \(m\) variables (the "basic variables")</li>
+    <li>Re-express them in terms of the non-basic variables only (using Gaussian elimination)</li>
+    <li>We have a basic feasible solution if the \(b\)'s (the \(x^0\) factors) are all nonnegative</li>
+</ol><br>
+
+Note: in the image below all variables on the RHS (the non-basic variables) are set to zero while the variables \(x_3\), \(x_4\) and \(x_5\) are set to the non-negative values \(1\), \(2\) and \(3\) respectively.<br>
+
+<div class="image-center-wrapper"><img src="assets/reexpress-lp.png" style="width: 65%;" class="inline-image image-center    "></div>
+Naive optimization algorithm: Enumerate all subsets of the set of variables and find all basic feasible solutions with the above steps. This is highly inefficient, instead use the simplex algorithm.<br>
+<br>
+
+Starting from one basic feasible solution the simplex algorithm iteratively moves from one BFS to the next until it arrives at the global optimum. The move (swapping a basic and non-basic variable) is as follows: <br>
+<br>
+
+<ul>
+    <li>Select a non-basic variable with a negative coefficient in the objective function (the entering variable)</li>
+    <li>Select a basic variable (the leaving variable) to maintain feasibility
+	$$
+    l = \arg \min_{i:a_{ie} <0} \frac{b_i}{-a_{ie}}
+    $$
+    </li>
+    <li>Perform gaussian elimination (eliminate \(x_e\) from the right-hand side)</li>
+</ul><br>
+
+This operation is called pivoting <code>pivot(e, l)</code>.<br>
+<br>
+
+A BFS is optimal if its objective function after having eliminated all basic variables, is of the form:
+$$
+c_0 + c_1x_1 + \ldots + c_nx_n \\
+c_i \ge 0 \,\,(1 \le i \le n)
+$$<br>
+
+<strong>The Simplex algorithm:</strong><br>
+
+$$
+\begin{alignat}{1}
+ & \text{while } \exists 1 \le i \le n\colon c_i < 0 \text{ do} \\
+ & \quad \text{choose } e \text{ such that } c_e < 0; & \\
+ & \quad l = \arg \min_{i:a_{ie} <0} \frac{b_i}{-a_{ie}}
+      & \\ 
+ & \quad \text{pivot} (e, l) & \\ 
+\end{alignat}
+$$
+Assume that during the execution all \(b_i\) are always strictly positive and that the objective function is bounded below.<br>
+<br>
+
+<strong>Special case: objective function is unbounded below</strong><br>
+
+If a basic variable \(x_i\) has a negative coefficient in the objective function but only positive coefficients in the constraints the objective is unbounded below. This is because by making \(x_i\) arbitrarily large the objective can be made arbitrarily small but the solution remains feasible since the non-basic variables remain positive.<br>
+<br>
+
+<strong>Special case: Non-termination due to \(b_i=0\)</strong><br>
+
+If one of the \(b_i\) is zero during leaving variable selection we will always select the same variable since the arg-min ratio will always be zero. But selecting this variable will cause the objective function to remain the same so the algorithm never terminates. We can fix this by slightly changing our pivoting rule:<br>
+<br>
+
+<ul>
+    <li>Bland rule: always select the first entering variable lexicographically. This solves the non-termination issue but may not be very efficient since we generally want to select variables with large negative coefficents since by assigning a large positive value to those variables we can significantly decrease the objective.</li>
+    <li>Lexicographic pivoting rule: break ties when selecting the leaving variable by using a lexicographic pivoting rule.</li>
+    <li>Pertubation methods</li>
+</ul><br>
+<br>
+
+<strong>Two-phase method (how to find the initial BFS)</strong><br>
+
+Introduce artificial variables \(y_1\) to \(y_m\)<br>
+
+<div class="image-center-wrapper"><img src="assets/bfs_lp.png" style="width: 65%;" class="inline-image image-center    "></div>
+and optimize this problem with the simplex algorithm starting from a trivial initial BFS. If we find a solution with objective value 0 then the original problem is feasible since in this case all the \(y_i\) are zero (If a \(y_i\) is not zero we can perform a pivot to replace them with an \(x_i\)). From this solution we can create an initial BFS for our original problem.
+<section id="article_footer"><h2>References</h2><ol class="references"><li><span id="ref1"><a href="https://en.wikipedia.org/wiki/Linear_programming">Wikipedia: Linear Programming</a></span> <a href="#ref1ref""> <i class="fas fa-undo-alt references-return"></i></a></li></ol></section>
+      </span>
+
+      <!--<div id="disqus_thread"></div>
+
+
+      <script>
+          /**
+           *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+           *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+           */
+
+          var disqus_config = function () {
+              this.page.url = "https://dominikschmidt.xyz/discrete-opt-notes";  // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = "discrete-opt-notes"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+          };
+
+          (function() {  // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+
+              s.src = 'https://dominikschmidtxyz.disqus.com/embed.js';
+
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+          })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    </div>-->
+
+  <br><br>
+
+  <!--<footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>-
+
+  <br>-->
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

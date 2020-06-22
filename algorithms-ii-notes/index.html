@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Algorithms II - Dominik Schmidt</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <link rel=preload href="../css/BIG JOHN.otf" as="font" crossorigin>
+
+  <meta property="og:title" content="Algorithms II"/>
+  <meta property='og:type' content='article'/>
+  <meta property="og:image" content="assets/cover.png"/>
+  <meta property="og:url" content="http://dominikschmidt.xyz/algorithms-ii-notes"/>
+  <!--<meta property="og:description" content="<h2 id="maximum-flow-and-minimum-cut"> Maximum Flow and Minimum Cut</h2><h3 id="flow-network"> Flow Network</h3>
+A flow network is a directed graph where each edge has an associated capacity and flow value and the flow is always less or equal to the capacity. Furthermore (apart from source and sink node), the total flow coming out of a node has to be equal to the total flow going into the node."/>-->
+
+  <!--<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+  <script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#edeff5",
+        "text": "#838391"
+      },
+      "button": {
+        "background": "#4b81e8"
+      }
+    },
+    "position": "bottom-left",
+    "content": {
+      "href": "http://dominikschmidt.xyz/policy"
+    }
+  })});
+</script>-->
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-4694920180315448",
+            enable_page_level_ads: true
+       });
+  </script>
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 100 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/article.css">
+
+  <link rel="stylesheet" href="../highlight/styles/atom-one-light.css"><!--foundation/hopscotch-->
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+
+  <!--<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>-->
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 8%">
+          <h1>
+            <a href="../index.html">
+              <span id="title">
+                Dominik Schmidt
+              </span>
+            </a>
+            <!--<a href="index.html">
+              <span id="by-me">
+
+              </span>
+            </a>-->
+          </h1>
+        <hr>
+        <nav>
+          <span style="display: inline-block;" ><a class="navitem" href="../index.html"><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../datasets.html"><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../random.html"><i class="fas fa-robot"></i>&nbsp;Random Stuff</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About me</a></span>
+
+          <span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://github.com/schmidtdominik"><i class="fab fa-github"></i>&nbsp;</a></span>
+          <!--<span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://www.reddit.com/user/dominik_schmidt"><i class="fab fa-reddit"></i></i>&nbsp;</a></span>-->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container article">
+      <div id='header-box'>
+
+
+        <!--START OF HEADING-->
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <img src="assets/cover.png" id="header-img" alt="">
+        </div>
+
+
+        <div id="header-text">
+          <h1 class="article-title">
+            Algorithms II
+          </h1>
+          <time datetime="2020-06-03 00:00:00">June 3, 2020 ⧗ 25 minute read</time><br>
+        </div>
+      </div>
+      <!--END OF HEADING-->
+
+      <span class="article-text">
+        <div id="index"><ul><li><a href=#maximum-flow-and-minimum-cut> Maximum Flow and Minimum Cut</li></a><ul><li><a href=#flow-network> Flow Network</li></a><li><a href=#cut,-cut-set,--cut,-capacity-of-a-cut> Cut, Cut-Set, \(s\)-\(t\) Cut, Capacity of a Cut</li></a><li><a href=#mincut-problem> Mincut Problem</li></a><li><a href=#maxflow-problem> Maxflow Problem</li></a><li><a href=#ford-fulkerson-algorithm> Ford-Fulkerson Algorithm</li></a><li><a href=#flow-cut-relationship> Flow Cut Relationship</li></a><li><a href=#augmenting-path-theorem> Augmenting Path Theorem</li></a><li><a href=#maxflow-mincut-theorem> Maxflow-Mincut Theorem</li></a><li><a href=#proofs> Proofs</li></a><li><a href=#application:-bipartite-matching> Application: Bipartite Matching</li></a><li><a href=#application:-baseball-elimination> Application: Baseball Elimination</li></a></ul><li><a href=#radix-sorts> Radix Sorts</li></a><ul><li><a href=#key-indexed-counting> Key-Indexed Counting</li></a><li><a href=#lsd-radix-sort> LSD Radix Sort</li></a><li><a href=#msd-radix-sort> MSD Radix Sort</li></a><li><a href=#3-way-radix-quicksort-multi-key-quicksort> 3-way Radix Quicksort (Multi-key quicksort)</li></a><li><a href=#suffix-sort> Suffix Sort</li></a><li><a href=#manber-myers-algorithm> Manber-Myers Algorithm</li></a></ul><li><a href=#tries> Tries</li></a><ul><li><a href=#r-way-trie> R-way Trie</li></a><li><a href=#ternary-search-trie-tst> Ternary Search Trie (TST)</li></a><li><a href=#tst-with-r²-branching-at-the-root> TST with R² Branching at the Root</li></a><li><a href=#radix-tree> Radix tree</li></a><li><a href=#suffix-tree> Suffix Tree</li></a><li><a href=#trie-based-character-operations> Trie-based Character Operations</li></a></ul><li><a href=#substring-search> Substring Search</li></a><ul><li><a href=#brute-force-approach> Brute-force approach</li></a><li><a href=#knuth-morris-pratt-substring-search> Knuth-Morris-Pratt Substring Search</li></a><li><a href=#boyer-moore-heuristic> Boyer-Moore Heuristic</li></a><li><a href=#rabin-karp-algorithm> Rabin-Karp Algorithm</li></a></ul><li><a href=#regular-expressions> Regular Expressions</li></a><ul><li><a href=#general-regex-pattern-matching> General regex Pattern Matching</li></a></ul><li><a href=#data-compression> Data Compression</li></a><ul><li><a href=#universal-data-compression> Universal Data Compression</li></a></ul><li><a href=#other-notes> Other Notes</li></a><ul></ul></div><hr style="margin-bottom: 4rem;"><h2 id="maximum-flow-and-minimum-cut"> Maximum Flow and Minimum Cut</h2><h3 id="flow-network"> Flow Network</h3>
+A <strong>flow network</strong> is a directed graph where each edge has an associated capacity and flow value and the flow is always less or equal to the capacity. Furthermore (apart from <strong>source</strong> and <strong>sink</strong> node), the total flow coming out of a node has to be equal to the total flow going into the node. <br>
+<br>
+
+The assignment of flow values to edges is called an <strong>s-t flow</strong>. The <strong>value</strong> of an s-t flow is the inflow at the sink (or the outflow at the source).<br>
+<br>
+<h3 id="cut,-cut-set,--cut,-capacity-of-a-cut"> Cut, Cut-Set, \(s\)-\(t\) Cut, Capacity of a Cut</h3>
+A <strong>cut</strong> is a partition of the vertices of a graph into two disjoint subsets A and B. The <strong>cut-set</strong> is the set of edges that have an endpoint in each of the subsets. <br>
+<br>
+
+An <strong>s-t cut</strong> is a partition of a network into two disjoint subsets where the source \(s\) is in one subset and the sink \(t\) is in the other. The <strong>cut-set</strong> of an s-t cut only contains the edges going from the source's subset of the sink's subset. The <strong>capacity</strong> of an s-t cut is the sum of the weight of each edge in the cut-set.<br>
+<br>
+<h3 id="mincut-problem"> Mincut Problem</h3>
+Given a flow network, a source vertex \(s\) and a target vertex \(t\) find the s-t cut with minimal capacity.<br>
+<br>
+<h3 id="maxflow-problem"> Maxflow Problem</h3>
+Given a flow network, find an s-t flow of maximum value.<br>
+
+<ul>
+	<li>There are many algorithms to solve maxflow problems</li>
+	<li>Best in-practice: push-relabel method with gab relabeling (in \(E^{3/2}\))</li>
+	<li>Worst-case time complexity is generally not useful for predicting or comparing maxflow algorithm performance in practice</li>
+</ul><br>
+
+<div class="image-center-wrapper"><img src="assets/maxflow.png" style="width: 65%;" class="inline-image image-center    "></div><br>
+<h3 id="ford-fulkerson-algorithm"> Ford-Fulkerson Algorithm</h3>
+<ol>
+    <li>Start with 0 flow at all edges</li>
+    <li>Repeatedly find an "augmenting" <em>undirected</em> path from \(s\) to \(t\) such that the flow on forward edges is less than the capacity and the flow on backwards edges is more than 0.</li>
+    <li>Increase/decrease the flow along the path on all forward/backward edges.</li>
+    <li>Terminate when no augmenting paths are left.</li>
+</ol><br>
+
+The performance of this algorithm depends heavily on the augmenting path selection algorithm.<br>
+
+<div class="image-center-wrapper"><img src="assets/ff-perf.png" style="width: 65%;" class="inline-image image-center    "></div>
+Note that the method of finding augmenting paths is not specified in the Ford-Fulkerson algorithm. When BFS is used the algorithm is referred to as the <strong>Edmonds–Karp algorithm</strong>.<br>
+<br>
+
+With a bad augmenting path selection algorithm (e.g. longest path first), Ford-Fulkerson can pretty slow (e.g. 200 vs 2 iterations, where each iteration +1/+100 is added to the flow)<br>
+
+<div class="image-center-wrapper"><img src="assets/ff-worst-case.png" style="width: 50%;" class="inline-image image-center    "></div><br>
+<h3 id="flow-cut-relationship"> Flow Cut Relationship</h3>
+The <strong>net flow across a cut</strong> (A, B) is the sum of flows on edges from A to B minus the total flow in the other direction.<br>
+
+<strong>Flow-value lemma:</strong> Let \(f\) be any s-t flow. Then the net flow across any s-t cut is equal to the value of \(f\). (Proof by induction)<br>
+
+<strong>Weak duality:</strong> The value of any s-t flow is less or equal to the capacity of any s-t cut.<br>
+<br>
+
+So overall we know that \(\text{value of the flow} = \text{net flow across cut} \le \text{capacity of the cut}\).<br>
+<br>
+<h3 id="augmenting-path-theorem"> Augmenting Path Theorem</h3>
+A flow \(f\) is a maxflow \(\iff\) there are no augmenting paths
+(correctness of the ford-fulkerson algorithm)<br>
+<br>
+<h3 id="maxflow-mincut-theorem"> Maxflow-Mincut Theorem</h3>
+We know that the value of a flow is less or equal to the capacity of any cut. The maxflow-mincut theorem says that equality holds if the chosen flow is the maxflow and the chosen cut is the mincut:<br>
+<br>
+
+Value of the maxflow \(=\) capacity of the mincut<br>
+<br>
+<h3 id="proofs"> Proofs</h3>
+To prove the above two theorems show that the following three conditions are equivalent for any flow \(f\):<br>
+
+<ol>
+    <li>There exists a cut whose capacity equals the value of the flow \(f\).</li>
+    <li>\(f\) is a maxflow.</li>
+    <li>There is no augmenting path with respect to \(f\).</li>
+</ol><br>
+
+Prove 1 \(\implies\) 2, ~3 \(\implies\) ~2 and 3 \(\implies\) 2.<br>
+<br>
+
+How to compute a mincut from a maxflow follows directly from the proof.<br>
+<br>
+<h3 id="application:-bipartite-matching"> Application: Bipartite Matching</h3>
+Given a bipartite graph, either find a perfect matching or explain why no perfect matching exists (e.g. matching students to companies). This problem can be reformulated as a maxflow problem as below. If no perfect matching exists the associated mincut explains why.<br>
+
+<div class="image-center-wrapper"><img src="assets/bipartite-matching.png" style="width: 65%;" class="inline-image image-center    "></div>
+With a Ford-Fulkerson implementation specifically optimized for bipartite matching the runtime is proportional to \(E\sqrt{V}\).<br>
+<br>
+<h3 id="application:-baseball-elimination"> Application: Baseball Elimination</h3>
+<div class="image-center-wrapper"><img src="assets/baseball-elim.png" style="width: 65%;" class="inline-image image-center    "></div><br>
+<h2 id="radix-sorts"> Radix Sorts</h2>
+<div class="image-center-wrapper"><img src="assets/sorts_perf.png" style="width: 65%;" class="inline-image image-center    "></div><br>
+<h3 id="key-indexed-counting"> Key-Indexed Counting</h3>
+Key-Indexed Counting is a variant of Counting Sort that allows for stable sorting of Value(arbitrary)-Key(integer) pairs (not just a list of integer values as in counting sort). The <strong>radix</strong> is the largest key in the array to be sorted an corresponds to the length of the count/cumulatives array.<br>
+<br>
+<h3 id="lsd-radix-sort"> LSD Radix Sort</h3>
+Going from the rightmost to the leftmost character column in the array to be sorted, LSD radix sort (for fixed width strings) iteratively applies key-indexed counting to the array, taking each character column as the sorting key.<br>
+<br>
+
+LSD radix sort can be used to efficiently sort a list of integers by grouping the number into bytes (or \(n\)-bit sized blocks) and sorting the string of bytes (or string of blocks).<br>
+<br>
+
+LSD radix sort runs in \(\mathcal{O}(2\cdot nw)\) where \(n\) is the number of keys and \(w\) is the key length.<br>
+<br>
+<h3 id="msd-radix-sort"> MSD Radix Sort</h3>
+MSD Radix sort first applies key-indexed counting to the array taking the leftmost character column as keys. This partitions the array into \(R\) subsets each containing strings starting with the same character. Then MSD radix sort is performed recursively on this subset. <br>
+<br>
+
+<strong>Issue with Radix Sort:</strong>
+Radix sorts have a performance issue in cases where the array to be sorted is small but the radix is very large. In this case the sorting of the small array would be possible in a short amount of time but radix sort has to initialize a very large count array. This is especially bad in MSD radix sort where the recursive procedure causes this exact situation to happen many times (in the leaves of the recursion tree sorting arrays are small but the radix remains constant). Solution: Cutoff to insertion sort (starting at the \(d\)th character) for small subarrays. This can be implemented by overriding <code>less()</code>.<br>
+<br>
+
+MSD radix sort is generally linear \(\mathcal{O}(2\cdot nw)\) but can be sublinear \(\mathcal{O}(n \log_R n)\) in input size since for (almost) random keys only very few digits need to be examined to determine the correct order.<br>
+<br>
+
+Note: LSD radix sort is generally only defined for fixed length keys whereas MSD radix sort can operate on mixed length keys. <br>
+<br>
+<h3 id="3-way-radix-quicksort-multi-key-quicksort"> 3-way Radix Quicksort (Multi-key quicksort)</h3>
+<strong>Disadvantages of MSD radix sort</strong><br>
+
+<ul>
+    <li>Accesses memory randomly (→ cache inefficient)</li>
+    <li>Needs lots of extra space for count[] and aux[]</li>
+    <li>Inner loop with lot of instructions</li>
+</ul><br>
+
+<strong>Disadvantages quicksort</strong><br>
+
+<ul>
+    <li>Linearithmic number of string compares</li>
+    <li>Has to rescan many characters in keys with long prefix matches (since comparison with the pivot is done by comparing the entire strings)</li>
+</ul><br>
+
+3-way string/radix quicksort combines radix sort with quicksort to create a sorting algorithm with quicksort like performance characteristics that performs better than quicksort in cases where lots of keys share prefixes (as is common in many applications of sorting).<br>
+<br>
+
+<strong>Advantages 3-way string quicksort</strong><br>
+
+<ul>
+    <li>Short inner loop</li>
+    <li>Cache friendly</li>
+    <li>In place</li>
+</ul><br>
+
+3-way string quicksort partitions the array on the \(d\)th character based on a selected pivot character (median/random/..) such that the first/second/third partition contains keys where the \(d\)th characters is less than/equal/greater than the pivot character. Then the algorithm is recursively applied to the partitions.<br>
+<br>
+
+3-way radix quicksort benefits from typical quicksort optimizations like median-of-three pivoting and switching to insertion sort for small arrays. 3-way radix quicksort is isomorphic to ternary search trees in the same way that quicksort is isomophic to binary search trees. <sup><a id="ref1ref" href="#ref1">[1]</a></sup><br>
+<br>
+<h3 id="suffix-sort"> Suffix Sort</h3>
+Suffix sort is a technique that can be used to efficiently search a long string for occurrences of substring (and its context in the string) or to solve the longest repeating substring problem. The longest repeating substring problem has many applications in bioinformatics, cryptanalysis and data compression.<br>
+<br>
+
+First an array of all suffixes of the string is created (in linear time and space using array views) then this array is sorted with any sorting algorithm (e.g. very efficiently with 3-way radix quicksort).<br>
+
+<div class="image-center-wrapper"><img src="assets/suffix-sort.png" style="width: 60%;" class="inline-image image-center    "></div>
+When doing suffix sort with 3-way radix quicksort the worst-case input contains a very long longest repeated substring which causes the algorithm to have a runtime quadratic (or worse) in D. The suffix sort problem can also be solved in linearithmic time with the Manber-Myers algorithm or in linear time with suffix trees.<br>
+<br>
+<h3 id="manber-myers-algorithm"> Manber-Myers Algorithm</h3>
+The Manber-Myers algorithm is a \(n\log n\) algorithm for creating suffix arrays. In the first phase it sorts the given array on the first character using key-indexed counting. It then repeatedly turns an array sorted on the first \(2^{i-1}\) characters into an array sorted on the first \(2^i\) characters.<br>
+<br>
+<h2 id="tries"> Tries</h2>
+Both red-black BSTs and hash tables are efficient symbol table implementations. We can do even better however by avoiding examining entire keys and look at individual characters.<br>
+
+<div class="image-center-wrapper"><img src="assets/symbol-table.png" style="width: 60%;" class="inline-image image-center    "></div><br>
+<h3 id="r-way-trie"> R-way Trie</h3>
+An R-way trie is a data structure that associates arbitrary values with string keys in a way that allows for efficient search, insert and delete operations.<br>
+
+<div class="image-center-wrapper"><img src="assets/tries.png" style="width: 60%;" class="inline-image image-center    "></div><br>
+<h3 id="ternary-search-trie-tst"> Ternary Search Trie (TST)</h3>
+A hybrid between search trees and tries that is more space efficient than regular tries.<br>
+
+<div class="image-center-wrapper"><img src="assets/tsts.png" style="width: 60%;" class="inline-image image-center    "></div>
+We can build balanced TSTs via rotations to achieve a \(L + \log N\) worst-case guarantee.<br>
+<br>
+<h3 id="tst-with-r²-branching-at-the-root"> TST with R² Branching at the Root</h3>
+This is a hybrid between regular tries and TSTs which performs better than either. At the root there exist either \(R\) or \(R^2\) branches that cover the first (or first two) characters, then the rest of the trie is a normal TST.<br>
+<br>
+<h3 id="radix-tree"> Radix tree</h3>
+Radix trees (also called compact prefix tree; variant of patricia trie) removes one-way branches by compressing multiple character nodes into a single string node.<br>
+<br>
+<h3 id="suffix-tree"> Suffix Tree</h3>
+A suffix tree is a patricia trie of suffixes of a string and can be constructed in linear time. Can solve longest repeated substring, longest common substring, longest palindromic substring, substring search, tandem repeats,.. in linear time.<br>
+<br>
+<h3 id="trie-based-character-operations"> Trie-based Character Operations</h3>
+<ul>
+    <li>Prefix match (find all keys that match a given prefix)</li>
+    <li>Wildcard match (find all keys that match a given pattern)</li>
+    <li>Longest prefix (find key that is the longest prefix of a given word, e.g. ip packet routing)</li>
+    <li>Sorted iteration (inorder traversal of trie yields keys in sorted order)</li>
+</ul><br>
+<br>
+<h2 id="substring-search"> Substring Search</h2>
+<div class="image-center-wrapper"><img src="assets/substring-search.png" style="width: 60%;" class="inline-image image-center    "></div><br>
+<h3 id="brute-force-approach"> Brute-force approach</h3>
+Go through pattern and text input at the same time always checking that characters match. If a mismatch occurs backtrack to beginning of pattern+1 and try again.<br>
+<br>
+<h3 id="knuth-morris-pratt-substring-search"> Knuth-Morris-Pratt Substring Search</h3>
+The Knuth-Morris-Pratt algorithm precomputes an NFA (deterministic finite state automaton) that allows us to always know our matched-up-to-\(d\)th-char position in the pattern without ever having to backtrack. The computing the NFA table is \(\mathcal{O}(k)\) where \(k\) is the length of the pattern and performing the substring search is \(\mathcal{O}(n)\) where \(n\) is the length of the string, so the KMP algorithm is \(\mathcal{O}(k+n)\).  (Note in the course a less efficient but much simpler method for computing a <em>D</em>FA is presented that takes more space and time to compute)<br>
+<br>
+<h3 id="boyer-moore-heuristic"> Boyer-Moore Heuristic</h3>
+We can achieve sublinear time for substring search by comparing patterns from right to left, skipping over part of the pattern if a letter doesn't match.<br>
+
+<div class="image-center-wrapper"><img src="assets/boyer-moore.png" style="width: 60%;" class="inline-image image-center    "></div>
+<ol>
+    <li>If character is not in pattern: skip over entire pattern</li>
+    <li>Otherwise skip to the rightmost matching character.
+    	Unless this would involve back-up of the leftmost edge of the pattern, then just move one character over.
+    </li>
+</ol><br>
+
+Step 2. can be performed efficiently by precomputing a table of rightmost character occurrences.<br>
+<br>
+
+Substring search with the Boyer-Moore mismatched character heuristic takes about \(N/M\) character compares where \(N\) is the length of the string and \(M\) is the length of the pattern.<br>
+<br>
+
+The worst-case of \(M\cdot N\) can be avoided by using a KMP (see above) hybrid rule to guard against repetitive patterns which brings the worst case runtime to \(3N\).<br>
+<br>
+<h3 id="rabin-karp-algorithm"> Rabin-Karp Algorithm</h3>
+The Rabin-Karp algorithm is another efficient algorithm for substring search based on modular hashing. Rabin-Karp can be extended to cases with 2d-patterns or multiple patterns.<br>
+
+<div class="image-center-wrapper"><img src="assets/rabin-karp.png" style="width: 60%;" class="inline-image image-center    "></div>
+Above, \(Q=997\) is chosen as an arbitrary, large prime number. If the hash of the current substring matches the hash of the pattern the strings can be compared to see whether they actually match.<br>
+<br>
+
+The hash computation can also be performed efficiently. Basically we have to evaluate the polynomial
+$$
+x_i = t_iR^{M-1} + t_{i+1}R^{M-2} + \ldots + t_{i+M-1}R^{0}
+$$
+for every starting position \(i\) and hash the result. To compute the hash of a single substring/pattern we can use Horner's method and apply the hash function between each step which ensures that the values can't grow arbitrarily large, no matter how long the pattern is.<br>
+
+<div class="image-center-wrapper"><img src="assets/horner.png" style="width: 60%;" class="inline-image image-center    "></div>
+We can then efficiently compute the hashes for sequential substrings in a running fashion (applying the hash function after each step):
+$$
+x_{i+1} = (x_i - t_iR^{M-1}) R + t_{i+M}
+$$
+Note that \(R^{M-1} \pmod{Q}\) can be precomputed (using Horner's method to prevent overflows).<br>
+<br>
+
+<strong>Monte Carlo version:</strong> Return match if hashes match, always runs in linear time but may be incorrect with a small probability.<br>
+
+<strong>Las Vegas version:</strong> If hashes match check for string match and return result, always correct and likely to run in linear time (but worst case \(MN\)).<br>
+<br>
+
+Note that arithmetic ops in Rabin-Karp are generally slower than char compares.<br>
+<br>
+
+If \(Q\) is a sufficiently large random prime (about \(MN^2\)), then the probability of a false collision is a about \(1/N\). In practice choose \(Q\) to be a large random prime, under reasonable assumptions the probability of a collision is about \(1/Q\).<br>
+<br>
+<h2 id="regular-expressions"> Regular Expressions</h2>
+A regular expression is a notation consisting of concatenation, or, closure (Kleene's star) and parentheses used to specify a possibly infinite set of strings. <br>
+<br>
+
+Other common regex patterns like "[a-z]", "a+", "." (wildcard), "[0-9]{5}" (exactly k), ... can all be expressed through the notational devices listed above. Notations like "\0" (matches previous match) are not regular.<br>
+<br>
+<h3 id="general-regex-pattern-matching"> General regex Pattern Matching</h3>
+<strong>Kleene's Theorem:</strong>
+For any DFA, there exists a RE that describes the same set of strings and vice versa. The corresponding DFA may however have an exponential number of states.<br>
+<br>
+
+Instead of DFAs we use NFAs in the following algorithm since we can't process an exponential number of states in polynomial time.<br>
+<br>
+
+<strong>Pattern matching algorithm overview</strong><br>
+
+<ol>
+    <li>Create NFA from RE</li>
+    <li>Simulate NFA with text as input</li>
+    <li>If the NFA ends in a terminal state the text matches the pattern.</li>
+</ol><br>
+
+<strong>Constructing the NFA</strong><br>
+
+The NFA can be constructed in time proportional to \(M\), where \(M\) is the length of the RE with the following procedure: <br>
+
+<ol>
+    <li>We are using states numbered from \(0\) to \(M\), one for each symbol in the RE + one terminal state.</li>
+    <li>Every in-alphabet symbol (A, B,..) has an edge to the next state. (implicitly stored in the RE array)</li>
+    <li>Create separate directed graph to store \(\epsilon\)-transitions (red edges in the picture below) in. There are simple rules to determine which \(\epsilon\)-edges are needed for each type of metacharacter.
+    </li>
+</ol><br>
+
+Note: to create the \(\epsilon\)-transition digraph, maintain a stack that stores opening and closing parentheses and \(|\) (or) symbols. <br>
+
+<div class="image-center-wrapper"><img src="assets/nfa-grep.png" style="width: 60%;" class="inline-image image-center    "></div>
+<strong>Simulating the NFA</strong><br>
+
+<ol>
+    <li>Maintain a set of all possible states that the NFA could be in after reading the first \(i\) characters.</li>
+    <li>Read character \(i+1\) and update set of possible states after transitioning.</li>
+    <li>Add all states reachable via \(\epsilon\) transitions by running dfs on the \(\epsilon\)-digraph starting from all possible current states.</li>
+    <li>Repeat for all characters in the input.</li>
+</ol><br>
+<br>
+<h2 id="data-compression"> Data Compression</h2><h3 id="universal-data-compression"> Universal Data Compression</h3>
+<strong>Proposition:</strong> No algorithm can compress every bitstring.
+Proof by counting number of bitstrings with \(n\) bits vs number of bitstrings with \(\le n-1\) bits. (or proof by contradiction through repeated application of the algorithm)<br>
+<br>
+<h2 id="other-notes"> Other Notes</h2>
+<ul>
+	<li>Eulerian tour is tractable; graph isomophism, hamilton cycle are intractable</li>
+	<li>Find topological sort with reverse dfs postorder</li>
+	<li>Shortest path: topological sort (restriction: no directed cycles), dijkstra (restriction: no negative edges), bellman-ford (restriction: no negative cycles)</li>
+	<li>We can also use bellman ford to detect and find negative cycles (e.g. for arbitrage)</li>
+</ul><section id="article_footer"><h2>References</h2><ol class="references"><li><span id="ref1">https://en.wikipedia.org/wiki/Multi-key_quicksort</span> <a href="#ref1ref""> <i class="fas fa-undo-alt references-return"></i></a></li></ol></section>
+      </span>
+
+      <!--<div id="disqus_thread"></div>
+
+
+      <script>
+          /**
+           *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+           *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+           */
+
+          var disqus_config = function () {
+              this.page.url = "https://dominikschmidt.xyz/algorithms-ii-notes";  // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = "algorithms-ii-notes"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+          };
+
+          (function() {  // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+
+              s.src = 'https://dominikschmidtxyz.disqus.com/embed.js';
+
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+          })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    </div>-->
+
+  <br><br>
+
+  <!--<footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>-
+
+  <br>-->
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

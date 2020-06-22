@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Game Theory - Dominik Schmidt</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <link rel=preload href="../css/BIG JOHN.otf" as="font" crossorigin>
+
+  <meta property="og:title" content="Game Theory"/>
+  <meta property='og:type' content='article'/>
+  <meta property="og:image" content="assets/cover.png"/>
+  <meta property="og:url" content="http://dominikschmidt.xyz/game-theory-notes"/>
+  <!--<meta property="og:description" content="These are my lecture notes on the Stanford coursera course on Game Theory."/>-->
+
+  <!--<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+  <script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#edeff5",
+        "text": "#838391"
+      },
+      "button": {
+        "background": "#4b81e8"
+      }
+    },
+    "position": "bottom-left",
+    "content": {
+      "href": "http://dominikschmidt.xyz/policy"
+    }
+  })});
+</script>-->
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-4694920180315448",
+            enable_page_level_ads: true
+       });
+  </script>
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 100 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/article.css">
+
+  <link rel="stylesheet" href="../highlight/styles/atom-one-light.css"><!--foundation/hopscotch-->
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+
+  <!--<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>-->
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 8%">
+          <h1>
+            <a href="../index.html">
+              <span id="title">
+                Dominik Schmidt
+              </span>
+            </a>
+            <!--<a href="index.html">
+              <span id="by-me">
+
+              </span>
+            </a>-->
+          </h1>
+        <hr>
+        <nav>
+          <span style="display: inline-block;" ><a class="navitem" href="../index.html"><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../datasets.html"><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../random.html"><i class="fas fa-robot"></i>&nbsp;Random Stuff</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About me</a></span>
+
+          <span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://github.com/schmidtdominik"><i class="fab fa-github"></i>&nbsp;</a></span>
+          <!--<span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://www.reddit.com/user/dominik_schmidt"><i class="fab fa-reddit"></i></i>&nbsp;</a></span>-->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container article">
+      <div id='header-box'>
+
+
+        <!--START OF HEADING-->
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <img src="assets/cover.png" id="header-img" alt="">
+        </div>
+
+
+        <div id="header-text">
+          <h1 class="article-title">
+            Game Theory
+          </h1>
+          <time datetime="2020-04-22 00:00:00">April 22, 2020 ⧗ 39 minute read</time><br>
+        </div>
+      </div>
+      <!--END OF HEADING-->
+
+      <span class="article-text">
+        <div id="index"><ul><li><a href=#normal-form-games> Normal Form Games</li></a><ul><li><a href=#strategies> Strategies</li></a><li><a href=#best-response> Best Response</li></a><li><a href=#nash-equilibrium> Nash Equilibrium</li></a><li><a href=#computing-nash-equilibria> Computing Nash Equilibria</li></a><li><a href=#complexity-of-finding-nash-equilibria> Complexity of Finding Nash Equilibria</li></a><li><a href=#domination> Domination</li></a><li><a href=#pareto-optimality> Pareto Optimality</li></a><li><a href=#iterated-removal-of-strictly-dominated-strategies> Iterated Removal of Strictly Dominated Strategies</li></a><li><a href=#maxmin-&-minmax-strategies> Maxmin & Minmax Strategies</li></a><li><a href=#the-minimax-theorem> The Minimax Theorem</li></a><li><a href=#correlated-equilibrium> Correlated Equilibrium</li></a></ul><li><a href=#extensive-form-games> Extensive Form Games</li></a><ul><li><a href=#perfect-information-extensive-form-games> Perfect Information Extensive Form Games</li></a><li><a href=#pure-strategies-in-perfect-information-extensive-form-games> Pure Strategies in Perfect Information Extensive Form Games</li></a><li><a href=#subgame-perfection> Subgame Perfection</li></a><li><a href=#computing-subgame-perfect-equilibria> Computing Subgame Perfect Equilibria</li></a><li><a href=#imperfect-information-extensive-form-games> Imperfect Information Extensive Form Games</li></a><li><a href=#pure-strategies-in-imperfect-information-extensive-form-games> Pure Strategies in Imperfect Information Extensive Form Games</li></a><li><a href=#induced-normal-form> Induced Normal Form</li></a><li><a href=#perfect-recall> Perfect Recall</li></a><li><a href=#behavioral-strategies> Behavioral Strategies</li></a><li><a href=#beyond-subgame-perfection> Beyond Subgame Perfection</li></a></ul><li><a href=#repeated-games> Repeated Games</li></a><ul><li><a href=#utility-in-infinitely-repeated-games> Utility in Infinitely Repeated Games</li></a><li><a href=#stochastic-games> Stochastic Games</li></a><li><a href=#fictitious-play> Fictitious Play</li></a><li><a href=#no-regret-learning> No-regret Learning</li></a><li><a href=#regret-matching> Regret Matching</li></a><li><a href=#pure-strategies-and-equilibria-in-repeated-games> Pure Strategies and Equilibria in Repeated Games</li></a><li><a href=#payoff-profiles> Payoff Profiles</li></a><li><a href=#folk-theorem-for-ir-games-with-average-rewards> Folk Theorem for IR games with Average Rewards</li></a><li><a href=#games-with-discounted-rewards> Games with Discounted Rewards</li></a><li><a href=#folk-theorem-for-ir-games-with-discounted-rewards> Folk Theorem for IR games with Discounted Rewards</li></a></ul><li><a href=#bayesian-games> Bayesian Games</li></a><ul><li><a href=#definition-via-information-sets> Definition via Information Sets</li></a><li><a href=#definition-via-epistemic-types> Definition via Epistemic Types</li></a><li><a href=#bayesian-nash-equilibrium> Bayesian Nash Equilibrium</li></a></ul></div><hr style="margin-bottom: 4rem;">These are my lecture notes on the Stanford coursera course on Game Theory.<br>
+<h2 id="normal-form-games"> Normal Form Games</h2>
+A finite <strong>Normal Form Game</strong> (or Matrix form, strategic form) of \(n\) players is a tuple \(\langle N, A, u\rangle\), where:<br>
+
+<ul>
+	<li>\(N=\{1, \ldots, n\}\) is a finite set denoting the players (indexed by \(i\))</li>
+	<li>\(A=A_1 \times \ldots \times A_n\) denotes the <strong>action profile</strong> where \(A_i\) denotes the <strong>action set</strong> for player \(i\). Each action \(a_i \in A_i\) is referred to as a pure strategy.</li>
+	<li>\(u=(u_1, \ldots, u_n)\) is a profile of <strong>utility functions</strong> where \(u_i\colon A  → \mathbb{R}\) is the <strong>utility/payoff function</strong> for player \(i\)</li>
+</ul><br>
+
+A game is <strong>finite</strong> if it takes a finite amount of time to write down (finite number of players, finite number of actions for every players and therefore a finite number of utility values).<br>
+<br>
+
+A game of two players is called a game of pure competition when both players have exactly opposed interests, i.e. \(\forall a \in A, u_1(a)+u_2(a) = c\) for some constant \(c\) (special case zero sum games with \(c = 0\)).<br>
+<br>
+
+A game is referred to as a game of cooperation when all players have the exact same interests, i.e. \(\forall a\in A, \forall i, j, u_i(a) = u_j(a)\).<br>
+<br>
+<h3 id="strategies"> Strategies</h3>
+A <strong>strategy</strong> \(s_i\) for agent \(i\) is a probability distribution over the actions \(A_i\).<br>
+
+A strategy is called <strong>pure</strong> if only one action is played with positive probability, otherwise the strategy is called <strong>mixed</strong>. The set of actions with positive probability in a mixed strategy is called the <strong>support</strong> of the strategy.<br>
+<br>
+
+Let the set of all strategies for \(i\) be denoted \(S_i\) and the set of all strategy profiles be denoted \(S=S_1\times \ldots \times S_n\).<br>
+<br>
+
+For players following mixed strategies the payoff is then defined in terms of an expectation:
+$$
+u_i(s) = \sum_{a\in A} u_i(a) \Pr(a|s)\\
+\Pr(a|s) = \prod_{j\in N} s_j(a_j)
+$$
+where \(s \in S\).<br>
+<br>
+
+When to play mixed strategies? To confuse opponent (like in matching pennies) or when uncertain about the other's action (like in battle of the sexes).<br>
+<br>
+<h3 id="best-response"> Best Response</h3>
+Let \(s_{-i}=\langle s_1, \ldots, s_{i-1}, s_{i+1}, \ldots, s_n\rangle\) so \(s=(s_i, s_{-i})\).
+Then the non-unique <strong>best response</strong> (for pure or mixed strategies) is defined as
+$$
+s_i^\ast \in BR(s_{-i}) \iff \forall s_i \in S_i, u_i(s_i^\ast, s_{-i}) \le u_i(s_i, s_{-i})
+$$<br>
+<h3 id="nash-equilibrium"> Nash Equilibrium</h3>
+The <strong>Nash equilibrium</strong> is a action profile where no player can increase their expected reward by changing his strategy while other players keep theirs unchanged.<br>
+<br>
+
+\(s=\langle s_1, \ldots, s_n\rangle\) is a Nash equilibrium \(\iff \forall i, s_i \in BR(s_{-i})\).<br>
+
+\(a=\langle a_1, \ldots, a_n\rangle\) is a pure strategy Nash equilibrium \(\iff \forall i, a_i \in BR(a_{-i})\).<br>
+<br>
+
+<strong>(Nash 1950)</strong> Every <em>finite</em> game has a Nash equilibrium. (not all games have a pure strategy Nash equilibrium however)<br>
+<br>
+
+A Nash equilibrium in strictly dominant strategies is unique. Therefore the prisoners dilemma has only a single pure strategy NE and no mixed strategy NEs.<br>
+<br>
+<h3 id="computing-nash-equilibria"> Computing Nash Equilibria</h3>
+Computing Nash equilibria is hard in general but easy if we can guess (or know) the support.<br>
+
+<div class="image-center-wrapper"><img src="assets/comp-nash.png" style="width: 60%;" class="inline-image image-center    "></div>
+<div class="image-center-wrapper"><img src="assets/comp-nash1.png" style="width: 60%;" class="inline-image image-center    "></div>
+Note: if the results of the above computation weren't probabilities (in the range \((0, 1)\)) we would know that there exists no equilibrium with the given support.<br>
+<br>
+
+<strong>Current Algorithms (exponential worst case):</strong><br>
+
+<ul>
+    <li><strong>LCP (Linear Complementarity)</strong> formulation [Lemke-Howson 1964]
+	<div class="image-center-wrapper"><img src="assets/lemke-howson.png" style="width: 55%;" class="inline-image image-center    "></div>
+    (\(s\) are strategies, \(r\) are slack variables)
+</li>
+    <li><strong>Support Enumeration Method</strong> [Porter et al. 2004]:
+    Enumerate supports using clever heuristics (to curb exponential number of supports) and try to find an equilibrium for the given supports by formulating them as linear programs. A heuristic for searching through different supports is to start by looking at small supports and generally bias our search towards supports that are similar in size for each player.
+        <div class="image-center-wrapper"><img src="assets/porter.png" style="width: 55%;" class="inline-image image-center    "></div>
+        (sigma is the set of actions in the support for a given player)
+    </li>
+</ul><br>
+<br>
+<h3 id="complexity-of-finding-nash-equilibria"> Complexity of Finding Nash Equilibria</h3>
+The decision problem "Does an NE exist" is trivial since by Nash's theorem it is guaranteed to exist. The following decision problems for a game \(G\) however are NP-complete:<br>
+
+<ul>
+    <li>Does a unique NE exist?</li>
+    <li>Does a strictly Pareto efficient NE exist?</li>
+    <li>Does an NE exist with a guaranteed payoff or guaranteed social welfare?</li>
+    <li>Does an NE exist that includes/excludes specific actions?</li>
+</ul><br>
+
+The complexity of finding a even a single Nash equilibrium is captured by the complexity class <strong>Polynomial Parity Arguments on Directed graphs</strong>. PPAD is "between P and NP" and was defined by Papadimitriou in 1994.<br>
+
+<ul>
+    <li>FNP problems are constructive versions of NP problems (F stands for functional)</li>
+    <li>TFNP is a subclass of FNP for problems for which a solution is guaranteed to exist (T stands for "total")</li>
+    <li>PPAD is a subclass of TFNP where the proofs are based on parity arguments in directed graphs</li>
+</ul><br>
+
+Theorem: Finding a Nash equilibrium is <strong>PPAD-complete</strong>.<br>
+<br>
+<h3 id="domination"> Domination</h3>
+Let \(s_i\) and \(s_i'\) be two strategies for player \(i\) and let \(S_{-i}\) be the set of all possible strategy profiles for the other players.<br>
+<br>
+
+Then \(s_i\) <strong>strictly dominates</strong> \(s_i'\) if \(\forall s_{-i} \in S_{-i}, u_i(s_i, s_{-i}) > u_i(s_i', s_{-i})\).<br>
+
+Furthermore  \(s_i\) <strong>very weakly dominates</strong> \(s_i'\) if \(\forall s_{-i} \in S_{-i}, u_i(s_i, s_{-i}) \ge u_i(s_i', s_{-i})\).<br>
+<br>
+
+A strategy that dominates all others is called <strong>dominant</strong>. A strategy profile consisting of dominant strategies for every player must be a Nash equilibrium.<br>
+<br>
+
+"Dominant strategies are powerful from both an analytical point of view and a player’s perspective. An individual does not have to make any predictions about what other players might do, and still has a well-defined best strategy. [..] A basic lesson from the prisoners’ dilemma is that individual incentives and overall welfare need not coincide."<sup><a id="ref1ref" href="#ref1">[1]</a></sup>.<br>
+<br>
+<h3 id="pareto-optimality"> Pareto Optimality</h3>
+An outcome \(o\) is said to <strong>Pareto-dominate</strong> an outcome \(o'\) if for every agent \(o\) is at least as good as \(o'\) and there is some agent who strictly prefers \(o\) over \(o'\).<br>
+<br>
+
+An outcome is <strong>Pareto-optimal</strong> if it is not Pareto-dominated by any other outcome. Every outcome in a zero-sum game is Pareto-optimal .<br>
+
+<div class="image-center-wrapper"><img src="assets/pareto-optimality.png" style="width: 70%;" class="inline-image image-center    "></div>
+The prisoners dilemma is a dilemma for the exact reason that the Nash equilibrium is the only non-Pareto-optimal outcome. (The outcome most likely to happen is the socially worst outcome)<br>
+<br>
+<h3 id="iterated-removal-of-strictly-dominated-strategies"> Iterated Removal of Strictly Dominated Strategies</h3>
+A strictly dominated strategy (a single specific action) can never be a best reply since no matter the opponents action since the dominating strategy is always strictly better. Therefore we can assume that a rational player would never play this strategy and we can remove it from the game. Furthermore we can also remove pure strategies that are strictly dominated by any mixed strategies. By doing so repeatedly (in any order) we have an iterative procedure to simplify complex games.<br>
+<br>
+
+Performing this iterative algorithm preserves Nash equilibria since in a Nash equilibrium everybody plays a best reply (and we don't remove best replies). It can therefore be used as a preprocessing step before computing an equilibrium.<br>
+<br>
+
+If after the procedure only a single action profile remains, that profile is the unique NE of the game and the game is called <strong>dominance solvable</strong>.<br>
+<br>
+
+Note: we can also iteratively remove <em>weakly</em> dominated strategies but since those can be best replies we may remove equilibria (at least one equilibrium is preserved) and the order of removal may matter. <br>
+<br>
+<h3 id="maxmin-&-minmax-strategies"> Maxmin & Minmax Strategies</h3>
+The <strong>maxmin strategy</strong> for player \(i\) is
+$$
+\arg \max_{s_i} \,\, \min_{s_{-i}} u_i(s_1, s_{-i})
+$$
+i.e. the strategy that maximizes \(i\)'s worst-case payoff.<br>
+<br>
+
+The corresponding <strong>maxmin value</strong> or <strong>safety level</strong> which is the minimum payoff guaranteed by the maxmin strategy is 
+$$
+\max_{s_i} \, \min_{s_{-i}} u_i(s_1, s_{-i})
+$$
+The <strong>minmax strategy</strong> for player \(i\) is
+$$
+\arg \min_{s_i} \,\, \max_{s_{-i}} u_{-i}(s_i, s_{-i})
+$$
+i.e. the strategy that minimizes the opponents best-case payoff.<br>
+<br>
+
+The corresponding <strong>minmax value</strong> which is the opponents maximum payoff guaranteed by the minmax strategy is 
+$$
+\min_{s_i} \, \max_{s_{-i}} u_{-i}(s_i, s_{-i})
+$$<br>
+<h3 id="the-minimax-theorem"> The Minimax Theorem</h3>
+In any finite, two-player, zero-sum game, in any Nash equilibrium each player receives a payoff that is equal to both his maxmin value and his minmax value. This value is referred to as the <strong>value of the game</strong>. Furthermore the set of maxmin strategies coincides exactly with the set of minmax strategies and any maxmin/minmax strategy profiles are Nash equilibria.<br>
+<br>
+
+The minimax theorem shows us that we can easily find NE for two-player zero-sum games by solving the corresponding minmax problem.<br>
+<br>
+
+The minmax problem for 2x2 games can be solved by writing down and solving the corresponding maxmin value equations for each player.<br>
+
+The general minmax problem for two players is easily solvable with LP. \(U_1^\ast\) is the value of the game (the payoff to player 1 in equilibrium), \(s_2\) is the mixed strategy for player 2 that we want to find, \(k\) is a pure strategy.<div class="image-center-wrapper"><img src="assets/minmax.png" style="width: 70%;" class="inline-image image-center    "></div><br>
+
+The minmax problem for matching pennies:<br>
+
+<div class="image-center-wrapper"><img src="assets/zero-sum.png" style="width: 70%;" class="inline-image image-center    "></div><br>
+<h3 id="correlated-equilibrium"> Correlated Equilibrium</h3>
+A correlated equilibrium is a randomized assignment of (potentially correlated) action recommendations to agents, such that nobody wants to deviate.<br>
+<br>
+
+A correlated equilibrium is a generalization of Nash equilibria since any Nash equilibrium can be expressed as a correlated equilibrium where action recommendations are not correlated.<br>
+<br>
+
+A CE can for example be used to achieve fair and optimal outcomes in the Battle of the Sexes game.<br>
+<br>
+<h2 id="extensive-form-games"> Extensive Form Games</h2>
+Extensive form games are an alternative representation of games that makes their temporal structure (sequence/time) explicit.<br>
+<br>
+<h3 id="perfect-information-extensive-form-games"> Perfect Information Extensive Form Games</h3>
+A (finite) perfect-information game is defined by the tuple \((N, A, H, Z, \chi, \rho, \sigma, u)\), where<br>
+
+<ul>
+    <li>\(N\) is a set of \(n\) players.</li>
+    <li>\(A\) is a set of actions (not action profiles like in normal form games)</li>
+    <li>\(H\) is a set of choice nodes</li>
+    <li>\(\chi\) is the action function \(\chi\colon H \rightarrow 2^A\) that assigns a set of possible actions to each choice node</li>
+    <li>\(\rho\) is the player function \(\rho \colon H → N\) that assigns a player \(i \in N\) to each choice node (that player that makes that choice)</li>
+    <li>\(Z\) is a set of terminal nodes (disjoint from \(H\))</li>
+    <li>\(\sigma\) is the successor function \sigma \colon H \times A → H \cup Z that assigns a next choice or terminal node to a choice and action pair (such that the node graph is a tree)</li>
+    <li>\(u\) is a utility function \((u_1, \ldots, u_n)\) where \(u_i \colon Z → \mathbb{R}\) is a utility function for player \(i\) on the terminal nodes \(Z\)</li>
+</ul><br>
+<br>
+<h3 id="pure-strategies-in-perfect-information-extensive-form-games"> Pure Strategies in Perfect Information Extensive Form Games</h3>
+The set of pure strategies for player \(i\) is the set
+$$
+\times_{h \in H, \rho(h) =i} \chi(h)
+$$
+where \(\times\) is the generalized cross-product.<br>
+<br>
+
+Theorem: <strong>Every perfect information game in extensive form has a PSNE.</strong> (In normal form games some games only have mixed strategy Nash equilibria but in extensive form perfect information games due to the sequential nature of the moves and having perfect information, randomization is never a useful strategy)<br>
+<br>
+<h3 id="subgame-perfection"> Subgame Perfection</h3>
+<div class="image-center-wrapper"><img src="assets/subgame-perf.png" style="width: 70%;" class="inline-image image-center    "></div>
+The <strong>subgame</strong> of \(G\) <strong>rooted</strong> at \(h\) is the restriction of \(G\) to the descendents of \(H\).<br>
+
+The <strong>set of subgames</strong> of \(G\) is the set of subgames of \(G\) rooted at each of the nodes in \(G\).<br>
+<br>
+
+A Nash equilibrium \(s\) is a <strong>subgame perfect equilibrium</strong> of \(G \iff\) for any subgame \(G'\) of \(G\), the restriction of \(s\) to \(G'\) is a Nash equilibrium of \(G'\).<br>
+<br>
+
+Every finite extensive form game with perfect recall has a subgame perfect equilibrium.<br>
+<br>
+<h3 id="computing-subgame-perfect-equilibria"> Computing Subgame Perfect Equilibria</h3>
+Backwards induction is a recursive algorithm to find subgame perfect equilibria. It starts at any node \(h\) (e.g. the root of the game) and recursively finds an equilibrium for all its subgames and then the entire game (rooted at \(h\)).<br>
+<br>
+
+The algorithm below simply computes the payoff under the equilibrium strategy but can be extended to compute the strategy itself. (The function labels each node with a utility vector, the labeling can be seen as an extension of the game's utility function to the non-terminal nodes)<br>
+
+<div class="image-center-wrapper"><img src="assets/comp-sgp-equi.png" style="width: 70%;" class="inline-image image-center    "></div>
+For zero-sum games backwards induction is referred to as the <strong>minimax algorithm</strong>. The minimax algorithm can be sped up by removing nodes that will never be reached in play (<strong>alpha-beta pruning</strong>).<br>
+
+<div class="image-center-wrapper"><img src="assets/centipede.png" style="width: 70%;" class="inline-image image-center    "></div><br>
+<h3 id="imperfect-information-extensive-form-games"> Imperfect Information Extensive Form Games</h3>
+A (finite) imperfect-information game is defined by the tuple \((N, A, H, Z, \chi, \rho, \sigma, u, I)\) where \((N, A, H, Z, \chi, \rho, \sigma, u)\) is a perfect-information game and \(I = (I_1, \ldots, I_n)\), where \(I_i = (I_{i, 1}, \ldots, I_{i, k_i})\) is a partition of player \(i\)'s choice nodes. Each \(I_{i, j}\) contains one or more choice nodes such that for \(h, h' \in I_{i, j}\) it holds that \(\chi(h) = \chi(h')\) and \(\rho(h) = \rho(h')\). This ensures that players are unable to distinguish these nodes via available actions in the node or via different players playing those nodes. Note that if each \(I_{i, j}\) contains only a single element the game is a perfect information game.<br>
+<br>
+<h3 id="pure-strategies-in-imperfect-information-extensive-form-games"> Pure Strategies in Imperfect Information Extensive Form Games</h3>
+The set of pure strategies for player \(i\) is the set
+$$
+\times_{I_{i, j} \in I_i} \chi(I_{i, j})
+$$
+where \(\times\) is the generalized cross-product.<br>
+<br>
+<h3 id="induced-normal-form"> Induced Normal Form</h3>
+All extensive form games can be converted to an equivalent normal form game. The induced normal form games are generally exponentially larger than the associated extensive-form games. To convert an EF game to normal form simply create a normal form game with the pure strategies in the EF game (as above) as actions in the normal form game, then fill out the matrix with the corresponding outcomes.<br>
+<br>
+
+Not all normal form games can be converted to perfect information extensive form games due to their nonsequential nature (e.g. matching pennies) but they can always be converted to imperfect information extensive form games.<br>
+<br>
+
+Performing the conversion NF → IIEF → NF may not return the same game but always returns an equivalent game with the same strategy spaces and equilibria.<br>
+<br>
+<h3 id="perfect-recall"> Perfect Recall</h3>
+An imperfect information game is said to have perfect recall if any agent in any information set knows all previously visited information sets and actions they have previously taken.<br>
+<br>
+<h3 id="behavioral-strategies"> Behavioral Strategies</h3>
+In perfect information games and imperfect information games with perfect recall, mixed strategies and behavioral strategies can emulate each other. Otherwise behavioral strategies can offer ways of playing a game that can not be done with mixed strategies.<br>
+<br>
+
+A mixed strategy in imperfect information games is a probability distribution over pure strategies. Considering a single information set, mixed strategies assign a probability to every action available at nodes in that set. Before the game is played a concrete pure strategy is sampled from the the mixed strategy which is then executed. Notice that this entails the constraint that the agent plays the same action at every node in an information set (actions are not resampled when moving from one node to another node in the same information set).<br>
+<br>
+
+Behavioral strategies are also probability distributions over pure strategies but they resample from the distribution every time they make a move. Behavioral strategies can have equilibria that are different from equilibria in mixed strategies.<br>
+<br>
+<h3 id="beyond-subgame-perfection"> Beyond Subgame Perfection</h3>
+In incomplete information games there may not be any proper subgames: In the following example the only subgame is the game itself since both player-two choices are in the same information set and therefore not disconnected subgames. In this case subgame perfect equilibria are just general Nash equilibria.<br>
+<br>
+
+Note: The N choice at the top stands for nature and injects randomization into the game<br>
+
+<div class="image-center-wrapper"><img src="assets/iief-subgame-perf.png" style="width: 70%;" class="inline-image image-center    "></div>
+Here \((S→N, W→N; \,F)\) is an equilibrium even though the off-the-equilibrium-path action \(F\) for player two is a non-credible threat. (It is still a nash equilibrium because if player 1 truly believes player 2 is going to play \(F\) and player 2 truly believes player 1 is going to play \(S→N, W→N\) neither player has an incentive to change their action)<br>
+<br>
+
+\((S→E, W→N; A)\) is another (a more credible) Nash equilibrium.<br>
+<br>
+
+Other equilibrium concepts (sequential equilibrium, perfect bayesian equilibrium) explicitly model players' beliefs about the current state of the game and may be better suited for these kinds of games.<br>
+<br>
+<h2 id="repeated-games"> Repeated Games</h2>
+A repeated game is a game where a single normal form game is played repeatedly for a finite or infinite number of times.<br>
+<br>
+<h3 id="utility-in-infinitely-repeated-games"> Utility in Infinitely Repeated Games</h3>
+Given an infinite sequence of payoffs \((r_j)_{j=1}^\infty\) for player \(i\) the <strong>average reward</strong> is
+$$
+\lim_{k→\infty} \sum_{j=1}^k \frac{r_j}{k}
+$$<br>
+
+and the <strong>future discounted reward</strong> with a discount factor of \(0 < \beta < 1\) is<br>
+
+$$
+\sum_{j=1}^\infty \beta^jr_j
+$$
+The discount factor can be interpreted as expressing that the agent prefers present rewards over future rewards. The future discounted reward is equivalent to the expected reward in a game where the agent cares equally about present and future rewards but there is a probability of \(1-\beta\) that the game ends in any given round. <br>
+<br>
+<h3 id="stochastic-games"> Stochastic Games</h3>
+A <strong>stochastic game</strong> is a generalization of repeated games. In a stochastic game players play games from a given set of normal form games and can transition to playing another game depending on the previous game played and all the actions taken by the players.<br>
+<br>
+
+A stochastic game is a tuple \((Q, N, A, P, R)\) where<br>
+
+<ul>
+    <li>\(Q\) is a finite set of states (these implicitly define multiple games)</li>
+    <li>\(N\) is a finite set of \(n\) players</li>
+    <li>\(A=A_1 \times \ldots \times A_n\) is an action profile where \(A_i\) is the set of actions available to player \(i\)</li>
+    <li>\(P\colon Q \times A \times Q \rightarrow [0, 1]\) is a transition probability function where \(P(q, a, \hat q)\) is the probability of transitioning from state \(q\) to state \(\hat q\) after executing action profile \(a\)</li>
+    <li>\(R=r_1, \ldots, r_n\) where \(r_i\colon Q \times A → \mathbb{R}\) is a real valued payoff function for player \(i\)</li>
+</ul><br>
+
+This definition assumes that all games have the same strategy space (otherwise just more notation).<br>
+<br>
+
+Stochastic games generalize Markov Decision Processes since an MDP is a single-agent stochastic game.<br>
+<br>
+<h3 id="fictitious-play"> Fictitious Play</h3>
+Let \(w(a)\) be the number of times the opponent has played action \(a\) and initialize \(w(a)\) with a zero or non-zero value. Assess opponent's strategy using
+$$
+\sigma(a) = \frac{w(a)}{\sum_{a'\in A} w(a')}
+$$
+and best respond to the mixed strategy given by \(\sigma\).<br>
+<br>
+
+<strong>Theorem:</strong> If the empirical distribution of each player's strategies (e.g. percentage of head/tails in matching pennies) converges in fictitious play, then it converges to a Nash equilibrium.<br>
+<br>
+
+Note that the strategies played by each player may not converge to a single strategy.<br>
+<br>
+
+Each of the following are sufficient conditions for the empirical frequencies of play to converge in fictitious play:<br>
+
+<ul>
+    <li>The game is zero-sum</li>
+    <li>The game is dominance-solvable</li>
+    <li>The game is a potential game</li>
+    <li>The game is \(2\times n\) and has generic payoffs</li>
+</ul><br>
+<br>
+<h3 id="no-regret-learning"> No-regret Learning</h3>
+Define the <strong>regret</strong> an agent experiences at time \(t\) for <em>not</em> having played \(s\) as the differences between the received reward and reward that the agent would have received under strategy \(s\):
+$$
+R^t(s) = \alpha^t - \alpha^t(s)
+$$<br>
+
+A learning rule exhibits no regret if for any pure strategy \(s\) it holds that \(\Pr([\lim_{t→\infty} \inf R^t(s)] \le 0) = 1\) (in the limit the regret tends to zero).<br>
+<br>
+<h3 id="regret-matching"> Regret Matching</h3>
+<strong>Regret matching</strong> is a no regret learning rule where the agent plays with probability proportional to its regret for not playing that action in the past. <br>
+<br>
+
+See <a href="https://cs.stackexchange.com/questions/27915/how-to-implement-the-regret-matching-algorithm">this</a> for more information.<br>
+<br>
+
+Regret matching converges to a correlated equilibrium for finite games.<br>
+<br>
+<h3 id="pure-strategies-and-equilibria-in-repeated-games"> Pure Strategies and Equilibria in Repeated Games</h3>
+A pure strategy in an infinitely repeated game is a choice of action at every round. Therefore there are infinitely many pure strategies in infinitely repeated games and there may also be infinitely many pure strategy Nash equilibria.<br>
+<br>
+
+Since Nash's theorem only applies to finite games, there may not be any Nash equilibria in IRGs.<br>
+<br>
+
+Finding Nash equilibria in IRGs is difficult but the Folk theorem tells us a way to identify which payoff profiles are generated by a Nash equilibrium. <br>
+<br>
+<h3 id="payoff-profiles"> Payoff Profiles</h3>
+Consider an \(n\)-player game \(G=(N, A, u)\) and any payoff vector \(r = (r_1, \ldots, r_n)\). Let \(v_i\) be player \(i\)'s minmax value.<br>
+<br>
+
+A payoff profile \(r\) is <strong>enforceable</strong> if \(r_i \ge v_i\).<br>
+<br>
+
+A payoff profile \(r\) is <strong>feasible</strong> (actually achievable on average in a concrete game) if \(r\) can expressed as a convex rational combination of outcomes i.e. there exist rational \(0 \le \alpha_a \le 1\) with \(\sum_{a \in A} \alpha_a = 1\) such that \(r = \sum_{a\in A} \alpha_a u_i(a)\). Note that this is defined for all players simultaneously and that the alphas must be the same for each player.<br>
+<br>
+<h3 id="folk-theorem-for-ir-games-with-average-rewards"> Folk Theorem for IR games with Average Rewards</h3>
+Given any \(n\)-player game consider a payoff profile \((r_1, \ldots, r_n)\)<br>
+
+<ol>
+    <li>If \(r\) is the payoff in any Nash equilibrium then it is enforceable.</li>
+    <li>If \(r\) is both feasible and enforceable it is the payoff in some Nash equilibrium.</li>
+</ol><br>
+
+Note that above theorem does not state that a payoff profile in an equilibrium is necessarily feasible. This is because it may not be expressible as a <em>rational</em> convex combination.<br>
+<br>
+
+See the <a href="https://www.coursera.org/learn/game-theory-1/lecture/jgpjN/5-5-equilibria-of-infinitely-repeated-games">lecture</a> for the full proof. Short summary of proof<br>
+
+<ol>
+    <li>Proof by contradiction: Playing the minmax strategy would be a profitable deviation from the Nash equilibrium (contradiction!) since the Nash equilibrium's reward profile is enforceable.</li>
+    <li>By exploiting the rationality in the definition of feasibility we can construct simple strategies for all players that lead exactly to the given reward profile. Furthermore we make the strategies be trigger strategies so that when any player deviates from their strategy the others punish him and he will receive at most his minmax value. Because the reward profile is enforceable deviating from the strategy is not a profitable deviation for any player and the strategy is a therefore Nash equilibrium.</li>
+</ol><br>
+<br>
+<h3 id="games-with-discounted-rewards"> Games with Discounted Rewards</h3>
+We consider stage games of the form \((N, A, u)\) with discount factors \(\beta_1 = \ldots = \beta_n = \beta\). The payoff from a sequence of actions \((a_t)_t\) is \(\sum_t \beta_i^t u_i(a_t)\).<br>
+<br>
+
+The set of finite histories is \(H=\bigcup_tH^t\) where \(H^t = \{h^t : h^t \in A^t\}\) is the set of histories of length \(t\). A strategy is a function \(s_i \colon H → \Delta(A_i)\).<br>
+<br>
+
+A strategy profile is a subgame perfect Nash equilibrium if it is Nash in every subgame where a subgame in infinitely repeated games is defined as the game starting at any specific round.<br>
+<br>
+
+Repeatedly playing the stage game NE is always a subgame perfect equilibrium (by backward induction) and is the unique subgame perfect equilibrium if the stage game has a unique NE.<br>
+<br>
+<h3 id="folk-theorem-for-ir-games-with-discounted-rewards"> Folk Theorem for IR games with Discounted Rewards</h3>
+Let \(a=(a_1, \ldots, a_n)\) be a Nash equilibrium of the stage game.<br>
+<br>
+
+If there exists an \(a' = (a'_1, \ldots a'_n)\) such that all \(u_i(a') > u_i(a)\) then there exists a discount factor \(\beta < 1\), such that if all \(\beta_i \ge \beta\), then there exists a subgame perfect equilibrium for the IR game where \(a'\) is played in every period (as long as we're on the equilibrium path).<br>
+<br>
+
+Note: the equilibrium strategy is a grim trigger strategy, meaning it plays \(a'\) as long as no one deviates and switches to forever playing \(a\) otherwise. Not playing \(a'\) is then never a profitable deviation for any player as long as \(\beta\) is large enough (if players don't care about future rewards enough, they don't care if we punish them by playing \(a\) instead of \(a'\)).<br>
+<br>
+<h2 id="bayesian-games"> Bayesian Games</h2>
+Unlike perfect information games, <strong>Bayesian games</strong> (sometimes called games of incomplete information) can model agents' uncertainty in their and other players payoffs/utility functions.<br>
+<br>
+<h3 id="definition-via-information-sets"> Definition via Information Sets</h3>
+A <strong>Bayesian game (defined via information sets)</strong> is a tuple \((N, G, P, I)\) where<br>
+
+<ul>
+    <li>\(N\) is a set of players</li>
+    <li>\(G\) is a set of games with identical strategy spaces and players \(N\) (they differ only in their utility functions)</li>
+    <li>\(\Pi(G)\) is the set of probability distributions over games in \(G\) and \(P \in \Pi(G)\) is a common prior</li>
+    <li>I=(I_1, \ldots, I_n) is a set of partitions of \(G\), one for each agent</li>
+</ul><br>
+
+where games in the same information set \(I_{i, j}\) of \(I_i\) are indistinguishable for agent \(i\). Note that players have access to all information in the \((N,G,P,I)\) tuple, they just don't know which game is being played.<br>
+<br>
+
+Agents' beliefs are posteriors, obtained by conditioning the common prior \(P\) on individual private signals.<br>
+<br>
+<h3 id="definition-via-epistemic-types"> Definition via Epistemic Types</h3>
+A <strong>Bayesian game (defined via epistemic types)</strong> is a tuple \((N, A, \Theta, p, u)\) where<br>
+
+<ul>
+    <li>\(N\) is a set of agents</li>
+    <li>\(A=(A_1, \ldots, A_n)\), where \(A_i\) is the sets of actions for player \(i\)</li>
+    <li>\(\Theta = (\Theta_1, \ldots, \Theta_n)\), where \(\Theta_i\) is the type space of player \(i\)</li>
+    <li>\(p\colon \Theta → [0, 1]\) is a common prior</li>
+    <li>\(u=(u_1, \ldots, u_n)\), where \(u_i\colon A \times \Theta → \mathbb{R}\) is the utility function for player \(i\)</li>
+</ul><br>
+
+An agent's type consists of all information and beliefs the agent has that is not common knowledge.<br>
+
+<div class="image-center-wrapper"><img src="assets/bayesian-game-typedef.png" style="width: 65%;" class="inline-image image-center    "></div><br>
+<h3 id="bayesian-nash-equilibrium"> Bayesian Nash Equilibrium</h3>
+A pure strategy is a function \(s_i\colon \Theta → A_i\).
+A mixed strategy is a function \(s_i\colon \Theta → \Pi(A_i)\).
+\(s_i(a_i | \theta_i)\) is the probability that agent \(i\) plays action \(a_i\) under the mixed strategy \(s_i\) given that his type is \(\theta_i\).<br>
+
+Kinds of <strong>expected utility</strong> (\(EU\))<br>
+
+<ul>
+    <li><strong>ex-ante:</strong> the agent knows nothing about anyone's actual type</li>
+    <li><strong>interim:</strong> the agent only knows their actual type</li>
+    <li><strong>ex-post:</strong> the agent knows all agent's actual types</li>
+</ul><br>
+
+The <strong>interim expected utility</strong> for player \(i\) is:
+$$
+EU_i(s|\theta_i) = \sum_{\theta_{-i} \in \Theta_{-i}} p(\theta_{-i}|\theta_i) \sum_{a \in A} \left( \prod_{j\in N} s_j(a_j| \theta_j) \right)  u_i(a, \theta_i, \theta_{-i})
+$$
+The <strong>ex-ante expected utility</strong> for player \(i\) is:
+$$
+EU_i(s) = \sum_{\theta_i \in \Theta_i} p(\theta_i) EU_i(s | \theta_i)
+$$
+A <strong>Bayesian Nash equilibrium</strong> is a mixed strategy profile \(s\) such that each player plays a best response, i.e for each \(i\) and \(\theta_i \in \Theta_i\):
+$$
+s_i \in \arg \max_{s_i'} EU_i(s_i', s_{-i}, \theta_i)
+$$
+This interim maximization based definition is equivalent to the ex-ante based formulation if all \(p(\theta_i) > 0\)
+$$
+s_i \in \arg \max_{s_i'} EU_i(s_i', s_{-i})
+$$
+since maximizing the \(EU\) for each type also maximizes their weighted average and not maximizing the \(EU\) for any type that has nonzero probability doesn't maximize the average. (?)<br>
+<br>
+
+See <a href="https://www.coursera.org/lecture/game-theory-1/6-5-analyzing-bayesian-games-another-example-iexeA">this</a> example.
+<section id="article_footer"><h2>References</h2><ol class="references"><li><span id="ref1">Jackson, Matthew O., A Brief Introduction to the Basics of Game Theory (December 5, 2011</span> <a href="#ref1ref""> <i class="fas fa-undo-alt references-return"></i></a></li></ol></section>
+      </span>
+
+      <!--<div id="disqus_thread"></div>
+
+
+      <script>
+          /**
+           *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+           *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+           */
+
+          var disqus_config = function () {
+              this.page.url = "https://dominikschmidt.xyz/game-theory-notes";  // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = "game-theory-notes"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+          };
+
+          (function() {  // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+
+              s.src = 'https://dominikschmidtxyz.disqus.com/embed.js';
+
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+          })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    </div>-->
+
+  <br><br>
+
+  <!--<footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>-
+
+  <br>-->
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Approximation Algorithms - Dominik Schmidt</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <link rel=preload href="../css/BIG JOHN.otf" as="font" crossorigin>
+
+  <meta property="og:title" content="Approximation Algorithms"/>
+  <meta property='og:type' content='article'/>
+  <meta property="og:image" content="assets/cover.png"/>
+  <meta property="og:url" content="http://dominikschmidt.xyz/approximation-algorithms-notes"/>
+  <!--<meta property="og:description" content="<h2 id="vertex-cover-approximation"> Vertex Cover Approximation</h2>
+Note on the Unique Games Conjecture: If the UCG is true then there is no polynomial-time algorithm that achieves a better approximation than 2 for vertex cover."/>-->
+
+  <!--<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+  <script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#edeff5",
+        "text": "#838391"
+      },
+      "button": {
+        "background": "#4b81e8"
+      }
+    },
+    "position": "bottom-left",
+    "content": {
+      "href": "http://dominikschmidt.xyz/policy"
+    }
+  })});
+</script>-->
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-4694920180315448",
+            enable_page_level_ads: true
+       });
+  </script>
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 100 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/article.css">
+
+  <link rel="stylesheet" href="../highlight/styles/atom-one-light.css"><!--foundation/hopscotch-->
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+
+  <!--<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>-->
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 8%">
+          <h1>
+            <a href="../index.html">
+              <span id="title">
+                Dominik Schmidt
+              </span>
+            </a>
+            <!--<a href="index.html">
+              <span id="by-me">
+
+              </span>
+            </a>-->
+          </h1>
+        <hr>
+        <nav>
+          <span style="display: inline-block;" ><a class="navitem" href="../index.html"><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../datasets.html"><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../random.html"><i class="fas fa-robot"></i>&nbsp;Random Stuff</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About me</a></span>
+
+          <span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://github.com/schmidtdominik"><i class="fab fa-github"></i>&nbsp;</a></span>
+          <!--<span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://www.reddit.com/user/dominik_schmidt"><i class="fab fa-reddit"></i></i>&nbsp;</a></span>-->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container article">
+      <div id='header-box'>
+
+
+        <!--START OF HEADING-->
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <img src="assets/cover.png" id="header-img" alt="">
+        </div>
+
+
+        <div id="header-text">
+          <h1 class="article-title">
+            Approximation Algorithms
+          </h1>
+          <time datetime="2020-06-05 00:00:00">June 5, 2020 ⧗ 9 minute read</time><br>
+        </div>
+      </div>
+      <!--END OF HEADING-->
+
+      <span class="article-text">
+        <div id="index"><ul><li><a href=#vertex-cover-approximation> Vertex Cover Approximation</li></a><ul><li><a href=#weighted-vertex-cover-via-lp-relaxation> Weighted Vertex Cover via LP Relaxation</li></a><li><a href=#vertex-cover-via-maximal-matching> Vertex Cover via Maximal Matching</li></a></ul><li><a href=#knapsack-approximation-and-rounding> Knapsack Approximation and Rounding</li></a><ul><li><a href=#special-cases> Special Cases</li></a><li><a href=#scale-&-round-fptas-for-knapsack> Scale & Round FPTAS for Knapsack</li></a><li><a href=#partial-brute-force-ptas-for-knapsack> Partial Brute-Force PTAS for Knapsack</li></a></ul></div><hr style="margin-bottom: 4rem;"><h2 id="vertex-cover-approximation"> Vertex Cover Approximation</h2>
+<strong>Note on the Unique Games Conjecture:</strong> If the UCG is true then there is no polynomial-time algorithm that achieves a better approximation than 2 for vertex cover.<br>
+<br>
+<h3 id="weighted-vertex-cover-via-lp-relaxation"> Weighted Vertex Cover via LP Relaxation</h3>
+An approximation algorithm for the vertex cover problem can be created by looking at linear relaxations of the integer linear program formulation of vertex cover. First consider the following ILP:
+$$
+\begin{alignat}{1}
+ & \text{min} & \sum_{u\in V} a_ux_u \\
+ & \text{subject to} \quad& \forall u \in V\colon x_u = 0 \lor x_u = 1 & \\
+ & \text{and} \quad& \forall (v, w) \in E\colon x_v + x_w \ge 1 & \\          
+\end{alignat}
+$$
+ Now consider the linear relaxation:
+$$
+\begin{alignat}{1}
+ & \text{min} & \sum_{u\in V} a_ux_u^\ast \\
+ & \text{subject to} \quad& \forall u \in V\colon\, 0 \le x_u^\ast \le 1 & \\
+ & \text{and} \quad& \forall (v, w) \in E\colon x_v^\ast + x_w^\ast \ge 1 & \\          
+\end{alignat}
+$$
+Solving integer linear programs is NP-hard, linear programs can however be solved in polynomial time. By solving this LP and rounding we have an efficient approximation algorithm.
+$$
+z_u = 1 \text{ if } x_u^\ast \ge 0.5 \text{ else } 0
+$$
+<strong>Correctness:</strong> For any solution to the LP and any edge \((v, w)\) the constraint \(x_v^\ast + x_w^\ast \ge 1\) must hold. Therefore one of \(x_v^\ast, x_w^\ast\)  must be greater or equals 0.5 and at least one of the vertices is included in the vertex cover.<br>
+<br>
+
+<strong>Quality guarantee:</strong> \(\text{Output cost} = \sum_{u} a_uz_u \le 2\sum_{u} a_ux_u^\ast \le 2\text{OPT}\). (our solution is better than two times the linear relaxation, and the LR achieves a higher optimization value than OPT)<br>
+<br>
+
+In typical cases the performance is within 10% of OPT. To quantify the degree of deviation from OPT we can compare our output cost to the cost of our linear relaxation \(\sum_{u} a_ux_u^\ast\) (which is lower than opt). If our output cost is within \(x%\) of of the linear relaxation cost it must also be within \(x%\) of OPT.<br>
+<br>
+
+Overall we have: \(\sum_{u} a_ux_u^\ast \le \text{OPT} \le \sum_{u} a_uz_u \le 2\sum_{u} a_ux_u^\ast \le 2\text{OPT}\)<br>
+<br>
+
+<strong>Note:</strong> There is a 3/2-approximation algorithm for vertex cover on 4-colorable graphs via a specific rounding procedure that uses the coloring and above linear relaxation.<br>
+<br>
+<h3 id="vertex-cover-via-maximal-matching"> Vertex Cover via Maximal Matching</h3>
+A <strong>matching</strong> (or independent edge set) of a graph is a subset of the edges of the graph such that no edges share a vertex.<br>
+
+A <strong>maximal matching</strong> is a matching that is not a subset of any other matching. No additional edges can be added to a maximal matching.<br>
+
+A <strong>maximum matching</strong> (or maximum-cardinality matching) is a matching that contains the largest possible number of edges. Every maximum matching is a maximal matching. A maximum matching can be found in polynomial time using the blossom algorithm which uses augmenting paths (paths that alternate between edges in the matching and edges not in the matching).<br>
+
+A <strong>perfect matching</strong> is a matching that matches all of the vertices of the graph. <br>
+<br>
+
+<strong>2-OPT Approximation for Vertex Cover via Matching:</strong><br>
+
+<ol>
+    <li>Compute a maximal matching</li>
+    <li>For each edge in the matching add both vertices to the vertex cover.</li>
+</ol><br>
+<h2 id="knapsack-approximation-and-rounding"> Knapsack Approximation and Rounding</h2>
+<strong>Definition:</strong> A polynomial-time approximation scheme (PTAS) is an polynomial time approximation algorithm that can find solutions within a factor \(1+\epsilon\) (or \(1-\epsilon\) for maximization) of optimality.<br>
+
+<strong>Definition:</strong> A fully polynomial-time approximation scheme (FPTAS) is an approximation scheme that is not only polynomial in \(N\) but also in \(1/\epsilon\).<br>
+
+<strong>Theorem:</strong> The knapsack problem admits a fully polynomial-time approximation scheme.<br>
+<br>
+<h3 id="special-cases"> Special Cases</h3>
+<strong>Theorem:</strong> In the special case where \(w_i = v_i\), the greedy algorithm that picks the maximum value item is a 2-approximation.<br>
+
+<strong>Theorem:</strong> The special case where \(w_i = v_i\) and \(v_i \in \{1, 2, \ldots, B\}\) where \(B\) is a small <em>integer</em> polynomial in \(n\), can be solved in polynomial time with dynamic programming.<br>
+
+<strong>Theorem:</strong> The special case where all \(w_i, v_i \in \{1, 2, \ldots, N\}\) where \(N\) is a small <em>integer</em> polynomial in \(n\) can be solved time proportional to \(\mathcal{O}(n^2N)\) (or pseudo-polynomial if \(N\) is not polynomial in \(n\)).<br>
+<br>
+<h3 id="scale-&-round-fptas-for-knapsack"> Scale & Round FPTAS for Knapsack</h3>
+This algorithm exploits the fact that when \(v_i, w_i\) are small integers polynomial in \(n\) we can solve the Knapsack problem optimally in polynomial time with dynamic programming.<br>
+
+<ol>
+    <li>Discard items that don't fit in the knapsack at all.</li>
+    <li>Scale values linearly such that the largest item has value \(N\) and round them down to the nearest integer. Weights are left unchanged - the DP table size is only proportional to [number of items \(\times\) value].</li>
+    <li>Use the DP algorithm above to solve this problem.</li>
+</ol><br>
+
+\(N\) has to be chosen in such a way that the runtime is polynomial but the approximation is close to optimal. Note that unlike in the vertex cover approximation above we round the inputs, not the outputs.<br>
+<br>
+
+<strong>Correctness:</strong> The algorithm produces only feasible solutions (with total weight less or equal than the knapsack capacity) since weights are left unchanged by the scale and round procedure.<br>
+<br>
+
+<strong>Quality guarantee:</strong><br>
+
+Let \(S\) be the set of items returned by our algorithm and \(S^\ast\) by the set of items returned by the optimal solution to the unmodified problem. Note that \(S^\ast\) is also optimal for the scaled but unrounded problem, since scaling does not affect the problem structure. <br>
+
+We know that (where \(\alpha\) is the scaling factor)
+$$
+\begin{equation}
+\begin{aligned}
+\text{Value}(S) &= \sum_S v_i\\
+  &= \frac{1}{\alpha} \sum_S \alpha v_i\\
+  & \ge \frac{1}{\alpha} \sum_S v_i' 
+\end{aligned}
+\end{equation}
+$$
+since \(v_i' = \lfloor \alpha v_i \rfloor\). We also know that
+$$
+\sum_S v_i' \ge \sum_{S^\ast} v_i'
+$$
+since \(S\) is optimal for the scaled and rounded instance. Due to rounding it holds that \(v_i' > \alpha v_i-1\), so \(\sum_{S^\ast} v_i' > \alpha \sum_{S^\ast} v_i-n\) where \(\sum_{S^\ast} v_i = \text{OPT}\).<br>
+<br>
+
+Overall:
+$$
+\begin{equation}
+\begin{aligned}
+\text{Value}(S) &= \sum_S v_i\\
+  &= \frac{1}{\alpha} \sum_S \alpha v_i\\
+  & \ge \frac{1}{\alpha} \sum_S v_i'\\
+  & \ge \frac{1}{\alpha} \sum_{S^\ast} v_i'\\
+  & \ge \sum_{S^\ast} v_i - \frac{n}{\alpha}\\
+  & = \text{OPT} - \frac{n}{\alpha}\\
+  & = \text{OPT} - \frac{n \max v_i}{N}\\
+  & \ge \text{OPT} - \frac{n}{N}\text{OPT}
+\end{aligned}
+\end{equation}
+$$
+So for \(N=100n\) we will have an approximation of \((1-\frac{1}{100})\text{ OPT} = 0.99 \text{ OPT}\). The algorithm has a runtime of \(\mathcal{O}(n^2N)\).<br>
+<br>
+<h3 id="partial-brute-force-ptas-for-knapsack"> Partial Brute-Force PTAS for Knapsack</h3>
+The knapsack problem admits another polynomial time approximation scheme. Here we first find part of the solution by brute-force and then finish up using a greedy algorithm. This algorithm has a runtime of \(\mathcal{O}(\frac{1}{\epsilon}n^{1/\epsilon})\) and achieves an approximation within a factor of \(1+\frac{1}{k}\) of optimality where \(k\) is the largest possible subset we consider in the brute-force step.<br>
+
+For more details see <a href="http://math.mit.edu/~goemans/18434S06/knapsack-katherine.pdf">this</a> excellent paper.<br>
+<br>
+<br>
+<br>
+
+
+      </span>
+
+      <!--<div id="disqus_thread"></div>
+
+
+      <script>
+          /**
+           *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+           *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+           */
+
+          var disqus_config = function () {
+              this.page.url = "https://dominikschmidt.xyz/approximation-algorithms-notes";  // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = "approximation-algorithms-notes"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+          };
+
+          (function() {  // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+
+              s.src = 'https://dominikschmidtxyz.disqus.com/embed.js';
+
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+          })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    </div>-->
+
+  <br><br>
+
+  <!--<footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>-
+
+  <br>-->
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

@@ -17,7 +17,7 @@
   <meta property="og:url" content="http://dominikschmidt.xyz/bloom-filter"/>
   <!--<meta property="og:description" content="A bloom filter is a probabilistic data structure that allows you to efficiently test an element for probable set membership. It supports the operations add(item) and contains(item), where add performs as expected and contains either yields a <em>definite no</em> or a <em>probable yes</em>, meaning false positives are possible but false negatives are not."/>-->
 
-  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <!--<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
   <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
   <script>
   window.addEventListener("load", function(){
@@ -36,7 +36,7 @@
       "href": "http://dominikschmidt.xyz/policy"
     }
   })});
-  </script>
+</script>-->
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
@@ -90,7 +90,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="../images/favicon.png">
 
-  <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>
+  <!--<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>-->
 </head>
 <body>
 
@@ -145,7 +145,7 @@
       <!--END OF HEADING-->
 
       <span class="article-text">
-        <div id="index"><a href=#how-to-add-an-item> → How to add an item</a><br><a href=#how-to-test-membership-of-an-item> → How to test membership of an item</a><br><a href=#applications-of-bloom-filters> → Applications of Bloom Filters</a><br><a href=#how-to-choose-parameters-m,-k-and-the-hash-functions> → How to choose parameters \(m\), \(k\) and the hash functions</a><br><a href=#how-to-use-a-bloom-filter-in-python> → How to use a Bloom Filter in Python</a></div><br><hr>
+        <div id="index"><ul><li><a href=#how-to-add-an-item> How to add an item</li></a><ul></ul><li><a href=#how-to-test-membership-of-an-item> How to test membership of an item</li></a><ul></ul><li><a href=#applications-of-bloom-filters> Applications of Bloom Filters</li></a><ul></ul><li><a href=#how-to-choose-parameters-,-and-the-hash-functions> How to choose parameters \(m\), \(k\) and the hash functions</li></a><ul></ul><li><a href=#how-to-use-a-bloom-filter-in-python> How to use a Bloom Filter in Python</li></a><ul></ul></div><hr style="margin-bottom: 4rem;">
 A <strong>bloom filter</strong> is a probabilistic data structure that allows you to efficiently test an element for probable set membership. It supports the operations <code>add(item)</code> and <code>contains(item)</code>, where <code>add</code> performs as expected and <code>contains</code> either yields a <em>definite no</em> or a <em>probable yes</em>, meaning false positives are possible but false negatives are not. <br>
 <br>
 
@@ -163,7 +163,7 @@ Bloom filters can be used to optimize disk lookups, database or web requests, im
 
 The fact that bloom filters sometimes return false positives is usually not a problem. For example when optimizing database or web requests one might want to use a bloom filter to determine whether an item is actually available there before sending a time-consuming lookup request. In this case a false positive would mean that the bloom filter says the item is stored in the database when it in reality is not. Therefore the false positive would only cause an unnecessary web request but no information would be lost.<br>
 <br>
-<h2 id="how-to-choose-parameters-$m$,-$k$-and-the-hash-functions"> How to choose parameters \(m\), \(k\) and the hash functions</h2>
+<h2 id="how-to-choose-parameters-,-and-the-hash-functions"> How to choose parameters \(m\), \(k\) and the hash functions</h2>
 When creating a bloom filter, one needs to specify the array size \(m\) and the number of hash functions \(k\). These together determine the expected false positive rate \(\lambda\) for the bloom filter after adding \(n\) items to it. Therefore the parameters should be chosen with the required false positive rate in mind.<br>
 <br>
 
@@ -198,7 +198,7 @@ bloom.add("test-key")
 print("test-key" in bloom)
 </code></pre></div>
 (Example is modified from project readme)
-<section id="article_footer"><div class="further-reading"><h2>Further Reading</h2><br><ul><li><a href="https://pypi.org/project/bloom-filter/">bloom-filter for Python (Pypi)</a></li><li><a href="https://llimllib.github.io/bloomfilter-tutorial/">Bloom Filter Online Example</a></li></ul></div><h2>References</h2><br><ol class="references"><li><span id="ref1"><a href="https://en.wikipedia.org/wiki/Bloom_filter">Wikipedia - Bloom Filter</a></span> <a href="#ref1ref""><i class="references-return fas fa-caret-left"></i></a></li><li><span id="ref2"><a href="https://stackoverflow.com/a/4125080/3062435">Modern, high performance bloom filter in Python?</a></span> <a href="#ref2ref""><i class="references-return fas fa-caret-left"></i></a></li></ol></section>
+<section id="article_footer"><h2>Further Reading</h2><ul class="further-reading"><li><a href="https://pypi.org/project/bloom-filter/">bloom-filter for Python (Pypi)</a></li><li><a href="https://llimllib.github.io/bloomfilter-tutorial/">Bloom Filter Online Example</a></li></ul><h2>References</h2><ol class="references"><li><span id="ref1"><a href="https://en.wikipedia.org/wiki/Bloom_filter">Wikipedia - Bloom Filter</a></span> <a href="#ref1ref""> <i class="fas fa-undo-alt references-return"></i></a></li><li><span id="ref2"><a href="https://stackoverflow.com/a/4125080/3062435">Modern, high performance bloom filter in Python?</a></span> <a href="#ref2ref""> <i class="fas fa-undo-alt references-return"></i></a></li></ol></section>
       </span>
 
       <!--<div id="disqus_thread"></div>

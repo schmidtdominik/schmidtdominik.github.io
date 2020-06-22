@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Convolutional Neural Networks for Visual Recognition - Dominik Schmidt</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <link rel=preload href="../css/BIG JOHN.otf" as="font" crossorigin>
+
+  <meta property="og:title" content="Convolutional Neural Networks for Visual Recognition"/>
+  <meta property='og:type' content='article'/>
+  <meta property="og:image" content="assets/cover.png"/>
+  <meta property="og:url" content="http://dominikschmidt.xyz/cs231-notes"/>
+  <!--<meta property="og:description" content="<h2 id="activation-functions"> Activation functions</h2><h3 id="sigmoid"> Sigmoid</h3>
+\(\sigma(x)=1/(1+e^{-x})\)"/>-->
+
+  <!--<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+  <script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#edeff5",
+        "text": "#838391"
+      },
+      "button": {
+        "background": "#4b81e8"
+      }
+    },
+    "position": "bottom-left",
+    "content": {
+      "href": "http://dominikschmidt.xyz/policy"
+    }
+  })});
+</script>-->
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-4694920180315448",
+            enable_page_level_ads: true
+       });
+  </script>
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 100 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/article.css">
+
+  <link rel="stylesheet" href="../highlight/styles/atom-one-light.css"><!--foundation/hopscotch-->
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+
+  <!--<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>-->
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 8%">
+          <h1>
+            <a href="../index.html">
+              <span id="title">
+                Dominik Schmidt
+              </span>
+            </a>
+            <!--<a href="index.html">
+              <span id="by-me">
+
+              </span>
+            </a>-->
+          </h1>
+        <hr>
+        <nav>
+          <span style="display: inline-block;" ><a class="navitem" href="../index.html"><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../datasets.html"><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../random.html"><i class="fas fa-robot"></i>&nbsp;Random Stuff</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About me</a></span>
+
+          <span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://github.com/schmidtdominik"><i class="fab fa-github"></i>&nbsp;</a></span>
+          <!--<span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://www.reddit.com/user/dominik_schmidt"><i class="fab fa-reddit"></i></i>&nbsp;</a></span>-->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container article">
+      <div id='header-box'>
+
+
+        <!--START OF HEADING-->
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <img src="assets/cover.png" id="header-img" alt="">
+        </div>
+
+
+        <div id="header-text">
+          <h1 class="article-title">
+            Convolutional Neural Networks for Visual Recognition
+          </h1>
+          <time datetime="2019-09-05 00:00:00">September 5, 2019 ⧗ 65 minute read</time><br>
+        </div>
+      </div>
+      <!--END OF HEADING-->
+
+      <span class="article-text">
+        <div id="index"><ul><li><a href=#activation-functions> Activation functions</li></a><ul><li><a href=#sigmoid> Sigmoid</li></a><li><a href=#tanh> tanh</li></a><li><a href=#relu> ReLU</li></a><li><a href=#leaky-relu> Leaky ReLU</li></a><li><a href=#parametric-relu-prelu> Parametric ReLU (PReLU)</li></a><li><a href=#exponential-linear-units-elu> Exponential Linear Units (ELU)</li></a><li><a href=#maxout-neuron> Maxout Neuron</li></a><li><a href=#hierarchical-softmax> Hierarchical Softmax</li></a><li><a href=#multi-label-attribute-tag-loss> Multi -label/-attribute/-tag loss</li></a></ul><li><a href=#initialization> Initialization</li></a><ul><li><a href=#w_i-=-0-all-weights=0> w_i = 0 (all weights=0)</li></a><li><a href=#small-random-numbers-w-=-0.01*np.random.randnd,-h> small random numbers W = 0.01*np.random.randn(D, H)</li></a><li><a href=#large-random-numbers-e.g.-randn-around-1> large random numbers (e.g. randn around 1)</li></a><li><a href=#xavier-initialization-glorot-et-al.,-2010> Xavier initialization (Glorot et al., 2010)</li></a></ul><li><a href=#hyperparameter-search> Hyperparameter Search</li></a><ul></ul><li><a href=#cross-validation> Cross Validation</li></a><ul></ul><li><a href=#autodifferentiation> Autodifferentiation</li></a><ul></ul><li><a href=#gradient-descent> Gradient Descent</li></a><ul><li><a href=#problems-with-sgd> Problems with SGD</li></a><li><a href=#sgd-+-momentum,-nesterov-momentum> SGD + Momentum, Nesterov Momentum</li></a><li><a href=#adagrad> AdaGrad</li></a><li><a href=#rmsprop> RMSProp</li></a><li><a href=#adam> Adam</li></a></ul><li><a href=#learning-rate-decay> Learning rate decay</li></a><ul></ul><li><a href=#higher-order-optimization> Higher-Order Optimization</li></a><ul></ul><li><a href=#model-ensembles> Model Ensembles</li></a><ul></ul><li><a href=#regularization> Regularization</li></a><ul><li><a href=#l2-regularization> L2 Regularization</li></a><li><a href=#l1-regularization> L1 Regularization</li></a><li><a href=#dropout> Dropout</li></a><li><a href=#bias-regularization> Bias regularization</li></a><li><a href=#data-augmentation> Data Augmentation</li></a><li><a href=#dropconnect> DropConnect</li></a><li><a href=#fractional-max-pooling> Fractional Max Pooling</li></a><li><a href=#stochastic-depth> Stochastic Depth</li></a><li><a href=#batch-normalization-ioffe-and-szegedy,-2015> Batch Normalization (Ioffe and Szegedy, 2015)</li></a></ul><li><a href=#cnn-architectures> CNN Architectures</li></a><ul></ul><li><a href=#rnns> RNNs</li></a><ul><li><a href=#char-level-rnn> Char-level RNN</li></a><li><a href=#backpropagation-through-time> Backpropagation through time</li></a><li><a href=#image-captioning> Image Captioning</li></a><li><a href=#image-captioning-with-attention> Image Captioning with Attention</li></a><li><a href=#vanilla-rnn-gradient-flow> Vanilla RNN Gradient Flow</li></a><li><a href=#long-short-term-memory-lstm> Long Short Term Memory (LSTM)</li></a></ul><li><a href=#detection-and-segmentation> Detection and Segmentation</li></a><ul><li><a href=#semantic-segmentation> Semantic Segmentation</li></a><li><a href=#upsampling-methods> Upsampling Methods</li></a><li><a href=#classification-+-localization> Classification + Localization</li></a><li><a href=#object-detection> Object Detection</li></a><li><a href=#instance-segmentation> Instance Segmentation</li></a></ul><li><a href=#visualizing-&-understanding> Visualizing & Understanding</li></a><ul><li><a href=#visualizing-convnet-filter-weights> Visualizing Convnet filter weights</li></a><li><a href=#maximally-activating-patches> Maximally activating patches</li></a><li><a href=#cluster-by-l2-nn-in-feature-space> Cluster by L2-nn in feature space</li></a><li><a href=#activation-visualization> Activation Visualization</li></a><li><a href=#occlusion-experiments> Occlusion Experiments</li></a><li><a href=#saliency-maps> Saliency Maps</li></a><li><a href=#dimensionality-reduction> Dimensionality Reduction</li></a><li><a href=#guided-backpropagation> Guided Backpropagation</li></a><li><a href=#synthesizing-images-with-gradient-ascent> Synthesizing images with Gradient Ascent</li></a><li><a href=#deep-dream> Deep Dream</li></a><li><a href=#feature-inversion> Feature inversion</li></a><li><a href=#neural-texture-synthesis> Neural Texture Synthesis</li></a><li><a href=#neural-style-transfer> Neural Style Transfer</li></a></ul><li><a href=#generative-models> Generative Models</li></a><ul><li><a href=#fully-visible-belief-network-explicit-density> Fully visible belief network (explicit density)</li></a><li><a href=#variational-autoencoders> Variational Autoencoders</li></a><li><a href=#generative-adversarial-networks> Generative Adversarial Networks</li></a></ul><li><a href=#deep-reinforcement-learning> Deep Reinforcement Learning</li></a><ul><li><a href=#markov-decision-process> Markov Decision Process \((\mathcal{S, A, R}, \mathbb{P}, \gamma)\)</li></a><li><a href=#q-learning> Q-learning</li></a><li><a href=#experience-replay> Experience Replay</li></a><li><a href=#policy-gradients> Policy Gradients</li></a><li><a href=#actor-critic> Actor-Critic</li></a><li><a href=#summary> Summary</li></a></ul><li><a href=#efficient-methods-and-hardware-for-deep-learning> Efficient Methods and Hardware for Deep Learning</li></a><ul><li><a href=#pruning> Pruning</li></a><li><a href=#weight-sharing-trained-quantization> Weight Sharing (Trained Quantization)</li></a><li><a href=#huffman-coding> Huffman Coding</li></a><li><a href=#squeezenet> SqueezeNet</li></a><li><a href=#quantization> Quantization</li></a><li><a href=#low-rank-approximation> Low Rank Approximation</li></a><li><a href=#binary-ternary-net> Binary/Ternary Net</li></a><li><a href=#winograd-convolution> Winograd Convolution</li></a><li><a href=#parallelism> Parallelism</li></a><li><a href=#mixed-precision-training> Mixed Precision Training</li></a><li><a href=#model-distillation> Model Distillation</li></a></ul><li><a href=#adversarial-examples-and-adversarial-training> Adversarial Examples and Adversarial Training</li></a><ul><li><a href=#adversarial-examples-from-overfitting> Adversarial Examples from Overfitting</li></a><li><a href=#adversarial-examples-from-underfitting> Adversarial Examples from Underfitting</li></a><li><a href=#fast-gradient-sign-method> Fast Gradient Sign Method</li></a><li><a href=#transferability-attack> Transferability Attack</li></a><li><a href=#failed-defenses> Failed Defenses</li></a></ul></div><hr style="margin-bottom: 4rem;"><h2 id="activation-functions"> Activation functions</h2><h3 id="sigmoid"> Sigmoid</h3>
+\(\sigma(x)=1/(1+e^{-x})\)<br>
+<br>
+
+Problems:
+<ul>
+<li>vanishing gradient</li>
+<li>not zero centered as the image of the sigmoid function is \((0, 1)\)<br>
+
+\((\textrm{I}) := \sigma(\sum w_ix_i+b)\) is always all-positive, this causes the gradient updates all moving in the same direction.
+The gradient of \((\textrm{I})\) (with respect to \(w\)) is \(\sigma'(\sum w_ix_i+b) (\sum w_i x_i+b)'\) according to the chain rule. The first term \(\sigma'(\sum w_ix_i+b)\) is some arbitrary gradient, the gradient of \((\sum w_i x_i+b)\) is \(x\). If \(x\) is the output of a previous layer with sigmoid activation it is always all-positive.</li>
+<li>\(\textrm{exp}()\) is computationally expensive</li>
+</ul><br>
+<br>
+<h3 id="tanh"> tanh</h3>
+like sigmoid but zero centered<br>
+
+Problems:
+<ul><li>vanishing gradient</li></ul><h3 id="relu"> ReLU</h3>
+\(\textrm{relu}(x) = \textrm{max}(0, x)\)<br>
+
+<ul>
+<li>does not saturate</li>
+<li>very computationally efficient</li>
+<li>converges fast</li>
+<li>more biologically plausible</li>
+</ul><br>
+
+Problems:<br>
+
+<ul>
+<li>not zero centered</li>
+<li>no gradient for negative values → bad initialization can cause relus to be "dead", a too high learning rate can also cause values to jump around and relus to die</li>
+</ul><br>
+
+relu neurons can be initialized with slightly positive bias (e.g. 0.01) to decrease the likelihood of it being dead<br>
+<br>
+<h3 id="leaky-relu"> Leaky ReLU</h3>
+\(\textrm{relu}(x) = \textrm{max}(0.01x, x)\)<br>
+
+Leaky ReLUs don't die, better gradient behaviour<br>
+<br>
+<h3 id="parametric-relu-prelu"> Parametric ReLU (PReLU)</h3>
+\(\textrm{relu}(x) = \textrm{max}(\alpha x, x)\)<br>
+
+\(\alpha\) is learned<br>
+<br>
+<h3 id="exponential-linear-units-elu"> Exponential Linear Units (ELU)</h3>
+\(f(x) = \left\{
+\begin{array}
+{ll}
+x & \textrm{if} \, x > 0 \\
+\alpha (\textrm{exp}(x)-1) & \textrm{if} \, x \le 0 \\
+\end{array}\right.\)<br>
+<br>
+
+<ul>
+<li>all benefits of relu</li>
+<li>closer to zero-mean outputs</li>
+</ul><br>
+
+Problems:<br>
+
+<ul>
+	<li>more saturating than relus</li>
+	<li>computationally expensive because of \(\textrm{exp}()\)</li>
+</ul><br>
+<br>
+<h3 id="maxout-neuron"> Maxout Neuron</h3>
+\(\textrm{max}(w^T_1x+b_1, w^T_2x+b_2)\)<br>
+<br>
+
+<ul>
+	<li>does not have the form of dot product, then linearity. Instead two sets of weights and biases</li>
+	<li>generalizes ReLU and LeakyReLU</li>
+	<li>Linear regime, does not die or saturate!</li>
+</ul><br>
+
+Problems:<br>
+
+<ul>
+	<li>doubles the number of weights and biases</li>
+</ul><br>
+<br>
+<h3 id="hierarchical-softmax"> Hierarchical Softmax</h3>
+Decomposes labels into a tree, where each label is a path along the tree. A softmax classifier is trained at every node of the tree to select either the left or right branch.<br>
+<br>
+<h3 id="multi-label-attribute-tag-loss"> Multi -label/-attribute/-tag loss</h3>
+<ul>
+	<li>binary classifier for each category</li>
+	<li>logistic regression classifier for every attribute</li>
+</ul><br>
+<br>
+<h2 id="initialization"> Initialization</h2><br>
+<h3 id="w_i-=-0-all-weights=0"> w_i = 0 (all weights=0)</h3>
+all neurons do the same operation and have the same gradient, then they update all in the same way → all neurons do essentially the same thing<br>
+<br>
+<h3 id="small-random-numbers-w-=-0.01*np.random.randnd,-h"> small random numbers <code>W = 0.01*np.random.randn(D, H)</code></h3>
+Works okay for small networks, in deeper networks since all values are multiplied by 0.01 at each layer the values get smaller and smaller until at the end of the network they are extremely tiny/zero. Same thing happens for gradients in the other direction → network doesn't learn<br>
+<br>
+<h3 id="large-random-numbers-e.g.-randn-around-1"> large random numbers (e.g. randn around 1)</h3>
+almost all neurons completely saturated with (tanh)<br>
+<br>
+<h3 id="xavier-initialization-glorot-et-al.,-2010"> Xavier initialization (Glorot et al., 2010)</h3>
+<div class="code-wrapper"><pre><code>W = np.random.randn(fan_in, fan_out) / np.sqrt(fan_in) # layer initialization
+</code></pre></div>
+<ul>
+	<li>try to get the variance of the input to be the same as the variance of the output</li>
+	<li>assumes linear activation (for example in the active region of tanh/sigmoid) → doesn't work with relu</li>
+</ul><br>
+
+To work with relu use this (note additional "/2") (He et al., 2015). This accounts for the 50% of neurons that are dead.
+<div class="code-wrapper"><pre><code>W = np.random.randn(fan_in, fan_out) / np.sqrt(fan_in/2) # layer initialization
+</code></pre></div><br>
+<h2 id="hyperparameter-search"> Hyperparameter Search</h2>
+<ul>
+	<li>Optimize in log space! <code>lr = 10**uniform(-3, -6)</code></li>
+{0.001, 0.01, 0.1, 1} vs {0.001, 0.334, 0.667, 1}
+<li>Use random search instead of grid search. Usually one variable is more important than the others, if we use random search we try many more different values for this important variable.</li>
+</ul><br>
+
+<div class="image-center-wrapper"><img src="assets/random-search.png"  class="inline-image image-center  zoomable-img  "><img src="assets/lr.png"  class="inline-image image-center  zoomable-img  "><img src="assets/bad_init.png"  class="inline-image image-center  zoomable-img  "><img src="assets/gap.png"  class="inline-image image-center  zoomable-img  "></div><h2 id="cross-validation"> Cross Validation</h2>
+<div class="image-center-wrapper"><img src="assets/crossvalidation.png" style="width: 43%;" class="inline-image image-center    "><img src="assets/K-fold_cross_validation_EN.svg" style="width: 43%;" class="inline-image image-center    "></div><br>
+<h2 id="autodifferentiation"> Autodifferentiation</h2>
+<ul>
+	<li>split up computation in elementary operations ("gates" in the computation graoh) for which the local derivative is known</li>
+	<li>chain the gradients of elementary operations together using the chain rule</li>
+	<li>the elementary operations in the computation graph don't have to be atomic. For example the sigmoid function \(\sigma(x)=\frac{1}{1+e^{-x}}\) has derivative \(\frac{d\sigma}{dx}=\frac{e^{-x}}{(1+e^{-x})^2}=(1-\sigma(x))\sigma(x)\). As the derivative is very simple it might make sense to have the entire sigmoid function as a singular gate in the computation graph instead of chaining \(e^x\), \(\frac{1}{x}\), \(x^2\),.. operations together.</li>
+	<li>don't create the entire computation graph for the gradient. Just compute it directly</li>
+</ul><br>
+
+See <a href="http://cs231n.github.io/optimization-2/">this</a>.<br>
+<br>
+
+Some quotes:<br>
+
+"<em>Unintuitive effects and their consequences</em>. Notice that if one of the inputs to the multiply gate is very small and the other is very big, then the multiply gate will do something slightly unintuitive: it will assign a relatively huge gradient to the small input and a tiny gradient to the large input. Note that in linear classifiers where the weights are dot producted wTxiwTxi (multiplied) with the inputs, this implies that <strong>the scale of the data has an effect on the magnitude of the gradient for the weights</strong>. For example, if you multiplied all input data examples by 1000 during preprocessing, then the gradient on the weights will be 1000 times larger, and you’d have to lower the learning rate by that factor to compensate. This is why preprocessing matters a lot, sometimes in subtle ways! And having intuitive understanding for how the gradients flow can help you debug some of these cases."<br>
+<br>
+
+"We discussed the importance of <strong>staged computation</strong> for practical implementations of backpropagation. You always want to break up your function into modules for which you can easily derive local gradients, and then chain them with chain rule. Crucially, you almost never want to write out these expressions on paper and differentiate them symbolically in full, because you never need an explicit mathematical equation for the gradient of the input variables. Hence, decompose your expressions into stages such that you can differentiate every stage independently (the stages will be matrix vector multiplies, or max operations, or sum operations, etc.) and then backprop through the variables one step at a time."<br>
+<br>
+<h2 id="gradient-descent"> Gradient Descent</h2>
+<ul>
+	<li>mini batch size: "We use powers of 2 in practice because many vectorized operation implementations work faster when their inputs are sized in powers of 2."</li>
+	<li>mini batches: "The reason this works well is that the examples in the training data are correlated. To see this, consider the extreme case where all 1.2 million images in ILSVRC are in fact made up of exact duplicates of only 1000 unique images (one for each class, or in other words 1200 identical copies of each image). Then it is clear that the gradients we would compute for all 1200 identical copies would all be the same, and when we average the data loss over all 1.2 million images we would get the exact same loss as if we only evaluated on a small subset of 1000."</li>
+</ul><br>
+<br>
+<h3 id="problems-with-sgd"> Problems with SGD</h3>
+<ul>
+	<li>Loss changes quickly in one direction and slowly in another (loss landscape looks like a taco shell) causes SGD to oscillate/jitter. Loss function is said to have a high <em>condition number</em> at this point (ratio of largest to smallest singular value of the Hessian matrix is large).</li>
+Problem is worse in higher dimensions: If we have thousands or millions of singular values of the (much larger) hessian matrix the ratio of the largest to smallest one will be quite large.
+<li>saddle points/local minima, some/all components of the gradient are zero → network doesn't learn. In practice since in high-dim spaces local minima/maxima are very rare, saddle points are much more problematic since they are very common and the network doesn't learn very fast if many of the gradient's components are zero.</li>
+</ul><br>
+<br>
+<h3 id="sgd-+-momentum,-nesterov-momentum"> SGD + Momentum, Nesterov Momentum</h3>
+Many of the problems with SGD are solved by SGD+momentum. Momentum tracks "velocity" and applies friction \(\rho\). This helps to avoid oscillations and accelerates traversal of local minima and saddle points.<br>
+<br>
+
+Nesterov momentum uses lookahead position (after adding velocity) to compute gradient.
+Formulation of NAG is a bit annoying since we usually want to compute the loss function and gradient at the same point. Change of variables fixes this<br>
+<br>
+
+Does momentum causes us to skip over minima (when the minimum lies in a very narrow basin)?
+Yes, but usually those sharp minima are minima that we want to avoid anyway because they lead to overfitting. If we increase our training set, those sharp minima may disappear, while large flat minima will remain.<br>
+<br>
+<h3 id="adagrad"> AdaGrad</h3>
+<div class="code-wrapper"><pre><code> python
+grad_squared = 0
+while True:
+	dx = compute_gradient(x)
+	grad_squared += dx<em>dx
+	x -= lr </em> dx / (np.sqrt(grad_squared) + 1e-7)
+</code></pre></div>
+Accelerates movement along dimensions of slow movement (weak gradient) and slows movement along dimensions of fast movement (strong gradient). Division by a large/small number.<br>
+<br>
+
+Problem: grad_squared is never "reset" → step size decrease over the course of training<br>
+<br>
+<h3 id="rmsprop"> RMSProp</h3>
+fixed the problem with AdaGrad by decaying the grad_squared term<br>
+
+<div class="code-wrapper"><pre><code> python
+grad_squared = 0
+while True:
+	dx = compute_gradient(x)
+	grad_squared = decay_rate <em> grad_squared + (1-decay_rate)</em>dx<em>dx
+	x -= lr </em> dx / (np.sqrt(grad_squared) + 1e-7)
+</code></pre></div><br>
+<h3 id="adam"> Adam</h3>
+Momentum: build up velocity by adding averaging the gradients
+AdaGrad & RMSProp: build up estimate of squared gradient and divide by those
+Adam: combines both<br>
+
+Adam without bias correction:<br>
+
+<div class="code-wrapper"><pre><code>first_moment = 0
+second_moment = 0
+while True:
+	dx = compute_gradient(x)
+	first_moment = beta1 <em> first_moment + (1+beta1) </em> dx # Momentum
+    second_moment = beta2 <em> second_moment + (1-beta2) </em> dx<em>dx
+	x -= lr </em> first_moment / (np.sqrt(second_moment) + 1e-7)
+</code></pre></div>
+Problem: At the first training steps first and second moment estimates are still close to zero. This causes us to take too large steps in the beginning. (because of the division by sqrt second_moment)<br>
+<br>
+
+<strong>Full Adam</strong> adds bias correction to fix this:<br>
+
+<div class="code-wrapper"><pre><code>first_moment = 0
+second_moment = 0
+for t in range(num_iterations):
+	dx = compute_gradient(x)
+	first_moment = beta1 <em> first_moment + (1+beta1) </em> dx # Momentum
+    second_moment = beta2 <em> second_moment + (1-beta2) </em> dx<em>dx # AdaGrad/RMSProp
+    first_unbias = first_moment / (1-beta1 <strong> t)
+    second_unbias = second_moment / (1-beta2 </strong> t)
+	x -= lr </em> first_unbias / (np.sqrt(second_unbias) + 1e-7)
+</code></pre></div>
+One problem with Adam:
+The taco shell optimization landscape problem above (under "problems with sgd") is only partly fixed by adam. Specifically only in cases where the "taco shell axes" are aligned with coordinate axes. In other cases where the valley is rotated Adam still has the same problem.<br>
+<br>
+<h2 id="learning-rate-decay"> Learning rate decay</h2>
+Common with sgd/momentum, less commonly used with adam.<br>
+
+<strong>Exponential Decay:</strong> \(\alpha = \alpha_0 e^{-kt}\)<br>
+
+<strong>1/t decay:</strong> \(\alpha = \alpha_0/(1+kt)\)<br>
+
+<strong>Step decay:</strong> e.g. decay learning rate by half every few epochs<br>
+<br>
+<h2 id="higher-order-optimization"> Higher-Order Optimization</h2>
+We can use higher order derivatives instead of only the first one. This has some advantages (we don't necessarily need a learning rate since we can directly step to the minimum of our quadratic approximation) but is very computationally expensive.<br>
+<br>
+
+Hessian Matrix for Newton parameter update has O(n^2) elements, inverting takes O(n^3)<br>
+<br>
+
+Instead there are less expensive versions<br>
+
+<ul>
+	<li>Quasi-Newton methods (BGFS)</li>
+	<li>L-BFGS (Limited memory BFGS)</li>
+</ul><br>
+
+works well with full batch deterministic sgd but not in the stochastic min-batch setting<br>
+<br>
+<h2 id="model-ensembles"> Model Ensembles</h2>
+<ol>
+<li>Train multiple independent models (possibly with different hyperparameters)</li>
+<li>At test time average their results</li>
+</ol><br>
+
+→ A few percent higher performance<br>
+<br>
+
+Alternatively:<br>
+
+<ul>
+	<li>take multiple snapshots of a single model during training and average those snapshots in an ensemble (maybe with extreme learning rate schedule to explore different regions of the parameter space within the same training run)</li>
+	<li>Polyak averaging</li>
+</ul><br>
+
+<div class="image-center-wrapper"><img src="assets/ensembles.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h2 id="regularization"> Regularization</h2><br>
+<h3 id="l2-regularization"> L2 Regularization</h3>
+"The L2 regularization has the intuitive interpretation of heavily penalizing peaky weight vectors and preferring diffuse weight vectors. As we discussed in the Linear Classification section, due to multiplicative interactions between weights and inputs this has the appealing property of encouraging the network to use all of its inputs a little rather than some of its inputs a lot. Lastly, notice that during gradient descent parameter update, using the L2 regularization ultimately means that every weight is decayed linearly: <code>W += -lambda * W</code> towards zero."<sup><a id="ref1ref" href="#ref1">[1]</a></sup><br>
+<br>
+<h3 id="l1-regularization"> L1 Regularization</h3>
+"The L1 regularization has the intriguing property that it leads the weight vectors to become sparse during optimization (i.e. very close to exactly zero). In other words, neurons with L1 regularization end up using only a sparse subset of their most important inputs and become nearly invariant to the “noisy” inputs. In comparison, final weight vectors from L2 regularization are usually diffuse, small numbers. In practice, if you are not concerned with explicit feature selection, L2 regularization can be expected to give superior performance over L1." <sup><a id="ref1ref" href="#ref1">[1]</a></sup><br>
+<br>
+<h3 id="dropout"> Dropout</h3>
+<ul>
+	<li>Distributes representation over many more neurons, network doesn't become dependent on any single neuron</li>
+	<li>Large ensemble of models within a single model</li>
+</ul><br>
+
+At test time we want to remove the stochasticity of dropout:<br>
+
+<div class="image-center-wrapper"><img src="assets/dropout.png" style="width: 80%;" class="inline-image image-center    "></div>
+Instead approximate this by multiplying by dropout probability to rescale all activations. "Drop at train time, scale at test time"<br>
+<br>
+
+<strong>Inverted Dropout:</strong> Drop and scale at train time, don't do anything at test time.<br>
+<br>
+<h3 id="bias-regularization"> Bias regularization</h3>
+Uncommon since bias parameters don't interact with the data multiplicatively, therefore don't control how individual data dimensions influence the final output<br>
+<br>
+<h3 id="data-augmentation"> Data Augmentation</h3>
+Transform images/data in such a way that the label is preserved<br>
+
+<ul>
+	<li>Horizontal Flips</li>
+	<li>Random crops and scales</li>
+	<li>Color jitter for contrast & brightness (more advanced with PCA to determine direction of jitter)</li>
+	<li>translation/rotation/stretching/shearing/lens distortions...</li>
+</ul><br>
+<br>
+<h3 id="dropconnect"> DropConnect</h3>
+Instead of randomly zeroing out neuron activations, zero out some of the values in the weight matrix instead.<br>
+<br>
+<h3 id="fractional-max-pooling"> Fractional Max Pooling</h3>
+Use multiple different pooling maps for each pooling layer
+<div class="image-center-wrapper"><img src="assets/fracmaxpool.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h3 id="stochastic-depth"> Stochastic Depth</h3>
+During training drop some layers
+<div class="image-center-wrapper"><img src="assets/stochdepth.png" style="width: 30%;" class="inline-image image-center    "></div><br>
+<h3 id="batch-normalization-ioffe-and-szegedy,-2015"> Batch Normalization (Ioffe and Szegedy, 2015)</h3>
+"We want gaussian activations → just make them so"<br>
+<br>
+
+Normalize by empirical mean and variance (independently for each dimension, applied batch-wise).<br>
+<br>
+
+Can be applied to fully connected and convolutional layers. In convolutional layers we normalize across all spatial locations. (For conv only one scalar mean and variance, for fully connected possibly one scalar mean and variance for each feature)<br>
+<br>
+
+BN avoids saturation, but maybe we want some saturation? Add parameters \(\beta\)  and \(\gamma\) to control mean and variance. In this way we don't simply normalize the layer output but instead give the layer explicit control over it's output's mean and variance. (layer can just recover identity mapping) <br>
+<br>
+
+<ul>
+	<li>improves gradient flow through the network</li>
+	<li>allows higher learning rates</li>
+	<li>reduces strong dependence on initialization</li>
+	<li>acts as regularization since each image (/item) is dependent on all other items in the batch. (since the normalization is done per batch). "It is no longer producing deterministic values for a given training example and is tying all of the inputs in a batch together"</li>
+</ul><br>
+
+Why should data everywhere in the network (and during preprocessing) be normalized?
+<div class="image-center-wrapper"><img src="assets/normalize.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h2 id="cnn-architectures"> CNN Architectures</h2>
+<div class="image-center-wrapper"><img src="assets/comparison.png" style="width: 80%;" class="inline-image image-center    "></div>
+<ul>
+	<li><strong>LeNet-5:</strong> one of the first convnets that was successfully used in practice (standard conv, pool, ... , fc architecture)</li>
+	<li><strong>AlexNet:</strong> first large scale convnet that won imagenet competition. Architecture similar to LeNet, first use of ReLU, used dropout and data augmentation, SGD+momentum, l2 weight decay, 7-CNN ensemble</li>
+	<li><strong>VGGNet:</strong> (VGG16, VGG19 with 16 and 19 layers respectively), won imagenet, very small conv filters (3x3, 5x5). Stacker smaller filter are less computationally expensive but have the same effective receptive field.
+<div class="image-center-wrapper"><img src="assets/vgg.png" style="width: 70%;" class="inline-image image-center    "></div></li>
+<li><strong>GoogLeNet:</strong> 2014 winner, introduced inception module, no fc layers, 12x less parameters than alexnet</li>
+<li><strong>ResNet:</strong> much deeper than any previous model: 152 layers, 2015 winner, residual connections make it easier to recover the identity mapping (and more explicit), batchnorm, xavier:2 init, sgd+momentum, weight decay, no dropout used, learning rate schedule
+<div class="image-center-wrapper"><img src="assets/resnet.png" style="width: 70%;" class="inline-image image-center    "></div> Residual Blocks and L2 normalization: l2 normalization encourages weights to be close to zero, this might not actually make a lot of sense with normal convnets but with resnets this causes unused layers to just become identity mappings. Think of what happens with the gradient at "additive gates". The gradient is the sum of the gradients of both branches.</li>
+</ul><br>
+<br>
+
+Other architectures:<br>
+
+<ul>
+	<li><strong>"Network in Network"</strong></li>
+	<li><strong>"Identity Mappings in Deep Residual Networks":</strong> improved ResNet block design</li>
+	<li><strong>"Wide Residual Networks":</strong> Argues that residuals are the important factor, not depth. Uses wider residual blocks and fewer layers. 50-layer wide ResNet outperforms 152-layer original ResNet. Increasing width instead of depth is more computationally efficient (parallelizable)</li>
+	<li><strong>"Aggregated Residual Transformations for Deep Neural Networks (ResNeXt)":</strong> multiple parallel pathways within a residual block
+<div class="image-center-wrapper"><img src="assets/resnext.png" style="width: 70%;" class="inline-image image-center    "></div></li>
+<li><strong>"Deep Networks with Stochastic Depth":</strong> Motivation: reduce vanishing gradients and training time through shallower networks during training. Like dropout but for entire layers. Use full network at test time.</li>
+	<li><strong>"FractalNet: Ultra-Deep Neural Networks without Residuals":</strong> argues that key is transitioning effectively from shallow to deep and residual representations are not necessary. Fractal architecture with both shallow and deep paths to output. Trained with dropping out sub-paths, full network at test time
+	<div class="image-center-wrapper"><img src="assets/fractalnet.png" style="width: 70%;" class="inline-image image-center    "></div></li>
+<li><strong>DenseNet "Densely Connected Convolutional Networks":</strong> dense blocks where each layer is connected to every other layer in feedforward fashion. Alleviates vanishing gradient, strengthens feature propagation, encourages feature reuse <div class="image-center-wrapper"><img src="assets/densenet.png" style="width: 70%;" class="inline-image image-center    "></div></li>
+<li><strong>"SqueezeNet: AlexNet-level Accuracy with 50x Fewer Parameters and less than 0.5Mb Model Size"</strong></li>
+</ul>  <br>
+
+Number of layers of a network: generally given as the number of weight layers (conv, fc)<br>
+<br>
+<h2 id="rnns"> RNNs</h2>
+Current state \(h_t\), state transition function \(f_W\), current input \(x_t\), current output \(y_t\). The recurrence relation is of the form:<br>
+<br>
+
+\(h_t=f_W(h_{t-1}, x_t)\)<br>
+<br>
+
+for example:<br>
+<br>
+
+\(h_t=\tanh(W_{hh}h_{t-1}+W_{xh}x_t)\)
+\(y_t=W_{hy}h_t\)<br>
+<br>
+
+or with biases:<br>
+<br>
+
+\(h_t=\tanh(W_{hh}h_{t-1}+W_{xh}x_t+b_h)\)
+\(y_t=W_{hy}h_t+b_y\)<br>
+<br>
+
+(Using \(\tanh\) generally causes the vanishing gradient problem but avoids the problem that unbounded activations in RNNs may explode, see <a href="https://www.reddit.com/r/MachineLearning/comments/9elxs8/d_why_do_you_use_tanh_in_a_rnn/">this</a> and 
+<a href="https://stackoverflow.com/questions/40761185/what-is-the-intuition-of-using-tanh-in-lstm">this</a>.<br>
+
+<div class="image-center-wrapper"><img src="assets/rnn.png" style="width: 80%;" class="inline-image image-center    "></div>
+One-to-one, one-to-many, many-to-one, many-to-many architectures<br>
+
+<strong>Sequence to sequence</strong>: Many-to-one encoder + One-to-many decoder<br>
+<br>
+<h3 id="char-level-rnn"> Char-level RNN</h3>
+Generating text with a char-level rnn:<br>
+
+<ul>
+	<li>Feed initial primer/prompt through the network</li>
+	<li>At each step apply softmax to output and sample from the resulting probability distribution. Then feed this back into the network as input.</li>
+(Instead of sampling we could also take the argmax which may increase stability but reduces sample diversity)</ul><br>
+
+<strong><a href="https://gist.github.com/karpathy/d4dee566867f8291f086">char-level rnn example: karpathy/min-char-rnn.py</a></strong>
+What are <strong>unnormalized log probabilities</strong> in min-char-rnn.py? <a href="https://stackoverflow.com/questions/48483980/why-explain-logit-as-unscaled-log-probabililty-in-sotfmax-cross-entropy-with-l">See this</a>
+The softmax function is \(\exp{z_k}/\sum_i{\exp{z_i}}\). \(z\) are called the unnormalized log probabilities because they are not yet normalized by \(\sum_i{\exp{z_i}}\) and \(z_k = \log (\exp z_k)\).<br>
+
+<div class="code-wrapper"><pre><code>ys[t] = np.dot(Why, hs[t]) + by # unnormalized log probabilities for next chars
+ps[t] = np.exp(ys[t]) / np.sum(np.exp(ys[t])) # probabilities for next chars
+</code></pre></div><br>
+<h3 id="backpropagation-through-time"> Backpropagation through time</h3>
+Forward pass through entire sequence to compute loss, backward pass through entire sequence to compute gradient<br>
+<br>
+
+<strong>Truncated BPTT:</strong> Forward and backward through smaller chunks of the whole sequence (carry over hidden state from previous chunk to the beginning of the next chunk)<br>
+<br>
+
+<div class="image-center-wrapper"><img src="assets/tbptt.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h3 id="image-captioning"> Image Captioning</h3>
+Feed image through convnet (for example inceptionv4 without the last two layers) to get a feature vector \(v\). Then run an rnn with the hidden state recurrence relation \(h_t=\tanh(W_{hh}h_{t-1}+W_{xh}x_t+W_{ih}v)\) which incorporates the image information at every timestep. (Alternatively just use the feature vector as the initial hidden state of a language model rnn instead of the changed recurrence relation)<br>
+<br>
+<h3 id="image-captioning-with-attention"> Image Captioning with Attention</h3>
+Instead of a single feature vector for the entire image, the convnet now extracts one feature vector for each patch of the image (e.g. 14x14 feature map for a 300x300px image), which is then fed into the lstm language model. In addition to the vocabulary prob. distribution the lstm model also outputs an (attention) distribution over all locations in the image. As the next input the model then receives the word/char sampled from the first prob. distr. and the (14x14) feature vector map weighted by the attention distribution.<br>
+
+<div class="image-center-wrapper"><img src="assets/ic-att.png" style="width: 80%;" class="inline-image image-center    "></div>
+<strong>Soft-attention:</strong> weighted combination of features from all image locations<br>
+
+<strong>Hard attention:</strong> Select exactly one location in the image to look at<br>
+
+<div class="image-center-wrapper"><img src="assets/hard-vs-soft-att.png" style="width: 80%;" class="inline-image image-center    "></div>
+Hard-attention is not differentiable. "Need to use something slightly fancier than vanilla backprob."<br>
+<br>
+
+<strong>Visual question answering</strong>: use rnn to summarize question, cnn to summarize image, then use another rnn to generate answer based on both summaries.<br>
+<br>
+
+<strong>Multilayer RNNs:</strong> hidden states from one rnn (one for each timestep) are passed to another rnn<br>
+<br>
+<h3 id="vanilla-rnn-gradient-flow"> Vanilla RNN Gradient Flow</h3>
+When backpropping through matrix multiply with \(W\) we multiply by the transpose of \(W\). Therefore in a deep RNN when computing the gradient we have repeated multiplication by W and application of tanh. This could cause our gradients to either explode or vanish.
+If \(W\) is a scalar then the gradient explodes or vanishes depending on whether \(W > 1\) or \(W < 1\). In the non-scalar case it depends on whether the largest singular value \(> 1\) or \(< 1\).<br>
+<br>
+
+Slight hack to fix exploding gradients: <strong>gradient clipping</strong><br>
+
+<div class="code-wrapper"><pre><code>grad_norm = np.sum(grad<em>grad)
+if grad_norm > threshold:
+    grad </em>= (threshold / grad_norm)
+</code></pre></div>
+(grad_norm might be the l2 norm)<br>
+<br>
+<h3 id="long-short-term-memory-lstm"> Long Short Term Memory (LSTM)</h3>
+explicit forget, input, update gates<br>
+
+better gradient flow: gradient flows through forget gate operation but this can be different for each timestep so we are not repeatedly multiplying by the same matrix. Also the forget gate is also in the range [0, 1] due to the sigmoid. Furthermore we have no non-linearity in the gradient path.<br>
+
+<strong>GRU:</strong> LSTM variant<br>
+<br>
+<h2 id="detection-and-segmentation"> Detection and Segmentation</h2>
+<div class="image-center-wrapper"><img src="assets/detect_segm.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h3 id="semantic-segmentation"> Semantic Segmentation</h3>
+Task: Classify every pixel of an image<br>
+
+<ul>
+	<li>Idea: Sliding window approach: Split image into tiny crops and classify each one by a conventional cnn classifier. Extremely inefficient <div class="image-center-wrapper"><img src="assets/segm2.png" style="width: 70%;" class="inline-image image-center    "></div></li>
+	<li>Idea: fully convolutional network. Very computationally expensive since we have convolutional layers with large height/width and depth.  <div class="image-center-wrapper"><img src="assets/segm1.png" style="width: 70%;" class="inline-image image-center    "></div></li>
+	<li>Solution: fully convolutional network with down- and upsampling <div class="image-center-wrapper"><img src="assets/segm3.png" style="width: 70%;" class="inline-image image-center    "></div></li>
+</ul><br>
+<br>
+<h3 id="upsampling-methods"> Upsampling Methods</h3>
+<ul>
+	<li><strong>Unpooling</strong> (nearest neighbor/bed of nails) <div class="image-center-wrapper"><img src="assets/unpooling.png" style="width: 70%;" class="inline-image image-center    "></div></li>
+	<li><strong>Max Unpooling</strong>: similar to bed of nails unpooling above but we choose the spots based on the max-positions of a previous max-pooling layer. May improve image sharpness compared to e.g. nn unpooling. <div class="image-center-wrapper"><img src="assets/max-unpooling.png" style="width: 70%;" class="inline-image image-center    "></div></li>
+	<li><strong>Transpose Convolution:</strong> learnable upsampling
+Forward pass of transpose convolution is the same operation as the backward pass of a normal convolutionOverlapping patches are added (not averaged) as a result of convolution's definition as a matrix multiplication <div class="image-center-wrapper"><img src="assets/transposed_conv.png" style="width: 70%;" class="inline-image image-center    "></div></li>
+</ul><br>
+
+Why is it called transposed conv?<br>
+
+<div class="image-center-wrapper"><img src="assets/transposed_conv2.png" style="width: 70%;" class="inline-image image-center    "></div>
+Use for example 4x4 stride=2 transposed conv or 2x2 stride=2 transposed conv to avoid checkerboard artefacts (or resize conv).<br>
+<br>
+<h3 id="classification-+-localization"> Classification + Localization</h3>
+Task: single object classification + localization<br>
+
+Solution: single convnet that outputs classification score (apply softmax loss) and (x, y, w, h) bounding box coordinates (apply l2/l1/any regression loss)<br>
+
+<div class="image-center-wrapper"><img src="assets/class_local.png" style="width: 80%;" class="inline-image image-center    "></div>
+<strong>Multi-task loss:</strong> weighted sum of multiple losses, each for a (possibly) different task. It's difficult to set this weighting parameter well because the parameter directly changes the value of the loss function (we can't just look which hyperparameter setting causes the loss after training to be the lowest because the parameter directly influences the loss scale). Recommended to find a different metric (accuracy,..) by which to judge the hyperparameter.<br>
+
+<strong>Regression loss:</strong> basically any loss other than cross-entropy or softmax (e.g. l1, l2,..). Losses for continuous outputs rather than classification categories<br>
+
+Related task: human pose estimation (e.g. network outputs the position of 14 fixed joints)<br>
+<br>
+<h3 id="object-detection"> Object Detection</h3>
+Task: multiple objects, draw bounding boxes and classify<br>
+
+Sliding window approach intractable since there are too many possible crops
+Solution: "Region Proposals" (for example with "Selective Search") to propose about 2000 possible image crops that could contain objects (high noise, but high recall).<br>
+<br>
+
+<ul>
+	<li><strong>R-CNN:</strong> create 2000 region proposals, scale them to a fixed size, apply convnet to classify and create bounding box correction</li>
+Problems: training (84h) and inference (47s/img with vgg16) is slow, using fixed instead of learned region proposals <div class="image-center-wrapper"><img src="assets/rcnn.png" style="width: 70%;" class="inline-image image-center    "></div>	<li><strong>Faster R-CNN:</strong> Fixes main problem with R-CNN (slowness) by computing feature maps for the entire image first (and only once) and then takes crops from region proposals (which are based on the image) out of the computed feature maps. Faster R-CNN's computation time is dominated by computing 2000 region proposals (0.32 sec excl, 2.3 sec incl region proposals) <div class="image-center-wrapper"><img src="assets/fastrcnn.png" style="width: 70%;" class="inline-image image-center    "></div></li>
+	<li><strong>Faster R-CNN:</strong> insert Region Proposal Network to predict proposals from features <div class="image-center-wrapper"><img src="assets/fasterrcnn.png" style="width: 70%;" class="inline-image image-center    "></div></li>
+	<li><strong>YOLO / SSD (Single-Shot MultiBox Detector)</strong> <div class="image-center-wrapper"><img src="assets/yolo_ssd.png" style="width: 70%;" class="inline-image image-center    "></div></li>
+</ul><br>
+<br>
+
+Summary: <div class="image-center-wrapper"><img src="assets/obj_dete_summary.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h3 id="instance-segmentation"> Instance Segmentation</h3>
+<strong>Mask R-CNN</strong><br>
+
+classification + bounding box regression + segmentation mask for each region proposal<br>
+
+<div class="image-center-wrapper"><img src="assets/mask-r-cnn.png" style="width: 80%;" class="inline-image image-center    "></div>
+Can also do pose estimation<br>
+
+<div class="image-center-wrapper"><img src="assets/mask-r-cnn-pose.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h2 id="visualizing-&-understanding"> Visualizing & Understanding</h2><br>
+<h3 id="visualizing-convnet-filter-weights"> Visualizing Convnet filter weights</h3>
+We can easily visualize the filters of the first layer of a convnet (these are the filter weights):<br>
+
+<div class="image-center-wrapper"><img src="assets/vis_filters1.png" style="width: 80%;" class="inline-image image-center    "></div>
+Visualizing later layers doesn't work well since activations in later layers are not in terms of pixels of the input image but rather in terms of activations of previous layers:<br>
+
+<div class="image-center-wrapper"><img src="assets/vis_filters2.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h3 id="maximally-activating-patches"> Maximally activating patches</h3>
+One way to visualize which input images maximally excite a specific neuron is to iterate over a dataset and look for the image that maximally excites that neuron.<br>
+
+<div class="image-center-wrapper"><img src="assets/max-act-patch.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h3 id="cluster-by-l2-nn-in-feature-space"> Cluster by L2-nn in feature space</h3>
+We can also cluster similar images from a dataset by looking for l2-nn in feature space. L2 dist in feature space is related to semantic difference, L2 dist in pixel space is related to pixel similarity.<br>
+
+<div class="image-center-wrapper"><img src="assets/nn_in_feature_space.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h3 id="activation-visualization"> Activation Visualization</h3>
+We can also look at activation values (here one filter in one layer seems to be activated at neurons over the persons face):<br>
+
+<div class="image-center-wrapper"><img src="assets/vis_act.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h3 id="occlusion-experiments"> Occlusion Experiments</h3>
+<div class="image-center-wrapper"><img src="assets/occl-exp.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h3 id="saliency-maps"> Saliency Maps</h3>
+Gradient of unnormalized class score with respect to image pixels, take absolute value and max over RGB channels<br>
+
+<div class="image-center-wrapper"><img src="assets/saliency1.png" style="width: 40%;" class="inline-image image-center    "><img src="assets/saliency2.png" style="width: 40%;" class="inline-image image-center    "></div>
+Can be used for segmentation without supervision<br>
+
+<div class="image-center-wrapper"><img src="assets/saliency_segm.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h3 id="dimensionality-reduction"> Dimensionality Reduction</h3>
+<ul>
+	<li><strong>PCA</strong> (Principal Component Analysis)</li>
+	<li><strong>t-SNE</strong> (t-distributed stochastic neighbor embedding)</li>
+</ul><br>
+<br>
+<h3 id="guided-backpropagation"> Guided Backpropagation</h3>
+Only backprop positive gradients through each ReLU. This way we only keep track of positive influences throughout the network → Images come out nicer<br>
+
+Collect maximally activating patches, then run guided backprop to find pixels that maximally affect the label
+<div class="image-center-wrapper"><img src="assets/guided-backprop.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h3 id="synthesizing-images-with-gradient-ascent"> Synthesizing images with Gradient Ascent</h3>
+Use gradient ascent (with a natural image regularizer) to maximize neuron value/label value of a synthetic image.<br>
+
+<div class="image-center-wrapper"><img src="assets/gradient-ascent.png" style="width: 80%;" class="inline-image image-center    "></div>
+By adding additional priors we can generate more realistic images.<br>
+
+<div class="image-center-wrapper"><img src="assets/opt-latent.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h3 id="deep-dream"> Deep Dream</h3>
+Amplify activations of entire layer of neurons by performing gradient descent on the image.<br>
+
++ jiggle image as regularization to increase spatial smoothness<br>
+
+<div class="image-center-wrapper"><img src="assets/deep-dream.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h3 id="feature-inversion"> Feature inversion</h3>
+Reconstruct image from feature vector at a specific layer<br>
+
+<div class="image-center-wrapper"><img src="assets/feature-inversion.png" style="width: 40%;" class="inline-image image-center    "><img src="assets/feature-inversion2.png" style="width: 40%;" class="inline-image image-center    "></div><br>
+<h3 id="neural-texture-synthesis"> Neural Texture Synthesis</h3>
+<strong>Gram Matrix</strong>: pick two feature vectors of shape \(W \times H\), matrix product create co-occurrence matrix between different features. Then take the average of this matrix over all these w, h feature vector pairs<br>
+
+Use gram matrices for neural texture synthesis: pass target image through cnn and compute gram matrix. Then use gradient descent to train new image to have a similar gram matrix. (Or use weighted average of multiple gram matrices at different layers)<br>
+
+<div class="image-center-wrapper"><img src="assets/gram-matrix.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h3 id="neural-style-transfer"> Neural Style Transfer</h3>
+combines feature inversion and neural texture synthesis (gram matrices) to apply a given style to a content image<br>
+
+Pass style image through network to get gram matrices
+Pass content image to get features<br>
+
+Then run feature inversion and neural texture synthesis in parallel<br>
+
+<div class="image-center-wrapper"><img src="assets/neural-style-transfer.png" style="width: 30%;" class="inline-image image-center  zoomable-img  "><img src="assets/nst.png" style="width: 30%;" class="inline-image image-center  zoomable-img  "><img src="assets/nst2.png" style="width: 30%;" class="inline-image image-center  zoomable-img  "></div>
+<ul>
+	<li>We can also use multiple scale images</li>
+	<li>Fast style transfer: train neural network to do style transfer in one step instead of needing to do thousands of forward and backward passes for each image</li>
+</ul><br>
+<br>
+<h2 id="generative-models"> Generative Models</h2>
+Unsupervised learning<br>
+
+<ul>
+	<li>clustering</li>
+	<li>dimensionality reduction</li>
+	<li>feature learning (e.g. autoencoders)</li>
+	<li>density estimation (approximate prob. density function of distribution based on data)</li>
+</ul><br>
+<br>
+
+<strong>Generative Models (density estimation)</strong>
+Given training data ~ p_data, generate new samples from distribution p_model, where p_data ≈ p_model<br>
+
+<ul>
+    <li>Explicit density estimation: explicitly define and solve for p_model</li>
+    <li>Implicit density estimation: Learn model that can sample from p_model but does not explicitly define the distribution.</li>
+</ul><br>
+
+Why generative models:<br>
+
+<ul>
+	<li>generating images, artwork, audio samples</li>
+	<li>generative models of time-series data can be used for simulation and planning (reinforcement learning applications)</li>
+	<li>generating data from latent representations</li>
+</ul><br>
+
+<div class="image-center-wrapper"><img src="assets/generative-taxonomy.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h3 id="fully-visible-belief-network-explicit-density"> Fully visible belief network (explicit density)</h3>
+Use chain rule for probabilities to decompose the likelihood of an image into a product of 1d distributions.<br>
+<br>
+
+<strong>PixelRNN</strong> defines the tractable density function:<br>
+
+$$
+p(x) = \prod_{i=1}^n p(x_i | x_1, \ldots, x_{i-1})
+$$<br>
+
+Then learn to generate the image pixel by pixel (computes probability distribution over all pixel intensities)<br>
+
+<div class="image-center-wrapper"><img src="assets/pixelrnn.png" style="width: 80%;" class="inline-image image-center    "></div> <br>
+
+PixelCNN: still generate image pixels sequentially but don't use an RNN and instead use a CNN to look at the context region around the next pixel.<br>
+
+<div class="image-center-wrapper"><img src="assets/pixelcnn.png" style="width: 80%;" class="inline-image image-center    "></div>
+For both PixelRNN and PixelCNN density estimation is explicit because the network predicts a probability distribution of possible values for each pixel and by the chain rule for the entire image. <br>
+<br>
+<h3 id="variational-autoencoders"> Variational Autoencoders</h3>
+<strong>General Autoencoders:</strong>
+Autoencoders allow us to take advantage of large amount of unlabeled data and carry over this knowledge to smaller supervised tasks.<br>
+
+<ol>
+    <li>Train autoencoder on a large amount of unlabeled data</li>
+    <li>Throw away decoder</li>
+    <li>Train classifier on top of the (feature) encoder with smaller amount of labeled data. (and possibly finetune encoder)</li>
+</ol><br>
+
+<strong>Variational Autoencoders</strong> (probabilistic spin to traditional autoencoders)
+define intractable density function with latent \(z\) (expectation over all possible values of \(z\))<br>
+
+$$
+p_\theta(x) = \int p_\theta(z) p_\theta(x|z)dz
+$$<br>
+
+(this integral is intractable because we cannot sum over <em>all</em> \(z\))<br>
+
+Instead optimize variational lower bound ("ELBO") → See lecture for exact discussion and derivations<br>
+<br>
+<h3 id="generative-adversarial-networks"> Generative Adversarial Networks</h3>
+GANs allow us to sample directly from the (implicit) distribution without modelling it explicitly. Trained through a 2-player game.<br>
+
+Instead of sampleing from a complex high dimensional distribution, sample from a simpler one and transform it into a complex one using a neural network<br>
+
+<div class="image-center-wrapper"><img src="assets/gan.png" style="width: 80%;" class="inline-image image-center    "></div>
+To train a GAN we alternate between the generator and discriminator objective.<br>
+
+<div class="image-center-wrapper"><img src="assets/gan-overview.png" style="width: 80%;" class="inline-image image-center    "></div>
+We want to minimize the generator objective in the graph above. Unfortunately we only get a strong gradient when the generator is already very good. Instead optimize the following objective<br>
+
+<div class="image-center-wrapper"><img src="assets/gan-gobjective.png" style="width: 80%;" class="inline-image image-center    "></div>
+We are able to do interpolation and interpretable vector math with latent vectors.<br>
+<br>
+<h2 id="deep-reinforcement-learning"> Deep Reinforcement Learning</h2><br>
+<h3 id="markov-decision-process"> Markov Decision Process \((\mathcal{S, A, R}, \mathbb{P}, \gamma)\)</h3><br>
+
+<ul>
+    <li>\(\mathcal{S}\) set of possible states</li>
+    <li>\(\mathcal{A}\) set of possible actions</li>
+    <li>\(\mathcal{R}\) distribution of reward given for (state, action) pair</li>
+    <li>\(\mathbb{P}\) transition probability i.e. distribution over next states given current (state, action) pair</li>
+    <li>\(\gamma\) discount factor</li>
+</ul><br>
+
+satisfies the Markov property<br>
+<br>
+
+A <strong>policy</strong> is a function \(\pi\colon \mathcal{S}→\mathcal{A}\)
+The <strong>optimal policy</strong> \(\pi^\ast\) maximizes the cumulative future discounted reward
+$$
+\pi^\ast = \arg \max_\pi \Bigg[\sum_{t\ge 0}\gamma^t r_t|\pi \Bigg]
+$$
+with \(s_0\sim p(s_0), a_t\sim\pi(\cdot|s_t), s_{t+1}\sim p(\cdot|s_t, a_t)\).<br>
+<br>
+
+<strong>Trajectory:</strong> \(s_0, a_0, r_0, s_1, a_1, r_1,\ldots\)<br>
+<br>
+
+<strong>Value function</strong> at state \(s\) is the expected cumulative reward from following the policy from state \(s\).
+$$
+V^\pi(s) = \mathbb{E}\Bigg[\sum_{t\ge0} \gamma^t r_t | s_0 = s, \pi\Bigg]
+$$
+<strong>Q-value function</strong> at state \(s\) and action \(a\) is the expected cumulative reward from taking action \(a\) and the following the policy
+$$
+Q^\pi(s, a) = \mathbb{E}\Bigg[\sum_{t\ge0} \gamma^t r_t | s_0 = s, a_0=a, \pi\Bigg]
+$$
+The <strong>optimal Q-value function</strong> is the maximum cumulative reward achievable from taking action \(a\) and then following a policy.
+$$
+Q^\ast(s, a) = \max_\pi \mathbb{E}\Bigg[\sum_{t\ge0} \gamma^t r_t | s_0 = s, a_0=a, \pi\Bigg]
+$$
+\(Q^\ast\) satisfies the <strong>Bellman equation</strong>
+$$
+Q^\ast(s,a) = \mathbb{E}_{s'\sim\epsilon}[r+\gamma\max_{a'} Q^\ast(s', a')|s, a]
+$$
+If the optimal state-action values for the next step \(Q^\ast(s', a')\) are known then the optimal strategy is to take the action that maximizes the expected value of \(r+\gamma Q^\ast(s', a')\)<br>
+<br>
+
+The optimal policy \(\pi^\ast\) corresponds to taking the best action in any state as specified by \(Q^\ast\)<br>
+<br>
+
+<strong>Value iteration</strong> algorithm: use bellman equation as an iterative update<br>
+<br>
+
+→ Instead use a function approximator to estimate the action-value function<br>
+<br>
+<h3 id="q-learning"> Q-learning</h3>
+Approximate the Q-function through a neural network and train it to approximately satisfy the Bellman equation:<br>
+
+<div class="image-center-wrapper"><img src="assets/q-learning.png" style="width: 70%;" class="inline-image image-center    "></div>
+The network outputs the approximated Q-value for each action at the current state:<br>
+
+<div class="image-center-wrapper"><img src="assets/q-learning-net.png" style="width: 70%;" class="inline-image image-center    "></div><br>
+<h3 id="experience-replay"> Experience Replay</h3>
+When learning from sequential samples the samples are strongly correlated which leads to inefficient learning<br>
+<br>
+
+Instead:<br>
+
+<ul>
+	<li>continually update a replay memory table of transitions (\(s_t, a_t, r_t, s_{t+1}\)) as game episodes are played</li>
+	<li>Train Q-network on random minibatches of transitions from the replay memory instead of consecutive samples</li>
+</ul><br>
+
+<div class="image-center-wrapper"><img src="assets/q-learning-alg.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h3 id="policy-gradients"> Policy Gradients</h3>
+Problem with Q-learning: the Q-function can be very complicated (high dimensional state, lots of possible actions) → Just learning the policy directly can be much simpler<br>
+<br>
+
+Class of parametrized policies:
+$$
+\Pi=\{\pi_\theta, \theta\in \mathbb{R}^m\}
+$$<br>
+
+Value of a policy
+$$
+J(\theta) = \mathbb{E}\Big[\sum_{t\ge 0} \gamma^tr_t|\pi_\theta\Big]
+$$<br>
+
+We want to find the optimal policy
+$$
+\theta^\ast = \arg \max_\theta J(\theta)
+$$<br>
+
+<strong>REINFORCE</strong>
+$$
+J(\theta) = \mathbb{E}_{\tau\sim p(\tau;\theta)}[r(\tau)] = \int_\tau r(\tau)p(\tau;\theta)d\tau
+$$
+where \(r(\tau)\) is the reward of a trajectory  \(\tau=(s_0, a_0, r_0, s_1,\ldots)\)<br>
+
+When we differentiate this however becomes untractable:
+$$
+\nabla_\theta J(\theta) = \int_\tau r(\tau)\nabla_\theta p(\tau;\theta)d\tau
+$$<br>
+
+Use the fact that: \(\nabla_\theta p(\tau; \theta)=p(\tau; \theta) \frac{\nabla_\theta p(\tau; \theta)}{p(\tau; \theta)} = p(\tau; \theta) \nabla_\theta \log p(\tau; \theta)\)<br>
+<br>
+
+Inject this back:
+$$
+\nabla_\theta J(\theta) = \int_\tau (r(\tau)\nabla_\theta \log p(\tau; \theta))p(\tau; \theta)d\tau = \mathbb{E}_{\tau\sim p(\tau;\theta)}[r(\tau)\nabla_\theta \log p(\tau; \theta)]
+$$
+We have taken a gradient of an expectation and transformed it into an expectation of gradients.<br>
+
+<div class="image-center-wrapper"><img src="assets/policy-grad.png" style="width: 45%;" class="inline-image image-center  zoomable-img  "><img src="assets/policy-grad-soft.png" style="width: 45%;" class="inline-image image-center  zoomable-img  "></div>
+<div class="image-center-wrapper"><img src="assets/policy-gradients-variance.png" style="width: 45%;" class="inline-image image-center  zoomable-img  "><img src="assets/variance-reduction-baseline.png" style="width: 45%;" class="inline-image image-center  zoomable-img  "></div>
+Simple baseline: constant moving average of rewards experienced from all trajectories<br>
+<br>
+<h3 id="actor-critic"> Actor-Critic</h3>
+The raw values of the rewards \(r(\tau)\) are not necessarily meaningful. For example when they are all positive, we would just try to keep pushing all action probabilities upwards. Instead, the actor-critic algorithm incorporates Q-learning into policy gradients and uses \(Q^\pi(s_t, a_t)-V^\pi(s_t)\) as the measure of "happiness" that we get from taking action \(a_t\) in state \(s_t\).<br>
+
+From REINFORCE, the \(J(\theta)\) estimator is
+$$
+\nabla_\theta J(\theta) = \sum_{t\ge 0} r(\tau)\nabla_\theta \log \pi_\theta(a_t|s_t)
+$$
+In Actor-Critic it is
+$$
+\nabla_\theta J(\theta) = \sum_{t\ge 0} (Q^\pi(s_t, a_t)-V^\pi(s_t))\nabla_\theta \log \pi_\theta(a_t|s_t)
+$$
+The <strong>advantage function</strong> is \(A^\pi(s,a) =Q^\pi(s, a)-V^\pi(s)\) and denotes how much better the action was than expected. <br>
+
+<div class="image-center-wrapper"><img src="assets/actor-critic.png" style="width: 45%;" class="inline-image image-center    "><img src="assets/ac.png" style="width: 45%;" class="inline-image image-center    "></div><br>
+<h3 id="summary"> Summary</h3>
+Policy gradient methods are stable and very general but suffer from high variance<br>
+
+Q-learning methods are more sample efficient but do not work in all cases<br>
+<br>
+
+Applications of RL:
+<ul>
+<li>Recurrent Attention Models (RAM) uses REINFORCE</li>
+<li>AlphaGo uses Policy Gradients</li>
+</ul><br>
+<br>
+<h2 id="efficient-methods-and-hardware-for-deep-learning"> Efficient Methods and Hardware for Deep Learning</h2>
+<div class="image-center-wrapper"><img src="assets/hardware.png" style="width: 60%;" class="inline-image image-center    "></div>
+The following methods drastically decrease the memory footprint (by 10x for inception and resnet, about 40x for others) while increasing speed and decreasing energy usage (by about 3x) with no hit on accuracy.<br>
+<br>
+<h3 id="pruning"> Pruning</h3>
+By iteratively pruning and retraining weights, the majority of the neurons can be removed with very little impact on performance.<br>
+
+<div class="image-center-wrapper"><img src="assets/pruning.png" style="width: 60%;" class="inline-image image-center    "></div>
+Pruning happens in humans too (50 trillion synapses as newborns, 1000 trillion at 1yo, 500 trillion as adolescents).<br>
+
+As pruning removes the neurons with the least impact (those with the smallest weights) this changes the weight distribution.<br>
+
+<div class="image-center-wrapper"><img src="assets/pruning-distr.png" style="width: 60%;" class="inline-image image-center    "></div><br>
+<h3 id="weight-sharing-trained-quantization"> Weight Sharing (Trained Quantization)</h3>
+Use k-means clustering to cluster similar values in the weight matrices and replace them with a single quantized <strong>shared</strong> weight. (8x less memory with 4bit instead of 32 bit)<br>
+
+<div class="image-center-wrapper"><img src="assets/quant.png" style="width: 30%;" class="inline-image image-center    "></div>
+With trained quantization a special training procedure is needed (that trains only the centroids):<br>
+
+<div class="image-center-wrapper"><img src="assets/quant-train.png" style="width: 60%;" class="inline-image image-center    "></div>
+How many bits do we actually need?<br>
+
+<div class="image-center-wrapper"><img src="assets/bits.png" style="width: 60%;" class="inline-image image-center    "></div>
+With pruning + quantization we can reduce the AlexNet memory footprint by about 97% with minimal reduction in accuracy<br>
+<br>
+<h3 id="huffman-coding"> Huffman Coding</h3>
+Use Huffman coding to let the binary representation of frequently used quantized weights to use fewer bits and use more bits for infrequently used weights.<br>
+<br>
+<h3 id="squeezenet"> SqueezeNet</h3>
+Reduced version of Inception with just two pathways per block.<br>
+
+Achieves AlexNet level accuracy with 50x fewer parameters. Can be further compressed with the methods above to a total of 510x fewer parameters.<br>
+<br>
+<h3 id="quantization"> Quantization</h3>
+Train with float then quantize weights and activations and use for inference<br>
+<br>
+<h3 id="low-rank-approximation"> Low Rank Approximation</h3>
+Layer responses lie in a low-rank subspace<br>
+
+Decompose a conv layer with \(d\) filters with filter size \(k\times k \times c\) to<br>
+
+<ul>
+    <li>A layer with \(d'\) filters (\(k\times k \times c\))</li>
+    <li>A layer with \(d\) filters (\(1 \times 1 \times d'\))</li>
+</ul><br>
+<br>
+<h3 id="binary-ternary-net"> Binary/Ternary Net</h3>
+Train with full precision, only use weights {-1, 0, 1} at inference time.<br>
+<br>
+<h3 id="winograd-convolution"> Winograd Convolution</h3>
+Alternative way to perform convolution that performs 2.25 fewer FMAs (fused multiply-add ops)<br>
+<br>
+<h3 id="parallelism"> Parallelism</h3>
+<strong>Data parallelism:</strong> run multiple training examples in parallel<br>
+
+<strong>Model parallelism:</strong> split model over multiple processors<br>
+<br>
+<h3 id="mixed-precision-training"> Mixed Precision Training</h3>
+Many operations can be performed in 16 bit mode with little change in accuracy.<br>
+
+Variables and some operations should be kept in 32 bits for numerical reasons<br>
+<br>
+<h3 id="model-distillation"> Model Distillation</h3>
+Given multiple large teacher networks (e.g. Googlenet + Vggnet + Resnet) model distillation aims to distill all their knowledge into a smaller student net. <br>
+
+Take the "output of geometric ensemble" and divide score by a temperature to get a much softer distribution
+$$
+p_i = \frac{\exp \frac{z_i}{T}}{\sum_j \exp \frac{z_i}{T}}
+$$<br>
+<br>
+<h2 id="adversarial-examples-and-adversarial-training"> Adversarial Examples and Adversarial Training</h2>
+Almost all machine learning models (not just neural networks) are highly vulnerable to adversarial examples.<br>
+<br>
+<h3 id="adversarial-examples-from-overfitting"> Adversarial Examples from Overfitting</h3>
+One theory was that adversarial attacks are possible due to overfitting. Complex neural networks with lots of parameters may just have random gaps in their decision areas/boundaries.<br>
+
+If this were the case however, each adversarial example would be unique to a specific trained model. But often, a single adversarial example can fool many different models (or different trained instances of the same model) in the same way.<br>
+
+Furthermore by taking the difference between the original example and the adversarial example we get a direction in input space that we can use to turn almost all items in the dataset into adversarial examples.<br>
+
+→ systematic example, not random effect<br>
+
+<div class="image-center-wrapper"><img src="assets/adv-overfit.png" style="width: 68%;" class="inline-image image-center    "></div><br>
+<h3 id="adversarial-examples-from-underfitting"> Adversarial Examples from Underfitting</h3>
+Another theory is that adversarial attacks are possible due to underfitting<br>
+
+<div class="image-center-wrapper"><img src="assets/adv-underfit.png" style="width: 60%;" class="inline-image image-center    "></div>
+Modern neural nets are piecewise linear<br>
+
+<div class="image-center-wrapper"><img src="assets/pw-linear.png" style="width: 60%;" class="inline-image image-center    "></div>
+<ul>
+	<li>nonlinear interactions between parameters and the output</li>
+	<li>piecewise linear (with relatively few pieces) interactions between the input and the output</li>
+</ul><br>
+
+→ Optimization problems that optimize the input of the model are much easier than problems that optimize the parameters<br>
+<br>
+
+We can visualize this by putting \((\text{example})+\epsilon(\text{fixed random unit vector})\) through a relu convnet model. Only in the center the network returns the correct class, automobile.<br>
+
+<div class="image-center-wrapper"><img src="assets/linear-resp.png" style="width: 70%;" class="inline-image image-center    "></div>
+In large images with many pixels we can make very small changes to each pixel but travel very far in vector space (as measured by the l2 norm).<br>
+<br>
+
+When doing adversarial experiments make sure not to apply too large changes that actually change the true class of the image. For example use max-norm (L∞ norm) that constrains the maximum change for each pixel.<br>
+<br>
+
+With the max norm the total change to the image can be large but the change can't be concentrated on a small area.<br>
+<br>
+<h3 id="fast-gradient-sign-method"> Fast Gradient Sign Method</h3>
+Maximize \(J(x, \theta) + (\tilde x-x)^\top \nabla_x J(x)\) subject to \(||\tilde x- x||_\infty \le \epsilon\). <br>
+
+\(\tilde x = x+ \epsilon \text{ sign}(\nabla_x J(X))\)<br>
+
+Adversarial examples live in more or less linear subspaces (it was initially thought they live in "little tiny pockets"):<br>
+
+<div class="image-center-wrapper"><img src="assets/fgsm.png" style="width: 80%;" class="inline-image image-center    "></div>
+→ Only need to get the direction right, don't need to find exact coordinates in space to go into adversarial subspace (in the images, can go upwards first, then to the right)<br>
+<br>
+
+Adversarial examples are not just noise (noise has very little effect compared to adversarial examples). Adding random noise rarely changes the classification decision:<br>
+
+<div class="image-center-wrapper"><img src="assets/adv-noise.png" style="width: 80%;" class="inline-image image-center    "></div>
+Since the procedure in the image above was performed on the test set, in some cases the network is already wrong, even without adding any noise (Usually in those cases adding the noise doesn't make the model correct).<br>
+<br>
+
+Neural networks are wrong almost everywhere and behave reasonably only on a really thin manifold around the data.<br>
+
+<div class="image-center-wrapper"><img src="assets/wrong-almost-ev.png" style="width: 80%;" class="inline-image image-center    "></div>
+<ul>
+	<li>Adversarial attacks work for RL too (so far we have only been able to make them fail at their task, not perform a different task/action)</li>
+	<li>shallow RBF networks resist adversarial pertubations fairly well</li>
+</ul><br>
+<br>
+<h3 id="transferability-attack"> Transferability Attack</h3>
+A transferability attack takes place when the attacker creates adversarial examples against a substitute model and uses the created examples to attack a target model. This is necessary when the attacker does not have direct access to the target model.<br>
+
+These attacks are possible cross-technique and cross-training instance <br>
+
+<div class="image-center-wrapper"><img src="assets/ct-transf.png" style="width: 80%;" class="inline-image image-center    "></div><br>
+<h3 id="failed-defenses"> Failed Defenses</h3>
+<div class="image-center-wrapper"><img src="assets/adv-failed-def.png" style="width: 80%;" class="inline-image image-center    "></div><section id="article_footer"><h2>References</h2><ol class="references"><li><span id="ref1">http://cs231n.github.io/neural-networks-2/#reg</span> <a href="#ref1ref""> <i class="fas fa-undo-alt references-return"></i></a></li></ol></section>
+      </span>
+
+      <!--<div id="disqus_thread"></div>
+
+
+      <script>
+          /**
+           *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+           *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+           */
+
+          var disqus_config = function () {
+              this.page.url = "https://dominikschmidt.xyz/cs231-notes";  // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = "cs231-notes"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+          };
+
+          (function() {  // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+
+              s.src = 'https://dominikschmidtxyz.disqus.com/embed.js';
+
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+          })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    </div>-->
+
+  <br><br>
+
+  <!--<footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>-
+
+  <br>-->
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

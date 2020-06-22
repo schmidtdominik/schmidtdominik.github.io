@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Deep Reinforcement Learning - Dominik Schmidt</title>
+  <meta name="author" content="Dominik Schmidt">
+  <meta name="theme-color" content="#52D681"/>
+
+  <link rel=preload href="../css/BIG JOHN.otf" as="font" crossorigin>
+
+  <meta property="og:title" content="Deep Reinforcement Learning"/>
+  <meta property='og:type' content='article'/>
+  <meta property="og:image" content="assets/cover.png"/>
+  <meta property="og:url" content="http://dominikschmidt.xyz/drl-notes"/>
+  <!--<meta property="og:description" content="A task is called episodic if it ends at some time step \(T\) when the game enters a terminal state. The episode is the sequence \(S_0, A_0, R_1, S_1, A_1, \ldots, R_T, S_T\). The opposite of an episodic task is a continuing task."/>-->
+
+  <!--<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
+  <script>
+  window.addEventListener("load", function(){
+  window.cookieconsent.initialise({
+    "palette": {
+      "popup": {
+        "background": "#edeff5",
+        "text": "#838391"
+      },
+      "button": {
+        "background": "#4b81e8"
+      }
+    },
+    "position": "bottom-left",
+    "content": {
+      "href": "http://dominikschmidt.xyz/policy"
+    }
+  })});
+</script>-->
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-123900161-1');
+  </script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+       (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-4694920180315448",
+            enable_page_level_ads: true
+       });
+  </script>
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <script defer src="https://use.fontawesome.com/releases/v5.12.0/js/all.js"></script>
+  <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+           CommonHTML: {
+             scale: (MathJax.Hub.Browser.isChrome ? 100 : 100)
+           }
+         });
+
+
+  </script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="../css/normalize.css">
+  <link rel="stylesheet" href="../css/skeleton.css">
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="../css/article.css">
+
+  <link rel="stylesheet" href="../highlight/styles/atom-one-light.css"><!--foundation/hopscotch-->
+  <script src="../highlight/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="../images/favicon.png">
+
+  <!--<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>-->
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div style="margin-top: 8%">
+          <h1>
+            <a href="../index.html">
+              <span id="title">
+                Dominik Schmidt
+              </span>
+            </a>
+            <!--<a href="index.html">
+              <span id="by-me">
+
+              </span>
+            </a>-->
+          </h1>
+        <hr>
+        <nav>
+          <span style="display: inline-block;" ><a class="navitem" href="../index.html"><i class="far fa-newspaper"></i>&nbsp;Reads</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../datasets.html"><i class="fas fa-sitemap"></i>&nbsp;Datasets</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../random.html"><i class="fas fa-robot"></i>&nbsp;Random Stuff</a></span>
+          <span style="display: inline-block;" ><a class="navitem" href="../about.html"><i class="fas fa-map-marker-alt"></i>&nbsp;About me</a></span>
+
+          <span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://github.com/schmidtdominik"><i class="fab fa-github"></i>&nbsp;</a></span>
+          <!--<span class="navwrapper" style="float: right"><a class="navitem" style="margin-right: 1.6rem;" href="https://www.reddit.com/user/dominik_schmidt"><i class="fab fa-reddit"></i></i>&nbsp;</a></span>-->
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="container article">
+      <div id='header-box'>
+
+
+        <!--START OF HEADING-->
+        <div style="display:flex;justify-content:center;align-items:center;">
+          <img src="assets/cover.png" id="header-img" alt="">
+        </div>
+
+
+        <div id="header-text">
+          <h1 class="article-title">
+            Deep Reinforcement Learning
+          </h1>
+          <time datetime="2020-06-20 00:00:00">June 20, 2020 ⧗ 15 minute read</time><br>
+        </div>
+      </div>
+      <!--END OF HEADING-->
+
+      <span class="article-text">
+        <div id="index"><ul><li><a href=#markov-decision-process> Markov Decision Process</li></a><li><a href=#bellman-equations> Bellman Equations</li></a><li><a href=#temporal-difference-learning> Temporal Difference Learning</li></a><ul><li><a href=#sarsa> Sarsa</li></a><li><a href=#q-learning--sarsamax> Q-Learning / Sarsamax</li></a><li><a href=#expected-sarsa> Expected Sarsa</li></a></ul><li><a href=#continuous-spaces> Continuous Spaces</li></a><ul><li><a href=#deep-q-learning> Deep Q-Learning</li></a><li><a href=#double-q-learning> Double Q-Learning</li></a><li><a href=#prioritized-experience-replay> Prioritized Experience Replay</li></a><li><a href=#dueling-dqn> Dueling DQN</li></a></ul><li><a href=#policy-based-methods> Policy Based Methods</li></a><ul></ul></div><hr style="margin-bottom: 4rem;">A task is called episodic if it ends at some time step \(T\) when the game enters a terminal state. The episode is the sequence \(S_0, A_0, R_1, S_1, A_1, \ldots, R_T, S_T\). The opposite of an episodic task is a continuing task.<br>
+<br>
+
+<strong>Reward hypothesis:</strong> All goals can be framed as the maximization of expected cumulative reward.<br>
+<br>
+<h3 id="markov-decision-process"> Markov Decision Process</h3>
+The <strong>state space</strong> \(\mathcal{S}\) is the set of all nonterminal states. In continuing tasks this is equivalent to the set of all states. In episodic tasks \(\mathcal{S}^+\) is the set of all states. \(\mathcal{A}\) is the action space. \(\mathcal{A}(s)\) is the set of actions available in state \(s\). \(\mathcal{R}\) is the set of possible rewards.<br>
+<br>
+
+The <strong>expected discounted return</strong> is \(G_t = \sum_{k=1}^\infty \gamma R_{t+k}\).<br>
+<br>
+
+In an MDP one-step dynamics are specified by:
+\(p(s', r|s, a) = \mathbb{P}(S_{t+1} = s', R_{t+1}=r | S_t=s \land A_t = a)\) <br>
+<br>
+
+A deterministic policy is a function \(\pi \colon \mathcal{S → A}\).
+A stochastic policy is a function \(\pi\colon \mathcal{S\times A} → [0, 1]\).<br>
+<br>
+
+The <strong>state-value function</strong> is a function \(v_\pi(s) = \mathbb{E}_\pi[G_t | S_t = s]\). The optimal state-value function is denoted \(v_\ast\).<br>
+<br>
+
+A policy \(\pi'\) <strong>dominates</strong> a policy \(\pi\), denoted as \(\pi' \ge \pi\), if and only if
+$$
+\forall s \in \mathcal{S}\colon \, v_{\pi'}(s) \ge v_{\pi}(s)
+$$
+An <strong>optimal policy</strong> \(\pi_\ast\) satisfies \(\pi_\ast \ge \pi\) for all policies \(\pi\). Optimal policies are guaranteed to exist but may not be unique. <br>
+<br>
+
+The <strong>action-value function</strong> is a function \(q_\pi(s, a) = \mathbb{E_\pi}[G_t | S_t = s, A_t = a]\) and yields the expected return if the agents starts in state \(s\), takes action \(a\), and then follows the policy \(\pi\). The optimal action-value function is denoted \(q^\ast\). An action-value function can simply be represented as a action \(\times\) value matrix.<br>
+<br>
+
+Given an optimal action value function \(q^\ast\) we can find an optimal policy by setting \(\pi^\ast(s) = \arg \max_{a\in \mathcal{A}} q_\ast(s, a)\).<br>
+<br>
+
+An \(\epsilon\)-greedy policy is a policy of the form
+$$
+\pi(a|s) = \Bigg\{\begin{array}{lr}
+1-\epsilon + \epsilon/|\mathcal{A}(s)|, & \text{if } a \text{ maximizes } Q(s,a)\\
+\epsilon/|\mathcal{A}(s)| & \text{else}
+\end{array}
+$$
+<strong>Control Problem:</strong> Estimate the optimal policy.<br>
+<br>
+
+The <strong>Monte-carlo control method</strong> alternates between policy evaluation and policy improvement to converge to the optimal policy \(\pi^\ast\).<br>
+<br>
+
+We can use <strong>first-visit MC</strong> or <strong>every-visit MC</strong> which estimate \(q_\pi(s, a)\) as the average of returns of the first visit to \((s, a)\) or all visits to \((s, a)\) respectively. Note: every-visit is biased whereas first-visit is not; every-visit has a lower MSE at first but first-visit is better in the limit <br>
+
+<div class="image-center-wrapper"><img src="assets/first-visit-mc.png" style="width: 70%;" class="inline-image image-center    "></div>
+In order for MC control to converge to the optimal policy the <strong>Greedy in the Limit with Infinite Exploration (GLIE)</strong> conditions must be met:
+<ul>
+    <li>every \((s, a)\) must be visited infinitely many times</li>
+    <li>the policy converges to the greedy policy based on the action-value estimate \(Q\)</li>
+</ul><br>
+
+When specifying an \(\epsilon\)-greedy policy both of the above conditions are satisfied if \(\forall i\colon\epsilon_i > 0\) and \(e_i → 0\).<br>
+
+<div class="image-center-wrapper"><img src="assets/first-visit-glie-control.png" style="width: 70%;" class="inline-image image-center    "></div>
+Two variations of MC control:<br>
+
+<ul>
+    <li><strong>Incremental mean:</strong> update the Q table after every episode</li>
+    <li><strong>Constant alpha:</strong> use exponential averaging instead of (constant time) arithmentic mean</li>
+</ul><br>
+
+<div class="image-center-wrapper"><img src="assets/constant-alpha-mc-control.png" style="width: 70%;" class="inline-image image-center    "></div><br>
+<h3 id="bellman-equations"> Bellman Equations</h3>
+The four Bellman equations show that value functions satisfy certain recursive relationships.<br>
+
+The <strong>Bellman Expectation Equation</strong> for \(v_\pi\) expresses the value of a state in the following way: 
+$$
+v_\pi(s) = \mathbb{E}_\pi[R_{t+1} + \gamma v_\pi(S_{t+1})|S_t = s]
+$$
+The expectation can be rewritten as
+$$
+v_\pi(s) = \sum_{s' \in S^+, r \in \mathcal{R}} p(s', r | s, \pi(s)) (r + \gamma v_\pi(s'))
+$$
+for a deterministic policy \(\pi\) or as
+$$
+v_\pi(s) = \sum_{s' \in S^+, r \in \mathcal{R}, a\in \mathcal{A}} \pi(a|s) p(s', r | s, a) (r + \gamma v_\pi(s'))
+$$
+for a stochastic policy \(\pi\).<br>
+
+// TODO: add other three bellman equations, sections 3.5 and 3.6 of textbook<br>
+<br>
+<h2 id="temporal-difference-learning"> Temporal Difference Learning</h2>
+While MC control methods update their estimates only after each episode, TD learning continuously amends its predictions.<br>
+<br>
+
+Sarsa, sarsamax and expected sarsa are all guaranteed to converge to the optimal action-value function \(q_\ast\) given that \(\alpha\) is sufficiently small and the GLIE conditions are met. In practice it is common to ignore GLIE conditions and still recover an optimal policy.<br>
+<br>
+
+Sarsa and expected sarsa are on-policy methods whereas q-learning is an off-policy method. On-policy methods generally have better online performance.<br>
+<br>
+
+Initializing Q values optimistically (to large values) can improve performance, see <a href="http://papers.nips.cc/paper/1944-convergence-of-optimistic-and-incremental-q-learning.pdf">this</a> paper.<br>
+<br>
+<h3 id="sarsa"> Sarsa</h3>
+The <strong>Sarsa(0)</strong> update rule is
+$$
+Q(S_t, A_t) ← Q(S_t, A_t)(1-\alpha) + \alpha(R_{t+1} + \gamma Q(S_{t+1}, A_{t+1}))
+$$
+<div class="image-center-wrapper"><img src="assets/sarsa.png" style="width: 70%;" class="inline-image image-center    "></div><br>
+<h3 id="q-learning--sarsamax"> Q-Learning / Sarsamax</h3>
+Q-learning uses the \(\max_{a \in \mathcal{A}} Q(S_{t+1}, a)\) instead of \(Q(S_{t+1}, A_{t+1})\) which means that depending on which action achieves the maximum the update step may not even depend on the action the agent is taking in the next step. (Basically based on state-value function not action-value function)<br>
+
+<div class="image-center-wrapper"><img src="assets/sarsamax.png" style="width: 70%;" class="inline-image image-center    "></div>
+See <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.80.7501&rep=rep1&type=pdf">this</a> paper for proof that Q-learning converges.<br>
+<br>
+<h3 id="expected-sarsa"> Expected Sarsa</h3>
+Expected Sarsa replaces the max term with an expectation based on the probability that each action gets selected under the policy.<br>
+
+<div class="image-center-wrapper"><img src="assets/expected_sarsa.png" style="width: 70%;" class="inline-image image-center    "></div>
+See <a href="http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.216.4144&rep=rep1&type=pdf">this</a> paper for more details on expected sarsa.<br>
+<br>
+<h2 id="continuous-spaces"> Continuous Spaces</h2>
+To apply RL in continuous spaces we can use <br>
+
+<ul>
+    <li>Uniform-grid based discretization</li>
+    <li>Discretization via Tile Coding
+    	<ul>
+            <li>generalizes better than uniform grid</li>
+        </ul>
+    </li>
+    <li>
+        Discretization via Coarse Coding
+        <ul>
+            <li> sparser than tile coding</li>
+            <li>can adjust degree of generalization vs resolution (and change smoothness of q-function)</li>
+            <li>can user radial basis functions to implement continuous tile membership</li>
+        </ul>
+    </li>
+    <li>Function approximation (for V/Q functions)
+    	<ul>
+            <li>Linear function approximation (possibly with kernel functions like radial basis functions)</li>
+            <li>Non-linear function approximation (neural nets)</li>
+        </ul>
+    </li>
+</ul><br>
+<br>
+<h3 id="deep-q-learning"> Deep Q-Learning</h3>
+<strong>DeepMind Atari:</strong> input 84x84 grayscale pixels * 4 frames; convnet outputs action; replay memory 1 mio frames; each selected action is played for k=4 timesteps<br>
+<br>
+
+Deep Q-Learning can suffer from two potentially harmful correlations: <br>
+
+<ul>
+    <li>Correlation between sequential samples</li>
+    <li>Correlation between Q-values for similar (state, action) pairs</li>
+</ul><br>
+
+which are addressed by experience replay and fixed Q-targets respectively.<br>
+<br>
+
+<strong>Experience Replay:</strong> keeping a replay buffer and training on samples randomly drawn from this buffer allows us to learn from each (possibly computationally expensive) sample multiple times. Furthermore the random sampling prevents oscillations or catastrophic divergence due to correlation between sequential samples.<br>
+<br>
+
+Experience replay can be seen as reducing the reinforcement learning problem to supervised learning.<br>
+<br>
+
+<strong>Fixed-Q Targets</strong> address the issue that the Q-value estimate for a (state, action) pair is updated using another Q-value estimate. This is the Q-learning update rule:
+$$
+\Delta w = \alpha(R + \gamma\max_a \hat q(S', a, w) - \hat q(S, A, w))\Delta_w \hat q(S, A, w)
+$$
+In particular the update of \(w\) is dependent on the TD target which in turn is dependent on \(w\). Instead with we want a fixed Q-target parametrized by \(w^-\) that is frozen and only updated (softly?) every few steps:
+$$
+\Delta w = \alpha(R + \gamma\max_a \hat q(S', a, w^-) - \hat q(S, A, w))\Delta_w \hat q(S, A, w)
+$$<br>
+
+See <a href="https://www.youtube.com/watch?v=SWpyiEezfp4">this</a> video for a more detailed description.<br>
+<br>
+
+<a href="https://storage.googleapis.com/deepmind-media/dqn/DQNNaturePaper.pdf">This</a> is the paper that introduced DQN.<br>
+
+<div class="image-center-wrapper"><img src="assets/deep-q-learning.png" style="width: 70%;" class="inline-image image-center    "></div><br>
+<h3 id="double-q-learning"> Double Q-Learning</h3>
+Double Q-Learning (or Double DQN = DDQN) addresses the issue of action value overestimation that can occur in basic DQN due to the unstable TD target:
+$$
+\gamma\max_a \hat q(S', a, w)
+$$
+Particularly in the early stages of training the action values in a given state can fluctuate wildly, taking the maximum of the already noisy values creates even more fluctuations and makes the network generally overestimate Q-values.<br>
+<br>
+
+For the exact reasoning see <a href="https://www.ri.cmu.edu/pub_files/pub1/thrun_sebastian_1993_1/thrun_sebastian_1993_1.pdf">this</a> paper.<br>
+<br>
+
+Since the TD target can be re-expressed in the following way,
+$$
+R + \gamma \hat q(S', \arg \max_a \hat q(S'a, w), w)
+$$
+one way to reduces the overestimation is use different Q-networks/set of weights for both \(\hat q()\) calls above (i.e. one network for selecting the maximum value action and one network for evaluating the action's value).<br>
+<br>
+
+When using fixed Q-targets we can simply use the \(w^-\) network for this purpose, the TD target is then:
+$$
+R + \gamma \hat q(S', \arg \max_a \hat q(S'a, w), w^-)
+$$<br>
+
+For a detailed description of DDQN see <a href="https://arxiv.org/pdf/1509.06461.pdf">this</a> paper.<br>
+<br>
+<h3 id="prioritized-experience-replay"> Prioritized Experience Replay</h3>
+The goal of <a href="https://arxiv.org/pdf/1511.05952.pdf">prioritized experience replay</a> is to sample rare or more important experiences more often. It's similar to techniques for dealing with class-imbalances in supervised learning.<br>
+<br>
+
+A transition's priority is either proportional to the TD error \(p_i = |\delta_i|+\epsilon\) or rank based \(p_i = \frac{1}{\text{rank}(i)}\) , where \(\text{rank}(i)\) is the rank of transition \(i\) when transitions are sorted by their TD error \(\delta\). The probability of sampling a transition from the replay buffer is \(P(i) = \frac{p_i^\alpha}{\sum_k p_k^\alpha}\) where alpha controls the degree of prioritization.<br>
+<br>
+
+For an efficient implementation of the replay buffer and interesting extensions of PER see the paper above.<br>
+<br>
+
+Note that "the estimation of the expectation of the expected value through stochastic updates relies on those updates corresponding to the same distribution as its expectation". For this reason additional importance sampling weights (and an additional hyperparameter \(\beta\)) have to be introduced to the update equation.<br>
+<br>
+<h3 id="dueling-dqn"> Dueling DQN</h3>
+In <a href="https://arxiv.org/abs/1511.06581">dueling DQN</a> the state-value and advantage functions are estimated separately within a single network and then combined to receive the action-value estimates. Additional constraints are imposed to ensure that both sub-functions model their respective targets. (similar to residual nets because default advantage=0 is easily representable?)<br>
+<br>
+
+The dueling DQN paper uses DDQN with (and without) rank based prioritized experience replay and uses the expected sarsa update rule.<br>
+<br>
+<h2 id="policy-based-methods"> Policy Based Methods</h2>
+Policy based methods are simpler, allow us to learn true stochastic policies and are better suited for continuous action spaces (In value based methods we would need to find the continuous action \(a\) that maximizes \(Q(s, a)\)).<br>
+<br>
+
+A trajectory is a state-action sequence of the form \(\tau = (s_0, a_0, s_1, a_1, \ldots, s_H, a_H, s_{H+1})\) where \(H\) is the time horizon. The return over a trajectory \(\tau\) is denoted by \(R(\tau) = r_1 + r_2 + \ldots + r_H+r_{H+1}\)<br>
+<br>
+
+The expected return of a policy with parameters \(\theta\) is \(U(\theta) = \sum_\tau P(\tau | \theta) R(\tau)\). <br>
+<br>
+
+Maximizing expected return over trajectories lets us search for optimal policies in both episodic and continuing tasks.<br>
+<br>
+<br>
+<br>
+
+
+      </span>
+
+      <!--<div id="disqus_thread"></div>
+
+
+      <script>
+          /**
+           *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+           *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables
+           */
+
+          var disqus_config = function () {
+              this.page.url = "https://dominikschmidt.xyz/drl-notes";  // Replace PAGE_URL with your page's canonical URL variable
+              this.page.identifier = "drl-notes"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+          };
+
+          (function() {  // DON'T EDIT BELOW THIS LINE
+              var d = document, s = d.createElement('script');
+
+              s.src = 'https://dominikschmidtxyz.disqus.com/embed.js';
+
+              s.setAttribute('data-timestamp', +new Date());
+              (d.head || d.body).appendChild(s);
+          })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
+    </div>-->
+
+  <br><br>
+
+  <!--<footer class="container">
+    <span><i class="fas fa-copyright"></i> 2018 Dominik Schmidt</span><br>
+  </footer>-
+
+  <br>-->
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>

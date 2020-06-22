@@ -17,7 +17,7 @@
   <meta property="og:url" content="http://dominikschmidt.xyz/nesterov-momentum"/>
   <!--<meta property="og:description" content="Momentum and Nesterov Momentum (also called Nesterov Accelerated Gradient/NAG) are slight variations of normal gradient descent that can speed up training and improve convergence significantly."/>-->
 
-  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <!--<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
   <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
   <script>
   window.addEventListener("load", function(){
@@ -36,7 +36,7 @@
       "href": "http://dominikschmidt.xyz/policy"
     }
   })});
-  </script>
+</script>-->
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
@@ -90,7 +90,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="../images/favicon.png">
 
-  <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>
+  <!--<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>-->
 </head>
 <body>
 
@@ -145,7 +145,7 @@
       <!--END OF HEADING-->
 
       <span class="article-text">
-        <div id="index"><a href=#first:-gradient-descent> → First: Gradient Descent</a><br><a href=#second:-gradient-descent-with-momentum> → Second: Gradient Descent with Momentum</a><br><a href=#third:-gradient-descent-with-nesterov-momentum> → Third: Gradient Descent with Nesterov Momentum</a></div><br><hr>
+        <div id="index"><ul><li><a href=#first:-gradient-descent> First: Gradient Descent</li></a><ul></ul><li><a href=#second:-gradient-descent-with-momentum> Second: Gradient Descent with Momentum</li></a><ul></ul><li><a href=#third:-gradient-descent-with-nesterov-momentum> Third: Gradient Descent with Nesterov Momentum</li></a><ul></ul></div><hr style="margin-bottom: 4rem;">
 <strong>Momentum</strong> and <strong>Nesterov Momentum</strong> (also called Nesterov Accelerated Gradient/NAG) are slight variations of normal gradient descent that can speed up training and improve convergence significantly. <br>
 <h2 id="first:-gradient-descent"> First: Gradient Descent</h2>
 The most common method to train a neural network is by using <strong>gradient descent</strong> (<div class="tooltip">SGD<span class="tooltiptext">stochastic gradient descent</span></div>). The way this works is you define a <div class="tooltip">loss function<span class="tooltiptext">sometimes called cost or error function or optimization objective</span></div> \(l(\theta)\) that expresses how well your weights & biases \(\theta\) allow the network to fit your training data. A higher loss means that the network is bad and makes a lot of errors while a low loss generally means that the network performs well. You can then train your network by adjusting the network parameters in a way that reduces the loss.<br>
@@ -171,7 +171,7 @@ Nesterov momentum is a simple change to normal momentum. Here the gradient term 
 The revised parameter update rule is: $$v_{t+1} = \mu v_t-\eta\nabla l(\theta+ \mu v_t)\\\theta_{t+1} = \theta_t + v_{t+1}$$ <br>
 
 
-<section id="article_footer"><div class="further-reading"><h2>Further Reading</h2><br><ul><li><a href="http://proceedings.mlr.press/v28/sutskever13.pdf">Sutskever, Martens et al. "On the importance of initialization and momentum in deep learning" 2013</a></li></ul></div></section>
+<section id="article_footer"><h2>Further Reading</h2><ul class="further-reading"><li><a href="http://proceedings.mlr.press/v28/sutskever13.pdf">Sutskever, Martens et al. "On the importance of initialization and momentum in deep learning" 2013</a></li></ul></section>
       </span>
 
       <!--<div id="disqus_thread"></div>

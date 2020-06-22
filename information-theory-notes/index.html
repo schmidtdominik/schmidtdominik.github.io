@@ -21,7 +21,7 @@ Network Coding" and these notes are organized around that.<br>
 
 Information theory is a major research field in communication theory and applied probability. This is not meant as a comprehensive guide but rather a loose collection of definitions and short summaries."/>-->
 
-  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <!--<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
   <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
   <script>
   window.addEventListener("load", function(){
@@ -40,7 +40,7 @@ Information theory is a major research field in communication theory and applied
       "href": "http://dominikschmidt.xyz/policy"
     }
   })});
-  </script>
+</script>-->
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
@@ -94,7 +94,7 @@ Information theory is a major research field in communication theory and applied
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="../images/favicon.png">
 
-  <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>
+  <!--<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>-->
 </head>
 <body>
 
@@ -143,13 +143,13 @@ Information theory is a major research field in communication theory and applied
           <h1 class="article-title">
             Information Theory
           </h1>
-          <time datetime="2020-02-16 00:00:00">February 16, 2020 ⧗ 31 minute read</time><br>
+          <time datetime="2020-02-16 00:00:00">February 16, 2020 ⧗ 33 minute read</time><br>
         </div>
       </div>
       <!--END OF HEADING-->
 
       <span class="article-text">
-        <div id="index"><a href=#1.-the-science-of-information> → 1. The Science of Information</a><br><a href=#shannon's-seminal-paper-1948>&emsp; → Shannon's Seminal Paper (1948)</a><br><a href=#2.-information-measures> → 2. Information Measures</a><br><a href=#2.1-independence-and-markov-chain>&emsp; → 2.1 Independence and Markov Chain</a><br><a href=#2.2-shannon's-information-measures>&emsp; → 2.2 Shannon's Information Measures</a><br><a href=#2.3-continuity-of-shannon's-information-measures>&emsp; → 2.3 Continuity of Shannon's Information Measures</a><br><a href=#2.4-chain-rules>&emsp; → 2.4 Chain Rules</a><br><a href=#2.5-informational-divergence>&emsp; → 2.5 Informational Divergence</a><br><a href=#2.6-the-basic-inequalities>&emsp; → 2.6 The Basic Inequalities</a><br><a href=#2.7-some-useful-information-inequalities>&emsp; → 2.7 Some Useful Information Inequalities</a><br><a href=#2.8-fano's-inequality>&emsp; → 2.8 Fano's Inequality</a><br><a href=#2.10-entropy-rate-of-a-stationary-source>&emsp; → 2.10 Entropy Rate of a Stationary Source</a><br><a href=#3.-the-i-measure> → 3. The I-Measure</a><br><a href=#3.1-preliminaries>&emsp; → 3.1 Preliminaries</a><br><a href=#3.3-construction-of-the-i-measure-\mu^\ast>&emsp; → 3.3 Construction of the I-Measure \(\mu^\ast\)</a><br><a href=#3.4-\mu^\ast-can-be-negative>&emsp; → 3.4 \(\mu^\ast\) can be Negative</a><br><a href=#3.5-information-diagrams>&emsp; → 3.5 Information Diagrams</a><br><a href=#4.-zero-error-data-compression> → 4. Zero-Error Data Compression</a><br><a href=#4.1-the-entropy-bound>&emsp; → 4.1 The Entropy Bound</a><br><a href=#4.2-prefix-codes>&emsp; → 4.2 Prefix Codes</a><br><a href=#4.3-redundancy-of-prefix-codes>&emsp; → 4.3 Redundancy of Prefix Codes</a><br><a href=#5.-weak-typicality> → 5. Weak Typicality</a><br><a href=#the-weak-aep-weak-asymptotic-equipartition-property>&emsp; → The Weak AEP (Weak Asymptotic Equipartition Property)</a><br><a href=#5.2-source-coding-theorem>&emsp; → 5.2 Source Coding Theorem</a></div><br><hr>These are my lecture notes on Prof. Raymond W. Yeung's excellent course on information theory. The course is based on Prog. Yeung's book "Information Theory and
+        <div id="index"><ul><li><a href=#1.-the-science-of-information> 1. The Science of Information</li></a><ul><li><a href=#shannon's-seminal-paper-1948> Shannon's Seminal Paper (1948)</li></a></ul><li><a href=#2.-information-measures> 2. Information Measures</li></a><ul><li><a href=#2.1-independence-and-markov-chain> 2.1 Independence and Markov Chain</li></a><li><a href=#2.2-shannon's-information-measures> 2.2 Shannon's Information Measures</li></a><li><a href=#2.3-continuity-of-shannon's-information-measures> 2.3 Continuity of Shannon's Information Measures</li></a><li><a href=#2.4-chain-rules> 2.4 Chain Rules</li></a><li><a href=#2.5-informational-divergence> 2.5 Informational Divergence</li></a><li><a href=#2.6-the-basic-inequalities> 2.6 The Basic Inequalities</li></a><li><a href=#2.7-some-useful-information-inequalities> 2.7 Some Useful Information Inequalities</li></a><li><a href=#2.8-fano's-inequality> 2.8 Fano's Inequality</li></a><li><a href=#2.10-entropy-rate-of-a-stationary-source> 2.10 Entropy Rate of a Stationary Source</li></a></ul><li><a href=#3.-the-i-measure> 3. The I-Measure</li></a><ul><li><a href=#3.1-preliminaries> 3.1 Preliminaries</li></a><li><a href=#3.3-construction-of-the-i-measure> 3.3 Construction of the I-Measure \(\mu^\ast\)</li></a><li><a href=#3.4-can-be-negative> 3.4 \(\mu^\ast\) can be Negative</li></a><li><a href=#3.5-information-diagrams> 3.5 Information Diagrams</li></a></ul><li><a href=#4.-zero-error-data-compression> 4. Zero-Error Data Compression</li></a><ul><li><a href=#4.1-the-entropy-bound> 4.1 The Entropy Bound</li></a><li><a href=#4.2-prefix-codes> 4.2 Prefix Codes</li></a><li><a href=#4.3-redundancy-of-prefix-codes> 4.3 Redundancy of Prefix Codes</li></a></ul><li><a href=#5.-weak-typicality> 5. Weak Typicality</li></a><ul><li><a href=#5.1-weak-aep-weak-asymptotic-equipartition-property> 5.1 Weak AEP (Weak Asymptotic Equipartition Property)</li></a><li><a href=#5.2-source-coding-theorem> 5.2 Source Coding Theorem</li></a></ul><li><a href=#6.-strong-typicality> 6. Strong Typicality</li></a><ul><li><a href=#6.1-strong-aep-strong-asymptotic-equipartition-property> 6.1 Strong AEP (Strong Asymptotic Equipartition Property)</li></a></ul></div><hr style="margin-bottom: 4rem;">These are my lecture notes on Prof. Raymond W. Yeung's excellent course on information theory. The course is based on Prog. Yeung's book "Information Theory and
 Network Coding" and these notes are organized around that.<br>
 <br>
 
@@ -440,7 +440,7 @@ A signed measure on \(\mathcal{F}_n\) is completely specified by its values on t
 
 (\(\ast\)) A signed measure is furthermore completely specified by it's values on all unions \(\{\mu(B), B \in \mathcal{B} \}\) where \(\mathcal{B} = \{\tilde X_G : G \subset \mathcal{N_n}\}\).<br>
 <br>
-<h3 id="3.3-construction-of-the-i-measure-$\mu^\ast$"> 3.3 Construction of the I-Measure \(\mu^\ast\)</h3>
+<h3 id="3.3-construction-of-the-i-measure"> 3.3 Construction of the I-Measure \(\mu^\ast\)</h3>
 <ul>
     <li>Let \(\tilde X_i\) be the set corresponding to the random variable \(X_i\)</li>
     <li>For a fix \(n\) let \(\mathcal{N_n} = \{1, 2, \ldots, n\}\)</li>
@@ -464,7 +464,7 @@ To show that \(\mu^\ast\) is consistent with all information measures we only ha
 
 Using the I-measure we can employ set-theoretic tools to manipulate expressions of Shannon's information measures.<br>
 <br>
-<h3 id="3.4-$\mu^\ast$-can-be-negative"> 3.4 \(\mu^\ast\) can be Negative</h3>
+<h3 id="3.4-can-be-negative"> 3.4 \(\mu^\ast\) can be Negative</h3>
 \(\mu^\ast\) is positive for all non-empty atoms that correspond to Shannon's information measures. It can however be negative in other cases such as \(\mu^\ast(\tilde X_1 \cap \tilde X_2 \cap \tilde X_3) = I(X_1;X_2;X_3)\), which is not a Shannon's information measure.<br>
 <br>
 
@@ -506,9 +506,16 @@ Given plaintext \(X\), ciphertext \(Y\) and key \(Z\). Decipherability: \(H(X|Y,
 Generalization of Shannon's perfect secrecy theorem above: \(I(X;Y) \ge H(X) - H(Z)\)<br>
 
 Interpretation: \(I(X; Y)\) measures the leakage of information into the ciphertext<br>
-<br>
 
 The data processing theorem can also be proved using information diagrams.<br>
+<br>
+
+Proving things with information diagrams:<br>
+
+<ul>
+<li>Always use Markov chain diagrams where possible. (e.g. \(X_1→X_2→X_3 \iff (X_1\perp X_3)\mid X_2\))</li>
+<li>Use the fact that \(I(X;Y) \ge 0\)</li>
+</ul><br>
 <br>
 <h2 id="4.-zero-error-data-compression"> 4. Zero-Error Data Compression</h2><h3 id="4.1-the-entropy-bound"> 4.1 The Entropy Bound</h3>
 A D-ary <strong>source code</strong> \(\mathcal{C}\) for a source random variable \(X\) is a function \(\mathcal{C}\colon \mathcal{X}→\mathcal{D^\ast}\), where \(\mathcal{D}^\ast\) is the set of all finite strings from a D-ary alphabet.<br>
@@ -583,7 +590,7 @@ An internal node is called <strong>balanced</strong> if \(\tilde p_{k,j} = \frac
 <h2 id="5.-weak-typicality"> 5. Weak Typicality</h2>
 Both weak and strong typicality are formal measures of how typical some outcome is for a sequence of i.i.d. random variables.<br>
 <br>
-<h3 id="the-weak-aep-weak-asymptotic-equipartition-property"> The Weak AEP (Weak Asymptotic Equipartition Property)</h3>
+<h3 id="5.1-weak-aep-weak-asymptotic-equipartition-property"> 5.1 Weak AEP (Weak Asymptotic Equipartition Property)</h3>
 <strong>Weak law of Large Numbers (WLLN)</strong>
 For i.i.d. random variables \(Y_1, Y_2, \ldots\) with generic random variable \(Y\)
 $$
@@ -644,8 +651,37 @@ For data compression typically \(R < \log |\mathcal{X}|\).<br>
 <ul>
     <li>If we allow a small error probability \(P_e\), there exists a block code whose coding rate is arbitrarily close to \(H(X)\) when \(n\) is sufficiently large. (Reliable communication can be achieved if the coding rate is \(\ge H(X)\))</li>
 	<li>For a block code with block length \(n\) and coding rate less than \(H(X)-\zeta\), where \(\zeta > 0\), then \(P_e → 0\) as \(n→\infty\). (It is impossible to achieve reliable communication if the coding rate is less than \(H(X)\))</li>
-</ul>
-<section id="article_footer"><h2>References</h2><br><ol class="references"><li><span id="ref1">https://en.wikipedia.org/wiki/Conditional_independence</span> <a href="#ref1ref""><i class="references-return fas fa-caret-left"></i></a></li><li><span id="ref2">https://en.wikipedia.org/wiki/Mutual_information</span> <a href="#ref2ref""><i class="references-return fas fa-caret-left"></i></a></li><li><span id="ref3">https://en.wikipedia.org/wiki/Data_processing_inequality</span> <a href="#ref3ref""><i class="references-return fas fa-caret-left"></i></a></li></ol></section>
+</ul><br>
+<h2 id="6.-strong-typicality"> 6. Strong Typicality</h2><br>
+<h3 id="6.1-strong-aep-strong-asymptotic-equipartition-property"> 6.1 Strong AEP (Strong Asymptotic Equipartition Property)</h3>
+Let \(X = (X_1, X_2, \ldots, X_n)\) where \(X_i\) are i.i.d. random variables. Assume \(|\mathcal{X}|<\infty\).<br>
+
+Consider \(\mathbf {x}\in \mathcal{X}^n\). Let \(N(x, \mathbf{x})\) be the number of occurrences of \(x\) in the sequence \(\mathbf{x}\). Then \(\frac{N(x, \mathbf{x})}{n}\) is the <strong>relative frequency</strong> of \(x\) in \(\mathbf{x}\) and \(\{\frac{N(x, \mathbf x)}{n}: x \in \mathcal{X}\}\) is the <strong>empirical distribution</strong> of \(\mathbf x\).<br>
+
+The <strong>strongly typical set</strong> \(T^n_{[X]\delta}\) with respect to \(p(x)\) is the set of sequences \(\mathbf x = (x_1, \ldots, x_n) \in \mathcal{X}^n\) such that:
+$$
+N(x, \mathbf x) = 0 \text{ for } x \notin \mathcal{S}_X
+$$
+(any \(x\) not in the support cannot occur in the sequence) and
+$$
+\sum_x \Bigg |\frac{N(x, \mathbf x)}{n} - p(x) \Bigg| \le \delta
+$$
+(the empirical distribution of \(\mathbf x\) is approximately equal to \(p(x)\))<br>
+
+<strong>Strong AEP</strong>
+For \(\mathbf x \in T^n_{[X]\delta}\) there exists \(\eta > 0\) such that \(\eta → 0\) as \(\delta → 0\) and the following hold
+$$
+2^{-n(H(X)+\eta)} \le p(x) \le 2^{-n(H(X)-\eta)}
+$$
+Furthermore for \(n\) sufficiently large
+$$
+\Pr\{X\in T_{[X]\delta}^n\} > 1-\delta
+$$
+and
+$$
+(1-\delta)2^{n(H(X)-\eta)} \le |T_{[X]\delta}^n| \le 2^{n(H(X)+\eta)}
+$$
+<section id="article_footer"><h2>References</h2><ol class="references"><li><span id="ref1">https://en.wikipedia.org/wiki/Conditional_independence</span> <a href="#ref1ref""> <i class="fas fa-undo-alt references-return"></i></a></li><li><span id="ref2">https://en.wikipedia.org/wiki/Mutual_information</span> <a href="#ref2ref""> <i class="fas fa-undo-alt references-return"></i></a></li><li><span id="ref3">https://en.wikipedia.org/wiki/Data_processing_inequality</span> <a href="#ref3ref""> <i class="fas fa-undo-alt references-return"></i></a></li></ol></section>
       </span>
 
       <!--<div id="disqus_thread"></div>

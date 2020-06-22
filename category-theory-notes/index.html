@@ -17,7 +17,7 @@
   <meta property="og:url" content="http://dominikschmidt.xyz/category-theory-notes"/>
   <!--<meta property="og:description" content="These are my lecture notes on Bartosz Milewski's course on category theory. These are not meant as a comprehensive guide but rather a loose collection of definitions and short summaries."/>-->
 
-  <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
+  <!--<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
   <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
   <script>
   window.addEventListener("load", function(){
@@ -36,7 +36,7 @@
       "href": "http://dominikschmidt.xyz/policy"
     }
   })});
-  </script>
+</script>-->
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123900161-1"></script>
@@ -90,7 +90,7 @@
   –––––––––––––––––––––––––––––––––––––––––––––––––– -->
   <link rel="icon" type="image/png" href="../images/favicon.png">
 
-  <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>
+  <!--<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us19.list-manage.com","uuid":"728374c3215a28cdf09e2b11c","lid":"eeb0dbccb1","uniqueMethods":true}) })</script>-->
 </head>
 <body>
 
@@ -145,7 +145,7 @@
       <!--END OF HEADING-->
 
       <span class="article-text">
-        <div id="index"><a href=#general-stuff> → General stuff</a><br><a href=#set> → Set</a><br><a href=#category-theory-in-programming> → Category Theory in Programming</a><br><a href=#the-empty-set>&emsp; → The Empty Set</a><br><a href=#the-singleton-set>&emsp; → The Singleton Set</a><br><a href=#the-two-element-set>&emsp; → The Two-Element Set</a><br><a href=#hask>&emsp; → Hask</a><br><a href=#weak-and-strong-typing>&emsp; → Weak and Strong Typing</a><br><a href=#other-categories> → Other Categories</a><br><a href=#the-category-\varnothing>&emsp; → The Category \(\varnothing\)</a><br><a href=#free-categories>&emsp; → Free Categories</a><br><a href=#monoids>&emsp; → Monoids</a><br><a href=#thin-categories>&emsp; → Thin Categories</a><br><a href=#orders>&emsp; → Orders</a><br><a href=#kleisli-categories>&emsp; → Kleisli Categories</a><br><a href=#categories-through-universal-construction>&emsp; → Categories through Universal Construction</a></div><br><hr>These are my lecture notes on Bartosz Milewski's course on category theory. These are not meant as a comprehensive guide but rather a loose collection of definitions and short summaries.<br>
+        <div id="index"><ul><li><a href=#general-stuff> General stuff</li></a><ul></ul><li><a href=#set> Set</li></a><ul></ul><li><a href=#category-theory-in-programming> Category Theory in Programming</li></a><ul><li><a href=#the-empty-set> The Empty Set</li></a><li><a href=#the-singleton-set> The Singleton Set</li></a><li><a href=#the-two-element-set> The Two-Element Set</li></a><li><a href=#hask> Hask</li></a><li><a href=#weak-and-strong-typing> Weak and Strong Typing</li></a></ul><li><a href=#other-categories> Other Categories</li></a><ul><li><a href=#the-category> The Category \(\varnothing\)</li></a><li><a href=#free-categories> Free Categories</li></a><li><a href=#monoids> Monoids</li></a><li><a href=#thin-categories> Thin Categories</li></a><li><a href=#orders> Orders</li></a><li><a href=#kleisli-categories> Kleisli Categories</li></a><li><a href=#categories-through-universal-construction> Categories through Universal Construction</li></a></ul></div><hr style="margin-bottom: 4rem;">These are my lecture notes on Bartosz Milewski's course on category theory. These are not meant as a comprehensive guide but rather a loose collection of definitions and short summaries.<br>
 <h2 id="general-stuff"> General stuff</h2>
 A <strong>category</strong> is a collection of <strong>objects</strong> along with arrows, called <strong>morphisms</strong>, between those objects. It is therefore similar to a labeled directed graph.<br>
 
@@ -239,7 +239,7 @@ In a <em>Set</em>-like category with only a single object, any two function are 
 
 Therefore weak and strong typing aren't actually distinct concepts but instead is weak typing inside strong typing.<br>
 <br>
-<h2 id="other-categories"> Other Categories</h2><h3 id="the-category-$\varnothing$"> The Category \(\varnothing\)</h3>
+<h2 id="other-categories"> Other Categories</h2><h3 id="the-category"> The Category \(\varnothing\)</h3>
 The category \(\varnothing\) is the empty category. It contains no objects or morphisms.
 Similar to the empty set or the number zero it is not very useful by itself. It however becomes useful in the context of other categories. <br>
 <br>
@@ -333,7 +333,7 @@ A category can have any number of terminal or initial objects.<br>
 Let \(a\) and \(b\) be terminal objects of a category. Then by the definition of terminal objects there exist unique morphisms \(f\colon a→b\) and \(g\colon b→a\). Let \(h=g\circ f\). Therefore \(h\) goes from \(a\) to \(a\). By the definition of a terminal object there can only be a single arrow from \(a\) to \(a\) so the identity \(\text{id}_a\) and \(h\) must be the same. Analogous for \(k=f\circ g\).<br>
 <br>
 
-Therefore \(f \circ g = \text{id}_b\) and \(g \circ f = \text{id}_a\) which is the definition of an isomorphism. This isomorphism is unique since \(f\) and \(g\) are unique.<section id="article_footer"><div class="further-reading"><h2>Further Reading</h2><br><ul><li><a href="https://www.youtube.com/playlist?list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_">Category Theory lectures by Bartosz Milewski</a></li><li><a href="https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/">Category Theory for Programmers, Book by Bartosz Milewski</a></li><li><a href="https://en.wikipedia.org/wiki/Category_theory">Wikipedia (Category Theory)</a></li></ul></div></section>
+Therefore \(f \circ g = \text{id}_b\) and \(g \circ f = \text{id}_a\) which is the definition of an isomorphism. This isomorphism is unique since \(f\) and \(g\) are unique.<section id="article_footer"><h2>Further Reading</h2><ul class="further-reading"><li><a href="https://www.youtube.com/playlist?list=PLbgaMIhjbmEnaH_LTkxLI7FMa2HsnawM_">Category Theory lectures by Bartosz Milewski</a></li><li><a href="https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/">Category Theory for Programmers, Book by Bartosz Milewski</a></li><li><a href="https://en.wikipedia.org/wiki/Category_theory">Wikipedia (Category Theory)</a></li></ul></section>
       </span>
 
       <!--<div id="disqus_thread"></div>
